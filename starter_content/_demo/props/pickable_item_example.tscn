@@ -9,7 +9,7 @@
 script = ExtResource("2_l5ha7")
 item_id = "KEY"
 item_type = "KEY"
-display_name = "Chave"
+display_name = "Comida"
 description = "Chave que abre coisas"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa0t"]
