@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=4 uid="uid://cqpart4lcjtn7"]
+
+[ext_resource type="PackedScene" uid="uid://b2x8mnc8pvcbe" path="res://starter_content/_demo/player_example.tscn" id="1_rx7x0"]
+[ext_resource type="TileSet" uid="uid://cq4nfdafe63cg" path="res://starter_content/_demo/levels/sidescroling_map_example.tres" id="2_2ho80"]
+[ext_resource type="PackedScene" uid="uid://3ocl8u7v4aid" path="res://starter_content/_demo/props/trap.tscn" id="3_ymmo5"]
+[ext_resource type="PackedScene" uid="uid://cqfcrb2gs0ay4" path="res://starter_content/_demo/props/pickable_item_example.tscn" id="4_cv41m"]
+
+[node name="SidescrolingMapExample" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_rx7x0")]
+position = Vector2(132, 122)
+scale = Vector2(0.5, 0.5)
+speed = 32.0
+jump_velocity = -200.0
+
+[node name="Parallax2D_Back" type="Parallax2D" parent="."]
+z_index = -1
+scroll_scale = Vector2(0.8, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Back"]
+position = Vector2(40, 0)
+tile_map_data = PackedByteArray("AAAFAAcAAgAOAAAAAAAFAAgAAgAOAAEAAAAJAAcAAgAOAAAAAAAJAAgAAgAOAAEAAAAMAAcAAgAOAAAAAAAMAAgAAgAOAAEAAAA=")
+tile_set = ExtResource("2_2ho80")
+
+[node name="Parallax2D_Base" type="Parallax2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Base"]
+tile_map_data = PackedByteArray("AAD//wkAAgAKAAcAAAD//wgAAgAKAAYAAAD//wcAAgANAAYAAAD//wYAAgANAAYAAAD//wUAAgANAAYAAAD//wQAAgANAAYAAAD//wMAAgANAAUAAAAQAAkAAgAMAAcAAAAPAAkAAgALAAcAAAAOAAkAAgALAAcAAAANAAkAAgALAAcAAAAMAAkAAgALAAcAAAALAAkAAgALAAcAAAAKAAkAAgALAAcAAAAJAAkAAgALAAcAAAAIAAkAAgALAAcAAAAHAAkAAgALAAcAAAAGAAkAAgALAAcAAAAFAAkAAgALAAcAAAAEAAkAAgALAAgAAAADAAkAAgALAAgAAAACAAkAAgALAAgAAAABAAkAAgAMAAcAAAAAAAkAAgALAAcAAAAQAAAAAgANAAUAAAAQAAEAAgANAAYAAAAQAAIAAgANAAYAAAAQAAMAAgANAAYAAAAQAAQAAgANAAYAAAAQAAUAAgANAAYAAAAQAAYAAgANAAYAAAAQAAcAAgANAAYAAAAQAAgAAgAMAAYAAAAAAAgAAgALAAUAAAABAAgAAgAMAAUAAAAFAAgAAgAKAAUAAAAGAAgAAgALAAUAAAAHAAgAAgALAAUAAAAIAAgAAgALAAUAAAAJAAgAAgALAAUAAAAOAAgAAgALAAUAAAAPAAgAAgALAAUAAAAKAAgAAgALAAUAAAALAAgAAgALAAUAAAAMAAgAAgALAAUAAAANAAgAAgALAAUAAAA=")
+tile_set = ExtResource("2_2ho80")
+
+[node name="Trap" parent="." instance=ExtResource("3_ymmo5")]
+position = Vector2(56, 140)
+scale = Vector2(0.5, 0.5)
+
+[node name="PickableItemExample" parent="." instance=ExtResource("4_cv41m")]
+position = Vector2(208, 120)

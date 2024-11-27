@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqfcrb2gs0ay4"]
+
+[ext_resource type="Script" path="res://starter_content/pickable_item/pickable_item.gd" id="1_hfbuh"]
+[ext_resource type="PackedScene" uid="uid://dl3hticbwtgq4" path="res://starter_content/interactable/interactable.tscn" id="2_ga2vm"]
+[ext_resource type="Script" path="res://starter_content/inventory/inventory_item.gd" id="2_l5ha7"]
+[ext_resource type="Texture2D" uid="uid://bu2jx4kfdm1p4" path="res://starter_content/_demo/assets/Tiny Swords (Update 010)/Resources/Resources/M_Idle.png" id="4_ay00j"]
+
+[sub_resource type="Resource" id="Resource_0n3i2"]
+script = ExtResource("2_l5ha7")
+item_id = "KEY"
+item_type = "KEY"
+display_name = "Chave"
+description = "Chave que abre coisas"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa0t"]
+size = Vector2(64, 48)
+
+[node name="PickableItemExample" type="Node2D"]
+script = ExtResource("1_hfbuh")
+inventory_item = SubResource("Resource_0n3i2")
+
+[node name="Interactable" parent="." instance=ExtResource("2_ga2vm")]
+collision_layer = 256
+interact_message = "Pegar Comida"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(8, 16)
+shape = SubResource("RectangleShape2D_xsa0t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_ay00j")

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Conversation" load_steps=6 format=3 uid="uid://c5p87o2xr5fu2"]
+
+[ext_resource type="Script" path="res://starter_content/conversation/chat_message.gd" id="1_vnc7o"]
+[ext_resource type="Script" path="res://starter_content/conversation/conversation.gd" id="2_4df72"]
+
+[sub_resource type="Resource" id="Resource_qtm7f"]
+script = ExtResource("1_vnc7o")
+message_id = "Mussum 01"
+char_name = "Mussum "
+char_picture_path = "res://starter_content/_demo/assets/face.png"
+message = "uco de cevadiss deixa as pessoas mais interessantis"
+has_cancel = false
+
+[sub_resource type="Resource" id="Resource_10vii"]
+script = ExtResource("1_vnc7o")
+message_id = "02"
+char_name = "Mussum "
+char_picture_path = "res://starter_content/_demo/assets/face.png"
+message = " Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis."
+has_cancel = false
+
+[sub_resource type="Resource" id="Resource_btvtq"]
+script = ExtResource("1_vnc7o")
+message_id = "03"
+char_name = "Mussum "
+char_picture_path = "res://starter_content/_demo/assets/face.png"
+message = "Manduma pindureta quium dia nois paga."
+has_cancel = false
+
+[resource]
+script = ExtResource("2_4df72")
+messages = Array[ExtResource("1_vnc7o")]([SubResource("Resource_qtm7f"), SubResource("Resource_10vii"), SubResource("Resource_btvtq")])

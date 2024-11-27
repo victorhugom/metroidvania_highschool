@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cdfmo47n5d35e"
+path="res://.godot/imported/Retro Weapon Laser 03.wav-9e0488696efa45b9c0b11514a5cbdd73.sample"
+
+[deps]
+
+source_file="res://starter_content/_demo/assets/FreeSFX/GameSFX/Weapon/laser/Retro Weapon Laser 03.wav"
+dest_files=["res://.godot/imported/Retro Weapon Laser 03.wav-9e0488696efa45b9c0b11514a5cbdd73.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
