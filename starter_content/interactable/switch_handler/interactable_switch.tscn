@@ -8,8 +8,6 @@ size = Vector2(64, 128)
 
 [node name="InteractableSwitch" type="Sprite2D"]
 script = ExtResource("1_84ho0")
-interact_message_a = null
-interact_message_b = null
 collision_layers = 0
 collision_masks = 0
 

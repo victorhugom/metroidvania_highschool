@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=4 uid="uid://b5dtkq6tyy6hd"]
 
 [ext_resource type="Texture2D" uid="uid://dg0yavpoam0ri" path="res://starter_content/_demo/assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="1_k5o2n"]
-[ext_resource type="PackedScene" uid="uid://b2x8mnc8pvcbe" path="res://starter_content/_demo/player_example_four_axis.tscn" id="2_fs7bn"]
+[ext_resource type="PackedScene" path="res://starter_content/_demo/player_example_four_axis.tscn" id="2_fs7bn"]
 [ext_resource type="Texture2D" uid="uid://bh38403rm0m7c" path="res://starter_content/_demo/assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="2_q7x0g"]
 [ext_resource type="Texture2D" uid="uid://be1djfky5120w" path="res://starter_content/_demo/assets/Tiny Swords (Update 010)/Terrain/Bridge/Bridge_All.png" id="3_2awv4"]
 [ext_resource type="PackedScene" uid="uid://3ocl8u7v4aid" path="res://starter_content/_demo/props/trap.tscn" id="3_baux4"]
