@@ -1,0 +1,124 @@
+[gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://j7yjapfe31ku"]
+
+[ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_pkd45"]
+[ext_resource type="Script" path="res://ai/tasks/task_check_low_health.gd" id="2_8gnkf"]
+[ext_resource type="Script" path="res://ai/tasks/task_move_torwards_node.gd" id="2_w7uj0"]
+[ext_resource type="Script" path="res://ai/tasks/task_retreat.gd" id="3_eg84x"]
+[ext_resource type="Script" path="res://ai/tasks/task_check_if_under_attack.gd" id="5_jh1gw"]
+[ext_resource type="Script" path="res://ai/tasks/task_dodge.gd" id="6_1xn37"]
+[ext_resource type="Script" path="res://ai/tasks/task_check_attack_range.gd" id="7_a4olp"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_3gunv"]
+var/pos/name = &"pos"
+var/pos/type = 5
+var/pos/value = Vector2(0, 0)
+var/pos/hint = 0
+var/pos/hint_string = ""
+var/dir/name = &"dir"
+var/dir/type = 2
+var/dir/value = 0
+var/dir/hint = 0
+var/dir/hint_string = ""
+var/target_player/name = &"target_player"
+var/target_player/type = 24
+var/target_player/hint = 0
+var/target_player/hint_string = ""
+var/target_player_distance/name = &"target_player_distance"
+var/target_player_distance/type = 5
+var/target_player_distance/value = Vector2(0, 0)
+var/target_player_distance/hint = 0
+var/target_player_distance/hint_string = ""
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_h2jhy"]
+text = "Sequence: Look For Player"
+
+[sub_resource type="BTAction" id="BTAction_jg8k8"]
+script = ExtResource("1_pkd45")
+target_player_var = &"target_player"
+dir_var = &"dir"
+detection_range = 200
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_5wlx8"]
+text = "Sequence: Following Player"
+
+[sub_resource type="BTAction" id="BTAction_2ob6v"]
+script = ExtResource("2_8gnkf")
+
+[sub_resource type="BTAction" id="BTAction_6pyk1"]
+script = ExtResource("3_eg84x")
+
+[sub_resource type="BTSequence" id="BTSequence_bh2te"]
+custom_name = "Sequence: Retreat with Low Health"
+children = [SubResource("BTConsolePrint_5wlx8"), SubResource("BTAction_2ob6v"), SubResource("BTAction_6pyk1")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_ijtaq"]
+text = "Sequence: Attack Player"
+
+[sub_resource type="BTAction" id="BTAction_p84hl"]
+custom_name = "TaskMoveTowardsNode(Player)"
+script = ExtResource("2_w7uj0")
+target_node_var = &"target_node"
+target_node_distance_var = &"target_node_distance"
+dir_var = &"dir"
+speed = 100
+tolerance = 10
+
+[sub_resource type="BTAction" id="BTAction_awkxc"]
+script = ExtResource("5_jh1gw")
+
+[sub_resource type="BTAction" id="BTAction_tpwry"]
+script = ExtResource("6_1xn37")
+
+[sub_resource type="BTSequence" id="BTSequence_r6r1q"]
+custom_name = "Sequence: Dodge if Under Attack"
+children = [SubResource("BTAction_awkxc"), SubResource("BTAction_tpwry")]
+
+[sub_resource type="BTAction" id="BTAction_8jvny"]
+script = ExtResource("7_a4olp")
+
+[sub_resource type="BTComment" id="BTComment_p710q"]
+custom_name = "Task: Attack 1"
+
+[sub_resource type="BTComment" id="BTComment_i8je8"]
+custom_name = "Task:A ttack 2"
+
+[sub_resource type="BTSelector" id="BTSelector_r1yna"]
+custom_name = "Selector: Choose Attack"
+children = [SubResource("BTComment_p710q"), SubResource("BTComment_i8je8")]
+
+[sub_resource type="BTSequence" id="BTSequence_4ta03"]
+custom_name = "Sequence: Attack Player"
+children = [SubResource("BTAction_8jvny"), SubResource("BTSelector_r1yna")]
+
+[sub_resource type="BTSelector" id="BTSelector_irrne"]
+custom_name = "Selector: Handle Attacks"
+children = [SubResource("BTSequence_r6r1q"), SubResource("BTSequence_4ta03")]
+
+[sub_resource type="BTSequence" id="BTSequence_u1qln"]
+custom_name = "Sequence: Engage Player"
+children = [SubResource("BTConsolePrint_ijtaq"), SubResource("BTAction_p84hl"), SubResource("BTSelector_irrne")]
+
+[sub_resource type="BTSelector" id="BTSelector_i3wei"]
+children = [SubResource("BTSequence_bh2te"), SubResource("BTSequence_u1qln")]
+
+[sub_resource type="BTSequence" id="BTSequence_mgkra"]
+custom_name = "Player in Sight Sequence"
+children = [SubResource("BTConsolePrint_h2jhy"), SubResource("BTAction_jg8k8"), SubResource("BTSelector_i3wei")]
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_8tuj1"]
+text = "Sequence: Roam"
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_yxrx3"]
+min_duration = 2.0
+max_duration = 4.0
+
+[sub_resource type="BTSequence" id="BTSequence_kvt2v"]
+custom_name = "Roam Sequence"
+children = [SubResource("BTConsolePrint_8tuj1"), SubResource("BTRandomWait_yxrx3")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_jy5ta"]
+children = [SubResource("BTSequence_mgkra"), SubResource("BTSequence_kvt2v")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_3gunv")
+root_task = SubResource("BTDynamicSelector_jy5ta")

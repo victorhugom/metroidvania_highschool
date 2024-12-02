@@ -11,7 +11,7 @@ const INTERACTION_UI = preload("res://starter_content/interactable/ui/interactio
 		interact_message = value
 		
 		if interactor != null:
-			Interaction_ui.show_interaction(interact_message)
+			interaction_ui.show_interaction(interact_message)
 	get:
 		return interact_message
 		
@@ -36,7 +36,7 @@ const INTERACTION_UI = preload("res://starter_content/interactable/ui/interactio
 var audio_stream_player_2d: AudioStreamPlayer2D
 var in_interaction_area:= false
 var interactor: Node2D
-var Interaction_ui: InteractionUI
+var interaction_ui: InteractionUI
 
 func _ready() -> void:
 	audio_stream_player_2d = AudioStreamPlayer2D.new()
@@ -63,19 +63,20 @@ func can_interact() -> bool:
 
 func _on_body_entered(body: Node2D) -> void:
 	
-	Interaction_ui = get_tree().root.get_node("InteractionUi")
-	if Interaction_ui == null:
-		Interaction_ui = INTERACTION_UI.instantiate()
-		get_tree().root.add_child(Interaction_ui)
+	if get_tree().root.has_node("InteractionUi"):
+		interaction_ui = get_tree().root.get_node("InteractionUi")
+	else:
+		interaction_ui = INTERACTION_UI.instantiate()
+		get_tree().root.add_child(interaction_ui)
 		
 	interactor = body
 	
 	in_interaction_area = true
 	
 	if can_interact():
-		Interaction_ui.show_interaction(interact_message)
+		interaction_ui.show_interaction(interact_message)
 	else:
-		Interaction_ui.show_interaction(cannot_interact_message)
+		interaction_ui.show_interaction(cannot_interact_message)
 	
 	begin_focus.emit(body)
 
@@ -84,7 +85,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 	in_interaction_area = false
 	
-	Interaction_ui.hide_interaction()
+	interaction_ui.hide_interaction()
 	
 	end_focus.emit(body)
 	

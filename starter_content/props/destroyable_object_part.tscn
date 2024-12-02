@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://krycl1g103ch"]
+
+[ext_resource type="Script" path="res://starter_content/props/destroyable_object_part.gd" id="1_je5v6"]
+[ext_resource type="Texture2D" uid="uid://cvhul1ge4w8hd" path="res://starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="1_jilf4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4feme"]
+
+[node name="DestroyableObjectPart" type="RigidBody2D"]
+position = Vector2(23, 0)
+collision_layer = 2048
+collision_mask = 1024
+script = ExtResource("1_je5v6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jilf4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4feme")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05

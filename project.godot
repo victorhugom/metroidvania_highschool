@@ -23,6 +23,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [input]
 
 ui_left={
@@ -100,6 +104,8 @@ ui_run={
 2d_physics/layer_8="EnemyAttackBox"
 2d_physics/layer_9="Interactable"
 2d_physics/layer_10="Obstacle"
+2d_physics/layer_11="Terrain"
+2d_physics/layer_12="DestroyableObject"
 
 [rendering]
 

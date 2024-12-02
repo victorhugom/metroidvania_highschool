@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca0ojjc8j3m55"]
+
+[ext_resource type="Script" path="res://starter_content/enemy/enemy.gd" id="1_03o4y"]
+[ext_resource type="Texture2D" uid="uid://cw36amcndjppf" path="res://starter_content/_demo/assets/Kings and Pigs/Sprites/03-Pig/Idle (34x28).png" id="2_pjg4e"]
+[ext_resource type="BehaviorTree" uid="uid://j7yjapfe31ku" path="res://ai/trees/enemy_basic_bt.tres" id="3_j7nuy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_prp0a"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_kbftn"]
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(-3, -14)
+collision_layer = 16
+collision_mask = 1553
+script = ExtResource("1_03o4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 6)
+shape = SubResource("CapsuleShape2D_prp0a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pjg4e")
+hframes = 11
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_j7nuy")
+blackboard_plan = SubResource("BlackboardPlan_kbftn")
