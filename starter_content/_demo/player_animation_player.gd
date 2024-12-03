@@ -2,11 +2,20 @@ extends AnimationPlayer
 
 @onready var player = $".."
 
+var last_direction = "left"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player.moving.connect(_on_moving)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("player_attack"):
+		play("attack_" + last_direction)
+		player.can_move = false
+
 func _on_moving(direction: String, velocity: Vector2):
+	
+	last_direction = direction
 	
 	if velocity.length() == 0:
 		play("idle")
@@ -22,3 +31,8 @@ func _on_moving(direction: String, velocity: Vector2):
 		play("down_left")
 	elif direction == "down_right" and has_animation("down_right"):
 		play("down_right")
+
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name.begins_with("attack_"):
+		player.can_move = true

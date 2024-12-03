@@ -3,6 +3,7 @@ class_name TwoAxisMovement extends CharacterBody2D
 signal moving(direction: String, velocity: Vector2)
 
 @onready var health: Health = $Health
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 ## The base speed
 @export var speed: float = 32*2
@@ -13,7 +14,7 @@ signal moving(direction: String, velocity: Vector2)
 ## If false player will not move
 @export var can_move:= true
 
-var last_direction:= "idle"
+var last_direction:= "left"
 var current_speed: float
 
 func  _ready() -> void:
@@ -30,10 +31,10 @@ func _input(event: InputEvent) -> void:
 			print_rich(debug_message %["Last Direction",last_direction])
 			print_rich(debug_message %["Velocity",velocity])
 			print_rich("_______________________________\n")
-		if event.is_action_pressed("ui_run"):
-			current_speed = speed * run_multiplier
-		if event.is_action_released("ui_run"):
-			current_speed = speed
+	if event.is_action_pressed("player_run"):
+		current_speed = speed * run_multiplier
+	if event.is_action_released("player_run"):
+		current_speed = speed
 
 func _physics_process(delta: float) -> void:
 	
@@ -44,11 +45,11 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 
 	# Handle jump.
-	if is_on_floor() and Input.is_action_just_pressed("ui_jump"):
+	if is_on_floor() and Input.is_action_just_pressed("player_jump"):
 		velocity.y = jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("player_left", "player_right")
 	if direction:
 		velocity.x = direction * current_speed
 	else:

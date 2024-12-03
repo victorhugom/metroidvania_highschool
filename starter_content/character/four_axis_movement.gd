@@ -28,10 +28,10 @@ func _input(event: InputEvent) -> void:
 			print_rich(debug_message %["Last Anim Direction",last_anim_direction])
 			print_rich(debug_message %["Velocity",velocity])
 			print_rich("_______________________________\n")
-		if event.is_action_pressed("ui_run"):
-			current_speed = speed * run_multiplier
-		if event.is_action_released("ui_run"):
-			current_speed = speed
+	if event.is_action_pressed("player_run"):
+		current_speed = speed * run_multiplier
+	if event.is_action_released("player_run"):
+		current_speed = speed
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 	if can_move == false:
 		return
 	
-	var move_direction_vector = Input.get_vector( "ui_left", "ui_right", "ui_up","ui_down")
+	var move_direction_vector = Input.get_vector( "player_left", "player_right", "player_up","player_down")
 	velocity = move_direction_vector * current_speed
 
 	var direction = last_anim_direction
