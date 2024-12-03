@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot Boilerplate"
-run/main_scene="res://_starter_content/_demo/levels/sidescroling_map_example.tscn"
+run/main_scene="res://levels/_test/sidescroling_map_example.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -30,12 +30,14 @@ folder_colors={
 "res://addons/": "gray",
 "res://ai/": "gray",
 "res://assets/": "red",
-"res://enemies/": "orange",
-"res://gui/": "yellow",
-"res://levels/": "green",
-"res://player/": "teal",
-"res://props/": "blue",
-"res://utils/": "purple"
+"res://conversation/": "orange",
+"res://enemies/": "yellow",
+"res://gui/": "green",
+"res://interactables/": "teal",
+"res://levels/": "blue",
+"res://player/": "purple",
+"res://props/": "pink",
+"res://utils/": "red"
 }
 
 [global_group]

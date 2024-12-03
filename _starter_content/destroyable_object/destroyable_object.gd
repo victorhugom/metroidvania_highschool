@@ -38,7 +38,7 @@ func _get(property: StringName):
 		return texture_full
 	return null
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint(): 
 		_update_collision_offset()
 		_update_collision_side()
