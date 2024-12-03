@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://daee7kqabtbiq"
+path="res://.godot/imported/Retro Descending Short 14.wav-fd2b0d006f6453d1fc8853ea3668a2a8.sample"
+
+[deps]
+
+source_file="res://_starter_content/_demo/assets/FreeSFX/GameSFX/Descending/Retro Descending Short 14.wav"
+dest_files=["res://.godot/imported/Retro Descending Short 14.wav-fd2b0d006f6453d1fc8853ea3668a2a8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,174 @@
+[gd_scene load_steps=15 format=3 uid="uid://2bcu8dbwp6kw"]
+
+[ext_resource type="Script" path="res://_starter_content/character/four_axis_movement.gd" id="1_yewlp"]
+[ext_resource type="Texture2D" uid="uid://6wrw47e3bc58" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_7me8x"]
+[ext_resource type="PackedScene" uid="uid://d3mbkmjkxl7ys" path="res://_starter_content/character/follow_camera.tscn" id="2_vdjha"]
+[ext_resource type="PackedScene" uid="uid://ko7klxxhj47r" path="res://_starter_content/character/health.tscn" id="3_nvi47"]
+[ext_resource type="PackedScene" uid="uid://kym32cx77lnq" path="res://_starter_content/character/hurt_box.tscn" id="4_8gpr3"]
+[ext_resource type="PackedScene" uid="uid://c8c7pmnu2dvsw" path="res://_starter_content/inventory/inventory.tscn" id="5_b82b4"]
+[ext_resource type="Script" path="res://_starter_content/_demo/player_animation_player.gd" id="7_pu15u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aoe20"]
+radius = 2.0
+height = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fqfi"]
+size = Vector2(33, 50)
+
+[sub_resource type="Animation" id="Animation_sa11w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sdaee"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_yiydf"]
+resource_name = "walk_left"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mequb"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtulq"]
+_data = {
+"RESET": SubResource("Animation_sa11w"),
+"idle": SubResource("Animation_sdaee"),
+"walk_left": SubResource("Animation_yiydf"),
+"walk_right": SubResource("Animation_mequb")
+}
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_mask = 785
+script = ExtResource("1_yewlp")
+speed = 128.0
+run_multiplier = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_7me8x")
+offset = Vector2(0, -30)
+flip_h = true
+hframes = 6
+vframes = 8
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_aoe20")
+
+[node name="FollowCamera" parent="." instance=ExtResource("2_vdjha")]
+
+[node name="Health" parent="." instance=ExtResource("3_nvi47")]
+max_health = 10
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_8gpr3")]
+position = Vector2(0, -4)
+collision_layer = 4
+collision_mask = 128
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_0fqfi")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Inventory" parent="." instance=ExtResource("5_b82b4")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rtulq")
+}
+script = ExtResource("7_pu15u")

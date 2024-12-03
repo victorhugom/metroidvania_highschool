@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkhbxo7yyxpld"]
+
+[ext_resource type="Script" path="res://_starter_content/conversation/chat_box.gd" id="1_w3236"]
+[ext_resource type="Texture2D" uid="uid://k7q80tgk3s4g" path="res://_starter_content/assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_r.png" id="2_veum8"]
+[ext_resource type="Texture2D" uid="uid://bebwhk7dv6tv5" path="res://_starter_content/assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_e.png" id="2_ybc26"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r67nv"]
+bg_color = Color(0.94902, 0.843137, 0.964706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 5
+border_color = Color(0.0627451, 0.0509804, 0.207843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlowc"]
+bg_color = Color(0.0627451, 0.0509804, 0.207843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ChatBox" type="CanvasLayer"]
+script = ExtResource("1_w3236")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -168.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Sprited2D" type="Sprite2D" parent="HBoxContainer/MarginContainer/PanelContainer"]
+scale = Vector2(4, 4)
+centered = false
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ConversationPanel" type="Panel" parent="HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(120, 112)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_r67nv")
+
+[node name="ConversationRichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/ConversationPanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 754.0
+offset_bottom = 100.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Lorem ipsum odor amet, consectetuer adipiscing elit. Dictum arcu suscipit quam leo ac. Rhoncus scelerisque duis lobortis; ultrices diam amet. Quisque vitae facilisi senectus turpis est posuere. "
+fit_content = true
+autowrap_mode = 2
+
+[node name="CharNamePanel" type="Panel" parent="HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(300, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dlowc")
+
+[node name="ChatNameRichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/CharNamePanel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 4.0
+offset_right = 297.0
+offset_bottom = 32.0
+text = "Nome do Personagem"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+offset_left = 902.0
+offset_top = 497.0
+offset_right = 1143.0
+offset_bottom = 597.0
+
+[node name="CancelButton" type="Button" parent="HBoxContainer2"]
+self_modulate = Color(0.0627451, 0.0509804, 0.207843, 1)
+layout_mode = 2
+theme_override_constants/icon_max_width = 40
+text = "Cancelar
+"
+icon = ExtResource("2_veum8")
+flat = true
+
+[node name="NextMessageButton" type="Button" parent="HBoxContainer2"]
+self_modulate = Color(0.0627451, 0.0509804, 0.207843, 1)
+layout_mode = 2
+theme_override_constants/icon_max_width = 40
+text = "Proxima"
+icon = ExtResource("2_ybc26")
+flat = true

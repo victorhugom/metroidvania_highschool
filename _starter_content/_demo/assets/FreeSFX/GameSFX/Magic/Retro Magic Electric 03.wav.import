@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://de4yo31o8215u"
+path="res://.godot/imported/Retro Magic Electric 03.wav-d4eca8749ea9a8d4c7273bc98196d79e.sample"
+
+[deps]
+
+source_file="res://_starter_content/_demo/assets/FreeSFX/GameSFX/Magic/Retro Magic Electric 03.wav"
+dest_files=["res://.godot/imported/Retro Magic Electric 03.wav-d4eca8749ea9a8d4c7273bc98196d79e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

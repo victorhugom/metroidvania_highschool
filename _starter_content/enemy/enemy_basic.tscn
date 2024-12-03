@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca0ojjc8j3m55"]
+
+[ext_resource type="Script" path="res://_starter_content/enemy/enemy.gd" id="1_03o4y"]
+[ext_resource type="Texture2D" uid="uid://cw36amcndjppf" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/03-Pig/Idle (34x28).png" id="2_pjg4e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_prp0a"]
+radius = 8.0
+height = 16.0
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(-3, -14)
+collision_layer = 16
+collision_mask = 1553
+script = ExtResource("1_03o4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 6)
+shape = SubResource("CapsuleShape2D_prp0a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pjg4e")
+hframes = 11

@@ -1,0 +1,29 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnaf10n6cgnuy"]
+
+[ext_resource type="Script" path="res://_starter_content/destroyable_object/destroyable_object.gd" id="1_mt7j0"]
+[ext_resource type="PackedScene" uid="uid://clfeahbqi3hv2" path="res://_starter_content/destroyable_object/destroyable_object_container.tscn" id="2_h2o0i"]
+[ext_resource type="PackedScene" uid="uid://kym32cx77lnq" path="res://_starter_content/character/hurt_box.tscn" id="3_egsjc"]
+[ext_resource type="Texture2D" uid="uid://cvhul1ge4w8hd" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="3_hgdwf"]
+[ext_resource type="PackedScene" uid="uid://ko7klxxhj47r" path="res://_starter_content/character/health.tscn" id="3_ucdif"]
+[ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="4_pp7pl"]
+[ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="5_irw68"]
+[ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="6_t0cfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gopik"]
+size = Vector2(22, 16)
+
+[node name="DestroyableObject" type="Node2D"]
+script = ExtResource("1_mt7j0")
+texture_pieces = Array[Texture2D]([ExtResource("3_hgdwf"), ExtResource("4_pp7pl"), ExtResource("5_irw68"), ExtResource("6_t0cfv")])
+
+[node name="DestroyableObjectContainer" parent="." instance=ExtResource("2_h2o0i")]
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_egsjc")]
+collision_layer = 2048
+collision_mask = 8
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_gopik")
+
+[node name="Health" parent="." instance=ExtResource("3_ucdif")]

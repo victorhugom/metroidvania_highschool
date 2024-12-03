@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot Boilerplate"
-run/main_scene="res://starter_content/_demo/levels/sidescroling_map_example.tscn"
+run/main_scene="res://_starter_content/_demo/levels/sidescroling_map_example.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,21 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://_starter_content/": "gray",
+"res://addons/": "gray",
+"res://ai/": "gray",
+"res://assets/": "red",
+"res://enemies/": "orange",
+"res://gui/": "yellow",
+"res://levels/": "green",
+"res://player/": "teal",
+"res://props/": "blue",
+"res://utils/": "purple"
+}
 
 [global_group]
 

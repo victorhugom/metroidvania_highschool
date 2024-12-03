@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://3ocl8u7v4aid"]
+
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_bk7ja"]
+[ext_resource type="Texture2D" uid="uid://dyka1bpumot0c" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Effects/Fire/Fire.png" id="1_fa1ix"]
+[ext_resource type="Texture2D" uid="uid://ckqfio1pwxhls" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Destroyed.png" id="2_1faxr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
+size = Vector2(96, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx124"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpd2v"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gim2m"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fla8"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij65o"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wc3u"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc03i"]
+atlas = ExtResource("1_fa1ix")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sp52q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx124")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpd2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gim2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fla8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij65o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wc3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc03i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Trap" type="Node2D"]
+y_sort_enabled = true
+
+[node name="AttackBox" parent="." instance=ExtResource("1_bk7ja")]
+collision_layer = 128
+collision_mask = 4
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_mnst4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -24)
+texture = ExtResource("2_1faxr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.960692

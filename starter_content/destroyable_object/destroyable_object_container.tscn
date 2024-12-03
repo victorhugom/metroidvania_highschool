@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://clfeahbqi3hv2"]
-
-[ext_resource type="Script" path="res://starter_content/destroyable_object/destroyable_object_container.gd" id="2_q5hta"]
-
-[node name="DestroyableObjectContainer" type="Sprite2D"]
-script = ExtResource("2_q5hta")
