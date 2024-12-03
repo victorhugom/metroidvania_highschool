@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgwv4iucvs5gn"]
+
+[ext_resource type="Script" path="res://gui/debug_overlay.gd" id="1_gkpty"]
+
+[node name="DebugOverlay" type="CanvasLayer"]
+script = ExtResource("1_gkpty")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 459.0
+offset_bottom = 322.0
+bbcode_enabled = true
