@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://3pe4vfsrj565"]
+
+[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_0iuma"]
+
+[sub_resource type="Gradient" id="Gradient_jwfgp"]
+offsets = PackedFloat32Array(0, 0.54918, 1)
+colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
+gradient = SubResource("Gradient_jwfgp")
+width = 5
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_0iuma")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
