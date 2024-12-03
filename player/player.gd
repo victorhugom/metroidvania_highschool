@@ -7,23 +7,20 @@ signal moving(direction: String, velocity: Vector2)
 
 ## The base speed
 @export var speed: float = 64
+## The max height that the player can jump
+@export var jump_height = 64
 ## The value that will multiply the speed when running
 @export var run_multiplier:= 2.5
-## The max height that the player can jump
-@export var jump_height = 128
+@export var acceleration:= 10 
+@export var deceleration:= 50 
 ## If false player will not move
 @export var can_move:= true
 
 var last_direction:= "left"
 var current_speed: float
-var acceleration:= 10 
-var deceleration:= 50 
-var jump_velocity:= -256
+var jump_velocity: float
 
 func  _ready() -> void:
-	var gravity = get_gravity().y
-	jump_velocity = -sqrt(2 * gravity * jump_height)
-	
 	current_speed = speed
 
 func _input(event: InputEvent) -> void:
@@ -36,7 +33,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("player_run"):
 		current_speed = speed
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
 		var debug_message:= ""
@@ -57,6 +54,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle jump.
 	if is_on_floor() and Input.is_action_just_pressed("player_jump"):
+		var gravity = get_gravity().y
+		jump_velocity = -sqrt(2 * gravity * jump_height)
 		velocity.y = jump_velocity
 		
 	# Get the input direction and handle the movement/deceleration.
