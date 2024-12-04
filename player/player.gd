@@ -66,6 +66,9 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	_apply_gravity(delta)
+	move_and_slide()
+	
 	if can_move == false:
 		return
 	
@@ -83,9 +86,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 	
-	_apply_gravity(delta)
-	move_and_slide()
-
 	if velocity.x > 0:
 		last_direction = "right"
 	elif velocity.x < 0:
@@ -100,8 +100,11 @@ func _apply_gravity(delta):
 			velocity += get_gravity() * delta * 1.2
 
 func _on_animation_finished(anim_name: StringName) -> void:
-	if anim_name.begins_with("attack_"):
-		main_state_machine.dispatch(to_idle)
+	if anim_name.begins_with("attack"):
+		if is_on_floor():
+			main_state_machine.dispatch(to_idle)
+		else:
+			main_state_machine.dispatch(to_jump)
 		can_move = true
 
 func _initiate_state_machine():
@@ -122,11 +125,10 @@ func _initiate_state_machine():
 	
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_idle, to_idle)
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_attack, to_attack)	
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)	
 	
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
 	
-	main_state_machine.add_transition(state_idle, state_jump, to_jump)
-	main_state_machine.add_transition(state_walk, state_jump, to_jump)
 	
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
@@ -136,23 +138,24 @@ func _state_idle_enter():
 	
 func _state_idle_update(_delta:float):
 	state_changed.emit("idle", velocity)
-	if velocity.x != 0:
+	if int(velocity.x) != 0:
 		main_state_machine.dispatch(to_walk)
 
 func _state_walk_enter():
 	state_changed.emit("walk", velocity)
 	
 func _state_walk_update(_delta:float):
-	state_changed.emit("walk", velocity)
-	if velocity.x == 0:
+	if int(velocity.x) == 0:
 		main_state_machine.dispatch(&"state_ended")
+	else:
+		state_changed.emit("walk", velocity)
 	
 func _state_jump_enter():
-	state_changed.emit("jump", velocity)
-	
-	var gravity = get_gravity().y
-	jump_velocity = -sqrt(2 * gravity * jump_height)
-	velocity.y = jump_velocity
+	if is_on_floor():
+		state_changed.emit("jump", velocity)
+		var gravity = get_gravity().y
+		jump_velocity = -sqrt(2 * gravity * jump_height)
+		velocity.y = jump_velocity
 
 func _state_jump_update(_delta:float):
 	state_changed.emit("jump", velocity)
@@ -164,4 +167,5 @@ func _state_attack_enter():
 	can_move = false
 	
 func _state_attack_update(_delta:float):
-	state_changed.emit("attack", velocity)
+	pass
+	#state_changed.emit("attack", velocity)

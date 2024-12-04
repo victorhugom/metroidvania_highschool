@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://3pe4vfsrj565"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dh87rmh7f2cqo"]
 
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_0iuma"]
 
