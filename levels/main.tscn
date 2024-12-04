@@ -40,7 +40,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3cxr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3v0y"]
 resource_local_to_scene = true
 shader = ExtResource("10_ugbvm")
 shader_parameter/lerper = null
@@ -150,7 +150,7 @@ tile_map_data = PackedByteArray("AAD//wYAAAAKAAAAAAAAAAYAAAAKAAAAAAABAAYAAAAKAAA
 tile_set = ExtResource("2_oppkn")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_s3cxr")
+material = SubResource("ShaderMaterial_k3v0y")
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]
@@ -164,7 +164,6 @@ texture_pieces = Array[Texture2D]([ExtResource("5_3b3q7"), ExtResource("6_8f5m3"
 [node name="PointLight2D" type="PointLight2D" parent="."]
 z_index = -2
 position = Vector2(-29, 77)
-scale = Vector2(1, 1)
 color = Color(0.77089, 0.628613, 0.34163, 1)
 texture = ExtResource("18_4yvbv")
 
