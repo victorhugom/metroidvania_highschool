@@ -21,18 +21,29 @@ signal state_changed(current_state: String, velocity: Vector2)
 ## If false player will not move
 
 var is_attacking:= false
-var last_direction:= "left"
 var current_speed: float
 
+# jump
 var jump_velocity: float
 var jump_buffer = false 
 var current_jump_buffer_timer = 0.0
 
+var dash_speed = 400.0 
+var dash_cooldown = 0.5
+var dash_duration = 0.2
+
+# dash variables 
+var is_dashing = false 
+var current_dash_duration = 0.0
+var current_dash_cooldown = 0.0
+
+# state machine
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
 var to_jump: StringName = &"to_jump"
 var to_walk: StringName = &"to_walk"
 var to_attack: StringName = &"to_attack"
+var to_dash: StringName = &"to_dash"
 
 func  _ready() -> void:
 	current_speed = speed
@@ -43,7 +54,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_F1:
 			DebugUI.ON = not DebugUI.ON
-			
 	if event.is_action_pressed("player_run"):
 		current_speed = speed * run_multiplier
 	if event.is_action_released("player_run"):
@@ -56,8 +66,9 @@ func _input(event: InputEvent) -> void:
 			current_jump_buffer_timer = jump_buffer_time
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
+	if event.is_action_pressed("player_dash"):
+		main_state_machine.dispatch(to_dash)
 
-		
 func _process(_delta: float) -> void:
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
@@ -66,7 +77,7 @@ func _process(_delta: float) -> void:
 		debug_message +=debug_message_template %["Health",health.current_health]
 		debug_message +=debug_message_template %["Speed",current_speed]
 		debug_message +=debug_message_template %["Can Move",_can_move()]
-		debug_message +=debug_message_template %["Last Direction",last_direction]
+		debug_message +=debug_message_template %["Last Direction",velocity.x]
 		debug_message +=debug_message_template %["Velocity",velocity]
 		debug_message +=debug_message_template %["Jump Buffer Active:", jump_buffer]
 		debug_message +=debug_message_template %["Jump Buffer Timer", current_jump_buffer_timer]
@@ -84,8 +95,9 @@ func _physics_process(delta: float) -> void:
 	if _can_move() == false and is_on_floor():
 		velocity.x = 0
 	
-	_handle_jump_buffer(delta)
 	_apply_gravity(delta)
+	_handle_jump_buffer(delta)
+	current_dash_cooldown-= delta
 	
 	move_and_slide()
 	
@@ -102,11 +114,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction * current_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
-	
-	if velocity.x > 0:
-		last_direction = "right"
-	elif velocity.x < 0:
-		last_direction = "left"
 
 func _apply_gravity(delta):
 	
@@ -130,11 +137,13 @@ func _initiate_state_machine():
 	var state_idle = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
 	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
+	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
 	main_state_machine.add_child(state_jump)
+	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_attack)
 	
 	main_state_machine.initial_state = state_idle
@@ -143,12 +152,17 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_idle, to_idle)
 	
 	#ENTER JUMP STATE
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)	
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)
+	
+	#ENTER DASH STATE
+	main_state_machine.add_transition(state_idle, state_dash, to_dash)
+	main_state_machine.add_transition(state_walk, state_dash, to_dash)
 	
 	#ENTER ATTACK STATE
 	main_state_machine.add_transition(state_idle, state_attack, to_attack)	
 	main_state_machine.add_transition(state_walk, state_attack, to_attack)	
 	main_state_machine.add_transition(state_jump, state_attack, to_attack)	
+	main_state_machine.add_transition(state_dash, state_attack, to_attack)	
 	
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
@@ -201,7 +215,24 @@ func _state_attack_exit():
 	attack_box.monitorable = false
 	attack_box.monitoring = false
 	is_attacking = false
+
+func _state_dash_enter():
+	if is_dashing || current_dash_cooldown > 0:
+		return
+		
+	is_dashing = true
+	current_dash_duration = dash_duration
+	current_speed = dash_speed
 	
+func _state_dash_update(delta:float):
+	current_dash_duration -= delta
+	
+	if current_dash_duration < 0:
+		is_dashing = false
+		main_state_machine.dispatch(to_idle)
+		current_dash_cooldown = dash_cooldown
+		current_speed = speed
+
 func _can_move():
 	return not is_attacking
 	

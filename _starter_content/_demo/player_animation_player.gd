@@ -32,6 +32,8 @@ func _on_state_changed(state: String, velocity: Vector2):
 		play("idle")
 	elif state == "walk":
 		play("walk")
+	elif state == "dash":
+		play("dash")
 	elif state == "jump":
 		# JUMP UP
 		if velocity.y > 0:
@@ -47,4 +49,4 @@ func _on_state_changed(state: String, velocity: Vector2):
 			combo_index = 1 if combo_index == 3	 else combo_index + 1
 				
 			combo_timeout = get_animation(combo_animation).length + .1
-			play(combo_animation)	
+			play(combo_animation)
