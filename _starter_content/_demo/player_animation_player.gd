@@ -4,7 +4,7 @@ extends AnimationPlayer
 @onready var sprite_2d: Sprite2D = $"../Sprite2D"
 
 var combo_index:= 1
-var combo_timeout:= 0
+var combo_timeout: float = 0
 var combo_direction:="right"
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	if combo_timeout < 0:
 		combo_index = 1
 		combo_timeout = 0
-	elif combo_timeout > 0:
+	else:
 		combo_timeout -= delta
 
 func _on_state_changed(state: String, velocity: Vector2):
@@ -46,5 +46,5 @@ func _on_state_changed(state: String, velocity: Vector2):
 			var combo_animation = "attack_0%s_%s" %[combo_index, combo_direction]
 			combo_index = 1 if combo_index == 3	 else combo_index + 1
 				
-			combo_timeout = get_animation(combo_animation).length + .5
+			combo_timeout = get_animation(combo_animation).length + .1
 			play(combo_animation)	

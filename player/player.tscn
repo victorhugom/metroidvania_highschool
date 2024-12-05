@@ -721,5 +721,3 @@ libraries = {
 "": SubResource("AnimationLibrary_rtulq")
 }
 script = ExtResource("9_4ue5d")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
