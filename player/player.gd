@@ -4,26 +4,29 @@ signal state_changed(current_state: String, velocity: Vector2)
 
 @onready var health: Health = $Health
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_box: AttackBox = $AttackBox
+@onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
 
 ## The base speed
 @export var speed: float = 64
 ## The max height that the player can jump
 @export var jump_height = 64
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
-@export var buffer_time = 0.1 # Buffer time in seconds
+@export var jump_buffer_time = 0.1 # Buffer time in seconds
+
 ## The value that will multiply the speed when running
 @export var run_multiplier:= 2.5
 @export var acceleration:= 10 
 @export var deceleration:= 50
 ## If false player will not move
-@export var can_move:= true
 
+var is_attacking:= false
 var last_direction:= "left"
 var current_speed: float
+
 var jump_velocity: float
 var jump_buffer = false 
-var jump_buffer_timer = 0.0
-
+var current_jump_buffer_timer = 0.0
 
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
@@ -50,9 +53,10 @@ func _input(event: InputEvent) -> void:
 			main_state_machine.dispatch(to_jump)
 		else: # Set the jump buffer 
 			jump_buffer = true 
-			jump_buffer_timer = buffer_time
+			current_jump_buffer_timer = jump_buffer_time
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
+
 		
 func _process(_delta: float) -> void:
 	if DebugUI.ON:
@@ -61,9 +65,11 @@ func _process(_delta: float) -> void:
 
 		debug_message +=debug_message_template %["Health",health.current_health]
 		debug_message +=debug_message_template %["Speed",current_speed]
-		debug_message +=debug_message_template %["Can Move",can_move]
+		debug_message +=debug_message_template %["Can Move",_can_move()]
 		debug_message +=debug_message_template %["Last Direction",last_direction]
 		debug_message +=debug_message_template %["Velocity",velocity]
+		debug_message +=debug_message_template %["Jump Buffer Active:", jump_buffer]
+		debug_message +=debug_message_template %["Jump Buffer Timer", current_jump_buffer_timer]
 		
 		var current_state = ""
 		if main_state_machine != null:
@@ -75,22 +81,12 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	if can_move == false and is_on_floor():
+	if _can_move() == false and is_on_floor():
 		velocity.x = 0
 	
-	# Decrease the buffer timer 
-	if jump_buffer_timer > 0: 
-		jump_buffer_timer -= delta 
-	else: 
-		jump_buffer = false
-		
-	# Handle landing 
-	if is_on_floor() and jump_buffer: 
-		main_state_machine.dispatch(to_jump)
-		jump_buffer = false
-		jump_buffer_timer = 0
-		
+	_handle_jump_buffer(delta)
 	_apply_gravity(delta)
+	
 	move_and_slide()
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -126,7 +122,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			main_state_machine.dispatch(to_idle)
 		else:
 			main_state_machine.dispatch(to_jump)
-		can_move = true
 
 func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
@@ -135,7 +130,7 @@ func _initiate_state_machine():
 	var state_idle = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
 	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
-	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update)
+	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -144,12 +139,19 @@ func _initiate_state_machine():
 	
 	main_state_machine.initial_state = state_idle
 	
+	#ENTER IDLE STATE
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_idle, to_idle)
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_attack, to_attack)	
+	
+	#ENTER JUMP STATE
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)	
 	
-	main_state_machine.add_transition(state_idle, state_walk, to_walk)
+	#ENTER ATTACK STATE
+	main_state_machine.add_transition(state_idle, state_attack, to_attack)	
+	main_state_machine.add_transition(state_walk, state_attack, to_attack)	
+	main_state_machine.add_transition(state_jump, state_attack, to_attack)	
 	
+	#ENTER WALK STATE
+	main_state_machine.add_transition(state_idle, state_walk, to_walk)
 	
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
@@ -184,9 +186,34 @@ func _state_jump_update(_delta:float):
 		main_state_machine.dispatch(to_idle)
 	
 func _state_attack_enter():
+	if is_attacking:
+		return
+
+	attack_box.monitorable = true
+	attack_box.monitoring = true
+	is_attacking = true
 	state_changed.emit("attack", velocity)
-	can_move = false
 	
 func _state_attack_update(_delta:float):
 	pass
-	#state_changed.emit("attack", velocity)
+
+func _state_attack_exit():
+	attack_box.monitorable = false
+	attack_box.monitoring = false
+	is_attacking = false
+	
+func _can_move():
+	return not is_attacking
+	
+func _handle_jump_buffer(delta):
+	# Decrease the buffer timer 
+	if current_jump_buffer_timer > 0: 
+		current_jump_buffer_timer -= delta 
+	else: 
+		jump_buffer = false
+		
+	# Handle landing 
+	if is_on_floor() and jump_buffer: 
+		main_state_machine.dispatch(to_jump)
+		jump_buffer = false
+		current_jump_buffer_timer = 0
