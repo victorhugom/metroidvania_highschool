@@ -32,6 +32,8 @@ func _on_state_changed(state: String, velocity: Vector2):
 		play("idle")
 	elif state == "walk":
 		play("walk")
+	elif state == "run":
+		play("walk")
 	elif state == "dash":
 		play("dash")
 	elif state == "jump":

@@ -42,6 +42,7 @@ var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
 var to_jump: StringName = &"to_jump"
 var to_walk: StringName = &"to_walk"
+var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
 var to_dash: StringName = &"to_dash"
 
@@ -55,9 +56,9 @@ func _input(event: InputEvent) -> void:
 		if event.pressed and event.keycode == KEY_F1:
 			DebugUI.ON = not DebugUI.ON
 	if event.is_action_pressed("player_run"):
-		current_speed = speed * run_multiplier
+		main_state_machine.dispatch(to_run)
 	if event.is_action_released("player_run"):
-		current_speed = speed
+		main_state_machine.dispatch(to_idle)
 	if event.is_action_pressed("player_jump"):
 		if is_on_floor(): 
 			main_state_machine.dispatch(to_jump)
@@ -70,6 +71,10 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_dash)
 
 func _process(_delta: float) -> void:
+	
+	if Input.is_action_pressed("player_run"):
+		main_state_machine.dispatch(to_run)
+	
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
 		var debug_message:= ""
@@ -136,12 +141,14 @@ func _initiate_state_machine():
 	
 	var state_idle = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
 	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
+	var state_run = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
 	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
+	main_state_machine.add_child(state_run)
 	main_state_machine.add_child(state_jump)
 	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_attack)
@@ -167,6 +174,10 @@ func _initiate_state_machine():
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
 	
+	#ENTER RUN STATE
+	main_state_machine.add_transition(state_idle, state_run, to_run)
+	main_state_machine.add_transition(state_walk, state_run, to_run)
+	
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
 	
@@ -179,6 +190,7 @@ func _state_idle_update(_delta:float):
 		main_state_machine.dispatch(to_walk)
 
 func _state_walk_enter():
+	current_speed = speed
 	state_changed.emit("walk", velocity)
 	
 func _state_walk_update(_delta:float):
@@ -186,6 +198,15 @@ func _state_walk_update(_delta:float):
 		main_state_machine.dispatch(to_idle)
 	else:
 		state_changed.emit("walk", velocity)
+		
+func _state_run_enter():
+	current_speed = speed * run_multiplier
+	
+func _state_run_update(_delta:float):
+	if int(velocity.x) == 0:
+		main_state_machine.dispatch(to_idle)
+	else:
+		state_changed.emit("run", velocity)
 	
 func _state_jump_enter():
 	if is_on_floor():
