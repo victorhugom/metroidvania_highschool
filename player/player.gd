@@ -9,6 +9,8 @@ signal state_changed(current_state: String, velocity: Vector2)
 @export var speed: float = 64
 ## The max height that the player can jump
 @export var jump_height = 64
+## The jump buffer time in seconds, used to allow player to make mistakes when jumping
+@export var buffer_time = 0.1 # Buffer time in seconds
 ## The value that will multiply the speed when running
 @export var run_multiplier:= 2.5
 @export var acceleration:= 10 
@@ -19,6 +21,9 @@ signal state_changed(current_state: String, velocity: Vector2)
 var last_direction:= "left"
 var current_speed: float
 var jump_velocity: float
+var jump_buffer = false 
+var jump_buffer_timer = 0.0
+
 
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
@@ -40,8 +45,12 @@ func _input(event: InputEvent) -> void:
 		current_speed = speed * run_multiplier
 	if event.is_action_released("player_run"):
 		current_speed = speed
-	if event.is_action_pressed("player_jump") and is_on_floor():
-		main_state_machine.dispatch(to_jump)
+	if event.is_action_pressed("player_jump"):
+		if is_on_floor(): 
+			main_state_machine.dispatch(to_jump)
+		else: # Set the jump buffer 
+			jump_buffer = true 
+			jump_buffer_timer = buffer_time
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
 		
@@ -66,11 +75,23 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	if can_move == false and is_on_floor():
+		velocity.x = 0
+	
+	# Decrease the buffer timer 
+	if jump_buffer_timer > 0: 
+		jump_buffer_timer -= delta 
+	else: 
+		jump_buffer = false
+		
+	# Handle landing 
+	if is_on_floor() and jump_buffer: 
+		main_state_machine.dispatch(to_jump)
+		jump_buffer = false
+		jump_buffer_timer = 0
+		
 	_apply_gravity(delta)
 	move_and_slide()
-	
-	if can_move == false:
-		return
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("player_left", "player_right")
@@ -146,7 +167,7 @@ func _state_walk_enter():
 	
 func _state_walk_update(_delta:float):
 	if int(velocity.x) == 0:
-		main_state_machine.dispatch(&"state_ended")
+		main_state_machine.dispatch(to_idle)
 	else:
 		state_changed.emit("walk", velocity)
 	
