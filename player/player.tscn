@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=28 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
+[ext_resource type="Shader" path="res://shaders/acceleration_effect.gdshader" id="3_jryd8"]
 [ext_resource type="PackedScene" uid="uid://d3mbkmjkxl7ys" path="res://_starter_content/character/follow_camera.tscn" id="3_mhy6p"]
 [ext_resource type="PackedScene" uid="uid://ko7klxxhj47r" path="res://_starter_content/character/health.tscn" id="4_jivws"]
 [ext_resource type="PackedScene" uid="uid://kym32cx77lnq" path="res://_starter_content/character/hurt_box.tscn" id="5_57fhj"]
@@ -17,6 +18,14 @@ height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nx1t5"]
 size = Vector2(21.5, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dumiq"]
+shader = ExtResource("3_jryd8")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 12.0
+shader_parameter/g = 12.0
+shader_parameter/b = 3333.0
+shader_parameter/mix_color = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7nay"]
 size = Vector2(10.625, 52.25)
@@ -684,7 +693,7 @@ rotation = 0.600826
 shape = SubResource("RectangleShape2D_nx1t5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-use_parent_material = true
+material = SubResource("ShaderMaterial_dumiq")
 position = Vector2(0, -15)
 texture = ExtResource("9_dgee3")
 offset = Vector2(3, -12)

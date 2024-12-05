@@ -28,7 +28,7 @@ var jump_velocity: float
 var jump_buffer = false 
 var current_jump_buffer_timer = 0.0
 
-var dash_speed = 400.0 
+var dash_speed = 600.0 
 var dash_cooldown = 0.5
 var dash_duration = 0.2
 
@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	
 	if _can_move() == false and is_on_floor():
 		velocity.x = 0
-	
+		
 	_apply_gravity(delta)
 	_handle_jump_buffer(delta)
 	current_dash_cooldown-= delta
@@ -164,6 +164,7 @@ func _initiate_state_machine():
 	#ENTER DASH STATE
 	main_state_machine.add_transition(state_idle, state_dash, to_dash)
 	main_state_machine.add_transition(state_walk, state_dash, to_dash)
+	main_state_machine.add_transition(state_run, state_dash, to_dash)
 	
 	#ENTER ATTACK STATE
 	main_state_machine.add_transition(state_idle, state_attack, to_attack)	
@@ -248,6 +249,11 @@ func _state_dash_enter():
 func _state_dash_update(delta:float):
 	current_dash_duration -= delta
 	
+	current_time_duplication+= delta
+	if current_time_duplication > duplication_time:
+		current_time_duplication = 0
+		_create_duplication()
+	
 	if current_dash_duration < 0:
 		is_dashing = false
 		main_state_machine.dispatch(to_idle)
@@ -269,3 +275,26 @@ func _handle_jump_buffer(delta):
 		main_state_machine.dispatch(to_jump)
 		jump_buffer = false
 		current_jump_buffer_timer = 0
+
+var current_time_duplication: float = 0
+var duplication_time: float = .025
+var duplcation_lifetime: float = .2
+
+func _create_duplication():
+	var duplicado = $Sprite2D.duplicate(true)
+	duplicado.material = $Sprite2D.material.duplicate(true)
+	duplicado.material.set_shader_parameter("opacity", 0.3)
+	duplicado.material.set_shader_parameter("r", 0.0)
+	duplicado.material.set_shader_parameter("g", 0.0)
+	duplicado.material.set_shader_parameter("b", 0.8)
+	duplicado.material.set_shader_parameter("mix_color", 0.7)
+	duplicado.position.y += position.y
+
+	if $Sprite2D.scale.x == -1:
+		duplicado.position.x = position.x - duplicado.position.x
+	else:
+		duplicado.position.x += position.x
+	duplicado.z_index -= 1
+	get_parent().add_child(duplicado)
+	await get_tree().create_timer(duplcation_lifetime).timeout
+	duplicado. queue_free()

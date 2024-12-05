@@ -45,7 +45,7 @@ func _on_state_changed(state: String, velocity: Vector2):
 			play("down")
 	elif state == "attack":
 		if velocity.y != 0:
-			play("attack", -1, 2)
+			play("attack_01_%s" %combo_direction, -1, 2)
 		else:
 			var combo_animation = "attack_0%s_%s" %[combo_index, combo_direction]
 			combo_index = 1 if combo_index == 3	 else combo_index + 1
