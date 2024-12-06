@@ -5,7 +5,7 @@ extends AnimationPlayer
 
 var combo_index:= 1
 var combo_timeout: float = 0
-var combo_direction:="right"
+var player_direction:="right"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,9 +23,9 @@ func _on_state_changed(state: String, velocity: Vector2):
 	
 	if velocity.x < 0:
 		sprite_2d.flip_h = true
-		combo_direction = "left"
+		player_direction = "left"
 	elif velocity.x > 0:
-		combo_direction = "right"
+		player_direction = "right"
 		sprite_2d.flip_h = false
 
 	if state == "idle":
@@ -45,10 +45,13 @@ func _on_state_changed(state: String, velocity: Vector2):
 			play("down")
 	elif state == "attack":
 		if velocity.y != 0:
-			play("attack_01_%s" %combo_direction, -1, 2)
+			play("attack_01_%s" %player_direction, -1, 2)
 		else:
-			var combo_animation = "attack_0%s_%s" %[combo_index, combo_direction]
+			var combo_animation = "attack_0%s_%s" %[combo_index, player_direction]
 			combo_index = 1 if combo_index == 3	 else combo_index + 1
 				
 			combo_timeout = get_animation(combo_animation).length + .1
 			play(combo_animation)
+	elif state == "secondary_attack":
+		var secondary_attack_animation = "secondary_attack_%s" %player_direction
+		play(secondary_attack_animation)

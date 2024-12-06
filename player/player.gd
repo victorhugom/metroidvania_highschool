@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+const SHOOTER = preload("res://player/weapons/throwable.tscn")
+
 signal state_changed(current_state: String, velocity: Vector2)
 
 @onready var health: Health = $Health
@@ -45,6 +47,9 @@ var to_walk: StringName = &"to_walk"
 var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
 var to_dash: StringName = &"to_dash"
+var _to_seconday_attack: StringName = &"_to_seconday_attack"
+
+var throw_speed:= 100
 
 func  _ready() -> void:
 	current_speed = speed
@@ -65,15 +70,21 @@ func _input(event: InputEvent) -> void:
 		else: # Set the jump buffer 
 			jump_buffer = true 
 			current_jump_buffer_timer = jump_buffer_time
-	if event.is_action_pressed("player_attack"):
-		main_state_machine.dispatch(to_attack)
 	if event.is_action_pressed("player_dash"):
 		main_state_machine.dispatch(to_dash)
+	if event.is_action_pressed("player_attack"):
+		main_state_machine.dispatch(to_attack)
+	if event.is_action_released("player_secondary_attack"):
+		main_state_machine.dispatch(_to_seconday_attack)		
+
 
 func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("player_run"):
 		main_state_machine.dispatch(to_run)
+		
+	if Input.is_action_pressed("player_secondary_attack"):
+		throw_speed += 10
 	
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
@@ -134,7 +145,9 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			main_state_machine.dispatch(to_idle)
 		else:
 			main_state_machine.dispatch(to_jump)
-
+	if anim_name.begins_with("secondary_attack"):
+		main_state_machine.dispatch(to_idle)
+		
 func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
 	add_child(main_state_machine)
@@ -145,6 +158,7 @@ func _initiate_state_machine():
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
 	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
+	var state_seconday_attack = LimboState.new().named("seconday_attack").call_on_enter(_state_secondary_attack_enter).call_on_update(_state_secondary_attack_update).call_on_exit(_state_secondary_attack_exit)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -152,6 +166,7 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_jump)
 	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_attack)
+	main_state_machine.add_child(state_seconday_attack)
 	
 	main_state_machine.initial_state = state_idle
 	
@@ -169,8 +184,14 @@ func _initiate_state_machine():
 	#ENTER ATTACK STATE
 	main_state_machine.add_transition(state_idle, state_attack, to_attack)	
 	main_state_machine.add_transition(state_walk, state_attack, to_attack)	
+	main_state_machine.add_transition(state_run, state_attack, to_attack)	
 	main_state_machine.add_transition(state_jump, state_attack, to_attack)	
 	main_state_machine.add_transition(state_dash, state_attack, to_attack)	
+	
+	#ENTER SECONDARY ATTACK STATE
+	main_state_machine.add_transition(state_idle, state_seconday_attack, _to_seconday_attack)	
+	main_state_machine.add_transition(state_walk, state_seconday_attack, _to_seconday_attack)	
+	main_state_machine.add_transition(state_run, state_seconday_attack, _to_seconday_attack)	
 	
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
@@ -236,6 +257,30 @@ func _state_attack_update(_delta:float):
 func _state_attack_exit():
 	attack_box.monitorable = false
 	attack_box.monitoring = false
+	is_attacking = false
+
+func _state_secondary_attack_enter():
+	if is_attacking:
+		return
+
+	is_attacking = true
+
+	var new_projectile = SHOOTER.instantiate()
+	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
+	new_projectile.explosion = load("res://player/weapons/acid.tscn")
+	var first_node = get_tree().current_scene.get_child(0)
+
+	var projectile_direction = "left" if velocity.x < 0 else "right"
+	new_projectile.throw(projectile_direction, 45, throw_speed)
+	throw_speed = 200
+
+	(first_node as Node2D).add_sibling(new_projectile)
+	state_changed.emit("secondary_attack", velocity)
+	
+func _state_secondary_attack_update(_delta:float):
+	pass
+	
+func _state_secondary_attack_exit():
 	is_attacking = false
 
 func _state_dash_enter():
