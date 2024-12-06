@@ -1,10 +1,11 @@
 class_name Player extends CharacterBody2D
 
-const SHOOTER = preload("res://player/weapons/throwable.tscn")
+const THROWABLE = preload("res://player/weapons/throwable.tscn")
 
 signal state_changed(current_state: String, velocity: Vector2)
 
 @onready var health: Health = $Health
+@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_box: AttackBox = $AttackBox
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
@@ -12,32 +13,37 @@ signal state_changed(current_state: String, velocity: Vector2)
 ## The base speed
 @export var speed: float = 64
 ## The max height that the player can jump
-@export var jump_height = 64
+@export var jump_height: int = 64
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
-@export var jump_buffer_time = 0.1 # Buffer time in seconds
+@export var jump_buffer_time: float = 0.1 # Buffer time in seconds
 
 ## The value that will multiply the speed when running
-@export var run_multiplier:= 2.5
-@export var acceleration:= 10 
-@export var deceleration:= 50
-## If false player will not move
+@export var run_multiplier: float = 2.5
+@export var acceleration: int = 10 
+@export var deceleration: int = 50
 
-var is_attacking:= false
-var current_speed: float
+var is_attacking: bool = false
+var current_speed: float = 0
+var throw_speed: int = 100
 
 # jump
-var jump_velocity: float
-var jump_buffer = false 
-var current_jump_buffer_timer = 0.0
+var jump_velocity: float = 0
+var jump_buffer: bool = false 
+var current_jump_buffer_timer: float = 0.0
 
-var dash_speed = 600.0 
-var dash_cooldown = 0.5
-var dash_duration = 0.2
+var dash_speed: float = 600.0 
+var dash_cooldown: float = 0.5
+var dash_duration: float = 0.2
 
 # dash variables 
-var is_dashing = false 
-var current_dash_duration = 0.0
-var current_dash_cooldown = 0.0
+var is_dashing: bool = false 
+var current_dash_duration: float = 0.0
+var current_dash_cooldown: float = 0.0
+
+# dash duplication
+var current_time_duplication: float = 0
+var duplication_time: float = .025
+var duplcation_lifetime: float = .2
 
 # state machine
 var main_state_machine: LimboHSM
@@ -48,8 +54,6 @@ var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
 var to_dash: StringName = &"to_dash"
 var _to_seconday_attack: StringName = &"_to_seconday_attack"
-
-var throw_speed:= 100
 
 func  _ready() -> void:
 	current_speed = speed
@@ -76,7 +80,6 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_attack)
 	if event.is_action_released("player_secondary_attack"):
 		main_state_machine.dispatch(_to_seconday_attack)		
-
 
 func _process(_delta: float) -> void:
 	
@@ -118,7 +121,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("player_left", "player_right")
+	var direction: float = Input.get_axis("player_left", "player_right")
 	
 	if velocity.y == 0:
 		if direction:
@@ -147,6 +150,41 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			main_state_machine.dispatch(to_jump)
 	if anim_name.begins_with("secondary_attack"):
 		main_state_machine.dispatch(to_idle)
+		
+func _can_move():
+	return not is_attacking
+	
+func _handle_jump_buffer(delta):
+	# Decrease the buffer timer 
+	if current_jump_buffer_timer > 0: 
+		current_jump_buffer_timer -= delta 
+	else: 
+		jump_buffer = false
+		
+	# Handle landing 
+	if is_on_floor() and jump_buffer: 
+		main_state_machine.dispatch(to_jump)
+		jump_buffer = false
+		current_jump_buffer_timer = 0
+
+func _create_duplication():
+	var duplication: Sprite2D = sprite_2d.duplicate(true)
+	duplication.material = sprite_2d.material.duplicate(true)
+	duplication.material.set_shader_parameter("opacity", 0.3)
+	duplication.material.set_shader_parameter("r", 0.0)
+	duplication.material.set_shader_parameter("g", 0.0)
+	duplication.material.set_shader_parameter("b", 0.8)
+	duplication.material.set_shader_parameter("mix_color", 0.7)
+	duplication.position.y += position.y
+
+	if sprite_2d.scale.x == -1:
+		duplication.position.x = position.x - duplication.position.x
+	else:
+		duplication.position.x += position.x
+	duplication.z_index -= 1
+	get_parent().add_child(duplication)
+	await get_tree().create_timer(duplcation_lifetime).timeout
+	duplication.queue_free()
 		
 func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
@@ -265,16 +303,16 @@ func _state_secondary_attack_enter():
 
 	is_attacking = true
 
-	var new_projectile = SHOOTER.instantiate()
+	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
 	new_projectile.explosion = load("res://player/weapons/acid.tscn")
-	var first_node = get_tree().current_scene.get_child(0)
-
+	
 	var projectile_direction = "left" if velocity.x < 0 else "right"
 	new_projectile.throw(projectile_direction, 45, throw_speed)
-	throw_speed = 200
 
+	var first_node = get_tree().current_scene.get_child(0)
 	(first_node as Node2D).add_sibling(new_projectile)
+	throw_speed = 200	
 	state_changed.emit("secondary_attack", velocity)
 	
 func _state_secondary_attack_update(_delta:float):
@@ -304,42 +342,3 @@ func _state_dash_update(delta:float):
 		main_state_machine.dispatch(to_idle)
 		current_dash_cooldown = dash_cooldown
 		current_speed = speed
-
-func _can_move():
-	return not is_attacking
-	
-func _handle_jump_buffer(delta):
-	# Decrease the buffer timer 
-	if current_jump_buffer_timer > 0: 
-		current_jump_buffer_timer -= delta 
-	else: 
-		jump_buffer = false
-		
-	# Handle landing 
-	if is_on_floor() and jump_buffer: 
-		main_state_machine.dispatch(to_jump)
-		jump_buffer = false
-		current_jump_buffer_timer = 0
-
-var current_time_duplication: float = 0
-var duplication_time: float = .025
-var duplcation_lifetime: float = .2
-
-func _create_duplication():
-	var duplicado = $Sprite2D.duplicate(true)
-	duplicado.material = $Sprite2D.material.duplicate(true)
-	duplicado.material.set_shader_parameter("opacity", 0.3)
-	duplicado.material.set_shader_parameter("r", 0.0)
-	duplicado.material.set_shader_parameter("g", 0.0)
-	duplicado.material.set_shader_parameter("b", 0.8)
-	duplicado.material.set_shader_parameter("mix_color", 0.7)
-	duplicado.position.y += position.y
-
-	if $Sprite2D.scale.x == -1:
-		duplicado.position.x = position.x - duplicado.position.x
-	else:
-		duplicado.position.x += position.x
-	duplicado.z_index -= 1
-	get_parent().add_child(duplicado)
-	await get_tree().create_timer(duplcation_lifetime).timeout
-	duplicado. queue_free()

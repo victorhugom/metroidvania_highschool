@@ -802,6 +802,11 @@ _data = {
 use_parent_material = true
 collision_mask = 1536
 script = ExtResource("1_dpgy2")
+speed = null
+jump_height = null
+jump_buffer_time = null
+run_multiplier = null
+acceleration = null
 deceleration = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
