@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody2D
 
-const THROWABLE = preload("res://player/weapons/throwable.tscn")
+const THROWABLE = preload("res://weapons/throwable.tscn")
 
 signal state_changed(current_state: String, velocity: Vector2)
 
@@ -9,6 +9,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_box: AttackBox = $AttackBox
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
+@onready var parry_box: Area2D = $ParryBox
 
 ## The base speed
 @export var speed: float = 64
@@ -47,6 +48,8 @@ var current_time_duplication: float = 0
 var duplication_time: float = .025
 var duplcation_lifetime: float = .2
 
+var is_parrying: bool = false
+
 # state machine
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
@@ -54,8 +57,9 @@ var to_jump: StringName = &"to_jump"
 var to_walk: StringName = &"to_walk"
 var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
+var to_parry: StringName = &"to_parry"
 var to_dash: StringName = &"to_dash"
-var _to_seconday_attack: StringName = &"_to_seconday_attack"
+var to_seconday_attack: StringName = &"_to_seconday_attack"
 
 func  _ready() -> void:
 	current_speed = speed
@@ -85,7 +89,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
 	if event.is_action_released("player_secondary_attack"):
-		main_state_machine.dispatch(_to_seconday_attack)		
+		main_state_machine.dispatch(to_seconday_attack)
+	if event.is_action_released("player_parry"):
+		main_state_machine.dispatch(to_parry)
 
 func _process(_delta: float) -> void:
 	
@@ -165,6 +171,8 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			main_state_machine.dispatch(to_jump)
 	if anim_name.begins_with("secondary_attack"):
 		main_state_machine.dispatch(to_idle)
+	if anim_name.begins_with("parry"):
+		main_state_machine.dispatch(to_idle)
 		
 func _can_move():
 	return not is_attacking
@@ -211,6 +219,7 @@ func _initiate_state_machine():
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
 	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
+	var state_parry = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
 	var state_seconday_attack = LimboState.new().named("seconday_attack").call_on_enter(_state_secondary_attack_enter).call_on_update(_state_secondary_attack_update).call_on_exit(_state_secondary_attack_exit)
 	
 	main_state_machine.add_child(state_idle)
@@ -219,6 +228,7 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_jump)
 	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_attack)
+	main_state_machine.add_child(state_parry)
 	main_state_machine.add_child(state_seconday_attack)
 	
 	main_state_machine.initial_state = state_idle
@@ -241,10 +251,15 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_jump, state_attack, to_attack)	
 	main_state_machine.add_transition(state_dash, state_attack, to_attack)	
 	
+	#ENTER PARRY STATE
+	main_state_machine.add_transition(state_idle, state_parry, to_parry)	
+	main_state_machine.add_transition(state_walk, state_parry, to_parry)	
+	main_state_machine.add_transition(state_run, state_parry, to_parry)	
+	
 	#ENTER SECONDARY ATTACK STATE
-	main_state_machine.add_transition(state_idle, state_seconday_attack, _to_seconday_attack)	
-	main_state_machine.add_transition(state_walk, state_seconday_attack, _to_seconday_attack)	
-	main_state_machine.add_transition(state_run, state_seconday_attack, _to_seconday_attack)	
+	main_state_machine.add_transition(state_idle, state_seconday_attack, to_seconday_attack)	
+	main_state_machine.add_transition(state_walk, state_seconday_attack, to_seconday_attack)	
+	main_state_machine.add_transition(state_run, state_seconday_attack, to_seconday_attack)	
 	
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
@@ -318,6 +333,21 @@ func _state_attack_exit():
 	attack_box.monitoring = false
 	is_attacking = false
 
+func _state_parry_enter():
+	
+	is_parrying = true
+	parry_box.monitoring = true
+	parry_box.monitorable = true
+	state_changed.emit("parry", velocity)
+	
+func _state_parry_update(_delta:float):
+	pass
+
+func _state_parry_exit():
+	is_parrying = false
+	parry_box.monitoring = false
+	parry_box.monitorable = false
+
 func _state_secondary_attack_enter():
 	if is_attacking:
 		return
@@ -326,7 +356,7 @@ func _state_secondary_attack_enter():
 
 	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
-	new_projectile.explosion = load("res://player/weapons/acid.tscn")
+	new_projectile.explosion = load("res://weapons/acid.tscn")
 	
 	var projectile_direction = "left" if velocity.x < 0 else "right"
 	new_projectile.throw(projectile_direction, 45, throw_speed)

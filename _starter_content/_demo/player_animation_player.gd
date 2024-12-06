@@ -55,3 +55,6 @@ func _on_state_changed(state: String, velocity: Vector2):
 	elif state == "secondary_attack":
 		var secondary_attack_animation = "secondary_attack_%s" %player_direction
 		play(secondary_attack_animation)
+	elif state == "parry":
+		var secondary_attack_animation = "parry_%s" %player_direction
+		play(secondary_attack_animation)

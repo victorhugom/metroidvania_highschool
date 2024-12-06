@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://qkwi1nibx2u0"]
 
-[ext_resource type="Script" path="res://player/weapons/throwable.gd" id="1_2ckqn"]
+[ext_resource type="Script" path="res://weapons/throwable.gd" id="1_2ckqn"]
 [ext_resource type="Texture2D" uid="uid://jsleyst50qei" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/09-Bomb/Bomb Off.png" id="2_k6e7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rlsk"]
 
 [node name="Throwable" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 4096
 collision_mask = 3600
 script = ExtResource("1_2ckqn")
 

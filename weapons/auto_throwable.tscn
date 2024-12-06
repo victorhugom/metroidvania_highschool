@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8pr3ebk5ncho"]
+
+[ext_resource type="Script" path="res://weapons/auto_throwable.gd" id="1_xfm63"]
+
+[node name="AutoThrowable" type="Node2D"]
+position = Vector2(505, 153)
+script = ExtResource("1_xfm63")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
