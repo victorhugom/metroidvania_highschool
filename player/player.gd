@@ -22,6 +22,14 @@ signal state_changed(current_state: String, velocity: Vector2)
 @export var acceleration: int = 10 
 @export var deceleration: int = 50
 
+@export var dash_speed = 400.0
+@export var dash_duration = 0.2
+@export var dash_cooldown = 1.0
+
+var is_dashing = false
+var dash_timer = 0.0
+var dash_cooldown_timer = 0.0
+
 var is_attacking: bool = false
 var current_speed: float = 0
 var throw_speed: int = 100
@@ -31,14 +39,6 @@ var jump_velocity: float = 0
 var jump_buffer: bool = false 
 var current_jump_buffer_timer: float = 0.0
 
-var dash_speed: float = 600.0 
-var dash_cooldown: float = 0.5
-var dash_duration: float = 0.2
-
-# dash variables 
-var is_dashing: bool = false 
-var current_dash_duration: float = 0.0
-var current_dash_cooldown: float = 0.0
 
 # dash duplication
 var current_time_duplication: float = 0
@@ -74,7 +74,7 @@ func _input(event: InputEvent) -> void:
 		else: # Set the jump buffer 
 			jump_buffer = true 
 			current_jump_buffer_timer = jump_buffer_time
-	if event.is_action_pressed("player_dash"):
+	if event.is_action_pressed("player_dash") and !is_dashing and dash_cooldown_timer == 0: 
 		main_state_machine.dispatch(to_dash)
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
@@ -93,13 +93,15 @@ func _process(_delta: float) -> void:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
 		var debug_message:= ""
 
-		debug_message +=debug_message_template %["Health",health.current_health]
-		debug_message +=debug_message_template %["Speed",current_speed]
-		debug_message +=debug_message_template %["Can Move",_can_move()]
-		debug_message +=debug_message_template %["Last Direction",velocity.x]
-		debug_message +=debug_message_template %["Velocity",velocity]
+		debug_message +=debug_message_template %["Health:",health.current_health]
+		debug_message +=debug_message_template %["Speed:",current_speed]
+		debug_message +=debug_message_template %["Can Move:",_can_move()]
+		debug_message +=debug_message_template %["Last Direction:",velocity.x]
+		debug_message +=debug_message_template %["Velocity:",velocity]
 		debug_message +=debug_message_template %["Jump Buffer Active:", jump_buffer]
-		debug_message +=debug_message_template %["Jump Buffer Timer", current_jump_buffer_timer]
+		debug_message +=debug_message_template %["Jump Buffer Timer:", current_jump_buffer_timer]
+		debug_message +=debug_message_template %["Dash Timer:", dash_timer]
+		debug_message +=debug_message_template %["Dash Cooldown Timer:", dash_cooldown_timer]
 		
 		var current_state = ""
 		if main_state_machine != null:
@@ -114,25 +116,31 @@ func _physics_process(delta: float) -> void:
 	if _can_move() == false and is_on_floor():
 		velocity.x = 0
 		
-	_apply_gravity(delta)
+	dash_cooldown_timer -= delta
+	if dash_cooldown_timer < 0:
+		dash_cooldown_timer = 0
+		
 	_handle_jump_buffer(delta)
-	current_dash_cooldown-= delta
 	
+	if !is_dashing:
+		# Get the input direction and handle the movement/deceleration.
+		var direction: float = Input.get_axis("player_left", "player_right")
+		
+		if velocity.y == 0:
+			if direction:
+				velocity = velocity.lerp(Vector2(direction, 0) * current_speed, acceleration * delta)
+			else:
+				velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)
+		else:
+			if direction:
+				velocity.x = direction * current_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, current_speed)
+	
+	# Apply gravity
+	_apply_gravity(delta)
+	# Move the character
 	move_and_slide()
-	
-	# Get the input direction and handle the movement/deceleration.
-	var direction: float = Input.get_axis("player_left", "player_right")
-	
-	if velocity.y == 0:
-		if direction:
-			velocity = velocity.lerp(Vector2(direction, 0) * current_speed, acceleration * delta)
-		else:
-			velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)
-	else:
-		if direction:
-			velocity.x = direction * current_speed
-		else:
-			velocity.x = move_toward(velocity.x, 0, current_speed)
 
 func _apply_gravity(delta):
 	
@@ -194,7 +202,7 @@ func _initiate_state_machine():
 	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
 	var state_run = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
-	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update)
+	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	var state_seconday_attack = LimboState.new().named("seconday_attack").call_on_enter(_state_secondary_attack_enter).call_on_update(_state_secondary_attack_update).call_on_exit(_state_secondary_attack_exit)
 	
@@ -322,23 +330,25 @@ func _state_secondary_attack_exit():
 	is_attacking = false
 
 func _state_dash_enter():
-	if is_dashing || current_dash_cooldown > 0:
-		return
-		
 	is_dashing = true
-	current_dash_duration = dash_duration
-	current_speed = dash_speed
+	dash_timer = dash_duration
+	dash_cooldown_timer = dash_cooldown
+	if Input.is_action_pressed("player_left"):
+		velocity.x = -dash_speed
+	elif Input.is_action_pressed("player_right"):
+		velocity.x = dash_speed
 	
 func _state_dash_update(delta:float):
-	current_dash_duration -= delta
-	
+	if is_dashing:
+		dash_timer -= delta
+	if dash_timer <= 0:
+		main_state_machine.dispatch(to_idle)
+		
 	current_time_duplication+= delta
 	if current_time_duplication > duplication_time:
 		current_time_duplication = 0
 		_create_duplication()
-	
-	if current_dash_duration < 0:
-		is_dashing = false
-		main_state_machine.dispatch(to_idle)
-		current_dash_cooldown = dash_cooldown
-		current_speed = speed
+
+func _state_dash_exit():
+	is_dashing = false
+	velocity.x = 0 # Stop the dash movement
