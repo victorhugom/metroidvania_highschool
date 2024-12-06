@@ -16,6 +16,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 @export var jump_height: int = 64
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
 @export var jump_buffer_time: float = 0.1 # Buffer time in seconds
+@export var max_jumps: int = 2
 
 ## The value that will multiply the speed when running
 @export var run_multiplier: float = 2.5
@@ -35,6 +36,7 @@ var current_speed: float = 0
 var throw_speed: int = 100
 
 # jump
+var current_jumps: int = 0
 var jump_velocity: float = 0
 var jump_buffer: bool = false 
 var current_jump_buffer_timer: float = 0.0
@@ -69,11 +71,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("player_run"):
 		main_state_machine.dispatch(to_idle)
 	if event.is_action_pressed("player_jump"):
-		if is_on_floor(): 
+		if is_on_floor():
 			main_state_machine.dispatch(to_jump)
-		else: # Set the jump buffer 
-			jump_buffer = true 
-			current_jump_buffer_timer = jump_buffer_time
+		else:
+			if current_jumps < max_jumps:
+				_perform_jump()
+			else:
+				jump_buffer = true 
+				current_jump_buffer_timer = jump_buffer_time
+			
 	if event.is_action_pressed("player_dash") and !is_dashing and dash_cooldown_timer == 0: 
 		main_state_machine.dispatch(to_dash)
 	if event.is_action_pressed("player_attack"):
@@ -98,6 +104,7 @@ func _process(_delta: float) -> void:
 		debug_message +=debug_message_template %["Can Move:",_can_move()]
 		debug_message +=debug_message_template %["Last Direction:",velocity.x]
 		debug_message +=debug_message_template %["Velocity:",velocity]
+		debug_message +=debug_message_template %["Current Jumps:", current_jumps]
 		debug_message +=debug_message_template %["Jump Buffer Active:", jump_buffer]
 		debug_message +=debug_message_template %["Jump Buffer Timer:", current_jump_buffer_timer]
 		debug_message +=debug_message_template %["Dash Timer:", dash_timer]
@@ -278,15 +285,21 @@ func _state_run_update(_delta:float):
 	
 func _state_jump_enter():
 	if is_on_floor():
-		state_changed.emit("jump", velocity)
-		var gravity = get_gravity().y
-		jump_velocity = -sqrt(2 * gravity * jump_height)
-		velocity.y = jump_velocity
+		_perform_jump()
 
 func _state_jump_update(_delta:float):
 	state_changed.emit("jump", velocity)
+	
 	if is_on_floor():
 		main_state_machine.dispatch(to_idle)
+		current_jumps = 0
+		
+func _perform_jump():
+	state_changed.emit("jump", velocity)
+	var gravity = get_gravity().y
+	jump_velocity = -sqrt(2 * gravity * jump_height)
+	velocity.y = jump_velocity
+	current_jumps += 1
 	
 func _state_attack_enter():
 	if is_attacking:
