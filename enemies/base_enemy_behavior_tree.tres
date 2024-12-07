@@ -1,0 +1,39 @@
+[gd_resource type="BehaviorTree" load_steps=9 format=3 uid="uid://cr6n7sschkx3f"]
+
+[ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
+[ext_resource type="Script" path="res://ai/tasks/task_move_torwards_position.gd" id="2_llgg2"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_paedr"]
+var/roam_position/name = &"roam_position"
+var/roam_position/type = 5
+var/roam_position/value = Vector2(0, 0)
+var/roam_position/hint = 0
+var/roam_position/hint_string = ""
+
+[sub_resource type="BTAction" id="BTAction_ynva3"]
+script = ExtResource("1_66w5h")
+roam_min_radius = 128.0
+roam_max_radius = 256.0
+roam_position_var = &"roam_position"
+
+[sub_resource type="BTAction" id="BTAction_wyc44"]
+script = ExtResource("2_llgg2")
+tolerance = 2
+target_position_var = "roam_position"
+
+[sub_resource type="BTSequence" id="BTSequence_dtxbt"]
+custom_name = "Roam"
+children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_fjk4m"]
+min_duration = 5.0
+max_duration = 10.0
+custom_name = "Idle"
+
+[sub_resource type="BTSequence" id="BTSequence_132rq"]
+custom_name = "Sequence Roam"
+children = [SubResource("BTSequence_dtxbt"), SubResource("BTRandomWait_fjk4m")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_paedr")
+root_task = SubResource("BTSequence_132rq")
