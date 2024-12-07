@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=33 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://wpus3qy1lhbm" path="res://assets/player/amenine/walk.png" id="9_0xq7l"]
 [ext_resource type="Script" path="res://_starter_content/_demo/player_animation_player.gd" id="9_4ue5d"]
 [ext_resource type="Texture2D" uid="uid://bpjpqwmi0auky" path="res://assets/player/amenine/idle.png" id="9_dgee3"]
-[ext_resource type="Script" path="res://player/parry_box.gd" id="12_kalid"]
+[ext_resource type="PackedScene" uid="uid://b4t0ftttcqb1a" path="res://character_components/parry_box.tscn" id="12_bq21u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 6.0
@@ -955,9 +955,6 @@ _data = {
 "walk": SubResource("Animation_jshpw")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysedk"]
-size = Vector2(7, 20)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
 collision_mask = 17920
@@ -1022,16 +1019,4 @@ libraries = {
 }
 script = ExtResource("9_4ue5d")
 
-[node name="ParryBox" type="Area2D" parent="."]
-collision_layer = 8192
-collision_mask = 4096
-script = ExtResource("12_kalid")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ParryBox"]
-position = Vector2(-12, -44)
-rotation = -0.488692
-shape = SubResource("RectangleShape2D_ysedk")
-debug_color = Color(0.94658, 4.23551e-06, 0.587136, 0.42)
-
-[connection signal="area_entered" from="ParryBox" to="ParryBox" method="_on_area_entered"]
-[connection signal="body_entered" from="ParryBox" to="ParryBox" method="_on_body_entered"]
+[node name="ParryBox" parent="." instance=ExtResource("12_bq21u")]
