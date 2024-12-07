@@ -33,22 +33,22 @@ func _on_state_changed(state: String, velocity: Vector2):
 	elif state == "walk":
 		play("walk")
 	elif state == "run":
-		play("walk")
+		play("run")
 	elif state == "dash":
 		play("dash")
 	elif state == "jump":
 		# JUMP UP
 		if velocity.y > 0:
-			play("up")
+			play("down")
 		# FALLING DOWN
 		elif velocity.y < 0:
-			play("down")
+			play("up")
 	elif state == "attack":
 		if velocity.y != 0:
 			play("attack_01_%s" %player_direction, -1, 2)
 		else:
 			var combo_animation = "attack_0%s_%s" %[combo_index, player_direction]
-			combo_index = 1 if combo_index == 3	 else combo_index + 1
+			combo_index = 1 if combo_index == 5	 else combo_index + 1
 				
 			combo_timeout = get_animation(combo_animation).length + .1
 			play(combo_animation)

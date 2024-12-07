@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="8_tyc5y"]
 [ext_resource type="Texture2D" uid="uid://cp34tldtwhqq1" path="res://assets/world/schoolcorridor/wallwithwindow.png" id="9_5pse1"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="10_ugbvm"]
-[ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/lights/light.png" id="18_4yvbv"]
+[ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/fx/light.png" id="18_4yvbv"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="19_nallo"]
 
 [sub_resource type="Gradient" id="Gradient_3mdix"]
@@ -67,7 +67,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_66qv5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jxgv"]
 resource_local_to_scene = true
 shader = ExtResource("10_ugbvm")
 shader_parameter/lerper = null
@@ -181,7 +181,7 @@ tile_map_data = PackedByteArray("AAD//wYAAAAKAAAAAAAAAAYAAAAKAAAAAAABAAYAAAAKAAA
 tile_set = ExtResource("2_oppkn")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_66qv5")
+material = SubResource("ShaderMaterial_6jxgv")
 use_parent_material = false
 position = Vector2(251, 197)
 
