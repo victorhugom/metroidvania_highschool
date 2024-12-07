@@ -67,7 +67,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xykyu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66qv5"]
 resource_local_to_scene = true
 shader = ExtResource("10_ugbvm")
 shader_parameter/lerper = null
@@ -181,7 +181,7 @@ tile_map_data = PackedByteArray("AAD//wYAAAAKAAAAAAAAAAYAAAAKAAAAAAABAAYAAAAKAAA
 tile_set = ExtResource("2_oppkn")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_xykyu")
+material = SubResource("ShaderMaterial_66qv5")
 use_parent_material = false
 position = Vector2(251, 197)
 

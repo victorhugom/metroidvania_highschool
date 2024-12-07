@@ -41,11 +41,11 @@ var current_jumps: int = 0
 var jump_velocity: float = 0
 var jump_buffer: bool = false 
 var current_jump_buffer_timer: float = 0.0
-
+var jump_down_buffer = false
 
 # dash duplication
 var current_time_duplication: float = 0
-var duplication_time: float = .025
+var duplication_time: float = .020
 var duplcation_lifetime: float = .2
 
 var is_parrying: bool = false
@@ -54,6 +54,7 @@ var is_parrying: bool = false
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
 var to_jump: StringName = &"to_jump"
+var to_down: StringName = &"to_down"
 var to_walk: StringName = &"to_walk"
 var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
@@ -74,15 +75,20 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_run)
 	if event.is_action_released("player_run"):
 		main_state_machine.dispatch(to_idle)
+	if Input.is_action_pressed("player_down") and Input.is_action_just_pressed("player_jump"):
+		main_state_machine.dispatch(to_down)
+		jump_down_buffer = true
 	if event.is_action_pressed("player_jump"):
-		if is_on_floor():
-			main_state_machine.dispatch(to_jump)
-		else:
-			if current_jumps < max_jumps:
-				_perform_jump()
+		if not jump_down_buffer:
+			if is_on_floor():
+				main_state_machine.dispatch(to_jump)
 			else:
-				jump_buffer = true 
-				current_jump_buffer_timer = jump_buffer_time
+				if current_jumps < max_jumps:
+					_perform_jump()
+				else:
+					jump_buffer = true 
+					current_jump_buffer_timer = jump_buffer_time
+		jump_down_buffer = false
 			
 	if event.is_action_pressed("player_dash") and !is_dashing and dash_cooldown_timer == 0: 
 		main_state_machine.dispatch(to_dash)
@@ -92,6 +98,7 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_seconday_attack)
 	if event.is_action_released("player_parry"):
 		main_state_machine.dispatch(to_parry)
+
 
 func _process(_delta: float) -> void:
 	
@@ -217,6 +224,7 @@ func _initiate_state_machine():
 	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
 	var state_run = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
+	var state_down = LimboState.new().named("down").call_on_enter(_state_down_enter).call_on_update(_state_down_update)
 	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	var state_parry = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
@@ -226,6 +234,7 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_walk)
 	main_state_machine.add_child(state_run)
 	main_state_machine.add_child(state_jump)
+	main_state_machine.add_child(state_down)
 	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_attack)
 	main_state_machine.add_child(state_parry)
@@ -238,6 +247,9 @@ func _initiate_state_machine():
 	
 	#ENTER JUMP STATE
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)
+	
+	#ENTER DOWN STATE
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_down, to_down)
 	
 	#ENTER DASH STATE
 	main_state_machine.add_transition(state_idle, state_dash, to_dash)
@@ -308,7 +320,22 @@ func _state_jump_update(_delta:float):
 	if is_on_floor():
 		main_state_machine.dispatch(to_idle)
 		current_jumps = 0
-		
+
+var collision_down_timeout = 0
+var collision_down_duration = .1
+func _state_down_enter():
+	if is_on_floor():
+		# Temporarily disable one-way collision to allow dropping through
+		set_collision_mask_value(15, false)
+		collision_down_timeout = collision_down_duration
+
+func _state_down_update(delta:float):
+	
+	collision_down_timeout -= delta
+	if collision_down_timeout <= 0:
+		set_collision_mask_value(15, true)
+		main_state_machine.dispatch(to_jump)
+	
 func _perform_jump():
 	state_changed.emit("jump", velocity)
 	var gravity = get_gravity().y
