@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2evyvnbhcdw0"
-path="res://.godot/imported/lbluelight.png-25f4e4ae99b50f2da51eb2eee649d5e3.ctex"
+uid="uid://cyks626ojs2bj"
+path="res://.godot/imported/light.png-c682d7fa75b2a301284dd654c4cd60c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lights/lbluelight.png"
-dest_files=["res://.godot/imported/lbluelight.png-25f4e4ae99b50f2da51eb2eee649d5e3.ctex"]
+source_file="res://assets/fx/light.png"
+dest_files=["res://.godot/imported/light.png-c682d7fa75b2a301284dd654c4cd60c6.ctex"]
 
 [params]
 
