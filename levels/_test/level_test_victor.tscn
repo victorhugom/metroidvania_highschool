@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=33 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_46mbl"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="17_qhx4q"]
 [ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/lights/light.png" id="18_oqii8"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="19_jut8j"]
+[ext_resource type="PackedScene" uid="uid://doigv8t3fi1pg" path="res://enemies/base_enemy.tscn" id="20_s51ef"]
 
 [sub_resource type="Gradient" id="Gradient_3mdix"]
 offsets = PackedFloat32Array(0, 0.655738)
@@ -67,7 +68,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yoww4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08f8u"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
@@ -179,9 +180,9 @@ tile_map_data = PackedByteArray("AAD8/wYAAAALAAEAAAD7/wYAAAAKAAEAAAD6/wYAAAAKAAE
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_yoww4")
+material = SubResource("ShaderMaterial_08f8u")
 use_parent_material = false
-position = Vector2(251, 197)
+position = Vector2(221, 199)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_t48cf")]
 z_index = -1
@@ -205,3 +206,6 @@ texture = ExtResource("18_oqii8")
 
 [node name="AutoThrowable" parent="." instance=ExtResource("19_jut8j")]
 position = Vector2(494, 197)
+
+[node name="BaseEnemy" parent="." instance=ExtResource("20_s51ef")]
+position = Vector2(313, 101)

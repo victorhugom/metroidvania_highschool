@@ -82,4 +82,3 @@ func _on_hurtbox_area_entered(area: Area2D):
 	
 func _on_damaged(damage):
 	damaged.emit(damage)
-	
