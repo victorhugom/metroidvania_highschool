@@ -36,6 +36,7 @@ folder_colors={
 "res://addons/": "gray",
 "res://ai/": "gray",
 "res://assets/": "red",
+"res://character_components/": "orange",
 "res://conversation/": "orange",
 "res://enemies/": "yellow",
 "res://gui/": "green",
