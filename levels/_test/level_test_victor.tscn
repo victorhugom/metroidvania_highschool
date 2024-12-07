@@ -67,7 +67,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5cg5k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvayx"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
@@ -179,7 +179,7 @@ tile_map_data = PackedByteArray("AAD8/wYAAAALAAEAAAD7/wYAAAAKAAEAAAD6/wYAAAAKAAE
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_5cg5k")
+material = SubResource("ShaderMaterial_fvayx")
 use_parent_material = false
 position = Vector2(221, 199)
 
@@ -191,18 +191,8 @@ destruction_power = Vector2(4, 1)
 texture_full = ExtResource("13_ylm2u")
 texture_pieces = Array[Texture2D]([ExtResource("14_uj3j1"), ExtResource("15_evvxg"), ExtResource("16_wv7is"), ExtResource("17_qhx4q"), ExtResource("14_uj3j1"), ExtResource("15_evvxg"), ExtResource("16_wv7is"), ExtResource("17_qhx4q")])
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-z_index = -2
-position = Vector2(-29, 77)
-color = Color(0.77089, 0.628613, 0.34163, 1)
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-z_index = -8
-position = Vector2(252, 72)
-color = Color(0.77089, 0.628613, 0.34163, 1)
-
 [node name="AutoThrowable" parent="." instance=ExtResource("19_jut8j")]
 position = Vector2(494, 197)
 
 [node name="BaseEnemy" parent="." instance=ExtResource("20_s51ef")]
-position = Vector2(313, 101)
+position = Vector2(363, 105)

@@ -702,3 +702,14 @@ position = Vector2(12, 0)
 target_position = Vector2(0, 30)
 collision_mask = 17408
 collide_with_areas = true
+
+[node name="RayCast2DEyes" type="RayCast2D" parent="."]
+position = Vector2(0, -45)
+rotation = -1.5708
+target_position = Vector2(0, 200)
+
+[node name="EyeSightTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="EyeSightTimer" to="." method="check_for_player"]
