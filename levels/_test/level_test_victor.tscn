@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="15_evvxg"]
 [ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="16_wv7is"]
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="17_qhx4q"]
-[ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/lights/light.png" id="18_oqii8"]
+[ext_resource type="Texture2D" path="res://assets/lights/light.png" id="18_oqii8"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="19_jut8j"]
 [ext_resource type="PackedScene" uid="uid://doigv8t3fi1pg" path="res://enemies/base_enemy.tscn" id="20_s51ef"]
 
@@ -68,7 +68,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_08f8u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2a2b"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
@@ -180,7 +180,7 @@ tile_map_data = PackedByteArray("AAD8/wYAAAALAAEAAAD7/wYAAAAKAAEAAAD6/wYAAAAKAAE
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_08f8u")
+material = SubResource("ShaderMaterial_u2a2b")
 use_parent_material = false
 position = Vector2(221, 199)
 

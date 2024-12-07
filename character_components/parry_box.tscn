@@ -1,20 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4t0ftttcqb1a"]
+[gd_scene load_steps=2 format=3 uid="uid://b4t0ftttcqb1a"]
 
 [ext_resource type="Script" path="res://character_components/parry_box.gd" id="1_ykq3m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysedk"]
-size = Vector2(7, 20)
 
 [node name="ParryBox" type="Area2D"]
 collision_layer = 8192
 collision_mask = 4096
 script = ExtResource("1_ykq3m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-12, -44)
-rotation = -0.488692
-shape = SubResource("RectangleShape2D_ysedk")
-debug_color = Color(0.94658, 4.23551e-06, 0.587136, 0.42)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
