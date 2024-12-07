@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs7a0adbjv5fk"
-path="res://.godot/imported/yellowlight.png-503e3620b5578fdf2440e54597105c75.ctex"
+uid="uid://b82j827qi7q80"
+path="res://.godot/imported/breath.png-65bd93139ebafbae41c3912e229da551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lights/yellowlight.png"
-dest_files=["res://.godot/imported/yellowlight.png-503e3620b5578fdf2440e54597105c75.ctex"]
+source_file="res://assets/fx/breath.png"
+dest_files=["res://.godot/imported/breath.png-65bd93139ebafbae41c3912e229da551.ctex"]
 
 [params]
 
