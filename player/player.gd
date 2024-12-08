@@ -410,7 +410,7 @@ func _state_throw_attack_enter():
 	(first_node as Node2D).add_sibling(new_projectile)
 	state_changed.emit("throw", velocity)
 
-func _state_throw_attack_update(delta):
+func _state_throw_attack_update(_delta):
 	if animation_player.current_animation != "throw":
 		is_attacking = false
 		throw_speed = 100	

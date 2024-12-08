@@ -1,9 +1,13 @@
-[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=30 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
 [ext_resource type="Script" path="res://ai/tasks/task_move_torwards_node.gd" id="2_3urkf"]
+[ext_resource type="Script" path="res://ai/tasks/task_check_distance.gd" id="2_kgp36"]
 [ext_resource type="Script" path="res://ai/tasks/task_move_torwards_position.gd" id="2_llgg2"]
+[ext_resource type="Script" path="res://ai/tasks/task_base_enemy_swing_bat.gd" id="3_ilgoi"]
+[ext_resource type="Script" path="res://ai/tasks/taks_stop.gd" id="3_jp1vo"]
+[ext_resource type="Script" path="res://ai/tasks/task_base_enemy_combo_attack.gd" id="4_0b6h6"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_paedr"]
 var/roam_position/name = &"roam_position"
@@ -21,25 +25,57 @@ script = ExtResource("1_yk8su")
 target_player_var = "target_player"
 detection_range = 200
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_0sm7e"]
-text = "Look for player"
-
-[sub_resource type="BTSelector" id="BTSelector_8revy"]
-custom_name = "Selector (Handle Attacks)"
-
 [sub_resource type="BTAction" id="BTAction_8nwes"]
-children = [SubResource("BTSelector_8revy")]
 script = ExtResource("2_3urkf")
 target_node_var = "target_player"
-tolerance = 10
+tolerance = 20
 
-[sub_resource type="BTSequence" id="BTSequence_c874w"]
-custom_name = "Sequence (Engage Player)"
-children = [SubResource("BTAction_8nwes")]
+[sub_resource type="BTAction" id="BTAction_1lqha"]
+script = ExtResource("3_jp1vo")
+
+[sub_resource type="BTAction" id="BTAction_oq82t"]
+script = ExtResource("2_kgp36")
+tagert_node_var = "target_player"
+more_than_distance = 20
+less_than_distance = 40
+
+[sub_resource type="BTAction" id="BTAction_vw0ky"]
+script = ExtResource("4_0b6h6")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_763k6"]
+min_duration = 2.0
+max_duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_3j1wa"]
+custom_name = "Sequence (Use Combo Attack Far-ish)"
+children = [SubResource("BTAction_1lqha"), SubResource("BTAction_oq82t"), SubResource("BTAction_vw0ky"), SubResource("BTRandomWait_763k6")]
+
+[sub_resource type="BTAction" id="BTAction_paefl"]
+script = ExtResource("3_jp1vo")
+
+[sub_resource type="BTAction" id="BTAction_ovc0w"]
+script = ExtResource("2_kgp36")
+tagert_node_var = "target_player"
+more_than_distance = 0
+less_than_distance = 20
+
+[sub_resource type="BTAction" id="BTAction_gv8vi"]
+script = ExtResource("3_ilgoi")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_nrmdq"]
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_lg1du"]
+custom_name = "Sequence (Use Swing Bat if Close)"
+children = [SubResource("BTAction_paefl"), SubResource("BTAction_ovc0w"), SubResource("BTAction_gv8vi"), SubResource("BTRandomWait_nrmdq")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_sihij"]
+custom_name = "Selector (Handle Attacks)"
+children = [SubResource("BTAction_8nwes"), SubResource("BTSequence_3j1wa"), SubResource("BTSequence_lg1du")]
 
 [sub_resource type="BTSequence" id="BTSequence_e5vfc"]
 custom_name = "Sequence Player In Sight"
-children = [SubResource("BTAction_t1sj7"), SubResource("BTConsolePrint_0sm7e"), SubResource("BTSequence_c874w")]
+children = [SubResource("BTAction_t1sj7"), SubResource("BTDynamicSelector_sihij")]
 
 [sub_resource type="BTAction" id="BTAction_ynva3"]
 script = ExtResource("1_66w5h")
@@ -52,12 +88,9 @@ script = ExtResource("2_llgg2")
 tolerance = 2
 target_position_var = "roam_position"
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_o80sr"]
-text = "Roam"
-
 [sub_resource type="BTSequence" id="BTSequence_dtxbt"]
 custom_name = "Roam"
-children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44"), SubResource("BTConsolePrint_o80sr")]
+children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44")]
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_fjk4m"]
 min_duration = 5.0

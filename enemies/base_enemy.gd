@@ -14,11 +14,18 @@ var origin_position = Vector2.ZERO
 var has_floor = true
 var direction = "right"
 var player_in_sight: CharacterBody2D
+var is_attacking = false
+var is_combo_attack = false
 
 func _ready():
 	origin_position = global_position
+	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
+	
+	if is_attacking:
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -55,6 +62,17 @@ func move(target_position) -> void:
 	else:
 		velocity = Vector2(-1, 0) * speed
 		
+func swing_bat():
+	print_debug("attack_01_%s" %direction)
+	animation_player.play("attack_01_%s" %direction)
+	is_attacking = true
+	
+func combo_attack():
+	print_debug("attack_01_%s" %direction)
+	animation_player.play("attack_01_%s" %direction)
+	is_attacking = true
+	is_combo_attack = true
+		
 func stop() -> void:
 	velocity = Vector2.ZERO
 
@@ -66,4 +84,16 @@ func check_for_player():
 		player_in_sight = ray_cast_2d_eyes.get_collider()
 	else:
 		player_in_sight = null
+		
+func _on_animation_finished(anim_name:String):
+	if anim_name.begins_with("attack_01"):
+		if is_combo_attack:
+			animation_player.play("attack_02_%s" %direction)
+		else:
+			is_attacking = false
+	if anim_name.begins_with("attack_02"):
+			animation_player.play("attack_03_%s" %direction)
+	if anim_name.begins_with("attack_03"):
+		is_attacking = false
+		is_combo_attack = false
 			
