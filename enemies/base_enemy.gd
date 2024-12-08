@@ -16,12 +16,15 @@ var direction = "right"
 var player_in_sight: CharacterBody2D
 var is_attacking = false
 var is_combo_attack = false
+var is_being_attacked = false
 
 func _ready():
 	origin_position = global_position
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
+	
+	is_being_attacked = Input.is_action_just_pressed("player_attack")
 	
 	if is_attacking:
 		return
@@ -63,12 +66,10 @@ func move(target_position) -> void:
 		velocity = Vector2(-1, 0) * speed
 		
 func swing_bat():
-	print_debug("attack_01_%s" %direction)
 	animation_player.play("attack_01_%s" %direction)
 	is_attacking = true
 	
 func combo_attack():
-	print_debug("attack_01_%s" %direction)
 	animation_player.play("attack_01_%s" %direction)
 	is_attacking = true
 	is_combo_attack = true
@@ -89,11 +90,11 @@ func _on_animation_finished(anim_name:String):
 	if anim_name.begins_with("attack_01"):
 		if is_combo_attack:
 			animation_player.play("attack_02_%s" %direction)
+			is_combo_attack = false
 		else:
 			is_attacking = false
 	if anim_name.begins_with("attack_02"):
 			animation_player.play("attack_03_%s" %direction)
 	if anim_name.begins_with("attack_03"):
 		is_attacking = false
-		is_combo_attack = false
 			

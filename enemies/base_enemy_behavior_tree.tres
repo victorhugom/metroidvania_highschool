@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
@@ -19,6 +19,34 @@ var/target_player/name = &"target_player"
 var/target_player/type = 24
 var/target_player/hint = 0
 var/target_player/hint_string = ""
+var/animation_player/name = &"animation_player"
+var/animation_player/type = 24
+var/animation_player/hint = 0
+var/animation_player/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_dj2f0"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_51ejd"]
+property = &"is_being_attacked"
+value = SubResource("BBVariant_dj2f0")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_dw7sb"]
+text = "IS BEING ATTACKED"
+
+[sub_resource type="BTSequence" id="BTSequence_3gohf"]
+custom_name = "Sequence: Dodge"
+children = [SubResource("BTConsolePrint_dw7sb")]
+
+[sub_resource type="BTProbability" id="BTProbability_n5ud1"]
+run_chance = 0.2
+children = [SubResource("BTSequence_3gohf")]
+
+[sub_resource type="BTSequence" id="BTSequence_bw7nw"]
+custom_name = "Sequence: Is Being Attacked"
+children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTProbability_n5ud1")]
 
 [sub_resource type="BTAction" id="BTAction_jow58"]
 script = ExtResource("1_yk8su")
@@ -41,44 +69,55 @@ variable = &"target_player"
 check_type = 5
 value = SubResource("BBVariant_8gu5v")
 
+[sub_resource type="BBVariant" id="BBVariant_gxqvd"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_rt4s1"]
+property = &"is_attacking"
+value = SubResource("BBVariant_gxqvd")
+
+[sub_resource type="BTAction" id="BTAction_5ihsn"]
+script = ExtResource("2_kgp36")
+tagert_node_var = "target_player"
+more_than_distance = 20
+less_than_distance = 40
+
+[sub_resource type="BTAction" id="BTAction_xkjnv"]
+script = ExtResource("4_0b6h6")
+
+[sub_resource type="BTSequence" id="BTSequence_gs17j"]
+custom_name = "Sequence: Combo Attack"
+children = [SubResource("BTAction_5ihsn"), SubResource("BTAction_xkjnv")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_eutoe"]
+duration = 2.0
+children = [SubResource("BTSequence_gs17j")]
+
 [sub_resource type="BTAction" id="BTAction_8ug22"]
 script = ExtResource("2_kgp36")
 tagert_node_var = "target_player"
 more_than_distance = 0
 less_than_distance = 20
 
-[sub_resource type="BTAction" id="BTAction_xvxob"]
+[sub_resource type="BTAction" id="BTAction_8f78n"]
 script = ExtResource("3_ilgoi")
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_qgodb"]
 
 [sub_resource type="BTSequence" id="BTSequence_5axlp"]
 custom_name = "Sequence: Attack"
-children = [SubResource("BTAction_8ug22"), SubResource("BTAction_xvxob"), SubResource("BTRandomWait_qgodb")]
+children = [SubResource("BTAction_8ug22"), SubResource("BTAction_8f78n")]
 
-[sub_resource type="BTAction" id="BTAction_5ihsn"]
-script = ExtResource("2_kgp36")
-tagert_node_var = "target_player"
-more_than_distance = 0
-less_than_distance = 40
-
-[sub_resource type="BTAction" id="BTAction_xkjnv"]
-script = ExtResource("4_0b6h6")
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_0yqlo"]
-min_duration = 2.0
-max_duration = 3.0
-
-[sub_resource type="BTSequence" id="BTSequence_gs17j"]
-custom_name = "Sequence: Combo Attack"
-children = [SubResource("BTAction_5ihsn"), SubResource("BTAction_xkjnv"), SubResource("BTRandomWait_0yqlo")]
+[sub_resource type="BTCooldown" id="BTCooldown_3ojn0"]
+duration = 1.0
+children = [SubResource("BTSequence_5axlp")]
 
 [sub_resource type="BTSelector" id="BTSelector_qkqor"]
-children = [SubResource("BTSequence_5axlp"), SubResource("BTSequence_gs17j")]
+children = [SubResource("BTCooldown_eutoe"), SubResource("BTCooldown_3ojn0")]
 
 [sub_resource type="BTSequence" id="BTSequence_ttrdq"]
 custom_name = "Sequence: Handle Attack"
-children = [SubResource("BTCheckVar_2inbc"), SubResource("BTSelector_qkqor")]
+children = [SubResource("BTCheckVar_2inbc"), SubResource("BTCheckAgentProperty_rt4s1"), SubResource("BTSelector_qkqor")]
 
 [sub_resource type="BTAction" id="BTAction_dndn3"]
 script = ExtResource("2_3urkf")
@@ -122,7 +161,7 @@ custom_name = "Sequence: Roam"
 children = [SubResource("BTCheckVar_fsrlj"), SubResource("BTAction_ognob"), SubResource("BTAction_7aq3u"), SubResource("BTRandomWait_45nid")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_74cf8"]
-children = [SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
+children = [SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_paedr")

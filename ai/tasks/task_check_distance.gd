@@ -12,7 +12,6 @@ func _tick(_delta: float) -> Status:
 	
 	var tagert_node: Node = blackboard.get_var(tagert_node_var)
 	var distance = abs(enemy.global_position.distance_to(tagert_node.global_position)) 
-	print_debug(distance)
 	if distance >= more_than_distance and distance <= less_than_distance:
 		return SUCCESS
 			
