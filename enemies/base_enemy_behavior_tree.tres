@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=17 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
@@ -16,15 +16,19 @@ var/target_player/type = 24
 var/target_player/hint = 0
 var/target_player/hint_string = ""
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_0sm7e"]
-text = "Look for player"
-
 [sub_resource type="BTAction" id="BTAction_t1sj7"]
 script = ExtResource("1_yk8su")
 target_player_var = "target_player"
 detection_range = 200
 
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_0sm7e"]
+text = "Look for player"
+
+[sub_resource type="BTSelector" id="BTSelector_8revy"]
+custom_name = "Selector (Handle Attacks)"
+
 [sub_resource type="BTAction" id="BTAction_8nwes"]
+children = [SubResource("BTSelector_8revy")]
 script = ExtResource("2_3urkf")
 target_node_var = "target_player"
 tolerance = 10
@@ -35,7 +39,7 @@ children = [SubResource("BTAction_8nwes")]
 
 [sub_resource type="BTSequence" id="BTSequence_e5vfc"]
 custom_name = "Sequence Player In Sight"
-children = [SubResource("BTConsolePrint_0sm7e"), SubResource("BTAction_t1sj7"), SubResource("BTSequence_c874w")]
+children = [SubResource("BTAction_t1sj7"), SubResource("BTConsolePrint_0sm7e"), SubResource("BTSequence_c874w")]
 
 [sub_resource type="BTAction" id="BTAction_ynva3"]
 script = ExtResource("1_66w5h")
@@ -48,9 +52,12 @@ script = ExtResource("2_llgg2")
 tolerance = 2
 target_position_var = "roam_position"
 
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_o80sr"]
+text = "Roam"
+
 [sub_resource type="BTSequence" id="BTSequence_dtxbt"]
 custom_name = "Roam"
-children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44")]
+children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44"), SubResource("BTConsolePrint_o80sr")]
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_fjk4m"]
 min_duration = 5.0
@@ -61,9 +68,9 @@ custom_name = "Idle"
 custom_name = "Sequence Roam"
 children = [SubResource("BTSequence_dtxbt"), SubResource("BTRandomWait_fjk4m")]
 
-[sub_resource type="BTSelector" id="BTSelector_bhsso"]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_vuv52"]
 children = [SubResource("BTSequence_e5vfc"), SubResource("BTSequence_132rq")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_paedr")
-root_task = SubResource("BTSelector_bhsso")
+root_task = SubResource("BTDynamicSelector_vuv52")

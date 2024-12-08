@@ -32,8 +32,11 @@ var is_dashing = false
 var dash_timer = 0.0
 var dash_cooldown_timer = 0.0
 
-var is_attacking: bool = false
 var current_speed: float = 0
+var last_direction: String = "right"
+
+var is_attacking: bool = false
+var is_parrying: bool = false
 var throw_speed: int = 100
 
 # jump
@@ -48,8 +51,6 @@ var current_time_duplication: float = 0
 var duplication_time: float = .020
 var duplcation_lifetime: float = .2
 
-var is_parrying: bool = false
-
 # state machine
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
@@ -60,7 +61,9 @@ var to_run: StringName = &"to_run"
 var to_attack: StringName = &"to_attack"
 var to_parry: StringName = &"to_parry"
 var to_dash: StringName = &"to_dash"
-var to_seconday_attack: StringName = &"_to_seconday_attack"
+var to_dash_attack: StringName = &"to_dash_attack"
+var to_throw_attack: StringName = &"to_throw_attack"
+var to_hold_throw_attack: StringName = &"to_hold_throw_attack"
 
 func  _ready() -> void:
 	current_speed = speed
@@ -92,22 +95,20 @@ func _input(event: InputEvent) -> void:
 			
 	if event.is_action_pressed("player_dash") and !is_dashing and dash_cooldown_timer == 0: 
 		main_state_machine.dispatch(to_dash)
+	if event.is_action_pressed("player_attack") and is_dashing:
+		main_state_machine.dispatch(to_dash_attack)
 	if event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_attack)
-	if event.is_action_released("player_secondary_attack"):
-		main_state_machine.dispatch(to_seconday_attack)
+	if event.is_action_pressed("player_throw"):
+		main_state_machine.dispatch(to_hold_throw_attack)
 	if event.is_action_released("player_parry"):
 		main_state_machine.dispatch(to_parry)
-
 
 func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("player_run"):
 		main_state_machine.dispatch(to_run)
 		
-	if Input.is_action_pressed("player_secondary_attack"):
-		throw_speed += 10
-	
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
 		var debug_message:= ""
@@ -142,9 +143,14 @@ func _physics_process(delta: float) -> void:
 		
 	_handle_jump_buffer(delta)
 	
-	if !is_dashing:
+	if !is_dashing and !is_attacking:
 		# Get the input direction and handle the movement/deceleration.
 		var direction: float = Input.get_axis("player_left", "player_right")
+		
+		if direction > 0:
+			last_direction = "right"
+		elif direction < 0:
+			last_direction = "left"
 		
 		if velocity.y == 0:
 			if direction:
@@ -176,8 +182,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			main_state_machine.dispatch(to_idle)
 		else:
 			main_state_machine.dispatch(to_jump)
-	if anim_name.begins_with("secondary_attack"):
-		main_state_machine.dispatch(to_idle)
 	if anim_name.begins_with("parry"):
 		main_state_machine.dispatch(to_idle)
 		
@@ -226,9 +230,11 @@ func _initiate_state_machine():
 	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
 	var state_down = LimboState.new().named("down").call_on_enter(_state_down_enter).call_on_update(_state_down_update)
 	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
+	var state_dash_attack = LimboState.new().named("dash_attack").call_on_enter(_state_dash_attack_enter).call_on_update(_state_dash_attack_update)
 	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
 	var state_parry = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
-	var state_seconday_attack = LimboState.new().named("seconday_attack").call_on_enter(_state_secondary_attack_enter).call_on_update(_state_secondary_attack_update).call_on_exit(_state_secondary_attack_exit)
+	var state_hold_throw_attack = LimboState.new().named(to_hold_throw_attack).call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
+	var state_throw_attack = LimboState.new().named(to_throw_attack).call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -236,9 +242,11 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_jump)
 	main_state_machine.add_child(state_down)
 	main_state_machine.add_child(state_dash)
+	main_state_machine.add_child(state_dash_attack)
 	main_state_machine.add_child(state_attack)
 	main_state_machine.add_child(state_parry)
-	main_state_machine.add_child(state_seconday_attack)
+	main_state_machine.add_child(state_hold_throw_attack)
+	main_state_machine.add_child(state_throw_attack)
 	
 	main_state_machine.initial_state = state_idle
 	
@@ -256,6 +264,9 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_walk, state_dash, to_dash)
 	main_state_machine.add_transition(state_run, state_dash, to_dash)
 	
+	#ENTER DASH ATTACK STATE
+	main_state_machine.add_transition(state_dash, state_dash_attack, to_dash_attack)
+	
 	#ENTER ATTACK STATE
 	main_state_machine.add_transition(state_idle, state_attack, to_attack)	
 	main_state_machine.add_transition(state_walk, state_attack, to_attack)	
@@ -264,14 +275,17 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_dash, state_attack, to_attack)	
 	
 	#ENTER PARRY STATE
-	main_state_machine.add_transition(state_idle, state_parry, to_parry)	
-	main_state_machine.add_transition(state_walk, state_parry, to_parry)	
-	main_state_machine.add_transition(state_run, state_parry, to_parry)	
+	main_state_machine.add_transition(state_idle, state_parry, to_parry)
+	main_state_machine.add_transition(state_walk, state_parry, to_parry)
+	main_state_machine.add_transition(state_run, state_parry, to_parry)
 	
-	#ENTER SECONDARY ATTACK STATE
-	main_state_machine.add_transition(state_idle, state_seconday_attack, to_seconday_attack)	
-	main_state_machine.add_transition(state_walk, state_seconday_attack, to_seconday_attack)	
-	main_state_machine.add_transition(state_run, state_seconday_attack, to_seconday_attack)	
+	#ENTER HOLD THROW ATTACK STATE
+	main_state_machine.add_transition(state_idle, state_hold_throw_attack, to_hold_throw_attack)
+	main_state_machine.add_transition(state_walk, state_hold_throw_attack, to_hold_throw_attack)
+	main_state_machine.add_transition(state_run, state_hold_throw_attack, to_hold_throw_attack)
+	
+	#ENTER THROW ATTACK STATE
+	main_state_machine.add_transition(state_hold_throw_attack, state_throw_attack, to_throw_attack)	
 	
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
@@ -375,40 +389,47 @@ func _state_parry_exit():
 	parry_box.monitoring = false
 	parry_box.monitorable = false
 
-func _state_secondary_attack_enter():
-	if is_attacking:
-		return
-
+func _state_hold_throw_attack_enter():
 	is_attacking = true
+	state_changed.emit("hold_throw", velocity)
 
+func _state_hold_throw_attack_update(_delta):
+	throw_speed += 10
+	if Input.is_action_just_released("player_throw"):
+		main_state_machine.dispatch(to_throw_attack)
+
+func _state_throw_attack_enter():
+	
 	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
 	new_projectile.explosion = load("res://weapons/acid.tscn")
 	
-	var projectile_direction = "left" if velocity.x < 0 else "right"
-	new_projectile.throw(projectile_direction, 45, throw_speed)
+	new_projectile.throw(last_direction, 45, throw_speed)
 
 	var first_node = get_tree().current_scene.get_child(0)
 	(first_node as Node2D).add_sibling(new_projectile)
-	throw_speed = 200	
-	state_changed.emit("secondary_attack", velocity)
-	
-func _state_secondary_attack_update(_delta:float):
-	pass
-	
-func _state_secondary_attack_exit():
-	is_attacking = false
+	state_changed.emit("throw", velocity)
+
+func _state_throw_attack_update(delta):
+	if animation_player.current_animation != "throw":
+		is_attacking = false
+		throw_speed = 100	
+		main_state_machine.dispatch(to_idle)
 
 func _state_dash_enter():
 	is_dashing = true
+	state_changed.emit("dash", velocity)
 	dash_timer = dash_duration
 	dash_cooldown_timer = dash_cooldown
 	if Input.is_action_pressed("player_left"):
 		velocity.x = -dash_speed
+		last_direction = "left"
 	elif Input.is_action_pressed("player_right"):
 		velocity.x = dash_speed
+		last_direction = "right"
 	
 func _state_dash_update(delta:float):
+	state_changed.emit("dash", velocity)
 	if is_dashing:
 		dash_timer -= delta
 	if dash_timer <= 0:
@@ -422,3 +443,12 @@ func _state_dash_update(delta:float):
 func _state_dash_exit():
 	is_dashing = false
 	velocity.x = 0 # Stop the dash movement
+	
+func _state_dash_attack_enter():
+	is_dashing = true
+	state_changed.emit("dash_attack", velocity)
+	
+func _state_dash_attack_update(_delta:float):
+	if animation_player.current_animation != "dash_attack":
+		is_dashing = false
+		main_state_machine.dispatch(to_idle)
