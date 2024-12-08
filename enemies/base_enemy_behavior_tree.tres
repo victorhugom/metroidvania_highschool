@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=30 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
@@ -20,90 +20,110 @@ var/target_player/type = 24
 var/target_player/hint = 0
 var/target_player/hint_string = ""
 
-[sub_resource type="BTAction" id="BTAction_t1sj7"]
+[sub_resource type="BTAction" id="BTAction_jow58"]
 script = ExtResource("1_yk8su")
 target_player_var = "target_player"
 detection_range = 200
 
-[sub_resource type="BTAction" id="BTAction_8nwes"]
-script = ExtResource("2_3urkf")
-target_node_var = "target_player"
-tolerance = 20
-
-[sub_resource type="BTAction" id="BTAction_1lqha"]
+[sub_resource type="BTAction" id="BTAction_sq7io"]
 script = ExtResource("3_jp1vo")
 
-[sub_resource type="BTAction" id="BTAction_oq82t"]
-script = ExtResource("2_kgp36")
-tagert_node_var = "target_player"
-more_than_distance = 20
-less_than_distance = 40
+[sub_resource type="BTSequence" id="BTSequence_5wci6"]
+custom_name = "Sequence: Look For Player"
+children = [SubResource("BTAction_jow58"), SubResource("BTAction_sq7io")]
 
-[sub_resource type="BTAction" id="BTAction_vw0ky"]
-script = ExtResource("4_0b6h6")
+[sub_resource type="BBVariant" id="BBVariant_8gu5v"]
+saved_value = null
+resource_name = "<null>"
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_763k6"]
-min_duration = 2.0
-max_duration = 3.0
+[sub_resource type="BTCheckVar" id="BTCheckVar_2inbc"]
+variable = &"target_player"
+check_type = 5
+value = SubResource("BBVariant_8gu5v")
 
-[sub_resource type="BTSequence" id="BTSequence_3j1wa"]
-custom_name = "Sequence (Use Combo Attack Far-ish)"
-children = [SubResource("BTAction_1lqha"), SubResource("BTAction_oq82t"), SubResource("BTAction_vw0ky"), SubResource("BTRandomWait_763k6")]
-
-[sub_resource type="BTAction" id="BTAction_paefl"]
-script = ExtResource("3_jp1vo")
-
-[sub_resource type="BTAction" id="BTAction_ovc0w"]
+[sub_resource type="BTAction" id="BTAction_8ug22"]
 script = ExtResource("2_kgp36")
 tagert_node_var = "target_player"
 more_than_distance = 0
 less_than_distance = 20
 
-[sub_resource type="BTAction" id="BTAction_gv8vi"]
+[sub_resource type="BTAction" id="BTAction_xvxob"]
 script = ExtResource("3_ilgoi")
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_nrmdq"]
-max_duration = 1.5
+[sub_resource type="BTRandomWait" id="BTRandomWait_qgodb"]
 
-[sub_resource type="BTSequence" id="BTSequence_lg1du"]
-custom_name = "Sequence (Use Swing Bat if Close)"
-children = [SubResource("BTAction_paefl"), SubResource("BTAction_ovc0w"), SubResource("BTAction_gv8vi"), SubResource("BTRandomWait_nrmdq")]
+[sub_resource type="BTSequence" id="BTSequence_5axlp"]
+custom_name = "Sequence: Attack"
+children = [SubResource("BTAction_8ug22"), SubResource("BTAction_xvxob"), SubResource("BTRandomWait_qgodb")]
 
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_sihij"]
-custom_name = "Selector (Handle Attacks)"
-children = [SubResource("BTAction_8nwes"), SubResource("BTSequence_3j1wa"), SubResource("BTSequence_lg1du")]
+[sub_resource type="BTAction" id="BTAction_5ihsn"]
+script = ExtResource("2_kgp36")
+tagert_node_var = "target_player"
+more_than_distance = 0
+less_than_distance = 40
 
-[sub_resource type="BTSequence" id="BTSequence_e5vfc"]
-custom_name = "Sequence Player In Sight"
-children = [SubResource("BTAction_t1sj7"), SubResource("BTDynamicSelector_sihij")]
+[sub_resource type="BTAction" id="BTAction_xkjnv"]
+script = ExtResource("4_0b6h6")
 
-[sub_resource type="BTAction" id="BTAction_ynva3"]
+[sub_resource type="BTRandomWait" id="BTRandomWait_0yqlo"]
+min_duration = 2.0
+max_duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_gs17j"]
+custom_name = "Sequence: Combo Attack"
+children = [SubResource("BTAction_5ihsn"), SubResource("BTAction_xkjnv"), SubResource("BTRandomWait_0yqlo")]
+
+[sub_resource type="BTSelector" id="BTSelector_qkqor"]
+children = [SubResource("BTSequence_5axlp"), SubResource("BTSequence_gs17j")]
+
+[sub_resource type="BTSequence" id="BTSequence_ttrdq"]
+custom_name = "Sequence: Handle Attack"
+children = [SubResource("BTCheckVar_2inbc"), SubResource("BTSelector_qkqor")]
+
+[sub_resource type="BTAction" id="BTAction_dndn3"]
+script = ExtResource("2_3urkf")
+target_node_var = "target_player"
+tolerance = 10
+
+[sub_resource type="BTSequence" id="BTSequence_212q4"]
+custom_name = "Sequence: Move Torwards Player"
+children = [SubResource("BTAction_dndn3")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hsxeh"]
+children = [SubResource("BTSequence_ttrdq"), SubResource("BTSequence_212q4")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_qjgyi"]
+custom_name = "Sequence (Engage Player)"
+children = [SubResource("BTSequence_5wci6"), SubResource("BTDynamicSelector_hsxeh")]
+
+[sub_resource type="BBVariant" id="BBVariant_rdgjo"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_fsrlj"]
+variable = &"target_player"
+value = SubResource("BBVariant_rdgjo")
+
+[sub_resource type="BTAction" id="BTAction_ognob"]
 script = ExtResource("1_66w5h")
 roam_min_radius = 128.0
 roam_max_radius = 256.0
 roam_position_var = &"roam_position"
 
-[sub_resource type="BTAction" id="BTAction_wyc44"]
+[sub_resource type="BTAction" id="BTAction_7aq3u"]
 script = ExtResource("2_llgg2")
-tolerance = 2
+tolerance = 10
 target_position_var = "roam_position"
 
-[sub_resource type="BTSequence" id="BTSequence_dtxbt"]
-custom_name = "Roam"
-children = [SubResource("BTAction_ynva3"), SubResource("BTAction_wyc44")]
+[sub_resource type="BTRandomWait" id="BTRandomWait_45nid"]
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_fjk4m"]
-min_duration = 5.0
-max_duration = 10.0
-custom_name = "Idle"
+[sub_resource type="BTSequence" id="BTSequence_tve3w"]
+custom_name = "Sequence: Roam"
+children = [SubResource("BTCheckVar_fsrlj"), SubResource("BTAction_ognob"), SubResource("BTAction_7aq3u"), SubResource("BTRandomWait_45nid")]
 
-[sub_resource type="BTSequence" id="BTSequence_132rq"]
-custom_name = "Sequence Roam"
-children = [SubResource("BTSequence_dtxbt"), SubResource("BTRandomWait_fjk4m")]
-
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_vuv52"]
-children = [SubResource("BTSequence_e5vfc"), SubResource("BTSequence_132rq")]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_74cf8"]
+children = [SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_paedr")
-root_task = SubResource("BTDynamicSelector_vuv52")
+root_task = SubResource("BTDynamicSelector_74cf8")
