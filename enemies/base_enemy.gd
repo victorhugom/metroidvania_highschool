@@ -8,6 +8,7 @@ class_name BaseEnemy extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var speed = 64
+@export var dash_speed = 400
 @export var dodge_distance = 128
 
 var origin_position = Vector2.ZERO
@@ -78,7 +79,10 @@ func stop() -> void:
 	velocity = Vector2.ZERO
 
 func dodge() -> void:
-	position += Vector2(randf() * dodge_distance, randf() * dodge_distance)
+	if direction == "left":
+		velocity = Vector2(1, 0) * dash_speed
+	else:
+		velocity = Vector2(-1, 0) * -dash_speed
 	
 func check_for_player():
 	if ray_cast_2d_eyes.is_colliding():

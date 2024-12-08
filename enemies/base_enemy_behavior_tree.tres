@@ -1,6 +1,7 @@
-[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=47 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
+[ext_resource type="Script" path="res://ai/tasks/task_dodge.gd" id="1_vtka4"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
 [ext_resource type="Script" path="res://ai/tasks/task_move_torwards_node.gd" id="2_3urkf"]
 [ext_resource type="Script" path="res://ai/tasks/task_check_distance.gd" id="2_kgp36"]
@@ -33,20 +34,28 @@ resource_name = "true"
 property = &"is_being_attacked"
 value = SubResource("BBVariant_dj2f0")
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_dw7sb"]
-text = "IS BEING ATTACKED"
+[sub_resource type="BTAction" id="BTAction_mo1n0"]
+script = ExtResource("2_kgp36")
+tagert_node_var = "target_player"
+more_than_distance = 0
+less_than_distance = 40
 
-[sub_resource type="BTSequence" id="BTSequence_3gohf"]
-custom_name = "Sequence: Dodge"
-children = [SubResource("BTConsolePrint_dw7sb")]
+[sub_resource type="BTAction" id="BTAction_oa7xt"]
+script = ExtResource("1_vtka4")
+
+[sub_resource type="BTWait" id="BTWait_mdnxr"]
+duration = 0.2
+
+[sub_resource type="BTSequence" id="BTSequence_2xpde"]
+children = [SubResource("BTAction_oa7xt"), SubResource("BTWait_mdnxr")]
 
 [sub_resource type="BTProbability" id="BTProbability_n5ud1"]
-run_chance = 0.2
-children = [SubResource("BTSequence_3gohf")]
+run_chance = 0.1
+children = [SubResource("BTSequence_2xpde")]
 
 [sub_resource type="BTSequence" id="BTSequence_bw7nw"]
 custom_name = "Sequence: Is Being Attacked"
-children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTProbability_n5ud1")]
+children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTAction_mo1n0"), SubResource("BTProbability_n5ud1")]
 
 [sub_resource type="BTAction" id="BTAction_jow58"]
 script = ExtResource("1_yk8su")
