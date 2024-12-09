@@ -72,9 +72,10 @@ func _ready() -> void:
 	
 func destroy():
 	hurt_box.can_be_hurt = false
+	hurt_box.set_deferred("monitoring", false)
+	hurt_box.set_deferred("monitorable", false)
 	
 	destroyable_object_container.destroy(damager.global_position)
-	
 	destroyed.emit()
 	
 func _on_hurtbox_area_entered(area: Area2D):

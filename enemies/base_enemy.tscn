@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://doigv8t3fi1pg"]
+[gd_scene load_steps=33 format=3 uid="uid://doigv8t3fi1pg"]
 
 [ext_resource type="Script" path="res://enemies/base_enemy.gd" id="1_uawak"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_qj21g"]
@@ -8,6 +8,11 @@
 [ext_resource type="BehaviorTree" uid="uid://cr6n7sschkx3f" path="res://enemies/base_enemy_behavior_tree.tres" id="7_2lvw2"]
 [ext_resource type="Texture2D" uid="uid://caahj4a3oi6m2" path="res://assets/player/amenine/attack.png" id="8_c2yjb"]
 [ext_resource type="Texture2D" uid="uid://wpus3qy1lhbm" path="res://assets/player/amenine/walk.png" id="9_6djn8"]
+[ext_resource type="PackedScene" uid="uid://clfeahbqi3hv2" path="res://_starter_content/destroyable_object/destroyable_object_container.tscn" id="9_twlgn"]
+[ext_resource type="Texture2D" uid="uid://cvhul1ge4w8hd" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="10_ayd7k"]
+[ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="11_neff7"]
+[ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="12_qxe2a"]
+[ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="13_glohs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e42is"]
 height = 56.0
@@ -675,7 +680,7 @@ shape = SubResource("RectangleShape2D_vums4")
 debug_color = Color(0.960784, 0, 0, 0.419608)
 
 [node name="Health" parent="." instance=ExtResource("4_reaex")]
-max_health = 10
+max_health = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -30)
@@ -712,4 +717,9 @@ target_position = Vector2(0, 200)
 wait_time = 0.5
 autostart = true
 
+[node name="DestroyableObjectContainer" parent="." instance=ExtResource("9_twlgn")]
+destruction_power = Vector2(4, 1)
+texture_pieces = Array[Texture2D]([ExtResource("10_ayd7k"), ExtResource("11_neff7"), ExtResource("12_qxe2a"), ExtResource("13_glohs")])
+
+[connection signal="hurtbox_area_entered" from="HurtBox" to="." method="_on_hurt_box_hurtbox_area_entered"]
 [connection signal="timeout" from="EyeSightTimer" to="." method="check_for_player"]
