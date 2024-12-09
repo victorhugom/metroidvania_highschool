@@ -905,7 +905,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [8]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -917,7 +917,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1, 2]
+"values": [2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_gif1l"]
@@ -1372,7 +1372,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [8]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1381,10 +1381,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [3, 4, 4, 5]
+"values": [3, 4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_f7exj"]
@@ -1541,6 +1541,7 @@ hframes = 4
 show_behind_parent = true
 position = Vector2(3, -29)
 color = Color(0.325625, 0.430132, 0.701241, 1)
+energy = 0.3
 texture = ExtResource("5_wc1rh")
 texture_scale = 0.6
 
