@@ -7,10 +7,19 @@ signal hurtbox_area_entered(area: Area2D)
 ## Set false if player cannot be hurt, by setting this true when an `AttackBox`
 ## hits the player will not do damage
 @export var can_be_hurt: bool = true
+## Don't get for this time after getting hit before
+@export var iframe_seconds : float = .5
+
+var current_iframe: float = 0
 
 func _ready() -> void:
 	assert(health != null, "param:health not set, health needed")
 	area_entered.connect(_on_area_entered)
+	
+func _process(delta: float) -> void:
+	
+	if current_iframe > 0:
+		current_iframe -= delta
 
 ##Occours when a `AttackBox` area enter this zone
 ##1. emits `hurtbox_area_entered`
@@ -20,10 +29,11 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	hurtbox_area_entered.emit(area)
 	
-	if not can_be_hurt:
+	if not can_be_hurt or current_iframe > 0:
 		return
 	
 	if area is AttackBox:
+		current_iframe = iframe_seconds
 		var attack_box = area as AttackBox
 		var damage = attack_box.damage
 		

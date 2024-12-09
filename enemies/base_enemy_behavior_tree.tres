@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=47 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_dodge.gd" id="1_vtka4"]
@@ -34,6 +34,15 @@ resource_name = "true"
 property = &"is_being_attacked"
 value = SubResource("BBVariant_dj2f0")
 
+[sub_resource type="BBVariant" id="BBVariant_ybmhh"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_1r7vi"]
+variable = &"target_player"
+check_type = 5
+value = SubResource("BBVariant_ybmhh")
+
 [sub_resource type="BTAction" id="BTAction_mo1n0"]
 script = ExtResource("2_kgp36")
 tagert_node_var = "target_player"
@@ -55,7 +64,7 @@ children = [SubResource("BTSequence_2xpde")]
 
 [sub_resource type="BTSequence" id="BTSequence_bw7nw"]
 custom_name = "Sequence: Is Being Attacked"
-children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTAction_mo1n0"), SubResource("BTProbability_n5ud1")]
+children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTCheckVar_1r7vi"), SubResource("BTAction_mo1n0"), SubResource("BTProbability_n5ud1")]
 
 [sub_resource type="BTAction" id="BTAction_jow58"]
 script = ExtResource("1_yk8su")

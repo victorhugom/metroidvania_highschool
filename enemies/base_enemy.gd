@@ -1,6 +1,10 @@
 class_name BaseEnemy extends CharacterBody2D
 
+const DESTROYABLE_OBJECT_CONTAINER = preload("res://_starter_content/destroyable_object/destroyable_object_container.tscn")
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var health: Health = $Health
+@onready var hurt_box: HurtBox = $HurtBox
 
 @onready var ray_cast_2d_eyes: RayCast2D = $RayCast2DEyes
 @onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
@@ -15,15 +19,26 @@ var origin_position = Vector2.ZERO
 var has_floor = true
 var direction = "right"
 var player_in_sight: CharacterBody2D
+var sight_time = 4
+var loose_sight_timeout = 0
 var is_attacking = false
 var is_combo_attack = false
 var is_being_attacked = false
+var damager_position = null
+var is_dying = null
 
 func _ready():
 	origin_position = global_position
 	animation_player.animation_finished.connect(_on_animation_finished)
+	health.health_empty.connect(_on_health_empty)
+	hurt_box.area_entered.connect(_on_hurt_box_area_entered)
 
 func _physics_process(delta: float) -> void:
+	
+	loose_sight_timeout-= delta
+	
+	if is_dying:
+		return
 	
 	is_being_attacked = Input.is_action_just_pressed("player_attack")
 	
@@ -86,9 +101,11 @@ func dodge() -> void:
 	
 func check_for_player():
 	if ray_cast_2d_eyes.is_colliding():
+		loose_sight_timeout = sight_time
 		player_in_sight = ray_cast_2d_eyes.get_collider()
 	else:
-		player_in_sight = null
+		if player_in_sight != null and loose_sight_timeout <= 0:
+			player_in_sight = null	
 		
 func _on_animation_finished(anim_name:String):
 	if anim_name.begins_with("attack_01"):
@@ -101,4 +118,36 @@ func _on_animation_finished(anim_name:String):
 			animation_player.play("attack_03_%s" %direction)
 	if anim_name.begins_with("attack_03"):
 		is_attacking = false
-			
+
+func _on_hurt_box_area_entered(area: Area2D):
+	damager_position = area.global_position
+
+@onready var destroyable_object_container: DestroyableObjectContainer = $DestroyableObjectContainer
+
+func _on_health_empty():
+	
+	set_as_is_dying()
+	queue_free()
+
+func set_as_is_dying():
+	visible = false
+	is_dying = true
+	
+func _on_hurt_box_hurtbox_area_entered(area: Area2D) -> void:
+	var target_position = area.global_position
+	var move_direction = (target_position - global_position).normalized()
+	if move_direction.x > 0:
+		velocity = Vector2(1, 0)
+	else:
+		velocity = Vector2(-1, 0)
+		
+	player_in_sight = area.get_parent()
+
+func _exit_tree() -> void:
+	destroyable_object_container.visible = true
+	
+	remove_child(destroyable_object_container)
+	get_tree().root.add_child(destroyable_object_container)
+
+	destroyable_object_container.global_position = global_position
+	destroyable_object_container.destroy(damager_position)
