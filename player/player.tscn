@@ -1509,6 +1509,11 @@ collision_mask = 17920
 script = ExtResource("1_dpgy2")
 deceleration = 10
 
+[node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
+use_parent_material = true
+position = Vector2(0, -46)
+zoom = Vector2(3, 3)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true
 position = Vector2(0, -26)
@@ -1543,11 +1548,6 @@ position = Vector2(3, -29)
 color = Color(0.325625, 0.430132, 0.701241, 1)
 texture = ExtResource("5_wc1rh")
 texture_scale = 0.6
-
-[node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
-use_parent_material = true
-position = Vector2(0, -46)
-zoom = Vector2(3, 3)
 
 [node name="Health" parent="." instance=ExtResource("4_jivws")]
 use_parent_material = true

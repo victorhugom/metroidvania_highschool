@@ -56,6 +56,7 @@ script = ExtResource("1_vtka4")
 duration = 0.2
 
 [sub_resource type="BTSequence" id="BTSequence_2xpde"]
+custom_name = "Sequenece: Dodge"
 children = [SubResource("BTAction_oa7xt"), SubResource("BTWait_mdnxr")]
 
 [sub_resource type="BTProbability" id="BTProbability_n5ud1"]
@@ -63,7 +64,7 @@ run_chance = 0.1
 children = [SubResource("BTSequence_2xpde")]
 
 [sub_resource type="BTSequence" id="BTSequence_bw7nw"]
-custom_name = "Sequence: Is Being Attacked"
+custom_name = "Sequence: React to Being Attacked"
 children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTCheckVar_1r7vi"), SubResource("BTAction_mo1n0"), SubResource("BTProbability_n5ud1")]
 
 [sub_resource type="BTAction" id="BTAction_jow58"]
@@ -131,6 +132,7 @@ duration = 1.0
 children = [SubResource("BTSequence_5axlp")]
 
 [sub_resource type="BTSelector" id="BTSelector_qkqor"]
+custom_name = "Selector: Attack"
 children = [SubResource("BTCooldown_eutoe"), SubResource("BTCooldown_3ojn0")]
 
 [sub_resource type="BTSequence" id="BTSequence_ttrdq"]
@@ -140,7 +142,7 @@ children = [SubResource("BTCheckVar_2inbc"), SubResource("BTCheckAgentProperty_r
 [sub_resource type="BTAction" id="BTAction_dndn3"]
 script = ExtResource("2_3urkf")
 target_node_var = "target_player"
-tolerance = 10
+tolerance = 20
 
 [sub_resource type="BTSequence" id="BTSequence_212q4"]
 custom_name = "Sequence: Move Torwards Player"
@@ -150,7 +152,7 @@ children = [SubResource("BTAction_dndn3")]
 children = [SubResource("BTSequence_ttrdq"), SubResource("BTSequence_212q4")]
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_qjgyi"]
-custom_name = "Sequence (Engage Player)"
+custom_name = "Sequence: Engage Player"
 children = [SubResource("BTSequence_5wci6"), SubResource("BTDynamicSelector_hsxeh")]
 
 [sub_resource type="BBVariant" id="BBVariant_rdgjo"]
