@@ -52,7 +52,7 @@ func _on_state_changed(state: String, velocity: Vector2):
 			var combo_animation = "attack_0%s_%s" %[combo_index, player_direction]
 			combo_index = 1 if combo_index == 5	 else combo_index + 1
 				
-			combo_timeout = get_animation(combo_animation).length + .1
+			combo_timeout = get_animation(combo_animation).length + .5
 			play(combo_animation)
 	elif state == "hold_throw":
 		play("hold_throw")

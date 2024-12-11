@@ -35,7 +35,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var attack_box = area as AttackBox
 		var damage = attack_box.damage
 		
+		hurtbox_area_entered.emit(area)
 		print_rich("[color=red][b] Hurt Box Take Damage:[/b][/color]  %s" %damage)
 		health.decrease_health(damage)
 		damaged.emit(damage)
-		hurtbox_area_entered.emit(area)
