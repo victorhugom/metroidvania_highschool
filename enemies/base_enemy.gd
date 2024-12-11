@@ -159,10 +159,10 @@ func set_as_is_dying():
 func _on_hurt_box_hurtbox_area_entered(area: Area2D) -> void:
 	var target_position = area.global_position
 	var move_direction = (target_position - global_position).normalized()
-	if move_direction.x > 0:
+	if move_direction.x > 0 and ray_cast_2d_left.is_colliding():
 		velocity = Vector2(1, 0)
 		global_position.x -= 10
-	else:
+	elif ray_cast_2d_right.is_colliding():
 		global_position.x += 10
 		velocity = Vector2(-1, 0)
 		
