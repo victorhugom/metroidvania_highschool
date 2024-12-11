@@ -45,6 +45,10 @@ func _on_state_changed(state: String, velocity: Vector2):
 		# FALLING DOWN
 		elif velocity.y < 0:
 			play("up")
+	elif state == "holding_attack":
+		play("hold_attack")
+	elif state == "strong_attack":
+		play("strong_attack")
 	elif state == "attack":
 		if velocity.y != 0:
 			play("attack_01_%s" %player_direction, -1, 2)
@@ -59,5 +63,4 @@ func _on_state_changed(state: String, velocity: Vector2):
 	elif state == "throw":
 		play("throw")
 	elif state == "parry":
-		var secondary_attack_animation = "parry_%s" %player_direction
-		play(secondary_attack_animation)
+		play("parry_%s" %player_direction)
