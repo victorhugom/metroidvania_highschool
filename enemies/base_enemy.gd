@@ -74,8 +74,14 @@ func _physics_process(delta: float) -> void:
 		stop()
 	else:
 		has_floor = true
+	
+	if has_floor == true and is_on_wall() == false:
+		move_and_slide()
 		
-	move_and_slide()
+	if velocity.x != 0:
+		animation_player.play("walk")
+	else:
+		animation_player.play("idle")
 		
 func move(target_position) -> void:
 	
