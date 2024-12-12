@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=32 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_46mbl"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
@@ -66,11 +66,13 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_27jvs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1tkn"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oessi"]
 
 [node name="SidescrolingMapExample" type="Node2D"]
 
@@ -178,7 +180,7 @@ tile_map_data = PackedByteArray("AAD8/wYAAAALAAEAAAD7/wYAAAAKAAEAAAD6/wYAAAAKAAE
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_27jvs")
+material = SubResource("ShaderMaterial_o1tkn")
 use_parent_material = false
 position = Vector2(139, 207)
 
@@ -191,3 +193,12 @@ texture_pieces = Array[Texture2D]([ExtResource("14_uj3j1"), ExtResource("15_evvx
 
 [node name="BaseEnemy" parent="." instance=ExtResource("20_s51ef")]
 position = Vector2(354, 107)
+
+[node name="SurfaceDriver" type="Area2D" parent="." groups=["wallkable_wall"]]
+position = Vector2(-103, 16)
+scale = Vector2(1, 13.88)
+collision_layer = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceDriver"]
+position = Vector2(-3, 0.144092)
+shape = SubResource("RectangleShape2D_oessi")

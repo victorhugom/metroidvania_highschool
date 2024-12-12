@@ -10,6 +10,8 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var attack_box: AttackBox = $AttackBox
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
 @onready var parry_box: Area2D = $ParryBox
+@onready var shape_cast_2d_left: ShapeCast2D = $ShapeCast2DLeft
+@onready var shape_cast_2d_right: ShapeCast2D = $ShapeCast2DRight
 
 ## The base speed
 @export var speed: float = 64
@@ -30,6 +32,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 
 @export var strong_attack_threshold: float = 0.2
 
+var is_on_wall_walk = false
 var is_dashing = false
 var dash_timer = 0.0
 var dash_cooldown_timer = 0.0
@@ -39,7 +42,6 @@ var last_direction: String = "right"
 
 var is_attacking: bool = false
 var strong_attack_time: float = 0
-
 
 var is_parrying: bool = false
 var throw_speed: int = 100
@@ -74,6 +76,8 @@ var to_dash: StringName = &"to_dash"
 var to_dash_attack: StringName = &"to_dash_attack"
 var to_throw_attack: StringName = &"to_throw_attack"
 var to_hold_throw_attack: StringName = &"to_hold_throw_attack"
+var to_walk_wall_left: StringName = &"to_walk_wall_left"
+var to_wall_jump: StringName = &"to_wall_jump"
 
 func  _ready() -> void:
 	current_speed = speed
@@ -92,7 +96,9 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_down)
 		jump_down_buffer = true
 	if event.is_action_pressed("player_jump"):
-		if not jump_down_buffer:
+		if is_on_wall_walk:
+			main_state_machine.dispatch(to_wall_jump)
+		elif not jump_down_buffer:
 			if is_on_floor():
 				main_state_machine.dispatch(to_jump)
 			else:
@@ -151,6 +157,12 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	if shape_cast_2d_left.is_colliding():
+		main_state_machine.dispatch(to_walk_wall_left)
+		
+	if shape_cast_2d_right.is_colliding():
+		print_debug("wall_right")
+	
 	if _can_move() == false and is_on_floor():
 		velocity.x = 0
 		
@@ -162,12 +174,14 @@ func _physics_process(delta: float) -> void:
 	
 	# Apply gravity
 	_apply_gravity(delta)
+	
 	# Move the character
 	move_and_slide()
 
 func _apply_gravity(delta):
 	
-	if not is_on_floor():
+	var current_state = main_state_machine.get_active_state().name
+	if not is_on_floor() and current_state != "walk_wall_left":
 		if velocity.y < 0:
 			velocity += get_gravity() * delta
 		else:
@@ -219,6 +233,13 @@ func _perform_jump():
 	velocity.y = jump_velocity
 	current_jumps += 1
 	
+func _perform_wall_jump():
+	state_changed.emit("jump", velocity)
+	var gravity = get_gravity().y
+	jump_velocity = -sqrt(2 * gravity * jump_height)
+	velocity = Vector2(current_speed * 2, jump_velocity)
+	current_jumps = 1
+	
 func _perform_move_on_floor(delta: float):
 	var direction: float = Input.get_axis("player_left", "player_right")
 	
@@ -232,7 +253,21 @@ func _perform_move_on_floor(delta: float):
 	else:
 		velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)	
 
-func _perform_move_on_jump(delta: float):
+func _perform_move_on_wall_left(delta: float):
+	
+	var direction: float = Input.get_axis("player_up", "player_down")
+	
+	if direction > 0:
+		last_direction = "left"
+	elif direction < 0:
+		last_direction = "left"
+	
+	if direction:
+		velocity = velocity.lerp(Vector2(0, direction) * current_speed, acceleration * delta)
+	else:
+		velocity = velocity.lerp(Vector2(0, direction) * current_speed, deceleration * delta)	
+
+func _perform_move_on_jump(_delta: float):
 	var direction: float = Input.get_axis("player_left", "player_right")
 	
 	if direction > 0:
@@ -249,22 +284,26 @@ func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
 	add_child(main_state_machine)
 	
-	var state_idle = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
-	var state_walk = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
-	var state_run = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
-	var state_jump = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
-	var state_down = LimboState.new().named("down").call_on_enter(_state_down_enter).call_on_update(_state_down_update)
-	var state_dash = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
-	var state_dash_attack = LimboState.new().named("dash_attack").call_on_enter(_state_dash_attack_enter).call_on_update(_state_dash_attack_update)
-	var satate_prepare_attack = LimboState.new().named("prepare_attack").call_on_enter(_state_prepare_attack_enter).call_on_update(_state_prepare_attack_update)
-	var state_attack = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
-	var state_strong_attack = LimboState.new().named("strong_attack").call_on_enter(_state_strong_attack_enter).call_on_update(_state_strong_attack_update).call_on_exit(_state_strong_attack_exit)
-	var state_parry = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
-	var state_hold_throw_attack = LimboState.new().named(to_hold_throw_attack).call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
-	var state_throw_attack = LimboState.new().named(to_throw_attack).call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
+	var state_idle: LimboState = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
+	var state_walk: LimboState = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
+	var state_walk_wall_left: LimboState = LimboState.new().named("walk_wall_left").call_on_enter(_state_walk_wall_left_enter).call_on_update(_state_walk_wall_left_update)
+	var state_wall_jump: LimboState = LimboState.new().named("wall_jump").call_on_enter(_state_wall_jump_enter).call_on_update(_state_wall_jump_update)
+	var state_run: LimboState = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
+	var state_jump: LimboState = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
+	var state_down: LimboState = LimboState.new().named("down").call_on_enter(_state_down_enter).call_on_update(_state_down_update)
+	var state_dash: LimboState = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
+	var state_dash_attack: LimboState = LimboState.new().named("dash_attack").call_on_enter(_state_dash_attack_enter).call_on_update(_state_dash_attack_update)
+	var satate_prepare_attack: LimboState = LimboState.new().named("prepare_attack").call_on_enter(_state_prepare_attack_enter).call_on_update(_state_prepare_attack_update)
+	var state_attack: LimboState = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
+	var state_strong_attack: LimboState = LimboState.new().named("strong_attack").call_on_enter(_state_strong_attack_enter).call_on_update(_state_strong_attack_update).call_on_exit(_state_strong_attack_exit)
+	var state_parry: LimboState = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
+	var state_hold_throw_attack: LimboState = LimboState.new().named(to_hold_throw_attack).call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
+	var state_throw_attack: LimboState = LimboState.new().named(to_throw_attack).call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
+	main_state_machine.add_child(state_walk_wall_left)
+	main_state_machine.add_child(state_wall_jump)
 	main_state_machine.add_child(state_run)
 	main_state_machine.add_child(state_jump)
 	main_state_machine.add_child(state_down)
@@ -280,13 +319,34 @@ func _initiate_state_machine():
 	main_state_machine.initial_state = state_idle
 	
 	#ENTER IDLE STATE
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_idle, to_idle)
+	main_state_machine.add_transition(state_walk, state_idle, to_idle)
+	main_state_machine.add_transition(state_run, state_idle, to_idle)
+	main_state_machine.add_transition(state_jump, state_idle, to_idle)
+	main_state_machine.add_transition(state_down, state_idle, to_idle)
+	main_state_machine.add_transition(state_dash, state_idle, to_idle)
+	main_state_machine.add_transition(state_dash_attack, state_idle, to_idle)
+	main_state_machine.add_transition(satate_prepare_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_strong_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_parry, state_idle, to_idle)
+	main_state_machine.add_transition(state_hold_throw_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_throw_attack, state_idle, to_idle)
 	
 	#ENTER JUMP STATE
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_jump, to_jump)
+	main_state_machine.add_transition(state_walk, state_jump, to_jump)
+	main_state_machine.add_transition(state_run, state_jump, to_jump)
+	main_state_machine.add_transition(state_jump, state_jump, to_jump)
+	main_state_machine.add_transition(state_down, state_jump, to_jump)
+	main_state_machine.add_transition(state_dash, state_jump, to_jump)
+	main_state_machine.add_transition(state_dash_attack, state_jump, to_jump)
+	main_state_machine.add_transition(state_attack, state_jump, to_jump)
+	main_state_machine.add_transition(state_walk_wall_left, state_jump, to_jump)
+	main_state_machine.add_transition(state_wall_jump, state_jump, to_jump)
 	
 	#ENTER DOWN STATE
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_down, to_down)
+	main_state_machine.add_transition(state_idle, state_down, to_down)
+	main_state_machine.add_transition(state_walk, state_down, to_down)
+	main_state_machine.add_transition(state_run, state_down, to_down)
 	
 	#ENTER DASH STATE
 	main_state_machine.add_transition(state_idle, state_dash, to_dash)
@@ -325,6 +385,12 @@ func _initiate_state_machine():
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
 	
+	#ENTER WALK WALL STATE
+	main_state_machine.add_transition(state_jump, state_walk_wall_left, to_walk_wall_left)
+	
+	#ENTER WALK WALL STATE
+	main_state_machine.add_transition(state_walk_wall_left, state_wall_jump, to_wall_jump)
+	
 	#ENTER RUN STATE
 	main_state_machine.add_transition(state_idle, state_run, to_run)
 	main_state_machine.add_transition(state_walk, state_run, to_run)
@@ -352,10 +418,41 @@ func _state_walk_update(delta:float):
 		main_state_machine.dispatch(to_jump)
 	else:
 		state_changed.emit("walk", velocity)
+
+func _state_walk_wall_left_enter():
+	rotate(PI/2)
+	current_speed = speed * run_multiplier
+	is_on_wall_walk = true
+	up_direction = Vector2.RIGHT
+
+func _state_walk_wall_left_update(delta:float):
+	
+	if not is_on_floor():
+		velocity += Vector2(-get_gravity().y,0) * delta * 5
+	
+	_perform_move_on_wall_left(delta)
+	
+	if int(velocity.y) == 0:
+		state_changed.emit("wall_idle", velocity)
+	else:
+		state_changed.emit("walk_wall_left", velocity)
 		
+func _state_wall_jump_enter():
+	rotate(-PI/2)
+	up_direction = Vector2.UP
+	
+func _state_wall_jump_update(delta):
+	if is_on_wall_walk:
+		_perform_wall_jump()
+		
+	is_on_wall_walk = false
+	
+	if shape_cast_2d_left.is_colliding() == false:
+		main_state_machine.dispatch(to_jump)
+
 func _state_run_enter():
 	current_speed = speed * run_multiplier
-	
+
 func _state_run_update(delta:float):
 	
 	_perform_move_on_floor(delta)

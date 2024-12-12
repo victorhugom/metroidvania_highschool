@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=55 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
@@ -105,7 +105,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_bvivn"]
 resource_name = "attack_01_left"
-length = 0.4
+length = 0.25
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -170,7 +170,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_mn0xa"]
 resource_name = "attack_01_right"
-length = 0.4
+length = 0.25
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -495,7 +495,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_kg4q2"]
 resource_name = "attack_04_left"
-length = 0.4
+length = 0.35
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -560,7 +560,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_y1sjx"]
 resource_name = "attack_04_right"
-length = 0.4
+length = 0.35
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1456,6 +1456,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjida"]
 size = Vector2(19, 5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d16ml"]
+size = Vector2(5, 30)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
 collision_mask = 17920
@@ -1465,7 +1468,6 @@ deceleration = 10
 [node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
 use_parent_material = true
 position = Vector2(0, -46)
-zoom = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true
@@ -1538,3 +1540,18 @@ position = Vector2(20, -44)
 rotation = -0.638866
 shape = SubResource("RectangleShape2D_vjida")
 debug_color = Color(0.922462, 5.14036e-05, 0.687427, 0.42)
+
+[node name="ShapeCast2DLeft" type="ShapeCast2D" parent="."]
+position = Vector2(-8, -28)
+shape = SubResource("RectangleShape2D_d16ml")
+target_position = Vector2(-4, 0)
+collision_mask = 32768
+collide_with_areas = true
+
+[node name="ShapeCast2DRight" type="ShapeCast2D" parent="."]
+position = Vector2(8, -28)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_d16ml")
+target_position = Vector2(-4, 1.90735e-06)
+collision_mask = 32768
+collide_with_areas = true
