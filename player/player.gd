@@ -14,7 +14,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 ## The base speed
 @export var speed: float = 64
 ## The max height that the player can jump
-@export var jump_height: int = 64
+@export var jump_height: int = 96
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
 @export var jump_buffer_time: float = 0.1 # Buffer time in seconds
 @export var max_jumps: int = 2
@@ -56,6 +56,9 @@ var current_time_duplication: float = 0
 var duplication_time: float = .020
 var duplcation_lifetime: float = .2
 
+var collision_down_timeout = 0
+var collision_down_duration = .1
+
 # state machine
 var main_state_machine: LimboHSM
 var to_idle: StringName = &"state_ended"
@@ -83,7 +86,7 @@ func _input(event: InputEvent) -> void:
 			DebugUI.ON = not DebugUI.ON
 	if event.is_action_pressed("player_run"):
 		main_state_machine.dispatch(to_run)
-	if event.is_action_released("player_run"):
+	if event.is_action_released("player_run") and is_on_floor():
 		main_state_machine.dispatch(to_idle)
 	if Input.is_action_pressed("player_down") and Input.is_action_just_pressed("player_jump"):
 		main_state_machine.dispatch(to_down)
@@ -99,7 +102,6 @@ func _input(event: InputEvent) -> void:
 					jump_buffer = true 
 					current_jump_buffer_timer = jump_buffer_time
 		jump_down_buffer = false
-			
 	if event.is_action_pressed("player_dash") and !is_dashing and dash_cooldown_timer == 0: 
 		main_state_machine.dispatch(to_dash)
 	
@@ -158,26 +160,6 @@ func _physics_process(delta: float) -> void:
 		
 	_handle_jump_buffer(delta)
 	
-	if !is_dashing and !is_attacking:
-		# Get the input direction and handle the movement/deceleration.
-		var direction: float = Input.get_axis("player_left", "player_right")
-		
-		if direction > 0:
-			last_direction = "right"
-		elif direction < 0:
-			last_direction = "left"
-		
-		if velocity.y == 0:
-			if direction:
-				velocity = velocity.lerp(Vector2(direction, 0) * current_speed, acceleration * delta)
-			else:
-				velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)
-		else:
-			if direction:
-				velocity.x = direction * current_speed
-			else:
-				velocity.x = move_toward(velocity.x, 0, current_speed)
-	
 	# Apply gravity
 	_apply_gravity(delta)
 	# Move the character
@@ -229,7 +211,40 @@ func _create_duplication():
 	get_parent().add_child(duplication)
 	await get_tree().create_timer(duplcation_lifetime).timeout
 	duplication.queue_free()
-		
+	
+func _perform_jump():
+	state_changed.emit("jump", velocity)
+	var gravity = get_gravity().y
+	jump_velocity = -sqrt(2 * gravity * jump_height)
+	velocity.y = jump_velocity
+	current_jumps += 1
+	
+func _perform_move_on_floor(delta: float):
+	var direction: float = Input.get_axis("player_left", "player_right")
+	
+	if direction > 0:
+		last_direction = "right"
+	elif direction < 0:
+		last_direction = "left"
+	
+	if direction:
+		velocity = velocity.lerp(Vector2(direction, 0) * current_speed, acceleration * delta)
+	else:
+		velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)	
+
+func _perform_move_on_jump(delta: float):
+	var direction: float = Input.get_axis("player_left", "player_right")
+	
+	if direction > 0:
+		last_direction = "right"
+	elif direction < 0:
+		last_direction = "left"
+	
+	if direction:
+		velocity.x = direction * current_speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+
 func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
 	add_child(main_state_machine)
@@ -322,41 +337,49 @@ func _state_idle_enter():
 	
 func _state_idle_update(_delta:float):
 	state_changed.emit("idle", velocity)
-	if int(velocity.x) != 0:
-		main_state_machine.dispatch(to_walk)
+	main_state_machine.dispatch(to_walk)
 
 func _state_walk_enter():
 	current_speed = speed
-	state_changed.emit("walk", velocity)
 	
-func _state_walk_update(_delta:float):
+func _state_walk_update(delta:float):
+	
+	_perform_move_on_floor(delta)
+	
 	if int(velocity.x) == 0:
 		main_state_machine.dispatch(to_idle)
+	elif velocity.y != 0:
+		main_state_machine.dispatch(to_jump)
 	else:
 		state_changed.emit("walk", velocity)
 		
 func _state_run_enter():
 	current_speed = speed * run_multiplier
 	
-func _state_run_update(_delta:float):
+func _state_run_update(delta:float):
+	
+	_perform_move_on_floor(delta)
+	
 	if int(velocity.x) == 0:
 		main_state_machine.dispatch(to_idle)
+	elif velocity.y != 0:
+		main_state_machine.dispatch(to_jump)
 	else:
 		state_changed.emit("run", velocity)
-	
+
 func _state_jump_enter():
 	if is_on_floor():
 		_perform_jump()
 
-func _state_jump_update(_delta:float):
+func _state_jump_update(delta:float):
 	state_changed.emit("jump", velocity)
 	
 	if is_on_floor():
 		main_state_machine.dispatch(to_idle)
 		current_jumps = 0
+	else:
+		_perform_move_on_jump(delta)
 
-var collision_down_timeout = 0
-var collision_down_duration = .1
 func _state_down_enter():
 	if is_on_floor():
 		# Temporarily disable one-way collision to allow dropping through
@@ -369,13 +392,6 @@ func _state_down_update(delta:float):
 	if collision_down_timeout <= 0:
 		set_collision_mask_value(15, true)
 		main_state_machine.dispatch(to_jump)
-	
-func _perform_jump():
-	state_changed.emit("jump", velocity)
-	var gravity = get_gravity().y
-	jump_velocity = -sqrt(2 * gravity * jump_height)
-	velocity.y = jump_velocity
-	current_jumps += 1
 	
 func _state_prepare_attack_enter():
 	strong_attack_time = 0
