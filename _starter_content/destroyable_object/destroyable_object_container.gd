@@ -27,7 +27,7 @@ func destroy(damager_global_position) -> void:
 	for part in destroyable_object_parts:
 		part.destruction_power = destruction_power
 		part.global_position = global_position
-		part.destroy(damager_global_position)
+		part.destroy.call_deferred(damager_global_position)
 
 func create_parts() -> void:
 	

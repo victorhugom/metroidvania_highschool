@@ -21,17 +21,38 @@ func _process(delta: float) -> void:
 
 func _on_state_changed(state: String, velocity: Vector2):
 	
-	if velocity.x < 0:
-		sprite_2d.flip_h = true
-		player_direction = "left"
-	elif velocity.x > 0:
-		player_direction = "right"
-		sprite_2d.flip_h = false
+	if state == "walk_wall_left":
+		if velocity.y < 0:
+			sprite_2d.flip_h = true
+			player_direction = "left"
+		elif velocity.y > 0:
+			player_direction = "right"
+			sprite_2d.flip_h = false
+	elif state == "walk_wall_right":
+		if velocity.y < 0:
+			sprite_2d.flip_h = false
+			player_direction = "right"
+		elif velocity.y > 0:
+			player_direction = "left"
+			sprite_2d.flip_h = true
+	else:
+		if velocity.x < 0:
+			sprite_2d.flip_h = true
+			player_direction = "left"
+		elif velocity.x > 0:
+			player_direction = "right"
+			sprite_2d.flip_h = false
 
 	if state == "idle":
 		play("idle")
 	elif state == "walk":
 		play("walk")
+	elif state == "walk_wall_left":
+		play("run")
+	elif state == "walk_wall_right":
+		play("run")
+	if state == "wall_idle":
+		play("idle")
 	elif state == "run":
 		play("run")
 	elif state == "dash":
