@@ -12,6 +12,8 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var parry_box: Area2D = $ParryBox
 @onready var shape_cast_2d_left: ShapeCast2D = $ShapeCast2DLeft
 @onready var shape_cast_2d_right: ShapeCast2D = $ShapeCast2DRight
+@onready var ray_cast_2d_foot_left: RayCast2D = $RayCast2DFootLeft
+@onready var ray_cast_2d_foot_right: RayCast2D = $RayCast2DFootRight
 
 ## The base speed
 @export var speed: float = 64
@@ -32,7 +34,8 @@ signal state_changed(current_state: String, velocity: Vector2)
 
 @export var strong_attack_threshold: float = 0.2
 
-var is_on_wall_walk = false
+enum WALL_WALK_DIRECTION {NONE, LEFT, RIGHT}
+var wall_walking_direction = WALL_WALK_DIRECTION.NONE
 var is_dashing = false
 var dash_timer = 0.0
 var dash_cooldown_timer = 0.0
@@ -77,6 +80,7 @@ var to_dash_attack: StringName = &"to_dash_attack"
 var to_throw_attack: StringName = &"to_throw_attack"
 var to_hold_throw_attack: StringName = &"to_hold_throw_attack"
 var to_walk_wall_left: StringName = &"to_walk_wall_left"
+var to_walk_wall_right: StringName = &"to_walk_wall_right"
 var to_wall_jump: StringName = &"to_wall_jump"
 
 func  _ready() -> void:
@@ -96,7 +100,7 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_down)
 		jump_down_buffer = true
 	if event.is_action_pressed("player_jump"):
-		if is_on_wall_walk:
+		if wall_walking_direction != WALL_WALK_DIRECTION.NONE:
 			main_state_machine.dispatch(to_wall_jump)
 		elif not jump_down_buffer:
 			if is_on_floor():
@@ -157,12 +161,11 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	if shape_cast_2d_left.is_colliding():
+	if shape_cast_2d_left.is_colliding() and wall_walking_direction == WALL_WALK_DIRECTION.NONE:
 		main_state_machine.dispatch(to_walk_wall_left)
+	elif shape_cast_2d_right.is_colliding() and wall_walking_direction == WALL_WALK_DIRECTION.NONE:
+		main_state_machine.dispatch(to_walk_wall_right)
 		
-	if shape_cast_2d_right.is_colliding():
-		print_debug("wall_right")
-	
 	if _can_move() == false and is_on_floor():
 		velocity.x = 0
 		
@@ -233,11 +236,15 @@ func _perform_jump():
 	velocity.y = jump_velocity
 	current_jumps += 1
 	
-func _perform_wall_jump():
+func _perform_wall_jump(direction: WALL_WALK_DIRECTION):
 	state_changed.emit("jump", velocity)
 	var gravity = get_gravity().y
 	jump_velocity = -sqrt(2 * gravity * jump_height)
-	velocity = Vector2(current_speed * 2, jump_velocity)
+	
+	if direction == WALL_WALK_DIRECTION.LEFT:
+		velocity = Vector2(-jump_velocity/2, jump_velocity)
+	elif  direction == WALL_WALK_DIRECTION.RIGHT:
+		velocity = Vector2(jump_velocity/2, jump_velocity)
 	current_jumps = 1
 	
 func _perform_move_on_floor(delta: float):
@@ -253,6 +260,22 @@ func _perform_move_on_floor(delta: float):
 	else:
 		velocity = velocity.lerp(Vector2(direction, 0) * current_speed, deceleration * delta)	
 
+func _perform_move_on_wall_right(delta: float):
+	
+	var direction: float = Input.get_axis("player_up", "player_down")
+	
+	if direction > 0:
+		last_direction = "left"
+	elif direction < 0:
+		last_direction = "right"
+	
+	if direction > 0 and ray_cast_2d_foot_left.is_colliding():
+		velocity = velocity.lerp(Vector2(0, direction) * current_speed, acceleration * delta)
+	elif direction < 0 and ray_cast_2d_foot_right.is_colliding():
+		velocity = velocity.lerp(Vector2(0, direction) * current_speed, deceleration * delta)	
+	else:
+		velocity.y = 0
+		
 func _perform_move_on_wall_left(delta: float):
 	
 	var direction: float = Input.get_axis("player_up", "player_down")
@@ -260,13 +283,15 @@ func _perform_move_on_wall_left(delta: float):
 	if direction > 0:
 		last_direction = "left"
 	elif direction < 0:
-		last_direction = "left"
+		last_direction = "right"
 	
-	if direction:
+	if direction > 0 and ray_cast_2d_foot_right.is_colliding():
 		velocity = velocity.lerp(Vector2(0, direction) * current_speed, acceleration * delta)
-	else:
+	elif direction < 0 and ray_cast_2d_foot_left.is_colliding():
 		velocity = velocity.lerp(Vector2(0, direction) * current_speed, deceleration * delta)	
-
+	else:
+		velocity.y = 0
+	
 func _perform_move_on_jump(_delta: float):
 	var direction: float = Input.get_axis("player_left", "player_right")
 	
@@ -287,6 +312,7 @@ func _initiate_state_machine():
 	var state_idle: LimboState = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
 	var state_walk: LimboState = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
 	var state_walk_wall_left: LimboState = LimboState.new().named("walk_wall_left").call_on_enter(_state_walk_wall_left_enter).call_on_update(_state_walk_wall_left_update)
+	var state_walk_wall_right: LimboState = LimboState.new().named("walk_wall_right").call_on_enter(_state_walk_wall_right_enter).call_on_update(_state_walk_wall_right_update)
 	var state_wall_jump: LimboState = LimboState.new().named("wall_jump").call_on_enter(_state_wall_jump_enter).call_on_update(_state_wall_jump_update)
 	var state_run: LimboState = LimboState.new().named("run").call_on_enter(_state_run_enter).call_on_update(_state_run_update)
 	var state_jump: LimboState = LimboState.new().named("jump").call_on_enter(_state_jump_enter).call_on_update(_state_jump_update)
@@ -303,6 +329,7 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
 	main_state_machine.add_child(state_walk_wall_left)
+	main_state_machine.add_child(state_walk_wall_right)
 	main_state_machine.add_child(state_wall_jump)
 	main_state_machine.add_child(state_run)
 	main_state_machine.add_child(state_jump)
@@ -341,6 +368,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_dash_attack, state_jump, to_jump)
 	main_state_machine.add_transition(state_attack, state_jump, to_jump)
 	main_state_machine.add_transition(state_walk_wall_left, state_jump, to_jump)
+	main_state_machine.add_transition(state_walk_wall_right, state_jump, to_jump)
 	main_state_machine.add_transition(state_wall_jump, state_jump, to_jump)
 	
 	#ENTER DOWN STATE
@@ -387,9 +415,14 @@ func _initiate_state_machine():
 	
 	#ENTER WALK WALL STATE
 	main_state_machine.add_transition(state_jump, state_walk_wall_left, to_walk_wall_left)
+	main_state_machine.add_transition(state_walk_wall_right, state_walk_wall_left, to_walk_wall_left)
 	
-	#ENTER WALK WALL STATE
+	main_state_machine.add_transition(state_jump, state_walk_wall_right, to_walk_wall_right)
+	main_state_machine.add_transition(state_walk_wall_left, state_walk_wall_right, to_walk_wall_right)
+	
+	#ENTER WALL JUMP STATE
 	main_state_machine.add_transition(state_walk_wall_left, state_wall_jump, to_wall_jump)
+	main_state_machine.add_transition(state_walk_wall_right, state_wall_jump, to_wall_jump)
 	
 	#ENTER RUN STATE
 	main_state_machine.add_transition(state_idle, state_run, to_run)
@@ -422,7 +455,7 @@ func _state_walk_update(delta:float):
 func _state_walk_wall_left_enter():
 	rotate(PI/2)
 	current_speed = speed * run_multiplier
-	is_on_wall_walk = true
+	wall_walking_direction = WALL_WALK_DIRECTION.LEFT
 	up_direction = Vector2.RIGHT
 
 func _state_walk_wall_left_update(delta:float):
@@ -437,19 +470,43 @@ func _state_walk_wall_left_update(delta:float):
 	else:
 		state_changed.emit("walk_wall_left", velocity)
 		
-func _state_wall_jump_enter():
+func _state_walk_wall_right_enter():
 	rotate(-PI/2)
+	current_speed = speed * run_multiplier
+	wall_walking_direction = WALL_WALK_DIRECTION.RIGHT
+	up_direction = Vector2.LEFT
+
+func _state_walk_wall_right_update(delta:float):
+	
+	if not is_on_floor():
+		velocity += Vector2(get_gravity().y,0) * delta * 5
+	
+	_perform_move_on_wall_right(delta)
+	
+	if int(velocity.y) == 0:
+		state_changed.emit("wall_idle", velocity)
+	else:
+		state_changed.emit("walk_wall_right", velocity)
+		
+func _state_wall_jump_enter():
+	if up_direction == Vector2.LEFT:
+		rotate(PI/2)
+	elif up_direction == Vector2.RIGHT:
+		rotate(-PI/2)
+		
 	up_direction = Vector2.UP
 	
-func _state_wall_jump_update(delta):
-	if is_on_wall_walk:
-		_perform_wall_jump()
-		
-	is_on_wall_walk = false
+func _state_wall_jump_update(_delta):
+	if wall_walking_direction != WALL_WALK_DIRECTION.NONE:
+		_perform_wall_jump(wall_walking_direction)
 	
-	if shape_cast_2d_left.is_colliding() == false:
+	if wall_walking_direction == WALL_WALK_DIRECTION.LEFT and shape_cast_2d_left.is_colliding() == false:
 		main_state_machine.dispatch(to_jump)
-
+		wall_walking_direction = WALL_WALK_DIRECTION.NONE
+	if wall_walking_direction == WALL_WALK_DIRECTION.RIGHT and shape_cast_2d_right.is_colliding() == false:
+		main_state_machine.dispatch(to_jump)
+		wall_walking_direction = WALL_WALK_DIRECTION.NONE
+	
 func _state_run_enter():
 	current_speed = speed * run_multiplier
 

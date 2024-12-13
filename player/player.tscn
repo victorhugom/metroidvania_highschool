@@ -1457,7 +1457,7 @@ _data = {
 size = Vector2(19, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d16ml"]
-size = Vector2(5, 30)
+size = Vector2(5, 10)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
@@ -1542,16 +1542,28 @@ shape = SubResource("RectangleShape2D_vjida")
 debug_color = Color(0.922462, 5.14036e-05, 0.687427, 0.42)
 
 [node name="ShapeCast2DLeft" type="ShapeCast2D" parent="."]
-position = Vector2(-8, -28)
+position = Vector2(-8, -5)
 shape = SubResource("RectangleShape2D_d16ml")
 target_position = Vector2(-4, 0)
+max_results = 2
 collision_mask = 32768
 collide_with_areas = true
 
 [node name="ShapeCast2DRight" type="ShapeCast2D" parent="."]
-position = Vector2(8, -28)
+position = Vector2(8, -5)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_d16ml")
 target_position = Vector2(-4, 1.90735e-06)
+max_results = 2
+collision_mask = 32768
+collide_with_areas = true
+
+[node name="RayCast2DFootLeft" type="RayCast2D" parent="."]
+position = Vector2(-12, -19)
+collision_mask = 32768
+collide_with_areas = true
+
+[node name="RayCast2DFootRight" type="RayCast2D" parent="."]
+position = Vector2(12, -18)
 collision_mask = 32768
 collide_with_areas = true
