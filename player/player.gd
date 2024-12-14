@@ -89,6 +89,8 @@ func  _ready() -> void:
 	_initiate_state_machine()
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("player_left") or event.is_action_pressed("player_right"):
+		main_state_machine.dispatch(to_walk)
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_F1:
 			DebugUI.ON = not DebugUI.ON
@@ -436,7 +438,8 @@ func _state_idle_enter():
 	
 func _state_idle_update(_delta:float):
 	state_changed.emit("idle", velocity)
-	main_state_machine.dispatch(to_walk)
+	if velocity.x != 0:
+		main_state_machine.dispatch(to_walk)
 
 func _state_walk_enter():
 	current_speed = speed
