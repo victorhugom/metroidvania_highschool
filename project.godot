@@ -43,8 +43,9 @@ folder_colors={
 "res://gui/": "green",
 "res://interactables/": "teal",
 "res://levels/": "blue",
-"res://player/": "purple",
-"res://props/": "pink",
+"res://player/": "blue",
+"res://props/": "purple",
+"res://shaders/": "pink",
 "res://utils/": "red"
 }
 

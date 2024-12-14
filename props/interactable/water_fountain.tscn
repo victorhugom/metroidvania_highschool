@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://cnpg6uxbisclk"]
+
+[ext_resource type="Texture2D" uid="uid://b2iosw57atcpk" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Deco/17.png" id="1_8kbbp"]
+[ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="1_hxxdk"]
+[ext_resource type="Script" path="res://props/interactable/water_fountain.gd" id="2_un8cn"]
+[ext_resource type="Texture2D" uid="uid://co2dgkqhh8iea" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Deco/16.png" id="3_ho6wg"]
+
+[sub_resource type="Animation" id="Animation_chp63"]
+resource_name = "state_a"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_8kbbp")]
+}
+
+[sub_resource type="Animation" id="Animation_mmapx"]
+resource_name = "state_b"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ho6wg")]
+}
+
+[sub_resource type="Animation" id="Animation_ojvvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_8kbbp")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yl5ge"]
+_data = {
+"RESET": SubResource("Animation_ojvvo"),
+"state_a": SubResource("Animation_chp63"),
+"state_b": SubResource("Animation_mmapx")
+}
+
+[node name="WaterFountain" type="Node2D"]
+script = ExtResource("2_un8cn")
+
+[node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("1_hxxdk")]
+texture = ExtResource("1_8kbbp")
+animation_player = NodePath("../AnimationPlayer")
+interact_message_a = "Beber"
+interact_message_b = "Vazio"
+cannot_interact_message = "Vazio"
+collision_layers = 256
+collision_masks = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yl5ge")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="interact" from="InteractableSwitch" to="." method="_on_interactable_switch_interact"]

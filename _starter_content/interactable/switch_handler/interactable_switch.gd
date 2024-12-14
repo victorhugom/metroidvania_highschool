@@ -102,13 +102,14 @@ func _ready() -> void:
 	
 	update_collision_side()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint(): 
 		update_collision_offset()
 		update_collision_side()
 
 func _on_interactable_interacted(body: Node2D) -> void:
 	
+	# switch interact message and state
 	if current_state == "state_a":
 		current_state = "state_b"
 		interactable.interact_message = interact_message_b
@@ -116,9 +117,47 @@ func _on_interactable_interacted(body: Node2D) -> void:
 		current_state = "state_a"
 		interactable.interact_message = interact_message_a
 
+	#get audio stream and switch
 	var audio_stream = audio_stream_a if current_state == "state_b" else audio_stream_b
 	if audio_stream != null:
 		interactable.audio_stream = audio_stream
 	
+	#play animation
 	animation_player.play(current_state)
 	interact.emit(body)
+	
+func go_to_sate_a():
+	
+	if current_state == "state_a":
+		return
+	
+	# switch state
+	current_state = "state_a"
+	# switch interact message
+	interactable.interact_message = interact_message_a
+		
+	#switch audio stream 
+	var audio_stream = audio_stream_a
+	if audio_stream != null:
+		interactable.audio_stream = audio_stream
+	
+	#play animation
+	animation_player.play(current_state)
+	
+func go_to_sate_b():
+	
+	if current_state == "state_b":
+		return
+	
+	# switch state
+	current_state = "state_b"
+	# switch interact message
+	interactable.interact_message = interact_message_b
+		
+	#switch audio stream 
+	var audio_stream = audio_stream_b
+	if audio_stream != null:
+		interactable.audio_stream = audio_stream
+	
+	#play animation
+	animation_player.play(current_state)

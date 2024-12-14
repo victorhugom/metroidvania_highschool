@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=33 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_46mbl"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="15_evvxg"]
 [ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="16_wv7is"]
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="17_qhx4q"]
+[ext_resource type="PackedScene" uid="uid://cnpg6uxbisclk" path="res://props/interactable/water_fountain.tscn" id="19_gfqt7"]
 [ext_resource type="PackedScene" uid="uid://doigv8t3fi1pg" path="res://enemies/base_enemy.tscn" id="20_s51ef"]
 
 [sub_resource type="Gradient" id="Gradient_3mdix"]
@@ -66,7 +67,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kv5u2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3ih7"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
@@ -180,12 +181,12 @@ tile_map_data = PackedByteArray("AAAAAAcAAAAIAAMAAAABAAcAAAAKAAAAAAACAAcAAAAKAAA
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_kv5u2")
+material = SubResource("ShaderMaterial_o3ih7")
 use_parent_material = false
 position = Vector2(139, 207)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_t48cf")]
-position = Vector2(42, 193)
+position = Vector2(61, 192)
 scale = Vector2(1.5, 1.8)
 texture_full = ExtResource("13_ylm2u")
 texture_broken = ExtResource("17_qhx4q")
@@ -211,3 +212,7 @@ collision_layer = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceDriver2"]
 position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_oessi")
+
+[node name="WaterFountain" parent="." instance=ExtResource("19_gfqt7")]
+z_index = -1
+position = Vector2(282, 177)

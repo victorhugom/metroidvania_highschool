@@ -1469,6 +1469,8 @@ deceleration = 10
 use_parent_material = true
 position = Vector2(0, -46)
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true

@@ -41,8 +41,27 @@ func increase_health(value: int = 1) -> bool:
 		return false
 	
 	current_health += value
+	if current_health > max_health: current_health = max_health
+	
 	health_changed.emit(current_health)
 	print_rich("[color=green][b] Health: Increase Health by: [/b][/color]: %s current health: %s" %[value, current_health])
+	
+	if current_health == max_health:
+		health_full.emit()
+	
+	return true
+	
+## Set health to max health
+func reset_health() -> bool:
+	
+	if current_health >= max_health: 
+		print_rich("[color=red][b] Health: Try increased Health: Max health [/b][/color]")
+		health_full.emit()
+		return false
+	
+	current_health = max_health
+	health_changed.emit(current_health)
+	print_rich("[color=green][b] Health: Health Full: [/b][/color]: current health: %s" %current_health)
 	
 	if current_health == max_health:
 		health_full.emit()

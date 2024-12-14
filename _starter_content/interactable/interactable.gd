@@ -4,7 +4,7 @@ signal interact(body: Node2D)
 signal begin_focus(body: Node2D)
 signal end_focus(body: Node2D)
 
-const INTERACTION_UI = preload("res://starter_content/interactable/ui/interaction_ui.tscn")
+const INTERACTION_UI = preload("res://_starter_content/interactable/ui/interaction_ui.tscn")
 
 @export var interact_message:= "Interagir":
 	set(value):
