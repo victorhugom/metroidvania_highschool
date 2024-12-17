@@ -5,9 +5,10 @@ const THROWABLE = preload("res://weapons/throwable.tscn")
 signal state_changed(current_state: String, velocity: Vector2)
 
 @onready var health: Health = $Health
+@onready var hurt_box: HurtBox = $HurtBox
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var attack_box: AttackBox = $AttackBox
+@onready var animation_player_being_hit: AnimationPlayer = $AnimationPlayerBeingHit
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
 @onready var parry_box: Area2D = $ParryBox
 @onready var shape_cast_2d_left: ShapeCast2D = $ShapeCast2DLeft
@@ -85,7 +86,10 @@ var to_wall_jump: StringName = &"to_wall_jump"
 
 func  _ready() -> void:
 	current_speed = speed
+	
 	animation_player.animation_finished.connect(_on_animation_finished)
+	hurt_box.damaged.connect(_on_hurt_box_damaged)
+	
 	_initiate_state_machine()
 
 func _input(event: InputEvent) -> void:
@@ -306,6 +310,24 @@ func _perform_move_on_jump(_delta: float):
 		velocity.x = direction * current_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
+
+
+func _on_hurt_box_damaged(_damage: int, area: Area2D):
+	
+	var damager_position = area.global_position
+	var move_direction = (damager_position - global_position).normalized()
+	
+	if last_direction == "right":
+		velocity = Vector2(1, 0)
+		global_position.x -= 10
+	else:
+		global_position.x += 10
+		velocity = Vector2(-1, 0)
+		
+	if !animation_player_being_hit.is_playing():
+		animation_player_being_hit.play("hit")
+
+#region STATE MACHINE
 
 func _initiate_state_machine():
 	main_state_machine = LimboHSM.new()
@@ -561,9 +583,6 @@ func _state_prepare_attack_update(delta: float):
 func _state_attack_enter():
 	if is_attacking:
 		return
-
-	attack_box.monitorable = true
-	attack_box.monitoring = true
 	is_attacking = true
 	state_changed.emit("attack", velocity)
 	
@@ -575,16 +594,12 @@ func _state_attack_update(_delta:float):
 			main_state_machine.dispatch(to_jump)
 
 func _state_attack_exit():
-	attack_box.monitorable = false
-	attack_box.monitoring = false
 	is_attacking = false
 	
 func _state_strong_attack_enter():
 	if is_attacking:
 		return
 
-	attack_box.monitorable = true
-	attack_box.monitoring = true
 	is_attacking = true
 	state_changed.emit("strong_attack", velocity)
 	
@@ -596,8 +611,6 @@ func _state_strong_attack_update(_delta: float):
 			main_state_machine.dispatch(to_jump)
 	
 func _state_strong_attack_exit():
-	attack_box.monitorable = false
-	attack_box.monitoring = false
 	is_attacking = false
 
 func _state_parry_enter():
@@ -678,3 +691,4 @@ func _state_dash_attack_update(_delta:float):
 	if animation_player.current_animation != "dash_attack":
 		is_dashing = false
 		main_state_machine.dispatch(to_idle)
+#endregion

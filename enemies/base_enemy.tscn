@@ -106,7 +106,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_bvivn"]
 resource_name = "attack_01_left"
-length = 0.4
+length = 0.25
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -168,10 +168,27 @@ tracks/4/keys = {
 "update": 0,
 "values": [-0.595157, 3.39467, -3.03687]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_mn0xa"]
 resource_name = "attack_01_right"
-length = 0.4
+length = 0.25
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -233,10 +250,27 @@ tracks/4/keys = {
 "update": 0,
 "values": [3.75071, -0.357792, -3.03687]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_23fob"]
 resource_name = "attack_02_left"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -269,7 +303,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 4, 5]
@@ -281,7 +315,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-3, -35), Vector2(-39, -31), Vector2(-37, -5), Vector2(-37, -5), Vector2(8, -38)]
@@ -293,15 +327,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0903213, -2.26369, -3.75246, -3.75246, -0.954695]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_tttg1"]
 resource_name = "attack_02_right"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -334,7 +385,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 4, 5]
@@ -346,7 +397,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-15, -33), Vector2(22, -25), Vector2(18, -7), Vector2(18, -7), Vector2(-23, -34)]
@@ -358,15 +409,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0903213, -0.23911, 0.872665, 0.872665, -1.92684]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_hvp7w"]
 resource_name = "attack_03_left"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -399,7 +467,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 7, 8]
@@ -411,7 +479,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(7, -37), Vector2(-39, -31), Vector2(-39, -31), Vector2(-24, -32)]
@@ -423,15 +491,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-1.19031, -2.26369, -2.26369, -1.60919]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v71oi"]
 resource_name = "attack_03_right"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -464,7 +549,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 7, 8]
@@ -476,7 +561,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-24, -36), Vector2(22, -31), Vector2(22, -31), Vector2(4, -32)]
@@ -488,15 +573,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.95295, -1.0472, -1.0472, -1.61342]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_kg4q2"]
 resource_name = "attack_04_left"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -529,7 +631,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [9, 10, 10, 11]
@@ -541,7 +643,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-10, -11), Vector2(-33, -18), Vector2(-34, -20), Vector2(-34, -20), Vector2(-24, -8)]
@@ -553,15 +655,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [-4.72712, 0.141372, -2.99997, -2.99997, -4.84678]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_y1sjx"]
 resource_name = "attack_04_right"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -594,7 +713,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [9, 10, 10, 11]
@@ -606,7 +725,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-10, -11), Vector2(15, -21), Vector2(15, -21), Vector2(6, -5)]
@@ -618,15 +737,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-1.71217, 0.0244346, 0.0244346, 1.69122]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_a7e6n"]
 resource_name = "attack_05_left"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -659,7 +795,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 14, 14, 15]
@@ -671,7 +807,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-2, -35), Vector2(-42, -23), Vector2(-43, 2), Vector2(-42, 2), Vector2(-26, -25)]
@@ -683,15 +819,32 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.95295, -3.25155, 0.0, 0.0, 0.774926]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_c0v0c"]
 resource_name = "attack_05_right"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -724,7 +877,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 14, 14, 15]
@@ -736,7 +889,7 @@ tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-2, -35), Vector2(-42, -23), Vector2(-43, 2), Vector2(-42, 2)]
@@ -748,10 +901,27 @@ tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.95295, -3.25155, 0.0, 0.0]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_f4ns3"]
@@ -1501,8 +1671,6 @@ _data = {
 "walk": SubResource("Animation_jshpw")
 }
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_qe8r2"]
-
 [sub_resource type="Animation" id="Animation_w0nk5"]
 length = 0.001
 tracks/0/type = "value"
@@ -1539,6 +1707,8 @@ _data = {
 "RESET": SubResource("Animation_w0nk5"),
 "hit": SubResource("Animation_40u1p")
 }
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qe8r2"]
 
 [node name="BaseEnemy" type="CharacterBody2D"]
 collision_layer = 16
@@ -1598,14 +1768,14 @@ libraries = {
 "": SubResource("AnimationLibrary_rtulq")
 }
 
-[node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("7_2lvw2")
-blackboard_plan = SubResource("BlackboardPlan_qe8r2")
-
 [node name="AnimationPlayerBeingHit" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_8lkxp")
 }
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("7_2lvw2")
+blackboard_plan = SubResource("BlackboardPlan_qe8r2")
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
 position = Vector2(-13, 0)
@@ -1632,7 +1802,5 @@ autostart = true
 destruction_power = Vector2(4, 1)
 texture_pieces = Array[Texture2D]([ExtResource("10_ayd7k"), ExtResource("11_neff7"), ExtResource("12_qxe2a"), ExtResource("13_glohs")])
 
-[connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
-[connection signal="hurtbox_area_entered" from="HurtBox" to="." method="_on_hurt_box_hurtbox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayerBeingHit" to="." method="_on_animation_player_being_hit_animation_finished"]
 [connection signal="timeout" from="EyeSightTimer" to="." method="check_for_player"]

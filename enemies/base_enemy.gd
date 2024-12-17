@@ -6,7 +6,6 @@ const DESTROYABLE_OBJECT_CONTAINER = preload("res://_starter_content/destroyable
 @onready var animation_player_being_hit: AnimationPlayer = $AnimationPlayerBeingHit
 @onready var health: Health = $Health
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var attack_box: AttackBox = $AttackBox
 @onready var destroyable_object_container: DestroyableObjectContainer = $DestroyableObjectContainer
 
 @onready var ray_cast_2d_eyes: RayCast2D = $RayCast2DEyes
@@ -33,9 +32,10 @@ var is_being_hit = false
 
 func _ready():
 	origin_position = global_position
+	
 	animation_player.animation_finished.connect(_on_animation_finished)
 	health.health_empty.connect(_on_health_empty)
-	hurt_box.area_entered.connect(_on_hurt_box_area_entered)
+	hurt_box.damaged.connect(_on_hurt_box_damaged)
 
 func _physics_process(delta: float) -> void:
 	
@@ -94,24 +94,13 @@ func move(target_position) -> void:
 func swing_bat():
 	animation_player.play("attack_01_%s" %direction)
 	is_attacking = true
-	attack_on()
 	
 func combo_attack(attack = 1):
-	attack_on()
 	animation_player.play("attack_0%s_%s" %[attack, direction])
 	is_attacking = true
 	is_combo_attack = true
 	
-func attack_off():
-	is_attacking = false
-	attack_box.monitoring = false
-	attack_box.monitorable = false
 	
-func attack_on():
-	is_attacking = true
-	attack_box.monitoring = true
-	attack_box.monitorable = true
-		
 func stop() -> void:
 	velocity = Vector2.ZERO
 
@@ -131,21 +120,18 @@ func check_for_player():
 		
 func _on_animation_finished(anim_name:String):
 	if anim_name.begins_with("attack_01"):
-		attack_off()
 		if is_combo_attack:
 			combo_attack(2)
+		else:
+			is_attacking = false	
 	if anim_name.begins_with("attack_02"):
-		attack_off()
 		combo_attack(3)
 	if anim_name.begins_with("attack_03"):
-		attack_off()
+		is_attacking = false
 
 func _on_animation_player_being_hit_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hit":
 		is_being_hit = false
-
-func _on_hurt_box_area_entered(area: Area2D):
-	damager_position = area.global_position
 
 func _on_health_empty():
 	
@@ -155,10 +141,14 @@ func _on_health_empty():
 func set_as_is_dying():
 	visible = false
 	is_dying = true
+
+func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	
-func _on_hurt_box_hurtbox_area_entered(area: Area2D) -> void:
-	var target_position = area.global_position
-	var move_direction = (target_position - global_position).normalized()
+	is_being_hit = true
+	
+	damager_position = area.global_position
+	var move_direction = (damager_position - global_position).normalized()
+	
 	if move_direction.x > 0 and ray_cast_2d_left.is_colliding():
 		velocity = Vector2(1, 0)
 		global_position.x -= 10
@@ -168,11 +158,10 @@ func _on_hurt_box_hurtbox_area_entered(area: Area2D) -> void:
 		
 	player_in_sight = area.get_parent()
 	loose_sight_timeout = sight_time
-
-func _on_hurt_box_damaged(_damage: int) -> void:
-	is_being_hit = true
+	
 	animation_player_being_hit.play("hit")
-		
+
+	
 func _exit_tree() -> void:
 	destroyable_object_container.visible = true
 	

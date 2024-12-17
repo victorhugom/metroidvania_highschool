@@ -1,7 +1,6 @@
 @tool
 class_name DestroyableObject extends Node2D
 
-signal damaged(damage:int)
 signal destroyed()
 
 @onready var destroyable_object_container: DestroyableObjectContainer = $DestroyableObjectContainer
@@ -17,8 +16,6 @@ signal destroyed()
 @export var texture_full: Texture2D
 @export var texture_broken: Texture2D
 @export var texture_pieces: Array[Texture2D] = []
-
-var damager: Node2D
 
 func _set(property: StringName, value: Variant) -> bool:
 	if property == "collision_offset":
@@ -62,9 +59,6 @@ func _ready() -> void:
 	health.max_health = 1
 	health.health_empty.connect(destroy)
 	
-	hurt_box.damaged.connect(_on_damaged)
-	hurt_box.hurtbox_area_entered.connect(_on_hurtbox_area_entered)
-	
 	destroyable_object_container.texture = texture_full
 	destroyable_object_container.texture_broken = texture_broken
 	destroyable_object_container.texture_pieces = texture_pieces
@@ -75,11 +69,5 @@ func destroy():
 	hurt_box.set_deferred("monitoring", false)
 	hurt_box.set_deferred("monitorable", false)
 	
-	destroyable_object_container.destroy(damager.global_position)
+	destroyable_object_container.destroy(global_position)
 	destroyed.emit()
-	
-func _on_hurtbox_area_entered(area: Area2D):
-	damager = area
-	
-func _on_damaged(damage):
-	damaged.emit(damage)
