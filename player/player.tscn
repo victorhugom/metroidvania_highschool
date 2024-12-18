@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=67 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
@@ -21,7 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://ddigq8hwt2ga8" path="res://assets/player/amenine/throw.png" id="16_1l4ej"]
 [ext_resource type="Texture2D" uid="uid://c33r8cfk4d3hg" path="res://assets/player/amenine/on_edge.png" id="17_1qj64"]
 [ext_resource type="Texture2D" uid="uid://bvfl3d1lsti17" path="res://assets/player/amenine/dash.png" id="18_vjboh"]
+[ext_resource type="Texture2D" uid="uid://bv3k8grmqbq4p" path="res://assets/player/amenine/walk_down.png" id="19_67ud0"]
+[ext_resource type="Texture2D" uid="uid://bp82yxyhb3me6" path="res://assets/player/amenine/wall_idle_withtransition.png" id="19_lhqhs"]
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="19_mhu11"]
+[ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 6.0
@@ -1733,11 +1736,8 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Resource" id="Resource_07cde"]
-metadata/__load_path__ = "res://assets/player/amenine/walk_down.png"
-
 [sub_resource type="Animation" id="Animation_3jbae"]
-resource_name = "walk_down"
+resource_name = "wall_down"
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -1750,7 +1750,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("Resource_07cde")]
+"values": [ExtResource("19_67ud0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1776,29 +1776,9 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-
-[sub_resource type="Animation" id="Animation_rjef2"]
-resource_name = "walk_idle"
-length = 0.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="Resource" id="Resource_53x3i"]
-metadata/__load_path__ = "res://assets/player/amenine/walk_up.png"
 
 [sub_resource type="Animation" id="Animation_0pv5n"]
-resource_name = "walk_up"
+resource_name = "wall_up"
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -1811,7 +1791,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("Resource_53x3i")]
+"values": [ExtResource("20_gfp2y")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1838,12 +1818,10 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Resource" id="Resource_00kk4"]
-metadata/__load_path__ = "res://assets/player/amenine/wall_idle_withtransition.png"
-
-[sub_resource type="Animation" id="Animation_5xbc6"]
-resource_name = "wall_idle_transition"
-length = 0.3
+[sub_resource type="Animation" id="Animation_pq871"]
+resource_name = "wall_idle"
+length = 0.2
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1855,7 +1833,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("Resource_00kk4")]
+"values": [ExtResource("19_lhqhs")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1876,10 +1854,92 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_chsrf"]
+resource_name = "wall_idle_start"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_lhqhs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_rr1dr"]
+resource_name = "wall_idle_end"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_lhqhs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtulq"]
@@ -1910,10 +1970,11 @@ _data = {
 "throw": SubResource("Animation_3ewcp"),
 "up": SubResource("Animation_f7exj"),
 "walk": SubResource("Animation_jshpw"),
-"walk_down": SubResource("Animation_3jbae"),
-"walk_idle": SubResource("Animation_rjef2"),
-"walk_up": SubResource("Animation_0pv5n"),
-"wall_idle_transition": SubResource("Animation_5xbc6")
+"wall_down": SubResource("Animation_3jbae"),
+"wall_idle": SubResource("Animation_pq871"),
+"wall_idle_end": SubResource("Animation_rr1dr"),
+"wall_idle_start": SubResource("Animation_chsrf"),
+"wall_up": SubResource("Animation_0pv5n")
 }
 
 [sub_resource type="Animation" id="Animation_w0nk5"]
