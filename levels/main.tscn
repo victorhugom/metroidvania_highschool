@@ -69,7 +69,7 @@ colors = PackedColorArray(0.0729509, 0.059947, 0.214424, 1, 0.591234, 0.16781, 0
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_abvkv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f15aw"]
 resource_local_to_scene = true
 shader = ExtResource("10_ugbvm")
 shader_parameter/lerper = null
@@ -200,7 +200,7 @@ position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_sw7rk")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_abvkv")
+material = SubResource("ShaderMaterial_f15aw")
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]
