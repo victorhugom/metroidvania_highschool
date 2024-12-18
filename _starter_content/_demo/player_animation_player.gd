@@ -6,6 +6,7 @@ extends AnimationPlayer
 var combo_index:= 1
 var combo_timeout: float = 0
 var player_direction:="right"
+var previous_state: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,20 +22,18 @@ func _process(delta: float) -> void:
 
 func _on_state_changed(state: String, velocity: Vector2):
 	
-	if state == "walk_wall_left":
+	if state == "walk_wall_right":
+		sprite_2d.flip_h = false
 		if velocity.y < 0:
-			sprite_2d.flip_h = true
-			player_direction = "left"
+			player_direction = "up"
 		elif velocity.y > 0:
-			player_direction = "right"
-			sprite_2d.flip_h = false
-	elif state == "walk_wall_right":
+			player_direction = "down"
+	elif state == "walk_wall_left":
+		sprite_2d.flip_h = true
 		if velocity.y < 0:
-			sprite_2d.flip_h = false
-			player_direction = "right"
+			player_direction = "up"
 		elif velocity.y > 0:
-			player_direction = "left"
-			sprite_2d.flip_h = true
+			player_direction = "down"
 	else:
 		if velocity.x < 0:
 			sprite_2d.flip_h = true
@@ -48,11 +47,17 @@ func _on_state_changed(state: String, velocity: Vector2):
 	elif state == "walk":
 		play("walk")
 	elif state == "walk_wall_left":
-		play("run")
+		if previous_state != state:
+			play("wall_idle_end")
+			queue("wall_" + player_direction)
 	elif state == "walk_wall_right":
-		play("run")
+		if previous_state != state:
+			play("wall_idle_end")
+			queue("wall_" + player_direction)
 	if state == "wall_idle":
-		play("idle")
+		if previous_state != state:
+			play("wall_idle_start")
+			queue("wall_idle")
 	elif state == "run":
 		play("run")
 	elif state == "dash":
@@ -85,3 +90,5 @@ func _on_state_changed(state: String, velocity: Vector2):
 		play("throw")
 	elif state == "parry":
 		play("parry_%s" %player_direction)
+		
+	previous_state = state

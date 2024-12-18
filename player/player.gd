@@ -80,6 +80,7 @@ var to_dash: StringName = &"to_dash"
 var to_dash_attack: StringName = &"to_dash_attack"
 var to_throw_attack: StringName = &"to_throw_attack"
 var to_hold_throw_attack: StringName = &"to_hold_throw_attack"
+var to_wall_idle: StringName = &"to_wall_idle"
 var to_walk_wall_left: StringName = &"to_walk_wall_left"
 var to_walk_wall_right: StringName = &"to_walk_wall_right"
 var to_wall_jump: StringName = &"to_wall_jump"
@@ -344,6 +345,7 @@ func _initiate_state_machine():
 	
 	var state_idle: LimboState = LimboState.new().named("idle").call_on_enter(_state_idle_enter).call_on_update(_state_idle_update)
 	var state_walk: LimboState = LimboState.new().named("walk").call_on_enter(_state_walk_enter).call_on_update(_state_walk_update)
+	var state_wall_idle: LimboState = LimboState.new().named("wall_idle").call_on_enter(_state_wall_idle_enter).call_on_update(_state_wall_idle_update)
 	var state_walk_wall_left: LimboState = LimboState.new().named("walk_wall_left").call_on_enter(_state_walk_wall_left_enter).call_on_update(_state_walk_wall_left_update)
 	var state_walk_wall_right: LimboState = LimboState.new().named("walk_wall_right").call_on_enter(_state_walk_wall_right_enter).call_on_update(_state_walk_wall_right_update)
 	var state_wall_jump: LimboState = LimboState.new().named("wall_jump").call_on_enter(_state_wall_jump_enter).call_on_update(_state_wall_jump_update)
@@ -361,6 +363,7 @@ func _initiate_state_machine():
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
+	main_state_machine.add_child(state_wall_idle)
 	main_state_machine.add_child(state_walk_wall_left)
 	main_state_machine.add_child(state_walk_wall_right)
 	main_state_machine.add_child(state_wall_jump)
@@ -446,14 +449,22 @@ func _initiate_state_machine():
 	#ENTER WALK STATE
 	main_state_machine.add_transition(state_idle, state_walk, to_walk)
 	
+	#ENTER WALL IDLE STATE
+	main_state_machine.add_transition(state_walk_wall_left, state_wall_idle, to_wall_idle)
+	main_state_machine.add_transition(state_walk_wall_right, state_wall_idle, to_wall_idle)
+	main_state_machine.add_transition(state_wall_jump, state_wall_idle, to_wall_idle)
+	
 	#ENTER WALK WALL STATE
+	main_state_machine.add_transition(state_wall_idle, state_walk_wall_left, to_walk_wall_left)
 	main_state_machine.add_transition(state_jump, state_walk_wall_left, to_walk_wall_left)
 	main_state_machine.add_transition(state_walk_wall_right, state_walk_wall_left, to_walk_wall_left)
 	
+	main_state_machine.add_transition(state_wall_idle, state_walk_wall_right, to_walk_wall_right)
 	main_state_machine.add_transition(state_jump, state_walk_wall_right, to_walk_wall_right)
 	main_state_machine.add_transition(state_walk_wall_left, state_walk_wall_right, to_walk_wall_right)
 	
 	#ENTER WALL JUMP STATE
+	main_state_machine.add_transition(state_wall_idle, state_wall_jump, to_wall_jump)
 	main_state_machine.add_transition(state_walk_wall_left, state_wall_jump, to_wall_jump)
 	main_state_machine.add_transition(state_walk_wall_right, state_wall_jump, to_wall_jump)
 	
@@ -485,6 +496,16 @@ func _state_walk_update(delta:float):
 		main_state_machine.dispatch(to_jump)
 	else:
 		state_changed.emit("walk", velocity)
+
+func _state_wall_idle_enter():
+	pass
+
+func _state_wall_idle_update(delta: float):
+	if int(velocity.y) != 0:
+		if up_direction == Vector2.LEFT:
+			state_changed.emit("walk_wall_right", velocity)
+		else:
+			state_changed.emit("walk_wall_left", velocity)
 
 func _state_walk_wall_left_enter():
 	rotate(PI/2)
