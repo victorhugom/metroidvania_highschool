@@ -93,8 +93,6 @@ func  _ready() -> void:
 	_initiate_state_machine()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("player_left") or event.is_action_pressed("player_right"):
-		main_state_machine.dispatch(to_walk)
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_F1:
 			DebugUI.ON = not DebugUI.ON
@@ -141,6 +139,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("player_run"):
 		main_state_machine.dispatch(to_run)
+		
+	if Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right"):
+		main_state_machine.dispatch(to_walk)
 		
 	if DebugUI.ON:
 		var debug_message_template:= "[color=green][b] %s [/b][/color]: %s \n"
@@ -311,7 +312,6 @@ func _perform_move_on_jump(_delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 
-
 func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	
 	var damager_position = area.global_position
@@ -326,6 +326,15 @@ func _on_hurt_box_damaged(_damage: int, area: Area2D):
 		
 	if !animation_player_being_hit.is_playing():
 		animation_player_being_hit.play("hit")
+
+func move_forward(distance: int = 5):
+	
+	if last_direction == "right":
+		velocity = Vector2(1, 0)
+		global_position.x += distance
+	else:
+		global_position.x -= distance
+		velocity = Vector2(-1, 0)
 
 #region STATE MACHINE
 
