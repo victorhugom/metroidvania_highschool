@@ -18,6 +18,6 @@ void fragment() {
 
 void light() {
 	// Se llama para cada píxel de cada luz que afecta al CanvasItem.
-	float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+	float cNdotL = max(0.5, dot(NORMAL, LIGHT_DIRECTION));
 	LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bhye2xudcyhv5"]
+[gd_scene load_steps=32 format=4 uid="uid://bhye2xudcyhv5"]
 
 [ext_resource type="PackedScene" uid="uid://dmxljstjb5ap1" path="res://player/player.tscn" id="1_8mx52"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="1_b7m6c"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="8_tyc5y"]
 [ext_resource type="Texture2D" uid="uid://cp34tldtwhqq1" path="res://assets/world/schoolcorridor/wallwithwindow.png" id="9_5pse1"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="10_ugbvm"]
+[ext_resource type="Shader" path="res://shaders/acceleration_effect.gdshader" id="12_rsgla"]
 [ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/fx/light.png" id="18_4yvbv"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="19_nallo"]
 
@@ -61,19 +62,13 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_tqrhq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw7rk"]
 
-[sub_resource type="Gradient" id="Gradient_jwfgp"]
-offsets = PackedFloat32Array(0, 0.396226, 0.745283, 1)
-colors = PackedColorArray(0.0729509, 0.059947, 0.214424, 1, 0.591234, 0.16781, 0.291696, 1, 0.870841, 0.560095, 0.460409, 1, 0.820306, 0.641465, 0.447589, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
-gradient = SubResource("Gradient_jwfgp")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f15aw"]
-resource_local_to_scene = true
-shader = ExtResource("10_ugbvm")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcl2l"]
+shader = ExtResource("12_rsgla")
+shader_parameter/opacity = null
+shader_parameter/r = null
+shader_parameter/g = null
+shader_parameter/b = null
+shader_parameter/mix_color = null
 
 [node name="SidescrolingMapExample" type="Node2D"]
 
@@ -200,7 +195,8 @@ position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_sw7rk")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_f15aw")
+material = SubResource("ShaderMaterial_hcl2l")
+use_parent_material = true
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]
