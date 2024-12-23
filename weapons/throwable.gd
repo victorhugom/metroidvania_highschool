@@ -7,16 +7,9 @@ var exploded = false
 func _ready():
 	# Connect to signals if needed
 	connect("body_entered", _on_body_entered)
-	connect("body_exited", _on_body_exited)
 
 # Optional: Signal handler for entering bodies
 func _on_body_entered(body):
-	if exploded: return
-	
-	_create_explosion()
-
-# Optional: Signal handler for exiting bodies
-func _on_body_exited(body):
 	if exploded: return
 	
 	_create_explosion()
