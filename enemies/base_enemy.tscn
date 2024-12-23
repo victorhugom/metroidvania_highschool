@@ -1921,7 +1921,7 @@ texture = ExtResource("14_1q37i")
 texture_scale = 0.6
 
 [node name="Health" parent="." instance=ExtResource("4_reaex")]
-max_health = 30
+max_health = 3
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_3v754")]
 collision_layer = 64

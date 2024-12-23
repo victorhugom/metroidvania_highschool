@@ -155,10 +155,11 @@ player_parry={
 2d_physics/layer_10="Obstacle"
 2d_physics/layer_11="Terrain"
 2d_physics/layer_12="DestroyableObject"
-2d_physics/layer_13="Projectile"
+2d_physics/layer_13="PlayerProjectile"
 2d_physics/layer_14="Weapon"
 2d_physics/layer_15="Platform"
 2d_physics/layer_16="WalkableWall"
+2d_physics/layer_17="EnemyProjectile"
 
 [rendering]
 

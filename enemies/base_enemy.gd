@@ -155,7 +155,7 @@ func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	elif ray_cast_2d_right.is_colliding():
 		global_position.x += 10
 		velocity = Vector2(-1, 0)
-		
+	
 	player_in_sight = area.get_parent()
 	loose_sight_timeout = sight_time
 	

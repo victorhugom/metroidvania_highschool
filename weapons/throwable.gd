@@ -1,66 +1,45 @@
-class_name Throwable extends CharacterBody2D
+class_name Throwable extends RigidBody2D
 
 @export var explosion: PackedScene
-# Variables for the throw
-@export var throw_angle = 45.0 # Throw angle in degrees
-@export var throw_speed = 400.0: # Throw speed
-	get():
-		return throw_speed
-	set(value):
-		throw_speed = mini(value, 400)
 
-var hit_something = false
-var can_move = false
+var exploded = false
 
 func _ready():
-	pass
+	# Connect to signals if needed
+	connect("body_entered", _on_body_entered)
+	connect("body_exited", _on_body_exited)
+
+# Optional: Signal handler for entering bodies
+func _on_body_entered(body):
+	if exploded: return
 	
-func _physics_process(delta):
+	_create_explosion()
+
+# Optional: Signal handler for exiting bodies
+func _on_body_exited(body):
+	if exploded: return
 	
-	if not can_move:
-		return
-	
-	# If the object has hit something, stop horizontal movement
-	if hit_something:
-		velocity.x = 0
-		
-	if is_on_floor():
-		velocity.y = 0
-		_create_explosion()
-	else:
-		velocity += get_gravity() * delta
-		move_and_slide()
-		
-func throw(direction: String, angle:= 45, speed:= 400):
-	
-	throw_speed = speed
-	throw_angle = angle
-	
-	var radians = deg_to_rad(throw_angle)
-	velocity.y = -throw_speed * sin(radians) # Negative because y-axis is downwards
+	_create_explosion()
+
+func throw(direction: String, speed:= 400):
 	
 	if direction == "left":
-		velocity.x = -throw_speed * cos(radians)
-	else:
-		velocity.x = throw_speed * cos(radians)
-		
-	can_move = true
-
-func _on_body_entered(_body):
-	hit_something = true
-
-func _on_area_entered(_area):
-	hit_something = true
+		speed = -speed
+	
+	var throw_force = Vector2(speed, -64*4)
+	apply_impulse(throw_force, Vector2())
 	
 func _create_explosion():
 	var new_explosion = explosion.instantiate()
 	new_explosion.global_position = global_position
 	var first_node = get_tree().current_scene.get_child(0)
-	(first_node as Node2D).add_sibling(new_explosion)
+	(first_node as Node2D).add_sibling.call_deferred(new_explosion)
 	
 	var tween = create_tween() 
-	tween.tween_property(self, "modulate:a", 0.0, .2) 
+	tween.tween_property(self, "modulate:a", 0.0, .05) 
 	tween.finished.connect(_on_tween_finished)
+	
+	exploded = true
 	
 func _on_tween_finished():
 	queue_free()

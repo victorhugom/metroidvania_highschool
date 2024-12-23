@@ -2030,6 +2030,7 @@ rotation_smoothing_enabled = true
 
 [node name="ParryBox" parent="." instance=ExtResource("12_bq21u")]
 use_parent_material = true
+collision_mask = 65536
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ParryBox"]
 use_parent_material = true

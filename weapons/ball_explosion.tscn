@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=3 uid="uid://t4lm1kivhjcj"]
+
+[ext_resource type="Script" path="res://weapons/acid.gd" id="1_7xeja"]
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_umtny"]
+[ext_resource type="Texture2D" uid="uid://besfywfkybil0" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Effects/Explosion/Explosions.png" id="3_h7mgg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
+size = Vector2(96, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anggw"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn1tc"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snhqr"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h73d"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6qpg"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhkq4"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1aaal"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k6bg"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpj50"]
+atlas = ExtResource("3_h7mgg")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sp52q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anggw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn1tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snhqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h73d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6qpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhkq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1aaal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k6bg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpj50")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BallExplosion" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_7xeja")
+
+[node name="AttackBox" parent="." instance=ExtResource("2_umtny")]
+position = Vector2(0, -13)
+collision_layer = 8
+collision_mask = 64
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_mnst4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-3.8147e-06, -22)
+scale = Vector2(0.520833, 0.473958)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.112106
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

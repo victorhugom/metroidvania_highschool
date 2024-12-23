@@ -4,6 +4,7 @@ const THROWABLE = preload("res://weapons/throwable.tscn")
 
 signal state_changed(current_state: String, velocity: Vector2)
 
+
 @onready var health: Health = $Health
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -396,6 +397,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_throw_attack, state_idle, to_idle)
 	
 	#ENTER JUMP STATE
+	main_state_machine.add_transition(state_idle, state_jump, to_jump)
 	main_state_machine.add_transition(state_walk, state_jump, to_jump)
 	main_state_machine.add_transition(state_run, state_jump, to_jump)
 	main_state_machine.add_transition(state_jump, state_jump, to_jump)
@@ -500,7 +502,7 @@ func _state_walk_update(delta:float):
 func _state_wall_idle_enter():
 	pass
 
-func _state_wall_idle_update(delta: float):
+func _state_wall_idle_update(_delta: float):
 	if int(velocity.y) != 0:
 		if up_direction == Vector2.LEFT:
 			state_changed.emit("walk_wall_right", velocity)
@@ -671,9 +673,9 @@ func _state_throw_attack_enter():
 	
 	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
-	new_projectile.explosion = load("res://weapons/acid.tscn")
+	new_projectile.explosion = load("res://weapons/ball_explosion.tscn")
 	
-	new_projectile.throw(last_direction, 45, throw_speed)
+	new_projectile.throw(last_direction, throw_speed)
 
 	var first_node = get_tree().current_scene.get_child(0)
 	(first_node as Node2D).add_sibling(new_projectile)
