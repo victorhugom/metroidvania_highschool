@@ -19,7 +19,7 @@ func throw(direction: String, speed:= 400):
 	if direction == "left":
 		speed = -speed
 	
-	var throw_force = Vector2(speed, -64*4)
+	var throw_force = Vector2(speed, -64*3)
 	apply_impulse(throw_force, Vector2())
 	
 func _create_explosion():

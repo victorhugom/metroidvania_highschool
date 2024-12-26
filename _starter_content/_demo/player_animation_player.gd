@@ -85,9 +85,9 @@ func _on_state_changed(state: String, velocity: Vector2):
 			combo_timeout = get_animation(combo_animation).length + .5
 			play(combo_animation)
 	elif state == "hold_throw":
-		play("hold_throw")
+		play("hold_throw_" + player_direction)
 	elif state == "throw":
-		play("throw")
+		play("throw_" + player_direction)
 	elif state == "parry":
 		play("parry_%s" %player_direction)
 		

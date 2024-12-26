@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://qkwi1nibx2u0"]
 
 [ext_resource type="Script" path="res://weapons/throwable.gd" id="1_2ckqn"]
-[ext_resource type="Texture2D" uid="uid://jsleyst50qei" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/09-Bomb/Bomb Off.png" id="2_k6e7e"]
+[ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="2_2u5p3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgnd4"]
-radius = 7.51665
+radius = 5.0
 
 [node name="Throwable" type="RigidBody2D"]
 position = Vector2(0, -3)
@@ -19,4 +19,6 @@ position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_cgnd4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_k6e7e")
+position = Vector2(0, 3)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2u5p3")

@@ -4,7 +4,6 @@ const THROWABLE = preload("res://weapons/throwable.tscn")
 
 signal state_changed(current_state: String, velocity: Vector2)
 
-
 @onready var health: Health = $Health
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -16,6 +15,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var shape_cast_2d_right: ShapeCast2D = $ShapeCast2DRight
 @onready var ray_cast_2d_foot_left: RayCast2D = $RayCast2DFootLeft
 @onready var ray_cast_2d_foot_right: RayCast2D = $RayCast2DFootRight
+@onready var throw_hand: Node2D = $ThrowHand
 
 ## The base speed
 @export var speed: float = 64
@@ -672,7 +672,7 @@ func _state_hold_throw_attack_update(_delta):
 func _state_throw_attack_enter():
 	
 	var new_projectile: Throwable = THROWABLE.instantiate()
-	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
+	new_projectile.global_position = throw_hand.global_position
 	new_projectile.explosion = load("res://weapons/ball_explosion.tscn")
 	
 	new_projectile.throw(last_direction, throw_speed)
@@ -682,7 +682,7 @@ func _state_throw_attack_enter():
 	state_changed.emit("throw", velocity)
 
 func _state_throw_attack_update(_delta):
-	if animation_player.current_animation != "throw":
+	if animation_player.current_animation.begins_with("throw_") == false :
 		is_attacking = false
 		throw_speed = 100	
 		main_state_machine.dispatch(to_idle)
