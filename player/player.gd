@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 const THROWABLE = preload("res://weapons/throwable.tscn")
+const MIN_THROW_SPEED: int = 200
 
 signal state_changed(current_state: String, velocity: Vector2)
 
@@ -19,22 +20,26 @@ signal state_changed(current_state: String, velocity: Vector2)
 
 ## The base speed
 @export var speed: float = 64
+@export var strong_attack_threshold: float = 0.2
+
+@export_group("Jump")
 ## The max height that the player can jump
 @export var jump_height: int = 96
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
 @export var jump_buffer_time: float = 0.1 # Buffer time in seconds
 @export var max_jumps: int = 2
+@export var wall_walk_multiplier: float = 3.0
 
+@export_group("Run")
 ## The value that will multiply the speed when running
 @export var run_multiplier: float = 2.5
 @export var acceleration: int = 10 
 @export var deceleration: int = 50
 
+@export_group("Dash")
 @export var dash_speed = 400.0
-@export var dash_duration = 0.2
+@export var dash_duration = 0.3
 @export var dash_cooldown = 1.0
-
-@export var strong_attack_threshold: float = 0.2
 
 enum WALL_WALK_DIRECTION {NONE, LEFT, RIGHT}
 var wall_walking_direction = WALL_WALK_DIRECTION.NONE
@@ -49,7 +54,7 @@ var is_attacking: bool = false
 var strong_attack_time: float = 0
 
 var is_parrying: bool = false
-var throw_speed: int = 100
+var throw_speed: int = MIN_THROW_SPEED
 
 # jump
 var current_jumps: int = 0
@@ -494,6 +499,7 @@ func _state_walk_update(delta:float):
 	
 	if int(velocity.x) == 0:
 		main_state_machine.dispatch(to_idle)
+		velocity.x = 0
 	elif velocity.y != 0:
 		main_state_machine.dispatch(to_jump)
 	else:
@@ -511,7 +517,7 @@ func _state_wall_idle_update(_delta: float):
 
 func _state_walk_wall_left_enter():
 	rotate(PI/2)
-	current_speed = speed * run_multiplier
+	current_speed = speed * wall_walk_multiplier
 	wall_walking_direction = WALL_WALK_DIRECTION.LEFT
 	up_direction = Vector2.RIGHT
 
@@ -529,7 +535,7 @@ func _state_walk_wall_left_update(delta:float):
 		
 func _state_walk_wall_right_enter():
 	rotate(-PI/2)
-	current_speed = speed * run_multiplier
+	current_speed = speed * wall_walk_multiplier
 	wall_walking_direction = WALL_WALK_DIRECTION.RIGHT
 	up_direction = Vector2.LEFT
 
@@ -684,7 +690,7 @@ func _state_throw_attack_enter():
 func _state_throw_attack_update(_delta):
 	if animation_player.current_animation.begins_with("throw_") == false :
 		is_attacking = false
-		throw_speed = 100	
+		throw_speed = MIN_THROW_SPEED	
 		main_state_machine.dispatch(to_idle)
 
 func _state_dash_enter():
