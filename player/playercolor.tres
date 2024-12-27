@@ -3,8 +3,8 @@
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_0iuma"]
 
 [sub_resource type="Gradient" id="Gradient_jwfgp"]
-offsets = PackedFloat32Array(0, 0.54918, 1)
-colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
+offsets = PackedFloat32Array(0, 0.323671, 0.797101, 1)
+colors = PackedColorArray(0.193983, 0.0309685, 0.174633, 1, 0.751161, 0.0887537, 0.380533, 1, 0.568499, 0.239925, 0.23819, 1, 0.999329, 0.658337, 0.693854, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
 gradient = SubResource("Gradient_jwfgp")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=71 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=70 format=3 uid="uid://dmxljstjb5ap1"]
 
+[ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
 [ext_resource type="PackedScene" uid="uid://d3mbkmjkxl7ys" path="res://_starter_content/character/follow_camera.tscn" id="3_mhy6p"]
-[ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="3_qkmli"]
 [ext_resource type="PackedScene" uid="uid://ko7klxxhj47r" path="res://_starter_content/character/health.tscn" id="4_jivws"]
 [ext_resource type="Texture2D" uid="uid://nv7o3vqgui4y" path="res://assets/player/amenine/hit.png" id="4_sln47"]
 [ext_resource type="PackedScene" uid="uid://kym32cx77lnq" path="res://_starter_content/character/hurt_box.tscn" id="5_57fhj"]
@@ -27,8 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="19_mhu11"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_13jnh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 6.0
@@ -2156,7 +2154,7 @@ size = Vector2(19, 5)
 size = Vector2(5, 10)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-material = SubResource("ShaderMaterial_13jnh")
+use_parent_material = true
 collision_mask = 17920
 script = ExtResource("1_dpgy2")
 deceleration = 10
@@ -2182,7 +2180,7 @@ rotation = 0.600826
 shape = SubResource("RectangleShape2D_nx1t5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("3_qkmli")
+material = ExtResource("1_7n57d")
 position = Vector2(0, -25)
 texture = ExtResource("4_sln47")
 offset = Vector2(3, -12)

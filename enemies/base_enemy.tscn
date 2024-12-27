@@ -2208,14 +2208,14 @@ shape = SubResource("RectangleShape2D_lf2u3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_h11ji")
 use_parent_material = true
-position = Vector2(0, -20)
+position = Vector2(0, -25)
 texture = ExtResource("4_1mmft")
 offset = Vector2(3, -12)
 hframes = 6
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
 show_behind_parent = true
-position = Vector2(15, -46)
+position = Vector2(15, -53)
 color = Color(0.325625, 0.430132, 0.701241, 1)
 texture = ExtResource("14_1q37i")
 texture_scale = 0.6
@@ -2229,7 +2229,7 @@ collision_mask = 8
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-1, -26)
+position = Vector2(-1, -28)
 shape = SubResource("RectangleShape2D_vums4")
 debug_color = Color(0.960784, 0, 0, 0.419608)
 
