@@ -16,7 +16,7 @@ func throw():
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
 	new_projectile.explosion = load("res://weapons/acid.tscn")
 	
-	new_projectile.throw(direction, angle, speed)
+	new_projectile.throw(direction, speed)
 
 	var first_node = get_tree().current_scene.get_child(0)
 	(first_node as Node2D).add_sibling(new_projectile)

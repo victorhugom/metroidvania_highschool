@@ -17,6 +17,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var ray_cast_2d_foot_left: RayCast2D = $RayCast2DFootLeft
 @onready var ray_cast_2d_foot_right: RayCast2D = $RayCast2DFootRight
 @onready var throw_hand: Node2D = $ThrowHand
+@onready var inventory: Inventory = $Inventory
 
 ## The base speed
 @export var speed: float = 64
@@ -164,6 +165,7 @@ func _process(_delta: float) -> void:
 		debug_message +=debug_message_template %["Jump Buffer Timer:", current_jump_buffer_timer]
 		debug_message +=debug_message_template %["Dash Timer:", dash_timer]
 		debug_message +=debug_message_template %["Dash Cooldown Timer:", dash_cooldown_timer]
+		debug_message +=debug_message_template %["Money:", inventory.has_item("money").size()]
 		
 		var current_state = ""
 		if main_state_machine != null:
