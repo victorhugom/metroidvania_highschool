@@ -19,10 +19,11 @@ func throw(direction: String, speed:= 400):
 	if direction == "left":
 		speed = -speed
 	
-	var throw_force = Vector2(speed, -64*4)
+	var throw_force = Vector2(speed, -64*3)
 	apply_impulse(throw_force, Vector2())
 	
 func _create_explosion():
+	
 	var new_explosion = explosion.instantiate()
 	new_explosion.global_position = global_position
 	var first_node = get_tree().current_scene.get_child(0)

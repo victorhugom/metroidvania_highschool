@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=35 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_46mbl"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cnpg6uxbisclk" path="res://props/interactable/water_fountain.tscn" id="19_gfqt7"]
 [ext_resource type="PackedScene" uid="uid://brmymfrt0hffo" path="res://props/the_floor_is_lava.tscn" id="20_ojado"]
 [ext_resource type="PackedScene" uid="uid://doigv8t3fi1pg" path="res://enemies/base_enemy.tscn" id="20_s51ef"]
+[ext_resource type="PackedScene" uid="uid://73xk1ylfyyfi" path="res://props/money.tscn" id="21_flggs"]
 
 [sub_resource type="Gradient" id="Gradient_3mdix"]
 offsets = PackedFloat32Array(0, 0.655738)
@@ -68,7 +69,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_krjhj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wh6xe"]
 resource_local_to_scene = true
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
@@ -182,7 +183,7 @@ tile_map_data = PackedByteArray("AAAAAAcAAAAIAAMAAAABAAcAAAAKAAAAAAACAAcAAAAKAAA
 tile_set = ExtResource("9_mkdhn")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_krjhj")
+material = SubResource("ShaderMaterial_wh6xe")
 position = Vector2(139, 207)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_t48cf")]
@@ -236,3 +237,21 @@ position = Vector2(1016, 204)
 z_index = -1
 y_sort_enabled = false
 position = Vector2(1074, 199)
+
+[node name="Money" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(190, 132)
+
+[node name="Money2" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(211, 118)
+
+[node name="Money3" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(175, 115)
+
+[node name="Money4" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(195, 99)
+
+[node name="Money5" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(179, 93)
+
+[node name="Money6" parent="." instance=ExtResource("21_flggs")]
+position = Vector2(214, 85)

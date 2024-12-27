@@ -9,6 +9,14 @@ class_name InventoryItem extends Resource
 @export_group("Custom Data")
 @export var resource: Resource
 
+func _init(_item_id: String = "", _item_type: String = "", _display_name: String = "", \
+			_description: String = "", resource: String = ""):
+	
+	item_id =  str(ResourceUID.create_id()) if not _item_id else _item_id
+	item_type = _item_type
+	display_name = _display_name
+	description = _description
+	
 func to_dict() -> Dictionary:
 	return {
 		"item_id": item_id,

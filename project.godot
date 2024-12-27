@@ -160,6 +160,7 @@ player_parry={
 2d_physics/layer_15="Platform"
 2d_physics/layer_16="WalkableWall"
 2d_physics/layer_17="EnemyProjectile"
+2d_physics/layer_18="SakuraLeaves"
 
 [rendering]
 

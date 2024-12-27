@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=71 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="1_gf577"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bp82yxyhb3me6" path="res://assets/player/amenine/wall_idle_withtransition.png" id="19_lhqhs"]
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="19_mhu11"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
+[ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_13jnh"]
 
@@ -100,6 +101,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.600826]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ThrowHand:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ThrowHand:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-23, -45)]
 }
 
 [sub_resource type="Animation" id="Animation_bvivn"]
@@ -1089,8 +1114,8 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_g3dqt"]
-resource_name = "hold_throw"
+[sub_resource type="Animation" id="Animation_38i86"]
+resource_name = "hold_throw_left"
 length = 0.2
 loop_mode = 1
 step = 0.1
@@ -1129,6 +1154,96 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThrowHand:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ThrowHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(28, -44)]
+}
+
+[sub_resource type="Animation" id="Animation_g3dqt"]
+resource_name = "hold_throw_right"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_1l4ej")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThrowHand:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ThrowHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-23, -45)]
 }
 
 [sub_resource type="Animation" id="Animation_gif1l"]
@@ -1241,7 +1356,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1306,7 +1421,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1468,8 +1583,8 @@ tracks/2/keys = {
 "values": [1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_3ewcp"]
-resource_name = "throw"
+[sub_resource type="Animation" id="Animation_wj1d7"]
+resource_name = "throw_left"
 length = 0.5
 step = 0.1
 tracks/0/type = "value"
@@ -1507,6 +1622,95 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThrowHand:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ThrowHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(28, -44), Vector2(26, -62)]
+}
+
+[sub_resource type="Animation" id="Animation_3ewcp"]
+resource_name = "throw_right"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_1l4ej")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThrowHand:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ThrowHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-23, -45), Vector2(26, -62)]
 }
 
 [sub_resource type="Animation" id="Animation_f7exj"]
@@ -1816,7 +2020,8 @@ _data = {
 "dash_attack": SubResource("Animation_327a4"),
 "down": SubResource("Animation_i85yy"),
 "hold_attack": SubResource("Animation_vgoym"),
-"hold_throw": SubResource("Animation_g3dqt"),
+"hold_throw_left": SubResource("Animation_38i86"),
+"hold_throw_right": SubResource("Animation_g3dqt"),
 "idle": SubResource("Animation_gif1l"),
 "on_edge": SubResource("Animation_rkkau"),
 "parry_left": SubResource("Animation_5qvsw"),
@@ -1824,7 +2029,8 @@ _data = {
 "run": SubResource("Animation_1w7i7"),
 "shade": SubResource("Animation_2htf7"),
 "strong_attack": SubResource("Animation_6knc6"),
-"throw": SubResource("Animation_3ewcp"),
+"throw_left": SubResource("Animation_wj1d7"),
+"throw_right": SubResource("Animation_3ewcp"),
 "up": SubResource("Animation_f7exj"),
 "walk": SubResource("Animation_jshpw"),
 "wall_down": SubResource("Animation_3jbae"),
@@ -1980,11 +2186,12 @@ material = ExtResource("3_qkmli")
 position = Vector2(0, -25)
 texture = ExtResource("4_sln47")
 offset = Vector2(3, -12)
+flip_h = true
 hframes = 6
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
 show_behind_parent = true
-position = Vector2(3, -29)
+position = Vector2(-24, -16)
 color = Color(0.325625, 0.430132, 0.701241, 1)
 energy = 0.3
 texture = ExtResource("5_wc1rh")
@@ -2065,3 +2272,9 @@ collide_with_areas = true
 position = Vector2(12, -18)
 collision_mask = 32768
 collide_with_areas = true
+
+[node name="ThrowHand" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-23, -45)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_pbpr2")
