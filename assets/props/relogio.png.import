@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3p2yu2g0k1kp"
-path="res://.godot/imported/quadronegro.png-70fc4aa8f932924d5b9bff587de46e8f.ctex"
+uid="uid://51ildpvwtagn"
+path="res://.godot/imported/relogio.png-d8e1299aa6ac9e5643dcddc0f5f37686.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/schoolcorridor/salda de aula BG/quadronegro.png"
-dest_files=["res://.godot/imported/quadronegro.png-70fc4aa8f932924d5b9bff587de46e8f.ctex"]
+source_file="res://assets/props/relogio.png"
+dest_files=["res://.godot/imported/relogio.png-d8e1299aa6ac9e5643dcddc0f5f37686.ctex"]
 
 [params]
 

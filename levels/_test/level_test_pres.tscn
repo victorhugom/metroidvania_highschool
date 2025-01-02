@@ -1,17 +1,19 @@
-[gd_scene load_steps=39 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=38 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_v82yu"]
-[ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/world/schoolcorridor/salda de aula BG/quadronegro.png" id="3_n0jms"]
-[ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/world/schoolcorridor/salda de aula BG/relogio.png" id="4_gh5y7"]
+[ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_n0jms"]
+[ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="4_gh5y7"]
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
 [ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="7_sl7sr"]
+[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="8_yxetv"]
 [ext_resource type="TileSet" uid="uid://pyuwg4up8fhx" path="res://levels/main_tileset.tres" id="9_jhwuw"]
 [ext_resource type="Texture2D" uid="uid://d2dhhqhe72270" path="res://assets/world/schoolcorridor/schoolcorridor.png" id="10_bgbii"]
 [ext_resource type="PackedScene" uid="uid://dmxljstjb5ap1" path="res://player/player.tscn" id="11_an7wo"]
-[ext_resource type="Texture2D" uid="uid://drpw1ucg4mg37" path="res://assets/world/schoolcorridor/armario.png" id="11_sgl2s"]
+[ext_resource type="Texture2D" uid="uid://drpw1ucg4mg37" path="res://assets/props/armario.png" id="11_sgl2s"]
+[ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="11_svt7y"]
 [ext_resource type="PackedScene" uid="uid://bnaf10n6cgnuy" path="res://_starter_content/destroyable_object/destroyable_object.tscn" id="12_djtmo"]
 [ext_resource type="Texture2D" uid="uid://cn301fxt81gqp" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="13_o3knb"]
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="14_ekxkp"]
@@ -25,41 +27,16 @@
 
 [sub_resource type="Gradient" id="Gradient_mt7q3"]
 offsets = PackedFloat32Array(0, 0.991803)
-colors = PackedColorArray(0.201327, 0.129863, 0.168825, 1, 0.57127, 0.476684, 0.410412, 1)
+colors = PackedColorArray(0.134117, 0.141819, 0.257391, 1, 0.51246, 0.486374, 0.53078, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_b21od"]
 gradient = SubResource("Gradient_mt7q3")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
-shader = ExtResource("2_v82yu")
+shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_b21od")
-
-[sub_resource type="Gradient" id="Gradient_grw1r"]
-colors = PackedColorArray(0.261936, 0.159258, 0.197492, 1, 0.718427, 0.554057, 0.680347, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_w6rtk"]
-gradient = SubResource("Gradient_grw1r")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yqnm"]
-shader = ExtResource("2_v82yu")
-shader_parameter/lerper = 0.0
-shader_parameter/pal0 = SubResource("GradientTexture1D_w6rtk")
-
-[sub_resource type="Gradient" id="Gradient_0e3lm"]
-offsets = PackedFloat32Array(0, 0.483092, 1)
-colors = PackedColorArray(0.116887, 0.102575, 0.199384, 1, 0.870626, 0.565867, 0.638673, 1, 0.521582, 0.533661, 0.597203, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4e03u"]
-gradient = SubResource("Gradient_0e3lm")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pt2js"]
-shader = ExtResource("2_v82yu")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_4e03u")
 
 [sub_resource type="Gradient" id="Gradient_g06d5"]
 offsets = PackedFloat32Array(0, 0.508197, 1)
@@ -70,7 +47,7 @@ gradient = SubResource("Gradient_g06d5")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
-shader = ExtResource("2_v82yu")
+shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_tqrhq")
 
@@ -82,11 +59,24 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgewv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3t1c"]
 resource_local_to_scene = true
-shader = ExtResource("2_v82yu")
+shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
+
+[sub_resource type="Gradient" id="Gradient_wnwtk"]
+offsets = PackedFloat32Array(0, 0.492754, 1)
+colors = PackedColorArray(0.420833, 0.0927659, 0.155334, 1, 0.890407, 0, 0.0640809, 1, 1, 0.217332, 0.261223, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_erbe6"]
+gradient = SubResource("Gradient_wnwtk")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bognm"]
+shader = ExtResource("2_v82yu")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_erbe6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oessi"]
 
@@ -177,12 +167,12 @@ texture = ExtResource("10_bgbii")
 
 [node name="Parallax2D_Objects" type="Parallax2D" parent="."]
 z_index = -1
-material = SubResource("ShaderMaterial_5yqnm")
+material = ExtResource("11_svt7y")
 repeat_size = Vector2(320, 0)
 repeat_times = 10
 
 [node name="Relogio" type="Sprite2D" parent="Parallax2D_Objects"]
-material = SubResource("ShaderMaterial_pt2js")
+material = ExtResource("11_svt7y")
 position = Vector2(-240, 116)
 texture = ExtResource("4_gh5y7")
 
@@ -206,7 +196,7 @@ tile_map_data = PackedByteArray("AAAwAAwAAAAKAAEAAAAxAA0AAAAKAAIAAAAxAAwAAAAKAAE
 tile_set = ExtResource("9_jhwuw")
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_wgewv")
+material = SubResource("ShaderMaterial_t3t1c")
 position = Vector2(139, 207)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_djtmo")]
@@ -217,6 +207,7 @@ texture_broken = ExtResource("14_ekxkp")
 texture_pieces = Array[Texture2D]([ExtResource("15_en1us"), ExtResource("16_wjxv5"), ExtResource("17_q48ae"), ExtResource("14_ekxkp"), ExtResource("15_en1us"), ExtResource("16_wjxv5"), ExtResource("17_q48ae"), ExtResource("14_ekxkp")])
 
 [node name="BaseEnemy" parent="." instance=ExtResource("18_jdtl5")]
+material = SubResource("ShaderMaterial_bognm")
 position = Vector2(569, 109)
 
 [node name="SurfaceDriver" type="Area2D" parent="." groups=["wallkable_wall"]]
@@ -239,7 +230,7 @@ shape = SubResource("RectangleShape2D_oessi")
 
 [node name="WaterFountain" parent="." instance=ExtResource("19_7f27c")]
 z_index = -1
-position = Vector2(78, 177)
+position = Vector2(75, 208)
 
 [node name="Trap" parent="." instance=ExtResource("20_eb8wa")]
 z_index = -1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://51ildpvwtagn"
-path="res://.godot/imported/relogio.png-e13d3095f65568ee78f06abf22cbee03.ctex"
+uid="uid://bvxfdhsuna3qx"
+path="res://.godot/imported/bebedouro.png-add132d4a2f44753779327f089588864.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/schoolcorridor/salda de aula BG/relogio.png"
-dest_files=["res://.godot/imported/relogio.png-e13d3095f65568ee78f06abf22cbee03.ctex"]
+source_file="res://assets/props/bebedouro.png"
+dest_files=["res://.godot/imported/bebedouro.png-add132d4a2f44753779327f089588864.ctex"]
 
 [params]
 

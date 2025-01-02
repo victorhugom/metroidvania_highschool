@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="1_b7m6c"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_viv0j"]
 [ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/CityBGparalax/2.png" id="2_dpg3j"]
+[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="2_e22s8"]
 [ext_resource type="TileSet" uid="uid://pyuwg4up8fhx" path="res://levels/main_tileset.tres" id="2_oppkn"]
 [ext_resource type="PackedScene" uid="uid://bnaf10n6cgnuy" path="res://_starter_content/destroyable_object/destroyable_object.tscn" id="3_2uv5d"]
 [ext_resource type="Texture2D" uid="uid://b6rnj5qaca3if" path="res://assets/world/CityBGparalax/3.png" id="3_t4tdf"]
@@ -16,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="7_re6ah"]
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="8_tyc5y"]
 [ext_resource type="Texture2D" uid="uid://cp34tldtwhqq1" path="res://assets/world/schoolcorridor/wallwithwindow.png" id="9_5pse1"]
-[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="10_ugbvm"]
 [ext_resource type="Shader" path="res://shaders/acceleration_effect.gdshader" id="12_rsgla"]
 [ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/fx/light.png" id="18_4yvbv"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="19_nallo"]
@@ -30,7 +30,7 @@ gradient = SubResource("Gradient_3mdix")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tr6m4"]
-shader = ExtResource("10_ugbvm")
+shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_8s3nc")
 
@@ -43,7 +43,7 @@ gradient = SubResource("Gradient_mt7q3")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
-shader = ExtResource("10_ugbvm")
+shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_b21od")
 
@@ -56,13 +56,13 @@ gradient = SubResource("Gradient_g06d5")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
-shader = ExtResource("10_ugbvm")
+shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_tqrhq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw7rk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3n30s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7sdp"]
 resource_local_to_scene = true
 shader = ExtResource("12_rsgla")
 shader_parameter/opacity = 0.5
@@ -196,7 +196,7 @@ position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_sw7rk")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_3n30s")
+material = SubResource("ShaderMaterial_w7sdp")
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]

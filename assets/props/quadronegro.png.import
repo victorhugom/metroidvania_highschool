@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drpw1ucg4mg37"
-path="res://.godot/imported/armario.png-4384c6dfdf86ad4eef86b15df2c074a5.ctex"
+uid="uid://d3p2yu2g0k1kp"
+path="res://.godot/imported/quadronegro.png-62e13398049dab4d89b11505549f3846.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/schoolcorridor/armario.png"
-dest_files=["res://.godot/imported/armario.png-4384c6dfdf86ad4eef86b15df2c074a5.ctex"]
+source_file="res://assets/props/quadronegro.png"
+dest_files=["res://.godot/imported/quadronegro.png-62e13398049dab4d89b11505549f3846.ctex"]
 
 [params]
 

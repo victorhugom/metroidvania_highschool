@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://73xk1ylfyyfi"]
+[gd_scene load_steps=16 format=3 uid="uid://73xk1ylfyyfi"]
 
 [ext_resource type="Script" path="res://props/money.gd" id="1_qo10a"]
 [ext_resource type="Texture2D" uid="uid://hvmw40ruqmpe" path="res://assets/props/sakura_flower.png" id="2_77p20"]
 [ext_resource type="Shader" path="res://shaders/wavy.gdshader" id="2_fbqfs"]
+[ext_resource type="Texture2D" uid="uid://b2evyvnbhcdw0" path="res://assets/fx/lbluelight.png" id="3_kvspe"]
+[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="3_s2doa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3faha"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7m45g"]
 shader = ExtResource("2_fbqfs")
 shader_parameter/waveAmplitude = 0.15
 shader_parameter/correctVertex = true
@@ -12,12 +14,47 @@ shader_parameter/waveFrequency = 10.0
 shader_parameter/verticalWave = false
 shader_parameter/keepTransparency = true
 shader_parameter/useTime = true
-shader_parameter/waveSpeed = 10.0
+shader_parameter/waveSpeed = 3.0
 shader_parameter/progress = 0.0
 shader_parameter/firstHalf = 0.5
 shader_parameter/secondHalf = 0.5
 shader_parameter/freezeFirstHalf = false
-shader_parameter/freezeSecondHalf = true
+shader_parameter/freezeSecondHalf = false
+
+[sub_resource type="Gradient" id="Gradient_s1kpa"]
+offsets = PackedFloat32Array(0, 0.309179, 0.690821, 0.995169)
+colors = PackedColorArray(0.497032, 0.000235167, 0.517142, 1, 0.724059, 0.131603, 0.488778, 1, 0.752342, 0.643759, 0.611257, 1, 1, 0.728017, 0.989376, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0mc5d"]
+gradient = SubResource("Gradient_s1kpa")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubimm"]
+shader = ExtResource("3_s2doa")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_0mc5d")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sik5w"]
+atlas = ExtResource("2_77p20")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfrd6"]
+atlas = ExtResource("2_77p20")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4nt8"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_sik5w")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_gfrd6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vveo"]
 radius = 3.0
@@ -29,31 +66,46 @@ radius = 3.16228
 radius = 7.0
 
 [node name="Money" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_7m45g")
 collision_layer = 131072
 mass = 0.025
 gravity_scale = 0.1
 max_contacts_reported = 1
 script = ExtResource("1_qo10a")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_3faha")
-scale = Vector2(0.071875, 0.071875)
-texture = ExtResource("2_77p20")
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.0719643, 0.0719643)
+color = Color(1, 0.290196, 1, 1)
+energy = 0.5
+texture = ExtResource("3_kvspe")
+texture_scale = 0.35
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ubimm")
+scale = Vector2(0.13, 0.13)
+sprite_frames = SubResource("SpriteFrames_o4nt8")
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_1vveo")
 
 [node name="FloorCollision" type="Area2D" parent="."]
+visible = false
 collision_layer = 131072
 collision_mask = 17408
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorCollision"]
+visible = false
 shape = SubResource("CircleShape2D_eluc4")
 debug_color = Color(0.9421, 8.47101e-06, 0.607648, 0.42)
 
 [node name="PlayerCollision" type="Area2D" parent="."]
+visible = false
 collision_layer = 131072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+visible = false
 shape = SubResource("CircleShape2D_msh80")
 debug_color = Color(0.711777, 0.485033, 0, 0.42)
