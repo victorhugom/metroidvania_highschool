@@ -40,7 +40,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_b21od")
 
 [sub_resource type="Gradient" id="Gradient_g06d5"]
 offsets = PackedFloat32Array(0, 0.508197, 1)
-colors = PackedColorArray(0.092093, 0.0622542, 0.083974, 1, 0.339854, 0.239383, 0.253644, 1, 0.860647, 0.560295, 0.376724, 1)
+colors = PackedColorArray(0.0691185, 0.0528117, 0.160867, 1, 0.421837, 0.112196, 0.221775, 1, 0.898033, 0.418723, 0.529982, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_tqrhq"]
 gradient = SubResource("Gradient_g06d5")
@@ -59,7 +59,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_emwuv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvmfs"]
 resource_local_to_scene = true
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
@@ -197,7 +197,7 @@ tile_map_data = PackedByteArray("AAAwAAwAAAAKAAEAAAAxAA0AAAAKAAIAAAAxAAwAAAAKAAE
 tile_set = ExtResource("9_jhwuw")
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_emwuv")
+material = SubResource("ShaderMaterial_pvmfs")
 position = Vector2(139, 207)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_djtmo")]
