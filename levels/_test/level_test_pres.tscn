@@ -59,7 +59,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3t1c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emwuv"]
 resource_local_to_scene = true
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
@@ -81,6 +81,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_erbe6")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oessi"]
 
 [node name="SidescrolingMapExample" type="Node2D"]
+position = Vector2(2, 2)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.45469, 0.531663, 0.731288, 1)
@@ -196,7 +197,7 @@ tile_map_data = PackedByteArray("AAAwAAwAAAAKAAEAAAAxAA0AAAAKAAIAAAAxAAwAAAAKAAE
 tile_set = ExtResource("9_jhwuw")
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_t3t1c")
+material = SubResource("ShaderMaterial_emwuv")
 position = Vector2(139, 207)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("12_djtmo")]

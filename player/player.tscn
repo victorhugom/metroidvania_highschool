@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=73 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="27_7ik08"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
+[ext_resource type="Texture2D" uid="uid://58msqt6r3pk7" path="res://player/ball.tres" id="28_d8kds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 6.0
@@ -2154,18 +2155,10 @@ size = Vector2(19, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d16ml"]
 size = Vector2(5, 10)
 
-[sub_resource type="Gradient" id="Gradient_rtp8u"]
-offsets = PackedFloat32Array(0, 0.169082, 0.478261, 0.628019, 0.850242)
-colors = PackedColorArray(0.151456, 0.277627, 0.239924, 1, 0.530845, 0.696488, 0.332839, 1, 0.381202, 0.516335, 0.470002, 1, 0.943746, 0.95603, 0.951818, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_mjgw0"]
-gradient = SubResource("Gradient_rtp8u")
-width = 5
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_htuy4"]
 shader = ExtResource("27_7ik08")
 shader_parameter/lerper = 0.0
-shader_parameter/pal0 = SubResource("GradientTexture1D_mjgw0")
+shader_parameter/pal0 = ExtResource("28_d8kds")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
