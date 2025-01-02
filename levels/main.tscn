@@ -62,7 +62,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_tqrhq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw7rk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7sdp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7pas"]
 resource_local_to_scene = true
 shader = ExtResource("12_rsgla")
 shader_parameter/opacity = 0.5
@@ -196,7 +196,7 @@ position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_sw7rk")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_w7sdp")
+material = SubResource("ShaderMaterial_d7pas")
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]
