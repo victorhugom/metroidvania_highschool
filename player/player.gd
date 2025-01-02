@@ -174,6 +174,8 @@ func _process(_delta: float) -> void:
 		debug_message +="_______________________________\n"
 
 		DebugUI.show_message(debug_message)
+	else:
+		DebugUI.clear()
 
 func _physics_process(delta: float) -> void:
 	
@@ -324,7 +326,7 @@ func _perform_move_on_jump(_delta: float):
 func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	
 	var damager_position = area.global_position
-	var move_direction = (damager_position - global_position).normalized()
+	#var move_direction = (damager_position - global_position).normalized()
 	
 	if last_direction == "right":
 		velocity = Vector2(1, 0)

@@ -9,7 +9,7 @@ func _ready():
 	connect("body_entered", _on_body_entered)
 
 # Optional: Signal handler for entering bodies
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if exploded: return
 	
 	_create_explosion()

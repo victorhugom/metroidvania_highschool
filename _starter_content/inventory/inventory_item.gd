@@ -10,12 +10,13 @@ class_name InventoryItem extends Resource
 @export var resource: Resource
 
 func _init(_item_id: String = "", _item_type: String = "", _display_name: String = "", \
-			_description: String = "", resource: String = ""):
+			_description: String = "", _resource: Resource = null):
 	
 	item_id =  str(ResourceUID.create_id()) if not _item_id else _item_id
 	item_type = _item_type
 	display_name = _display_name
 	description = _description
+	resource = _resource
 	
 func to_dict() -> Dictionary:
 	return {
