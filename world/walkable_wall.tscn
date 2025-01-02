@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://nsb6gspi738u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oessi"]
+
+[node name="SurfaceDriver" type="Area2D" groups=["wallkable_wall"]]
+position = Vector2(898, -110)
+scale = Vector2(1, 10.92)
+collision_layer = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0.144092)
+shape = SubResource("RectangleShape2D_oessi")

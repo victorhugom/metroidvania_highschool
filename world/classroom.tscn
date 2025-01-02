@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://h45xq2xfrxvj"]
+
+[ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_8p8bd"]
+[ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_avb71"]
+[ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_m2v4f"]
+[ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="4_wuof6"]
+[ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="5_x15qt"]
+[ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_7oal8"]
+[ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="7_ixqlm"]
+
+[node name="Classroom" type="Node2D"]
+z_index = -2
+material = ExtResource("1_8p8bd")
+position = Vector2(61, 362)
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+use_parent_material = true
+scroll_scale = Vector2(1.03, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+use_parent_material = true
+texture = ExtResource("2_avb71")
+
+[node name="Quadronegro" type="Sprite2D" parent="Parallax2D"]
+use_parent_material = true
+position = Vector2(25, 45)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_m2v4f")
+
+[node name="Relogio" type="Sprite2D" parent="Parallax2D"]
+use_parent_material = true
+position = Vector2(-32, 34)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("4_wuof6")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+use_parent_material = true
+scroll_scale = Vector2(1.03, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+use_parent_material = true
+position = Vector2(-4, 32)
+scale = Vector2(0.76, 0.76)
+texture = ExtResource("5_x15qt")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+use_parent_material = true
+scroll_scale = Vector2(1.02, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+use_parent_material = true
+position = Vector2(-5, 32)
+scale = Vector2(0.76, 0.76)
+texture = ExtResource("6_7oal8")
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+use_parent_material = true
+scroll_scale = Vector2(1.01, 1)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
+use_parent_material = true
+position = Vector2(-5, 31)
+scale = Vector2(0.76, 0.76)
+texture = ExtResource("7_ixqlm")

@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqo4ylqxw7loo"
-valid=false
+uid="uid://b3vas0ndtaksa"
+path="res://.godot/imported/window.png-5c74b888369ae6c288e74c85517dceea.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/world/schoolcorridor/reflection.png"
+source_file="res://assets/world/schoolcorridor/window.png"
+dest_files=["res://.godot/imported/window.png-5c74b888369ae6c288e74c85517dceea.ctex"]
 
 [params]
 

@@ -2235,8 +2235,8 @@ use_parent_material = true
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
 use_parent_material = true
-position = Vector2(0, -46)
-zoom = Vector2(2, 2)
+position = Vector2(0, -116)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 

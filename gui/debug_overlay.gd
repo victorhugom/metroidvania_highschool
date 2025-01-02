@@ -6,3 +6,6 @@ class_name DebugOverlay extends CanvasLayer
 
 func show_message(message: String):
 	rich_text_label.text = message
+	
+func clear():
+	rich_text_label.text = ""

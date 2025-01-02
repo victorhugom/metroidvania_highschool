@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwnt31qmwhun1"]
+
+[ext_resource type="Texture2D" uid="uid://b3vas0ndtaksa" path="res://assets/world/schoolcorridor/window.png" id="1_cwjms"]
+[ext_resource type="Shader" path="res://shaders/god_ray.gdshader" id="2_d1x5p"]
+[ext_resource type="Texture2D" uid="uid://d2dhhqhe72270" path="res://assets/world/schoolcorridor/schoolcorridor.png" id="3_b4hiw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crp85"]
+shader = ExtResource("2_d1x5p")
+shader_parameter/angle = -0.3
+shader_parameter/position = -0.2
+shader_parameter/spread = 0.446
+shader_parameter/cutoff = -0.076
+shader_parameter/falloff = 1.0
+shader_parameter/edge_fade = 0.933
+shader_parameter/speed = 3.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Color(1, 0.9, 0.65, 0.8)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
+[sub_resource type="Gradient" id="Gradient_5g8k6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3f5l1"]
+gradient = SubResource("Gradient_5g8k6")
+width = 20
+
+[node name="Node" type="Node2D"]
+
+[node name="Window" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+position = Vector2(0, 16)
+texture = ExtResource("1_cwjms")
+
+[node name="Window2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+position = Vector2(64, 16)
+texture = ExtResource("1_cwjms")
+
+[node name="Window3" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+position = Vector2(128, 16)
+texture = ExtResource("1_cwjms")
+
+[node name="GodRay" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_crp85")
+position = Vector2(65, 10)
+scale = Vector2(0.59375, 0.325)
+texture = ExtResource("3_b4hiw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(168, 16)
+scale = Vector2(0.8, 128)
+texture = SubResource("GradientTexture1D_3f5l1")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(-40, 16)
+scale = Vector2(0.8, 128)
+texture = SubResource("GradientTexture1D_3f5l1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(64, 96)
+scale = Vector2(11.2, 32)
+texture = SubResource("GradientTexture1D_3f5l1")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(64, -88)
+scale = Vector2(11.2, 80)
+texture = SubResource("GradientTexture1D_3f5l1")
