@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-
 const THROWABLE = preload("res://weapons/throwable.tscn")
 const MIN_THROW_SPEED: int = 200
 
@@ -20,9 +19,9 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var throw_hand: Node2D = $ThrowHand
 @onready var inventory: Inventory = $Inventory
 
-## The base speed
-@export var speed: float = 64
+@export_group("Attack")
 @export var strong_attack_threshold: float = 0.2
+@export var max_throw_ammunition: int = 3
 
 @export_group("Jump")
 ## The max height that the player can jump
@@ -32,7 +31,8 @@ signal state_changed(current_state: String, velocity: Vector2)
 @export var max_jumps: int = 2
 @export var wall_walk_multiplier: float = 3.0
 
-@export_group("Run")
+@export_group("Walk-Run")
+@export var speed: float = 64
 ## The value that will multiply the speed when running
 @export var run_multiplier: float = 2.5
 @export var acceleration: int = 10 
@@ -57,6 +57,7 @@ var strong_attack_time: float = 0
 
 var is_parrying: bool = false
 var throw_speed: int = MIN_THROW_SPEED
+var throw_ammunition: float = max_throw_ammunition * 10
 
 # jump
 var current_jumps: int = 0
@@ -167,6 +168,7 @@ func _process(_delta: float) -> void:
 		debug_message +=debug_message_template %["Dash Timer:", dash_timer]
 		debug_message +=debug_message_template %["Dash Cooldown Timer:", dash_cooldown_timer]
 		debug_message +=debug_message_template %["Money:", inventory.has_item("money").size()]
+		debug_message +=debug_message_template %["Ammo:", throw_ammunition]
 		
 		var current_state = ""
 		if main_state_machine != null:
@@ -191,6 +193,9 @@ func _physics_process(delta: float) -> void:
 	dash_cooldown_timer -= delta
 	if dash_cooldown_timer < 0:
 		dash_cooldown_timer = 0
+		
+	if throw_ammunition < max_throw_ammunition * 10:
+		throw_ammunition += delta
 		
 	_handle_jump_buffer(delta)
 	
@@ -326,7 +331,7 @@ func _perform_move_on_jump(_delta: float):
 
 func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	
-	var damager_position = area.global_position
+	#var damager_position = area.global_position
 	#var move_direction = (damager_position - global_position).normalized()
 	
 	if last_direction == "right":
@@ -672,6 +677,12 @@ func _state_parry_exit():
 	parry_box.monitorable = false
 
 func _state_hold_throw_attack_enter():
+	
+	if throw_ammunition < 10:
+		state_changed.emit("no_ammo")
+		main_state_machine.dispatch(to_idle)
+		return
+	
 	is_attacking = true
 	state_changed.emit("hold_throw", velocity)
 
@@ -697,6 +708,7 @@ func _state_throw_attack_update(_delta):
 		is_attacking = false
 		throw_speed = MIN_THROW_SPEED	
 		main_state_machine.dispatch(to_idle)
+		throw_ammunition -= 10
 
 func _state_dash_enter():
 	is_dashing = true
