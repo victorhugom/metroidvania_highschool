@@ -1,12 +1,15 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://pyuwg4up8fhx"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://cii404y27e6ij"]
 
-[ext_resource type="Texture2D" uid="uid://yqn3tbi6sk5s" path="res://assets/world/tilesetschoolfloor.png" id="1_y0p2y"]
-[ext_resource type="Texture2D" uid="uid://c4rnscss6exci" path="res://assets/world/tilesetschoolfloor1.png" id="2_nxsi0"]
-[ext_resource type="Texture2D" uid="uid://d2dhhqhe72270" path="res://assets/world/schoolcorridor/schoolcorridor.png" id="3_mocvo"]
-[ext_resource type="Texture2D" uid="uid://qcvy4rhmokjj" path="res://assets/props/props.png" id="4_nrfrq"]
+[ext_resource type="Texture2D" uid="uid://yqn3tbi6sk5s" path="res://assets/world/tilesetschoolfloor.png" id="1_p2jsa"]
+[ext_resource type="Texture2D" uid="uid://c4rnscss6exci" path="res://assets/world/tilesetschoolfloor1.png" id="2_kfet6"]
+[ext_resource type="Texture2D" uid="uid://d2dhhqhe72270" path="res://assets/world/schoolcorridor/schoolcorridor.png" id="3_m43fi"]
+[ext_resource type="Texture2D" uid="uid://qcvy4rhmokjj" path="res://assets/props/props.png" id="4_6fpuf"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_y0fh5"]
+tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 1, 65538, 0, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3sqxq"]
-texture = ExtResource("1_y0p2y")
+texture = ExtResource("1_p2jsa")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -388,7 +391,7 @@ texture_region_size = Vector2i(32, 32)
 11:3/0/terrains_peering_bit/top_right_corner = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ot4no"]
-texture = ExtResource("2_nxsi0")
+texture = ExtResource("2_kfet6")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -814,7 +817,7 @@ texture_region_size = Vector2i(32, 32)
 11:3/0/terrains_peering_bit/top_right_corner = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dmnd5"]
-texture = ExtResource("3_mocvo")
+texture = ExtResource("3_m43fi")
 texture_region_size = Vector2i(32, 32)
 use_texture_padding = false
 0:0/0 = 0
@@ -929,19 +932,42 @@ use_texture_padding = false
 9:10/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2sn61"]
-texture = ExtResource("4_nrfrq")
-10:1/size_in_atlas = Vector2i(3, 5)
-10:1/0 = 0
-13:1/size_in_atlas = Vector2i(3, 5)
-13:1/0 = 0
-0:1/size_in_atlas = Vector2i(10, 5)
-0:1/0 = 0
-10:6/size_in_atlas = Vector2i(9, 4)
-10:6/0 = 0
-1:6/size_in_atlas = Vector2i(8, 3)
-1:6/0 = 0
+texture = ExtResource("4_6fpuf")
+texture_region_size = Vector2i(32, 32)
 18:0/size_in_atlas = Vector2i(2, 2)
 18:0/0 = 0
+10:7/size_in_atlas = Vector2i(9, 4)
+10:7/0 = 0
+13:0/size_in_atlas = Vector2i(3, 7)
+13:0/0 = 0
+10:0/size_in_atlas = Vector2i(3, 7)
+10:0/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+1:8/0 = 0
+0:8/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+2:7/0 = 0
+3:8/0 = 0
+3:7/0 = 0
+3:6/0 = 0
+2:8/0 = 0
+0:0/size_in_atlas = Vector2i(5, 4)
+0:0/0 = 0
+5:0/0 = 0
+9:0/0 = 0
+5:3/size_in_atlas = Vector2i(5, 3)
+5:3/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+0:4/size_in_atlas = Vector2i(5, 2)
+0:4/0 = 0
+4:6/size_in_atlas = Vector2i(2, 1)
+4:6/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)
@@ -958,3 +984,4 @@ sources/0 = SubResource("TileSetAtlasSource_3sqxq")
 sources/1 = SubResource("TileSetAtlasSource_ot4no")
 sources/2 = SubResource("TileSetAtlasSource_dmnd5")
 sources/3 = SubResource("TileSetAtlasSource_2sn61")
+pattern_0 = SubResource("TileMapPattern_y0fh5")

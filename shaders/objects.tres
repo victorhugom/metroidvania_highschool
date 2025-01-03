@@ -3,8 +3,7 @@
 [ext_resource type="Shader" path="res://shaders/saura.gdshader" id="1_m2dhi"]
 
 [sub_resource type="Gradient" id="Gradient_0e3lm"]
-offsets = PackedFloat32Array(0, 0.555556, 1)
-colors = PackedColorArray(0.116887, 0.102575, 0.199384, 1, 0.668068, 0.496715, 0.523376, 1, 0.795864, 0.641012, 0.714069, 1)
+colors = PackedColorArray(0.116887, 0.102575, 0.199384, 1, 0.713634, 0.582622, 0.763227, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4e03u"]
 gradient = SubResource("Gradient_0e3lm")
