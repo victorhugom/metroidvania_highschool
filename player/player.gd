@@ -94,6 +94,7 @@ var to_wall_idle: StringName = &"to_wall_idle"
 var to_walk_wall_left: StringName = &"to_walk_wall_left"
 var to_walk_wall_right: StringName = &"to_walk_wall_right"
 var to_wall_jump: StringName = &"to_wall_jump"
+var to_shade: StringName = &"to_shade"
 
 func  _ready() -> void:
 	current_speed = speed
@@ -147,6 +148,8 @@ func _input(event: InputEvent) -> void:
 		main_state_machine.dispatch(to_hold_throw_attack)
 	if event.is_action_released("player_parry"):
 		main_state_machine.dispatch(to_parry)
+	if event.is_action_released("player_shade"):
+		main_state_machine.dispatch(to_shade)
 
 func _process(_delta: float) -> void:
 	
@@ -380,6 +383,7 @@ func _initiate_state_machine():
 	var state_parry: LimboState = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
 	var state_hold_throw_attack: LimboState = LimboState.new().named("hold_throw_attack").call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
 	var state_throw_attack: LimboState = LimboState.new().named("throw_attack").call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
+	var state_shade: LimboState = LimboState.new().named("shade").call_on_enter(_state_shade_enter).call_on_update(_state_shade_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -399,6 +403,7 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_parry)
 	main_state_machine.add_child(state_hold_throw_attack)
 	main_state_machine.add_child(state_throw_attack)
+	main_state_machine.add_child(state_shade)
 	
 	main_state_machine.initial_state = state_idle
 	
@@ -415,6 +420,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_parry, state_idle, to_idle)
 	main_state_machine.add_transition(state_hold_throw_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_throw_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_shade, state_idle, to_idle)
 	
 	#ENTER JUMP STATE
 	main_state_machine.add_transition(state_idle, state_jump, to_jump)
@@ -496,6 +502,9 @@ func _initiate_state_machine():
 	#ENTER RUN STATE
 	main_state_machine.add_transition(state_idle, state_run, to_run)
 	main_state_machine.add_transition(state_walk, state_run, to_run)
+	
+	#ENTER SHADE STATE
+	main_state_machine.add_transition(state_idle, state_shade, to_shade)
 	
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
@@ -770,4 +779,12 @@ func _state_dash_attack_update(_delta:float):
 	if animation_player.current_animation != "dash_attack":
 		is_dashing = false
 		main_state_machine.dispatch(to_idle)
+		
+func _state_shade_enter():
+	state_changed.emit("shade", velocity)
+
+func _state_shade_update(_delta:float):
+	if animation_player.current_animation.begins_with("shade") == false:
+		main_state_machine.dispatch(to_idle)
+
 #endregion

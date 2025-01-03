@@ -91,5 +91,7 @@ func _on_state_changed(state: String, velocity: Vector2):
 		play("throw_" + player_direction)
 	elif state == "parry":
 		play("parry_%s" %player_direction)
+	elif state == "shade":
+		play("shade", -1, 1.5)
 		
 	previous_state = state
