@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+
 const THROWABLE = preload("res://weapons/throwable.tscn")
 const MIN_THROW_SPEED: int = 200
 

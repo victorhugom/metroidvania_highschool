@@ -7,6 +7,7 @@ const DESTROYABLE_OBJECT_CONTAINER = preload("res://_starter_content/destroyable
 @onready var health: Health = $Health
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var destroyable_object_container: DestroyableObjectContainer = $DestroyableObjectContainer
+@onready var money_dropper: MoneyDropper = $MoneyDropper
 
 @onready var ray_cast_2d_eyes: RayCast2D = $RayCast2DEyes
 @onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
@@ -136,11 +137,15 @@ func _on_animation_player_being_hit_animation_finished(anim_name: StringName) ->
 func _on_health_empty():
 	
 	set_as_is_dying()
+	drop_money()
 	queue_free()
 
 func set_as_is_dying():
 	visible = false
 	is_dying = true
+	
+func drop_money():
+	money_dropper.drop()
 
 func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	
@@ -160,7 +165,6 @@ func _on_hurt_box_damaged(_damage: int, area: Area2D):
 	loose_sight_timeout = sight_time
 	
 	animation_player_being_hit.play("hit")
-
 	
 func _exit_tree() -> void:
 	destroyable_object_container.visible = true

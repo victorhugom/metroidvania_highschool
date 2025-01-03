@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="27_7ik08"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
-[ext_resource type="Texture2D" uid="uid://58msqt6r3pk7" path="res://player/ball.tres" id="28_d8kds"]
+[ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 6.0
