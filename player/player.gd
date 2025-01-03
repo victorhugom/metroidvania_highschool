@@ -83,6 +83,7 @@ var to_walk: StringName = &"to_walk"
 var to_run: StringName = &"to_run"
 var to_prepare_attack: StringName = &"to_prepare_attack"
 var to_attack: StringName = &"to_attack"
+var to_jump_attack: StringName = &"to_jump_attack"
 var to_strong_attack: StringName = &"to_strong_attack"
 var to_parry: StringName = &"to_parry"
 var to_dash: StringName = &"to_dash"
@@ -132,14 +133,16 @@ func _input(event: InputEvent) -> void:
 	## ATTACK
 	if event.is_action_pressed("player_attack") and is_dashing:
 		main_state_machine.dispatch(to_dash_attack)
-	if event.is_action_pressed("player_attack"):
+	elif event.is_action_pressed("player_attack") and velocity.y != 0:
+		main_state_machine.dispatch(to_jump_attack)
+	elif event.is_action_pressed("player_attack"):
 		main_state_machine.dispatch(to_prepare_attack)
 	if event.is_action_released("player_attack"):
 		if strong_attack_time >= strong_attack_threshold:
 			main_state_machine.dispatch(to_strong_attack)
 		else:
 			main_state_machine.dispatch(to_attack)
-	## ATTACK
+	
 	if event.is_action_pressed("player_throw"):
 		main_state_machine.dispatch(to_hold_throw_attack)
 	if event.is_action_released("player_parry"):
@@ -329,7 +332,7 @@ func _perform_move_on_jump(_delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 
-func _on_hurt_box_damaged(_damage: int, area: Area2D):
+func _on_hurt_box_damaged(_damage: int, _area: Area2D):
 	
 	#var damager_position = area.global_position
 	#var move_direction = (damager_position - global_position).normalized()
@@ -370,12 +373,13 @@ func _initiate_state_machine():
 	var state_down: LimboState = LimboState.new().named("down").call_on_enter(_state_down_enter).call_on_update(_state_down_update)
 	var state_dash: LimboState = LimboState.new().named("dash").call_on_enter(_state_dash_enter).call_on_update(_state_dash_update).call_on_exit(_state_dash_exit)
 	var state_dash_attack: LimboState = LimboState.new().named("dash_attack").call_on_enter(_state_dash_attack_enter).call_on_update(_state_dash_attack_update)
-	var satate_prepare_attack: LimboState = LimboState.new().named("prepare_attack").call_on_enter(_state_prepare_attack_enter).call_on_update(_state_prepare_attack_update)
 	var state_attack: LimboState = LimboState.new().named("attack").call_on_enter(_state_attack_enter).call_on_update(_state_attack_update).call_on_exit(_state_attack_exit)
+	var state_jump_attack: LimboState = LimboState.new().named("jump_attack").call_on_enter(_state_jump_attack_enter).call_on_update(_state_jump_attack_update).call_on_exit(_state_jump_attack_exit)
+	var state_prepare_attack: LimboState = LimboState.new().named("prepare_attack").call_on_enter(_state_prepare_attack_enter).call_on_update(_state_prepare_attack_update)
 	var state_strong_attack: LimboState = LimboState.new().named("strong_attack").call_on_enter(_state_strong_attack_enter).call_on_update(_state_strong_attack_update).call_on_exit(_state_strong_attack_exit)
 	var state_parry: LimboState = LimboState.new().named("parry").call_on_enter(_state_parry_enter).call_on_update(_state_parry_update).call_on_exit(_state_parry_exit)
-	var state_hold_throw_attack: LimboState = LimboState.new().named(to_hold_throw_attack).call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
-	var state_throw_attack: LimboState = LimboState.new().named(to_throw_attack).call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
+	var state_hold_throw_attack: LimboState = LimboState.new().named("hold_throw_attack").call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
+	var state_throw_attack: LimboState = LimboState.new().named("throw_attack").call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -388,8 +392,9 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_down)
 	main_state_machine.add_child(state_dash)
 	main_state_machine.add_child(state_dash_attack)
-	main_state_machine.add_child(satate_prepare_attack)
+	main_state_machine.add_child(state_prepare_attack)
 	main_state_machine.add_child(state_attack)
+	main_state_machine.add_child(state_jump_attack)
 	main_state_machine.add_child(state_strong_attack)
 	main_state_machine.add_child(state_parry)
 	main_state_machine.add_child(state_hold_throw_attack)
@@ -404,7 +409,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_down, state_idle, to_idle)
 	main_state_machine.add_transition(state_dash, state_idle, to_idle)
 	main_state_machine.add_transition(state_dash_attack, state_idle, to_idle)
-	main_state_machine.add_transition(satate_prepare_attack, state_idle, to_idle)
+	main_state_machine.add_transition(state_prepare_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_strong_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_parry, state_idle, to_idle)
@@ -420,6 +425,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_dash, state_jump, to_jump)
 	main_state_machine.add_transition(state_dash_attack, state_jump, to_jump)
 	main_state_machine.add_transition(state_attack, state_jump, to_jump)
+	main_state_machine.add_transition(state_jump_attack, state_jump, to_jump)
 	main_state_machine.add_transition(state_walk_wall_left, state_jump, to_jump)
 	main_state_machine.add_transition(state_walk_wall_right, state_jump, to_jump)
 	main_state_machine.add_transition(state_wall_jump, state_jump, to_jump)
@@ -438,17 +444,19 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_dash, state_dash_attack, to_dash_attack)
 	
 	#ENTER PREPARE ATTACK STATE
-	main_state_machine.add_transition(state_idle, satate_prepare_attack, to_prepare_attack)	
-	main_state_machine.add_transition(state_walk, satate_prepare_attack, to_prepare_attack)	
-	main_state_machine.add_transition(state_run, satate_prepare_attack, to_prepare_attack)	
-	main_state_machine.add_transition(state_jump, satate_prepare_attack, to_prepare_attack)	
-	main_state_machine.add_transition(state_dash, satate_prepare_attack, to_prepare_attack)	
+	main_state_machine.add_transition(state_idle, state_prepare_attack, to_prepare_attack)	
+	main_state_machine.add_transition(state_walk, state_prepare_attack, to_prepare_attack)	
+	main_state_machine.add_transition(state_run, state_prepare_attack, to_prepare_attack)	
+	main_state_machine.add_transition(state_dash, state_prepare_attack, to_prepare_attack)	
 	
 	#ENTER ATTACK STATE
-	main_state_machine.add_transition(satate_prepare_attack, state_attack, to_attack)	
+	main_state_machine.add_transition(state_prepare_attack, state_attack, to_attack)	
+	
+	#ENTER JUMP ATTACK STATE
+	main_state_machine.add_transition(state_jump, state_jump_attack, to_jump_attack)	
 	
 	#ENTER STRONG ATTACK STATE
-	main_state_machine.add_transition(satate_prepare_attack, state_strong_attack, to_strong_attack)	
+	main_state_machine.add_transition(state_prepare_attack, state_strong_attack, to_strong_attack)	
 
 	#ENTER PARRY STATE
 	main_state_machine.add_transition(state_idle, state_parry, to_parry)
@@ -642,6 +650,22 @@ func _state_attack_update(_delta:float):
 			main_state_machine.dispatch(to_jump)
 
 func _state_attack_exit():
+	is_attacking = false
+	
+func _state_jump_attack_enter():
+	if is_attacking:
+		return
+	is_attacking = true
+	state_changed.emit("jump_attack", velocity)
+	
+func _state_jump_attack_update(_delta:float):
+	if animation_player.current_animation.begins_with("jump_attack_") == false:
+		if is_on_floor():
+			main_state_machine.dispatch(to_idle)
+		else:
+			main_state_machine.dispatch(to_jump)
+
+func _state_jump_attack_exit():
 	is_attacking = false
 	
 func _state_strong_attack_enter():

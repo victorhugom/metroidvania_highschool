@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=76 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bp82yxyhb3me6" path="res://assets/player/amenine/wall_idle_withtransition.png" id="19_lhqhs"]
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="19_mhu11"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
+[ext_resource type="Texture2D" uid="uid://bv664daa4kb6n" path="res://assets/player/amenine/jump_attack.png" id="23_dwt61"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="27_7ik08"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
@@ -35,7 +36,7 @@ radius = 6.0
 height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nx1t5"]
-size = Vector2(21.5, 7.04292)
+size = Vector2(22.127, 7.04292)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7nay"]
 size = Vector2(10.625, 52.25)
@@ -1099,7 +1100,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2003,6 +2004,170 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_ns7tw"]
+resource_name = "jump_attack_left"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("23_dwt61")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(5, -47), Vector2(-19, -9), Vector2(-33, -46)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.884508, 2.0944, 3.93947]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4jxx0"]
+resource_name = "jump_attack_right"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("23_dwt61")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-23, -46), Vector2(-17, -14), Vector2(15, -47)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackBox/CollisionShape2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.04882, -0.720816, 2.44346]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackBox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_attack"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtulq"]
 _data = {
 "RESET": SubResource("Animation_sa11w"),
@@ -2023,6 +2188,8 @@ _data = {
 "hold_throw_left": SubResource("Animation_38i86"),
 "hold_throw_right": SubResource("Animation_g3dqt"),
 "idle": SubResource("Animation_gif1l"),
+"jump_attack_left": SubResource("Animation_ns7tw"),
+"jump_attack_right": SubResource("Animation_4jxx0"),
 "on_edge": SubResource("Animation_rkkau"),
 "parry_left": SubResource("Animation_5qvsw"),
 "parry_right": SubResource("Animation_7x43a"),
@@ -2167,6 +2334,7 @@ script = ExtResource("1_dpgy2")
 deceleration = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 use_parent_material = true
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_ifgk3")
@@ -2184,6 +2352,7 @@ damage = 1
 use_parent_material = true
 position = Vector2(-18.25, -33.5)
 rotation = 0.600826
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nx1t5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -2207,6 +2376,7 @@ use_parent_material = true
 max_health = 10
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_57fhj")]
+visible = false
 use_parent_material = true
 position = Vector2(0, -8)
 collision_layer = 4
@@ -2241,6 +2411,7 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
 [node name="ParryBox" parent="." instance=ExtResource("12_bq21u")]
+visible = false
 use_parent_material = true
 collision_mask = 65536
 
@@ -2252,6 +2423,7 @@ shape = SubResource("RectangleShape2D_vjida")
 debug_color = Color(0.922462, 5.14036e-05, 0.687427, 0.42)
 
 [node name="ShapeCast2DLeft" type="ShapeCast2D" parent="."]
+visible = false
 position = Vector2(-8, -5)
 shape = SubResource("RectangleShape2D_d16ml")
 target_position = Vector2(-4, 0)
@@ -2260,6 +2432,7 @@ collision_mask = 32768
 collide_with_areas = true
 
 [node name="ShapeCast2DRight" type="ShapeCast2D" parent="."]
+visible = false
 position = Vector2(8, -5)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_d16ml")
@@ -2269,11 +2442,13 @@ collision_mask = 32768
 collide_with_areas = true
 
 [node name="RayCast2DFootLeft" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(-12, -19)
 collision_mask = 32768
 collide_with_areas = true
 
 [node name="RayCast2DFootRight" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(12, -18)
 collision_mask = 32768
 collide_with_areas = true
