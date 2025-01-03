@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://cii404y27e6ij"]
+[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://cii404y27e6ij"]
 
 [ext_resource type="Texture2D" uid="uid://yqn3tbi6sk5s" path="res://assets/world/tilesetschoolfloor.png" id="1_p2jsa"]
 [ext_resource type="Texture2D" uid="uid://c4rnscss6exci" path="res://assets/world/tilesetschoolfloor1.png" id="2_kfet6"]
@@ -7,6 +7,24 @@
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_y0fh5"]
 tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1, 131072, 2, 2, 196608, 2, 3, 262144, 2, 4, 327680, 2, 5, 1, 65538, 0, 65537, 65538, 1, 131073, 65538, 2, 196609, 65538, 3, 262145, 65538, 4, 327681, 65538, 5, 2, 131074, 0, 65538, 131074, 1, 131074, 131074, 2, 196610, 131074, 3, 262146, 131074, 4, 327682, 131074, 5, 3, 196610, 0, 65539, 196610, 1, 131075, 196610, 2, 196611, 196610, 3, 262147, 196610, 4, 327683, 196610, 5, 4, 262146, 0, 65540, 262146, 1, 131076, 262146, 2, 196612, 262146, 3, 262148, 262146, 4, 327684, 262146, 5)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_yuaxf"]
+tile_data = PackedInt32Array(0, 3, 6, 65536, 3, 7, 131072, 3, 8, 1, 65539, 6, 65537, 65539, 7, 131073, 65539, 8)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_3cixr"]
+tile_data = PackedInt32Array(0, 131075, 6, 65536, 131075, 7, 131072, 131075, 8, 1, 196611, 6, 65537, 196611, 7, 131073, 196611, 8)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_4bp5c"]
+tile_data = PackedInt32Array(0, 262147, 6)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_qpg3r"]
+tile_data = PackedInt32Array(0, 3, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_n4w1i"]
+tile_data = PackedInt32Array(0, 327683, 3)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_kla8q"]
+tile_data = PackedInt32Array(0, 3, 4)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3sqxq"]
 texture = ExtResource("1_p2jsa")
@@ -934,13 +952,9 @@ use_texture_padding = false
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2sn61"]
 texture = ExtResource("4_6fpuf")
 texture_region_size = Vector2i(32, 32)
-18:0/size_in_atlas = Vector2i(2, 2)
 18:0/0 = 0
-10:7/size_in_atlas = Vector2i(9, 4)
 10:7/0 = 0
-13:0/size_in_atlas = Vector2i(3, 7)
 13:0/0 = 0
-10:0/size_in_atlas = Vector2i(3, 7)
 10:0/0 = 0
 0:6/0 = 0
 0:7/0 = 0
@@ -985,3 +999,9 @@ sources/1 = SubResource("TileSetAtlasSource_ot4no")
 sources/2 = SubResource("TileSetAtlasSource_dmnd5")
 sources/3 = SubResource("TileSetAtlasSource_2sn61")
 pattern_0 = SubResource("TileMapPattern_y0fh5")
+pattern_1 = SubResource("TileMapPattern_yuaxf")
+pattern_2 = SubResource("TileMapPattern_3cixr")
+pattern_3 = SubResource("TileMapPattern_4bp5c")
+pattern_4 = SubResource("TileMapPattern_qpg3r")
+pattern_5 = SubResource("TileMapPattern_n4w1i")
+pattern_6 = SubResource("TileMapPattern_kla8q")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://weapons/throwable.gd" id="1_2ckqn"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="2_2u5p3"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_7mifg"]
-[ext_resource type="Texture2D" uid="uid://58msqt6r3pk7" path="res://player/ball.tres" id="3_elwoi"]
+[ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="3_elwoi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgnd4"]
 radius = 5.0
