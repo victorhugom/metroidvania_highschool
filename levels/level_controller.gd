@@ -10,7 +10,7 @@ func _ready() -> void:
 	else:
 		_on_awake()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_L):
 		LevelsVars.sleep()
 	if Input.is_key_pressed(KEY_K):

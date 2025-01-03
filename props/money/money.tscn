@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://73xk1ylfyyfi"]
 
-[ext_resource type="Script" path="res://props/money.gd" id="1_qo10a"]
+[ext_resource type="Script" path="res://props/money/money.gd" id="1_qo10a"]
 [ext_resource type="Texture2D" uid="uid://hvmw40ruqmpe" path="res://assets/props/sakura_flower.png" id="2_77p20"]
 [ext_resource type="Shader" path="res://shaders/wavy.gdshader" id="2_fbqfs"]
 [ext_resource type="Texture2D" uid="uid://b2evyvnbhcdw0" path="res://assets/fx/lbluelight.png" id="3_kvspe"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://doigv8t3fi1pg"]
+[gd_scene load_steps=73 format=3 uid="uid://doigv8t3fi1pg"]
 
 [ext_resource type="Script" path="res://enemies/base_enemy.gd" id="1_uawak"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_qj21g"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://bp82yxyhb3me6" path="res://assets/player/amenine/wall_idle_withtransition.png" id="21_of4e3"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="22_vpt1e"]
 [ext_resource type="Texture2D" uid="uid://b82j827qi7q80" path="res://assets/fx/breath.png" id="25_23k5x"]
+[ext_resource type="PackedScene" uid="uid://baulxfl7iuam3" path="res://props/money/money_dropper.tscn" id="30_kdblc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e42is"]
 height = 56.0
@@ -2278,6 +2279,10 @@ position = Vector2(12, -51)
 scale = Vector2(0.34375, 0.34375)
 texture = ExtResource("25_23k5x")
 hframes = 6
+
+[node name="MoneyDropper" parent="." instance=ExtResource("30_kdblc")]
+position = Vector2(0, -64)
+quantity = 5
 
 [connection signal="animation_finished" from="AnimationPlayerBeingHit" to="." method="_on_animation_player_being_hit_animation_finished"]
 [connection signal="timeout" from="EyeSightTimer" to="." method="check_for_player"]
