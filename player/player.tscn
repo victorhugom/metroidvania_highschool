@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=78 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="19_mhu11"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="20_gfp2y"]
 [ext_resource type="Texture2D" uid="uid://bv664daa4kb6n" path="res://assets/player/amenine/jump_attack.png" id="23_dwt61"]
+[ext_resource type="Texture2D" uid="uid://cahu220qmbs7w" path="res://assets/player/amenine/death.png" id="24_httw6"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="27_7ik08"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
@@ -2168,6 +2169,47 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_3dyiw"]
+resource_name = "death"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_httw6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtulq"]
 _data = {
 "RESET": SubResource("Animation_sa11w"),
@@ -2183,6 +2225,7 @@ _data = {
 "attack_05_right": SubResource("Animation_c0v0c"),
 "dash": SubResource("Animation_f4ns3"),
 "dash_attack": SubResource("Animation_327a4"),
+"death": SubResource("Animation_3dyiw"),
 "down": SubResource("Animation_i85yy"),
 "hold_attack": SubResource("Animation_vgoym"),
 "hold_throw_left": SubResource("Animation_38i86"),

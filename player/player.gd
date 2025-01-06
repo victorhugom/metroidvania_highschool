@@ -53,6 +53,7 @@ var current_speed: float = 0
 var last_direction: String = "right"
 
 var is_attacking: bool = false
+var is_dead: bool = false
 var strong_attack_time: float = 0
 
 var is_parrying: bool = false
@@ -95,12 +96,14 @@ var to_walk_wall_left: StringName = &"to_walk_wall_left"
 var to_walk_wall_right: StringName = &"to_walk_wall_right"
 var to_wall_jump: StringName = &"to_wall_jump"
 var to_shade: StringName = &"to_shade"
+var to_dead: StringName = &"to_dead"
 
 func  _ready() -> void:
 	current_speed = speed
 	
 	animation_player.animation_finished.connect(_on_animation_finished)
 	hurt_box.damaged.connect(_on_hurt_box_damaged)
+	health.health_empty.connect(_on_health_empty)
 	
 	_initiate_state_machine()
 
@@ -337,6 +340,9 @@ func _perform_move_on_jump(_delta: float):
 
 func _on_hurt_box_damaged(_damage: int, _area: Area2D):
 	
+	if is_dead:
+		return
+	
 	#var damager_position = area.global_position
 	#var move_direction = (damager_position - global_position).normalized()
 	
@@ -349,6 +355,9 @@ func _on_hurt_box_damaged(_damage: int, _area: Area2D):
 		
 	if !animation_player_being_hit.is_playing():
 		animation_player_being_hit.play("hit")
+		
+func _on_health_empty():
+	main_state_machine.dispatch(to_dead)
 
 func move_forward(distance: int = 5):
 	
@@ -384,6 +393,7 @@ func _initiate_state_machine():
 	var state_hold_throw_attack: LimboState = LimboState.new().named("hold_throw_attack").call_on_enter(_state_hold_throw_attack_enter).call_on_update(_state_hold_throw_attack_update)
 	var state_throw_attack: LimboState = LimboState.new().named("throw_attack").call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
 	var state_shade: LimboState = LimboState.new().named("shade").call_on_enter(_state_shade_enter).call_on_update(_state_shade_update)
+	var state_dead: LimboState = LimboState.new().named("dead").call_on_enter(_state_dead_enter).call_on_update(_state_dead_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -404,8 +414,12 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_hold_throw_attack)
 	main_state_machine.add_child(state_throw_attack)
 	main_state_machine.add_child(state_shade)
+	main_state_machine.add_child(state_dead)
 	
 	main_state_machine.initial_state = state_idle
+	
+	#ENTER DEAD STATE
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_dead, to_dead)
 	
 	#ENTER IDLE STATE
 	main_state_machine.add_transition(state_walk, state_idle, to_idle)
@@ -786,5 +800,12 @@ func _state_shade_enter():
 func _state_shade_update(_delta:float):
 	if animation_player.current_animation.begins_with("shade") == false:
 		main_state_machine.dispatch(to_idle)
+
+func _state_dead_enter():
+	is_dead = true
+
+func _state_dead_update(_delta):
+	if is_on_floor():
+		state_changed.emit("dead", velocity)
 
 #endregion

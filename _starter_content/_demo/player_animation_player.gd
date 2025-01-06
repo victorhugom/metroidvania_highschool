@@ -41,6 +41,9 @@ func _on_state_changed(state: String, velocity: Vector2):
 		elif velocity.x > 0:
 			player_direction = "right"
 			sprite_2d.flip_h = false
+			
+	if state == "dead":
+		play("death")
 
 	if state == "idle":
 		play("idle")
