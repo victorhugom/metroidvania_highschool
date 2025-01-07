@@ -1,6 +1,7 @@
-[gd_resource type="BehaviorTree" load_steps=46 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=51 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
+[ext_resource type="Script" path="res://ai/tasks/task_parried.gd" id="1_j5h87"]
 [ext_resource type="Script" path="res://ai/tasks/task_dodge.gd" id="1_vtka4"]
 [ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="1_yk8su"]
 [ext_resource type="Script" path="res://ai/tasks/task_move_torwards_node.gd" id="2_3urkf"]
@@ -25,6 +26,22 @@ var/animation_player/type = 24
 var/animation_player/hint = 0
 var/animation_player/hint_string = ""
 
+[sub_resource type="BBVariant" id="BBVariant_05d37"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_aconq"]
+property = &"is_being_parried"
+value = SubResource("BBVariant_05d37")
+
+[sub_resource type="BTAction" id="BTAction_b64qo"]
+script = ExtResource("1_j5h87")
+
+[sub_resource type="BTSequence" id="BTSequence_45q7m"]
+custom_name = "Sequence: React to Being Parried"
+children = [SubResource("BTCheckAgentProperty_aconq"), SubResource("BTAction_b64qo")]
+
 [sub_resource type="BBVariant" id="BBVariant_dj2f0"]
 type = 1
 saved_value = true
@@ -47,7 +64,7 @@ value = SubResource("BBVariant_ybmhh")
 script = ExtResource("2_kgp36")
 tagert_node_var = "target_player"
 more_than_distance = 0
-less_than_distance = 40
+less_than_distance = 50
 
 [sub_resource type="BTAction" id="BTAction_oa7xt"]
 script = ExtResource("1_vtka4")
@@ -101,7 +118,7 @@ value = SubResource("BBVariant_gxqvd")
 script = ExtResource("2_kgp36")
 tagert_node_var = "target_player"
 more_than_distance = 0
-less_than_distance = 20
+less_than_distance = 30
 
 [sub_resource type="BTAction" id="BTAction_8f78n"]
 script = ExtResource("3_ilgoi")
@@ -128,7 +145,7 @@ children = [SubResource("BTCheckVar_2inbc"), SubResource("BTCheckAgentProperty_r
 [sub_resource type="BTAction" id="BTAction_dndn3"]
 script = ExtResource("2_3urkf")
 target_node_var = "target_player"
-tolerance = 20
+tolerance = 30
 
 [sub_resource type="BTSequence" id="BTSequence_212q4"]
 custom_name = "Sequence: Move Torwards Player"
@@ -167,7 +184,7 @@ custom_name = "Sequence: Roam"
 children = [SubResource("BTCheckVar_fsrlj"), SubResource("BTAction_ognob"), SubResource("BTAction_7aq3u"), SubResource("BTRandomWait_45nid")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_74cf8"]
-children = [SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
+children = [SubResource("BTSequence_45q7m"), SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_paedr")

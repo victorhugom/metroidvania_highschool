@@ -8,6 +8,7 @@ const DESTROYABLE_OBJECT_CONTAINER = preload("res://_starter_content/destroyable
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var destroyable_object_container: DestroyableObjectContainer = $DestroyableObjectContainer
 @onready var money_dropper: MoneyDropper = $MoneyDropper
+@onready var attack_box: AttackBox = $AttackBox
 
 @onready var ray_cast_2d_eyes: RayCast2D = $RayCast2DEyes
 @onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
@@ -30,13 +31,16 @@ var is_being_attacked = false
 var damager_position = null
 var is_dying = null
 var is_being_hit = false
+var is_being_parried = false
 
 func _ready():
 	origin_position = global_position
 	
 	animation_player.animation_finished.connect(_on_animation_finished)
-	health.health_empty.connect(_on_health_empty)
+	animation_player_being_hit.animation_finished.connect(_on_animation_player_being_hit_animation_finished)
 	hurt_box.damaged.connect(_on_hurt_box_damaged)
+	health.health_empty.connect(_on_health_empty)
+	attack_box.parried.connect(_on_attack_parried)
 
 func _physics_process(delta: float) -> void:
 	
@@ -47,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	
 	is_being_attacked = Input.is_action_just_pressed("player_attack")
 	
-	if is_attacking:
+	if is_attacking or is_being_parried:
 		return
 	
 	# Add the gravity.
@@ -101,7 +105,6 @@ func combo_attack(attack = 1):
 	is_attacking = true
 	is_combo_attack = true
 	
-	
 func stop() -> void:
 	velocity = Vector2.ZERO
 
@@ -130,6 +133,29 @@ func _on_animation_finished(anim_name:String):
 	if anim_name.begins_with("attack_03"):
 		is_attacking = false
 
+func parried():
+	
+	animation_player.play("dash")
+	is_attacking = false
+	
+		#push back
+	if direction == "right" and ray_cast_2d_left.is_colliding():
+		velocity = Vector2(1, 0)
+		global_position.x -= 5
+	elif ray_cast_2d_right.is_colliding():
+		global_position.x += 5
+		velocity = Vector2(-1, 0)
+	
+	var tween = create_tween()
+	tween.tween_callback(func():
+		is_being_parried = false
+		animation_player.play("idle")
+	).set_delay(.2) 
+
+
+func _on_attack_parried(character: CharacterBody2D):
+	is_being_parried = true
+		
 func _on_animation_player_being_hit_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hit":
 		is_being_hit = false
@@ -147,9 +173,11 @@ func set_as_is_dying():
 func drop_money():
 	money_dropper.drop()
 
-func _on_hurt_box_damaged(_damage: int, area: Area2D):
+func _on_hurt_box_damaged(damage: int, area: Area2D):
 	
 	is_being_hit = true
+	
+	health.decrease_health(damage)
 	
 	damager_position = area.global_position
 	var move_direction = (damager_position - global_position).normalized()

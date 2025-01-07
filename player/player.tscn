@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dmxljstjb5ap1"]
+[gd_scene load_steps=76 format=3 uid="uid://dmxljstjb5ap1"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://e4aleu108x88" path="res://assets/player/amenine/parry.png" id="10_knhxu"]
 [ext_resource type="Texture2D" uid="uid://n1kn046dyant" path="res://assets/player/amenine/down.png" id="11_k1xvn"]
 [ext_resource type="Texture2D" uid="uid://ds0y581uhfet7" path="res://assets/player/amenine/basic_combo_attack.png" id="11_xqd5u"]
-[ext_resource type="PackedScene" uid="uid://b4t0ftttcqb1a" path="res://character_components/parry_box.tscn" id="12_bq21u"]
 [ext_resource type="Texture2D" uid="uid://bpaxppey6ksof" path="res://assets/player/amenine/run.png" id="14_otvfv"]
 [ext_resource type="Texture2D" uid="uid://c7kqc0eckysja" path="res://assets/player/amenine/shade.png" id="15_olbwf"]
 [ext_resource type="Texture2D" uid="uid://ddigq8hwt2ga8" path="res://assets/player/amenine/throw.png" id="16_1l4ej"]
@@ -1032,6 +1031,47 @@ tracks/2/keys = {
 "values": [3, 4, 4]
 }
 
+[sub_resource type="Animation" id="Animation_3dyiw"]
+resource_name = "death"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_httw6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
 [sub_resource type="Animation" id="Animation_i85yy"]
 resource_name = "down"
 length = 0.6
@@ -1536,34 +1576,10 @@ tracks/2/keys = {
 "update": 1,
 "values": [2, 3, 3, 4, 5]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/CollisionShape2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-1.31074, -1.31074, -1.31074]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox/CollisionShape2D:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-45, -36), Vector2(-45, -36), Vector2(6, -34)]
-}
 
 [sub_resource type="Animation" id="Animation_7x43a"]
 resource_name = "parry_right"
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1587,7 +1603,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1596,34 +1612,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 3, 3, 4, 5]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/CollisionShape2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-1.78722, -1.78722, -1.84656, -2.05251]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox/CollisionShape2D:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(27, -36), Vector2(28, -36), Vector2(27, -35), Vector2(-22, -35)]
+"values": [0, 1, 2, 3, 5]
 }
 
 [sub_resource type="Animation" id="Animation_1w7i7"]
@@ -2169,47 +2161,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_3dyiw"]
-resource_name = "death"
-length = 1.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("24_httw6")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtulq"]
 _data = {
 "RESET": SubResource("Animation_sa11w"),
@@ -2360,9 +2311,6 @@ _data = {
 "hit": SubResource("Animation_40u1p")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjida"]
-size = Vector2(19, 5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d16ml"]
 size = Vector2(5, 10)
 
@@ -2378,7 +2326,6 @@ script = ExtResource("1_dpgy2")
 deceleration = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 use_parent_material = true
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_ifgk3")
@@ -2418,13 +2365,11 @@ texture_scale = 0.6
 use_parent_material = true
 max_health = 10
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_57fhj")]
-visible = false
+[node name="HurtBox" parent="." instance=ExtResource("5_57fhj")]
 use_parent_material = true
 position = Vector2(0, -8)
 collision_layer = 4
 collision_mask = 128
-health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 use_parent_material = true
@@ -2452,18 +2397,6 @@ position = Vector2(0, -116)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
-
-[node name="ParryBox" parent="." instance=ExtResource("12_bq21u")]
-visible = false
-use_parent_material = true
-collision_mask = 65536
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ParryBox"]
-use_parent_material = true
-position = Vector2(20, -44)
-rotation = -0.638866
-shape = SubResource("RectangleShape2D_vjida")
-debug_color = Color(0.922462, 5.14036e-05, 0.687427, 0.42)
 
 [node name="ShapeCast2DLeft" type="ShapeCast2D" parent="."]
 visible = false

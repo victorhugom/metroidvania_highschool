@@ -1,8 +1,7 @@
 class_name HurtBox extends Area2D
 
-signal damaged(damage:int, damager:Area2D)
+signal damaged(damage:int, damager:AttackBox)
 
-@export var health: Health
 ## Set false if player cannot be hurt, by setting this true when an `AttackBox`
 ## hits the player will not do damage
 @export var can_be_hurt: bool = true
@@ -11,9 +10,6 @@ signal damaged(damage:int, damager:Area2D)
 
 var current_iframe: float = 0
 
-func _ready() -> void:
-	assert(health != null, "param:health not set, health needed")
-	
 func _process(delta: float) -> void:
 	
 	if current_iframe > 0:
@@ -22,8 +18,7 @@ func _process(delta: float) -> void:
 ##Occours when a `AttackBox` area enter this zone
 ##1. decrease health
 ##2. emits `damaged`
-func damage(damage_value:int, damager:Area2D):
+func damage(damage_value:int, damager:AttackBox):
 	
 	print_rich("[color=red][b] Hurt Box Take Damage:[/b][/color]  %s" %damage_value)
-	health.decrease_health(damage_value)
 	damaged.emit(damage_value, damager)

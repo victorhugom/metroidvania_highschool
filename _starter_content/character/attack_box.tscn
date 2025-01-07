@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://_starter_content/character/attack_box.gd" id="1_pijr0"]
 
 [node name="AttackBox" type="Area2D"]
+collision_mask = 8193
 script = ExtResource("1_pijr0")

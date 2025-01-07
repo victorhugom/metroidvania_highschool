@@ -11,7 +11,6 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_player_being_hit: AnimationPlayer = $AnimationPlayerBeingHit
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackBox/CollisionShape2D
-@onready var parry_box: Area2D = $ParryBox
 @onready var shape_cast_2d_left: ShapeCast2D = $ShapeCast2DLeft
 @onready var shape_cast_2d_right: ShapeCast2D = $ShapeCast2DRight
 @onready var ray_cast_2d_foot_left: RayCast2D = $RayCast2DFootLeft
@@ -338,21 +337,29 @@ func _perform_move_on_jump(_delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 
-func _on_hurt_box_damaged(_damage: int, _area: Area2D):
+func _on_hurt_box_damaged(damage: int, area: AttackBox):
 	
 	if is_dead:
+		return
+		
+	if is_parrying:
+		area.parry(self)
 		return
 	
 	#var damager_position = area.global_position
 	#var move_direction = (damager_position - global_position).normalized()
 	
+	health.decrease_health(damage)
+	
+	#push back
 	if last_direction == "right":
 		velocity = Vector2(1, 0)
 		global_position.x -= 10
 	else:
 		global_position.x += 10
 		velocity = Vector2(-1, 0)
-		
+	
+	#play hit animation if is not being played
 	if !animation_player_being_hit.is_playing():
 		animation_player_being_hit.play("hit")
 		
@@ -711,17 +718,14 @@ func _state_strong_attack_exit():
 func _state_parry_enter():
 	
 	is_parrying = true
-	parry_box.monitoring = true
-	parry_box.monitorable = true
 	state_changed.emit("parry", velocity)
 	
 func _state_parry_update(_delta:float):
-	pass
-
+	if animation_player.current_animation.begins_with("parry_") == false:
+		main_state_machine.dispatch(to_idle)
+	
 func _state_parry_exit():
 	is_parrying = false
-	parry_box.monitoring = false
-	parry_box.monitorable = false
 
 func _state_hold_throw_attack_enter():
 	
