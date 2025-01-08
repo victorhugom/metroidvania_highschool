@@ -61,7 +61,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_tqrhq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw7rk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dxb2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ix11b"]
 resource_local_to_scene = true
 shader = ExtResource("12_rsgla")
 shader_parameter/opacity = 0.5
@@ -70,7 +70,7 @@ shader_parameter/g = null
 shader_parameter/b = null
 shader_parameter/mix_color = 0.5
 
-[node name="SidescrolingMapExample" type="Node2D"]
+[node name="SidescrolingMapExample2" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.45469, 0.531663, 0.731288, 1)
@@ -190,7 +190,7 @@ position = Vector2(-3, 0.144092)
 shape = SubResource("RectangleShape2D_sw7rk")
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_2dxb2")
+material = SubResource("ShaderMaterial_ix11b")
 position = Vector2(251, 197)
 
 [node name="DestroyableObject" parent="." instance=ExtResource("3_2uv5d")]
