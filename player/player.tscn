@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
-radius = 6.0
+radius = 9.0
 height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nx1t5"]
@@ -2322,6 +2322,7 @@ shader_parameter/pal0 = ExtResource("28_d8kds")
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
 collision_mask = 17920
+floor_snap_length = 10.0
 script = ExtResource("1_dpgy2")
 deceleration = 10
 

@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="14_p24ig"]
 [ext_resource type="Texture2D" uid="uid://bffuowp2bsmc2" path="res://assets/gradients/roxoaorose.tres" id="17_6sf6a"]
 [ext_resource type="PackedScene" uid="uid://cnpg6uxbisclk" path="res://props/interactable/water_fountain.tscn" id="19_7f27c"]
-[ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
+[ext_resource type="PackedScene" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
 
@@ -77,7 +77,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n43ts"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6755"]
 resource_local_to_scene = true
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
@@ -944,7 +944,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_n43ts")
+material = SubResource("ShaderMaterial_g6755")
 position = Vector2(996, -9)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
