@@ -138,7 +138,7 @@ func parried():
 	animation_player.play("dash")
 	is_attacking = false
 	
-		#push back
+	#push back
 	if direction == "right" and ray_cast_2d_left.is_colliding():
 		velocity = Vector2(1, 0)
 		global_position.x -= 5
@@ -151,7 +151,6 @@ func parried():
 		is_being_parried = false
 		animation_player.play("idle")
 	).set_delay(.2) 
-
 
 func _on_attack_parried(character: CharacterBody2D):
 	is_being_parried = true

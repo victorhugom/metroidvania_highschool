@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://qkwi1nibx2u0"]
+[gd_scene load_steps=9 format=3 uid="uid://qkwi1nibx2u0"]
 
 [ext_resource type="Script" path="res://weapons/throwable.gd" id="1_2ckqn"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="2_2u5p3"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_7mifg"]
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="3_elwoi"]
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="5_hyr4s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgnd4"]
 radius = 5.0
@@ -12,6 +13,9 @@ radius = 5.0
 shader = ExtResource("2_7mifg")
 shader_parameter/lerper = null
 shader_parameter/pal0 = ExtResource("3_elwoi")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxk2b"]
+radius = 6.0
 
 [node name="Throwable" type="RigidBody2D"]
 position = Vector2(0, -3)
@@ -30,3 +34,12 @@ material = SubResource("ShaderMaterial_16liw")
 position = Vector2(3.57628e-07, 3)
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("2_2u5p3")
+
+[node name="AttackBox" parent="." instance=ExtResource("5_hyr4s")]
+collision_layer = 4096
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_vxk2b")
+debug_color = Color(0.963752, 2.88785e-07, 0.496854, 0.42)

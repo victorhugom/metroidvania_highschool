@@ -2,19 +2,35 @@ class_name Throwable extends RigidBody2D
 
 @export var explosion: PackedScene
 
+@onready var attack_box: AttackBox = $AttackBox
+
 var exploded = false
+var direction = "right"
+var speed = 400
 
 func _ready():
 	# Connect to signals if needed
 	connect("body_entered", _on_body_entered)
-
+	attack_box.parried.connect(_on_parried)
+	attack_box.collision_layer = collision_layer
+	attack_box.collision_mask = collision_mask
+	
 # Optional: Signal handler for entering bodies
 func _on_body_entered(_body):
 	if exploded: return
 	
 	_create_explosion()
 
-func throw(direction: String, speed:= 400):
+func _on_parried(character: CharacterBody2D):
+	speed = -speed/2
+	
+	var throw_force = Vector2(speed, -64*3)
+	apply_impulse(throw_force, Vector2())
+
+func throw(_direction: String, _speed:= 400):
+	
+	direction = _direction
+	speed = _speed
 	
 	if direction == "left":
 		speed = -speed
