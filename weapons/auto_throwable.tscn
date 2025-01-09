@@ -1,13 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8pr3ebk5ncho"]
 
 [ext_resource type="Script" path="res://weapons/auto_throwable.gd" id="1_xfm63"]
-[ext_resource type="Texture2D" uid="uid://dva05put8562q" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/10-Cannon/Idle.png" id="2_hrnva"]
+[ext_resource type="Texture2D" uid="uid://bn8gf6el5ouml" path="res://assets/props/Thrower.png" id="2_mccf7"]
 
 [node name="AutoThrowable" type="Node2D"]
+use_parent_material = true
 script = ExtResource("1_xfm63")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_hrnva")
+use_parent_material = true
+position = Vector2(0, -32)
+texture = ExtResource("2_mccf7")
+hframes = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=39 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
 [ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="7_sl7sr"]
-[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="8_yxetv"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="9_apqma"]
 [ext_resource type="Texture2D" uid="uid://y6fdosd78yto" path="res://assets/world/CityBGparalax/7.png" id="9_y7upe"]
 [ext_resource type="TileSet" uid="uid://cii404y27e6ij" path="res://levels/objects_tileset.tres" id="9_yjwib"]
@@ -21,23 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://4md8j1yw2g0v" path="res://assets/world/CityBGparalax/4.png" id="12_2ypj6"]
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/CityBGparalax/5.png" id="13_18ogu"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="14_iiwd3"]
-[ext_resource type="Texture2D" uid="uid://bffuowp2bsmc2" path="res://assets/gradients/roxoaorose.tres" id="17_6sf6a"]
 [ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
+[ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="21_a23xm"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
 
-[sub_resource type="Gradient" id="Gradient_0macf"]
-offsets = PackedFloat32Array(0, 0.845411)
-colors = PackedColorArray(0.349755, 0.689284, 0.955315, 1, 0.900318, 0.657662, 0.493053, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8s3nc"]
-gradient = SubResource("Gradient_0macf")
-width = 5
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
-shader = ExtResource("8_yxetv")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_8s3nc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0mi2"]
 
@@ -54,37 +42,25 @@ shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_71rrb")
 
-[sub_resource type="Gradient" id="Gradient_mt7q3"]
-offsets = PackedFloat32Array(0, 0.991803)
-colors = PackedColorArray(0.134117, 0.141819, 0.257391, 1, 0.36403, 0.327566, 0.536837, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_b21od"]
-gradient = SubResource("Gradient_mt7q3")
+[sub_resource type="Gradient" id="Gradient_8dj65"]
+offsets = PackedFloat32Array(0, 0.492754, 0.743961, 1)
+colors = PackedColorArray(0.084595, 0.10533, 0.188947, 1, 0.483111, 0.498959, 0.562384, 1, 0.87789, 0.859279, 0.865822, 1, 0.561301, 0.742536, 0.229784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rmghf"]
+gradient = SubResource("Gradient_8dj65")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
-shader = ExtResource("8_yxetv")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_isaqf"]
+shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_b21od")
+shader_parameter/pal0 = SubResource("GradientTexture1D_rmghf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
-shader = ExtResource("8_yxetv")
-shader_parameter/lerper = null
-shader_parameter/pal0 = ExtResource("17_6sf6a")
 
-[sub_resource type="Gradient" id="Gradient_jwfgp"]
-offsets = PackedFloat32Array(0, 0.54918, 1)
-colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
-gradient = SubResource("Gradient_jwfgp")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_73ve4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34r4f"]
 resource_local_to_scene = true
-shader = ExtResource("8_yxetv")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
 
 [sub_resource type="Gradient" id="Gradient_0or05"]
 offsets = PackedFloat32Array(0, 0.405797)
@@ -331,6 +307,11 @@ position = Vector2(3, 4)
 [node name="VendingMachine2" parent="Parallax2D_Objects" instance=ExtResource("19_8haxy")]
 position = Vector2(423, -189)
 
+[node name="AutoThrowable" parent="Parallax2D_Objects" instance=ExtResource("21_a23xm")]
+material = SubResource("ShaderMaterial_isaqf")
+use_parent_material = false
+position = Vector2(-196, 2)
+
 [node name="Parallax2D_Base" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_npu4g")
@@ -353,7 +334,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_73ve4")
+material = SubResource("ShaderMaterial_34r4f")
 position = Vector2(-274, -19)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
