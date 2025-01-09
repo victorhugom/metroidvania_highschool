@@ -2,12 +2,12 @@
 
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_0iuma"]
 
-[sub_resource type="Gradient" id="Gradient_jwfgp"]
+[sub_resource type="Gradient" id="Gradient_f14of"]
 offsets = PackedFloat32Array(0, 0.256039, 0.541063, 1)
 colors = PackedColorArray(0.095504, 0.0862795, 0.216793, 1, 0.552013, 0.124107, 0.257956, 1, 0.719318, 0.367, 0.44812, 1, 0.985144, 0.811213, 0.767463, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
-gradient = SubResource("Gradient_jwfgp")
+gradient = SubResource("Gradient_f14of")
 width = 5
 
 [resource]

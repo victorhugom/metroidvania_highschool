@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="1_b7m6c"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_viv0j"]
 [ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/CityBGparalax/2.png" id="2_dpg3j"]
-[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="2_e22s8"]
+[ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="2_e22s8"]
 [ext_resource type="TileSet" uid="uid://pyuwg4up8fhx" path="res://levels/main_tileset.tres" id="2_oppkn"]
 [ext_resource type="PackedScene" uid="uid://bnaf10n6cgnuy" path="res://_starter_content/destroyable_object/destroyable_object.tscn" id="3_2uv5d"]
 [ext_resource type="Texture2D" uid="uid://b6rnj5qaca3if" path="res://assets/world/CityBGparalax/3.png" id="3_t4tdf"]

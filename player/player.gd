@@ -17,6 +17,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 @onready var ray_cast_2d_foot_right: RayCast2D = $RayCast2DFootRight
 @onready var throw_hand: Node2D = $ThrowHand
 @onready var inventory: Inventory = $Inventory
+@onready var follow_camera: FollowCamera = $FollowCamera
 
 @export_group("Attack")
 @export var strong_attack_threshold: float = 0.2

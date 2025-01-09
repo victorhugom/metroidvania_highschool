@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://qbhgpqyk8a7g"]
 
-[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="1_m2dhi"]
+[ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="1_m2dhi"]
 
 [sub_resource type="Gradient" id="Gradient_0e3lm"]
 colors = PackedColorArray(0.116887, 0.102575, 0.199384, 1, 0.713634, 0.582622, 0.763227, 1)
