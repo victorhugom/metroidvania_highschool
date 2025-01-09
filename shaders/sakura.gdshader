@@ -5,8 +5,6 @@ uniform sampler2D pal1 : hint_default_black;
 
 uniform float lerper: hint_range(0.0, 1.0);
 
-
-
 vec3 c_lerp(vec4 c1, vec4 c2, float pos) {
 	pos = clamp (pos, 0.0, 1.0);
 	return vec3(c1.x*pos + c2.x*(1.0-pos),c1.y*pos + c2.y*(1.0-pos),c1.z*pos + c2.z*(1.0-pos));

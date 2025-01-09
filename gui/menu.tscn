@@ -1,0 +1,283 @@
+[gd_scene load_steps=14 format=3 uid="uid://y5sipknw3c8a"]
+
+[ext_resource type="Script" path="res://gui/menu.gd" id="1_0dlck"]
+[ext_resource type="Texture2D" uid="uid://cn3d8sr21c4sb" path="res://assets/props/nokiatijolao.png" id="1_p6d3b"]
+[ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="4_m30wb"]
+[ext_resource type="Texture2D" uid="uid://dl3qdpap15vq4" path="res://assets/blank.png" id="5_oxiti"]
+[ext_resource type="StyleBox" uid="uid://cyfdxhkxehxq7" path="res://gui/icon_style.tres" id="6_axgp7"]
+[ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="6_ceo4a"]
+[ext_resource type="Texture2D" uid="uid://bjh5yo88okr18" path="res://assets/gui/sakura_icon.PNG" id="8_86icd"]
+[ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="8_apo1y"]
+
+[sub_resource type="Animation" id="Animation_52c7x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Transform2D(1, 0, 0, 1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s61ub"]
+resource_name = "hide_phone"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.14, 0.14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1220, 680)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Transform2D(1, 0, 0, 1, 0, 0), Transform2D(0.14, 0, 0, 0.14, 1220, 680)]
+}
+
+[sub_resource type="Animation" id="Animation_7tvx3"]
+resource_name = "show_phone"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.14, 0.14), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1220, 680), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Transform2D(0.14, 0, 0, 0.14, 1220, 680), Transform2D(1, 0, 0, 1, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jrcl4"]
+_data = {
+"RESET": SubResource("Animation_52c7x"),
+"hide_phone": SubResource("Animation_s61ub"),
+"show_phone": SubResource("Animation_7tvx3")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nw8fi"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_0dlck")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jrcl4")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -656.0
+offset_top = -978.0
+offset_right = 236.088
+offset_bottom = 136.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_p6d3b")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.103183, 0.18982, 1.20327e-07, 1)
+offset_left = 1112.0
+offset_top = 208.0
+offset_right = 1352.0
+offset_bottom = 376.0
+texture = ExtResource("5_oxiti")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 1144.0
+offset_top = 352.0
+offset_right = 1309.0
+offset_bottom = 374.0
+theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_m30wb")
+text = "Select Thowable"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel_Time" type="RichTextLabel" parent="."]
+offset_left = 1265.0
+offset_top = 216.0
+offset_right = 1350.0
+offset_bottom = 238.0
+theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_m30wb")
+text = "99:99:99"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 1136.0
+offset_top = 216.0
+offset_right = 1192.0
+offset_bottom = 238.0
+theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_m30wb")
+text = "300"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect7" type="TextureRect" parent="."]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(16, 16)
+offset_left = 1112.0
+offset_top = 216.0
+offset_right = 1135.0
+offset_bottom = 239.0
+texture = ExtResource("8_86icd")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="MenuContainer" type="HFlowContainer" parent="."]
+offset_left = 1120.0
+offset_top = 240.0
+offset_right = 1344.0
+offset_bottom = 349.0
+alignment = 1
+
+[node name="TextureRect3" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_axgp7")
+icon = ExtResource("6_ceo4a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect4" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_nw8fi")
+icon = ExtResource("8_apo1y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect5" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("6_ceo4a")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect6" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("6_ceo4a")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect7" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("6_ceo4a")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect8" type="Button" parent="MenuContainer"]
+modulate = Color(0.0327646, 0.529148, 2.69532e-06, 1)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("6_ceo4a")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

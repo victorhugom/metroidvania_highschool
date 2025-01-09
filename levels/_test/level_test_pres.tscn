@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
 [ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="7_sl7sr"]
-[ext_resource type="Shader" path="res://shaders/saura.gdshader" id="8_yxetv"]
+[ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="8_yxetv"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="9_apqma"]
 [ext_resource type="TileSet" uid="uid://cii404y27e6ij" path="res://levels/objects_tileset.tres" id="9_yjwib"]
 [ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/CityBGparalax/2.png" id="10_lqrwa"]
@@ -29,27 +29,27 @@
 offsets = PackedFloat32Array(0, 0.845411)
 colors = PackedColorArray(0.349755, 0.689284, 0.955315, 1, 0.900318, 0.657662, 0.493053, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8s3nc"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lwjto"]
 gradient = SubResource("Gradient_0macf")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_8s3nc")
+shader_parameter/pal0 = SubResource("GradientTexture1D_lwjto")
 
 [sub_resource type="Gradient" id="Gradient_mt7q3"]
 offsets = PackedFloat32Array(0, 0.991803)
 colors = PackedColorArray(0.134117, 0.141819, 0.257391, 1, 0.36403, 0.327566, 0.536837, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_b21od"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_er84d"]
 gradient = SubResource("Gradient_mt7q3")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_b21od")
+shader_parameter/pal0 = SubResource("GradientTexture1D_er84d")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
 shader = ExtResource("8_yxetv")
@@ -60,41 +60,41 @@ shader_parameter/pal0 = ExtResource("17_6sf6a")
 offsets = PackedFloat32Array(0, 0.115942, 0.400966, 0.763285, 1)
 colors = PackedColorArray(0.103187, 0.0649544, 0.162776, 1, 0.467316, 0.104862, 0.363009, 1, 0.878164, 0.000771632, 0.903572, 1, 0.997565, 0.719389, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_hn2e7"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bybk0"]
 gradient = SubResource("Gradient_x17ho")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_umtrk"]
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_hn2e7")
+shader_parameter/pal0 = SubResource("GradientTexture1D_bybk0")
 
 [sub_resource type="Gradient" id="Gradient_jwfgp"]
 offsets = PackedFloat32Array(0, 0.54918, 1)
 colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_byksv"]
 gradient = SubResource("Gradient_jwfgp")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6755"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h4h3"]
 resource_local_to_scene = true
 shader = ExtResource("8_yxetv")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
+shader_parameter/pal0 = SubResource("GradientTexture1D_byksv")
 
 [sub_resource type="Gradient" id="Gradient_0or05"]
 offsets = PackedFloat32Array(0, 0.405797)
 colors = PackedColorArray(0.0376743, 0.0520494, 0.110566, 1, 0.853986, 0.763631, 0.713302, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dh1ni"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dp5tx"]
 gradient = SubResource("Gradient_0or05")
 width = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jqn4s"]
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_dh1ni")
+shader_parameter/pal0 = SubResource("GradientTexture1D_dp5tx")
 
 [node name="SidescrolingMapExample" type="Node2D"]
 position = Vector2(2, 2)
@@ -944,7 +944,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_g6755")
+material = SubResource("ShaderMaterial_5h4h3")
 position = Vector2(996, -9)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
