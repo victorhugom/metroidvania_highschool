@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://y5sipknw3c8a"]
+[gd_scene load_steps=18 format=3 uid="uid://y5sipknw3c8a"]
 
 [ext_resource type="Script" path="res://gui/menu.gd" id="1_0dlck"]
 [ext_resource type="Texture2D" uid="uid://cn3d8sr21c4sb" path="res://assets/props/nokiatijolao.png" id="1_p6d3b"]
+[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_fr7sh"]
 [ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="4_m30wb"]
 [ext_resource type="Texture2D" uid="uid://dl3qdpap15vq4" path="res://assets/blank.png" id="5_oxiti"]
 [ext_resource type="StyleBox" uid="uid://cyfdxhkxehxq7" path="res://gui/icon_style.tres" id="6_axgp7"]
@@ -135,6 +136,18 @@ _data = {
 "show_phone": SubResource("Animation_7tvx3")
 }
 
+[sub_resource type="Gradient" id="Gradient_a3nxh"]
+offsets = PackedFloat32Array(0, 0.507246, 0.782609, 0.84058)
+colors = PackedColorArray(0.0380538, 0.0368735, 0.153747, 1, 0.225369, 0.310356, 0.383004, 1, 0.737618, 0.742337, 0.788065, 1, 0.313304, 0.420456, 0.119251, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xsdjp"]
+gradient = SubResource("Gradient_a3nxh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpges"]
+shader = ExtResource("2_fr7sh")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_xsdjp")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nw8fi"]
 
 [node name="Menu" type="CanvasLayer"]
@@ -146,6 +159,7 @@ libraries = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hpges")
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -164,6 +178,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.103183, 0.18982, 1.20327e-07, 1)
 offset_left = 1112.0
 offset_top = 208.0
@@ -177,7 +192,7 @@ offset_left = 1144.0
 offset_top = 352.0
 offset_right = 1309.0
 offset_bottom = 374.0
-theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_colors/default_color = Color(1.86507e-07, 0.174474, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_m30wb")
 text = "Select Thowable"
 fit_content = true
@@ -188,7 +203,7 @@ offset_left = 1265.0
 offset_top = 216.0
 offset_right = 1350.0
 offset_bottom = 238.0
-theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_colors/default_color = Color(0, 0.172549, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_m30wb")
 text = "99:99:99"
 fit_content = true
@@ -199,7 +214,7 @@ offset_left = 1136.0
 offset_top = 216.0
 offset_right = 1192.0
 offset_bottom = 238.0
-theme_override_colors/default_color = Color(0, 0.433151, 0, 1)
+theme_override_colors/default_color = Color(0, 0.172549, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_m30wb")
 text = "300"
 fit_content = true

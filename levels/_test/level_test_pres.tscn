@@ -59,7 +59,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_rmghf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_34r4f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_peyjf"]
 resource_local_to_scene = true
 
 [sub_resource type="Gradient" id="Gradient_0or05"]
@@ -334,7 +334,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_34r4f")
+material = SubResource("ShaderMaterial_peyjf")
 position = Vector2(-274, -19)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
