@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=37 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
@@ -22,8 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="14_iiwd3"]
 [ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
-[ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="21_a23xm"]
+[ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
+[ext_resource type="PackedScene" uid="uid://cnpg6uxbisclk" path="res://props/interactable/water_fountain.tscn" id="22_asyco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 
@@ -43,19 +44,6 @@ shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_71rrb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
-
-[sub_resource type="Gradient" id="Gradient_8dj65"]
-offsets = PackedFloat32Array(0, 0.492754, 0.743961, 1)
-colors = PackedColorArray(0.084595, 0.10533, 0.188947, 1, 0.483111, 0.498959, 0.562384, 1, 0.87789, 0.859279, 0.865822, 1, 0.561301, 0.742536, 0.229784, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rmghf"]
-gradient = SubResource("Gradient_8dj65")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_isaqf"]
-shader = ExtResource("20_qa315")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_rmghf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
 
@@ -307,11 +295,6 @@ position = Vector2(3, 4)
 [node name="VendingMachine2" parent="Parallax2D_Objects" instance=ExtResource("19_8haxy")]
 position = Vector2(423, -189)
 
-[node name="AutoThrowable" parent="Parallax2D_Objects" instance=ExtResource("21_a23xm")]
-material = SubResource("ShaderMaterial_isaqf")
-use_parent_material = false
-position = Vector2(-196, 2)
-
 [node name="Parallax2D_Base" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_npu4g")
@@ -324,6 +307,33 @@ tile_set = ExtResource("9_yjwib")
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(149, -71)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-80, -5)
+texture = ExtResource("21_a7jds")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(224, -5)
+texture = ExtResource("21_a7jds")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
+position = Vector2(484, -5)
+texture = ExtResource("21_a7jds")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lights"]
+position = Vector2(484, -193)
+texture = ExtResource("21_a7jds")
+
+[node name="PointLight2D5" type="PointLight2D" parent="Lights"]
+position = Vector2(105, -193)
+texture = ExtResource("21_a7jds")
+
+[node name="PointLight2D6" type="PointLight2D" parent="Lights"]
+position = Vector2(-172, -193)
+texture = ExtResource("21_a7jds")
+
+[node name="WaterFountain" parent="Lights" instance=ExtResource("22_asyco")]
+position = Vector2(-344, 72)
 
 [node name="SurfaceDriver" parent="." instance=ExtResource("22_8h22b")]
 position = Vector2(3906, -691)
