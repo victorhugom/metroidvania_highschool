@@ -18,7 +18,7 @@ void fragment() {
     float gradient_to_edge = max(abs(center_uv.x), abs(center_uv.y));
     gradient_to_edge = gradient_to_edge * Distortion;
     gradient_to_edge = 1.0 - gradient_to_edge;
-    
+
     // Apply rotation based on Rotation_deg
     float rotation_radians = radians(Rotation_deg);
     mat2 rotation_matrix = mat2(vec2(cos(rotation_radians), sin(rotation_radians)),

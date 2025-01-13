@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://xxvwsb4guibq"]
+[gd_scene load_steps=12 format=3 uid="uid://xxvwsb4guibq"]
 
 [ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="1_hxxdk"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_v5a7s"]
+[ext_resource type="Script" path="res://props/interactable/drinking_fountain.gd" id="2_s2u0s"]
 [ext_resource type="Texture2D" uid="uid://bvxfdhsuna3qx" path="res://assets/props/bebedouro.png" id="4_b83tw"]
 
 [sub_resource type="Gradient" id="Gradient_c0nb3"]
@@ -130,8 +131,9 @@ _data = {
 "state_b": SubResource("Animation_mmapx")
 }
 
-[node name="WaterFountain" type="Node2D"]
+[node name="DrinkingFountain" type="Node2D"]
 material = SubResource("ShaderMaterial_yxysk")
+script = ExtResource("2_s2u0s")
 
 [node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("1_hxxdk")]
 use_parent_material = true

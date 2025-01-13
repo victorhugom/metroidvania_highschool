@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4wrkdbuyfbj1"]
+
+[ext_resource type="Texture2D" uid="uid://btnishbhux0o2" path="res://assets/props/fluorescent_light.png" id="1_0pio7"]
+[ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="2_cpger"]
+
+[node name="FluorescentLight" type="Sprite2D"]
+position = Vector2(213, -135)
+texture = ExtResource("1_0pio7")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 81)
+color = Color(0.930668, 0.825378, 0.632974, 1)
+energy = 2.96
+texture = ExtResource("2_cpger")
