@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bhye2xudcyhv5"]
+[gd_scene load_steps=28 format=4 uid="uid://bhye2xudcyhv5"]
 
 [ext_resource type="PackedScene" uid="uid://dmxljstjb5ap1" path="res://player/player.tscn" id="1_8mx52"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="1_b7m6c"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/CityBGparalax/5.png" id="5_qv2im"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="6_nw8hp"]
 [ext_resource type="PackedScene" uid="uid://b4wrkdbuyfbj1" path="res://props/fluorescent_light.tscn" id="12_ccbrs"]
+[ext_resource type="PackedScene" uid="uid://c3djvh74heeys" path="res://props/interactable/load_level_door.tscn" id="14_b83tb"]
 [ext_resource type="PackedScene" uid="uid://h45xq2xfrxvj" path="res://world/classroom.tscn" id="15_j7yk1"]
 [ext_resource type="TileSet" uid="uid://cii404y27e6ij" path="res://levels/objects_tileset.tres" id="15_saqqm"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="16_dof6d"]
@@ -21,27 +22,27 @@
 offsets = PackedFloat32Array(0, 0.845411)
 colors = PackedColorArray(0.349755, 0.689284, 0.955315, 1, 0.900318, 0.657662, 0.493053, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lwjto"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mm4sm"]
 gradient = SubResource("Gradient_4144g")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0swcd"]
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_lwjto")
+shader_parameter/pal0 = SubResource("GradientTexture1D_mm4sm")
 
 [sub_resource type="Gradient" id="Gradient_d7the"]
 offsets = PackedFloat32Array(0, 0.991803)
 colors = PackedColorArray(0.134117, 0.141819, 0.257391, 1, 0.36403, 0.327566, 0.536837, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_er84d"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cpiup"]
 gradient = SubResource("Gradient_d7the")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xahwg"]
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_er84d")
+shader_parameter/pal0 = SubResource("GradientTexture1D_cpiup")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2mby"]
 shader = ExtResource("2_e22s8")
@@ -56,7 +57,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_roang"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq2l6"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -251,14 +252,6 @@ position = Vector2(912, 224)
 z_index = 1
 position = Vector2(904, 32)
 
-[node name="Door8" parent="Parallax2D_Front/Doors" instance=ExtResource("16_jgfg5")]
-z_index = 1
-position = Vector2(1168, 0)
-
-[node name="Door9" parent="Parallax2D_Front/Doors" instance=ExtResource("16_jgfg5")]
-z_index = 1
-position = Vector2(2032, 0)
-
 [node name="Door6" parent="Parallax2D_Front/Doors" instance=ExtResource("16_jgfg5")]
 z_index = 1
 position = Vector2(912, -160)
@@ -266,6 +259,14 @@ position = Vector2(912, -160)
 [node name="Door7" parent="Parallax2D_Front/Doors" instance=ExtResource("16_jgfg5")]
 z_index = 1
 position = Vector2(912, -352)
+
+[node name="Door8" parent="Parallax2D_Front/Doors" instance=ExtResource("16_jgfg5")]
+z_index = 1
+position = Vector2(1168, 0)
+
+[node name="LoadLevelDoor" parent="Parallax2D_Front/Doors" instance=ExtResource("14_b83tb")]
+position = Vector2(2032, 0)
+target_scene_path = "res://levels/library_entry.tscn"
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(149, -71)
@@ -361,7 +362,8 @@ position = Vector2(539, -425)
 position = Vector2(675, -425)
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
-material = SubResource("ShaderMaterial_roang")
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gq2l6")
 position = Vector2(-200, 608)
 
 [node name="CameraZoomChanger" parent="." instance=ExtResource("24_raw6j")]

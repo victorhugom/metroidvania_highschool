@@ -141,4 +141,7 @@ position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_460gr")
 debug_color = Color(0.938467, 1.37654e-05, 0.623568, 0.42)
 
+[node name="PlayerPosition" type="Marker2D" parent="."]
+position = Vector2(-64, 0)
+
 [connection signal="interact" from="InteractableSwitch" to="." method="_on_interactable_switch_interact"]

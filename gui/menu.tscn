@@ -181,7 +181,6 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Background" type="TextureRect" parent="."]
-visible = false
 modulate = Color(0.103183, 0.18982, 1.20327e-07, 1)
 offset_left = 1112.0
 offset_top = 208.0
