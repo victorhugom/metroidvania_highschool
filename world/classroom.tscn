@@ -19,18 +19,18 @@ scroll_scale = Vector2(1.03, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
 use_parent_material = true
-position = Vector2(20, 0)
+position = Vector2(-81.3653, 6)
 texture = ExtResource("2_coikw")
 
 [node name="Quadronegro" type="Sprite2D" parent="Parallax2D"]
 use_parent_material = true
-position = Vector2(25, 45)
+position = Vector2(-78.8164, 33.32)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_m2v4f")
 
 [node name="Relogio" type="Sprite2D" parent="Parallax2D"]
 use_parent_material = true
-position = Vector2(-32, 34)
+position = Vector2(-135.816, 22.32)
 scale = Vector2(0.52, 0.52)
 texture = ExtResource("4_wuof6")
 
@@ -40,7 +40,7 @@ scroll_scale = Vector2(1.03, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
 use_parent_material = true
-position = Vector2(81, 28)
+position = Vector2(-16.8101, 36)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("5_x15qt")
 
@@ -50,7 +50,7 @@ scroll_scale = Vector2(1.02, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
 use_parent_material = true
-position = Vector2(80, 28)
+position = Vector2(-17.8101, 36)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("6_7oal8")
 
@@ -60,39 +60,36 @@ scroll_scale = Vector2(1.01, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
 use_parent_material = true
-position = Vector2(80, 27)
+position = Vector2(-17.8101, 35)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("7_ixqlm")
 
 [node name="Parallax2D5" type="Parallax2D" parent="."]
 use_parent_material = true
 scroll_scale = Vector2(1.03, 1)
-screen_offset = Vector2(-656.867, 24.9333)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D5"]
 use_parent_material = true
-position = Vector2(-78.9687, 27.4)
+position = Vector2(-176.779, 35.4)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("5_x15qt")
 
 [node name="Parallax2D6" type="Parallax2D" parent="."]
 use_parent_material = true
 scroll_scale = Vector2(1.02, 1)
-screen_offset = Vector2(-656.867, 24.9333)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D6"]
 use_parent_material = true
-position = Vector2(-79.9687, 27.4)
+position = Vector2(-177.779, 35.4)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("6_7oal8")
 
 [node name="Parallax2D7" type="Parallax2D" parent="."]
 use_parent_material = true
 scroll_scale = Vector2(1.01, 1)
-screen_offset = Vector2(-656.867, 24.9333)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D7"]
 use_parent_material = true
-position = Vector2(-79.9687, 26.4)
+position = Vector2(-177.779, 34.4)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("7_ixqlm")
