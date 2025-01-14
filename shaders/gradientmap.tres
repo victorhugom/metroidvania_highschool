@@ -1,16 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bhjprxe5y5k3i"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bhjprxe5y5k3i"]
 
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_nv4hb"]
-
-[sub_resource type="Gradient" id="Gradient_0xjlx"]
-offsets = PackedFloat32Array(0, 0.468599, 1)
-colors = PackedColorArray(0.15827, 0.139064, 0.275848, 1, 0.480583, 0.28927, 0.363866, 1, 0.73485, 0.623978, 0.380932, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gvffu"]
-gradient = SubResource("Gradient_0xjlx")
-width = 5
+[ext_resource type="Texture2D" uid="uid://bf4ujpt8fvbh8" path="res://shaders/sundown_BG.tres" id="2_8shh3"]
 
 [resource]
 shader = ExtResource("1_nv4hb")
 shader_parameter/lerper = 0.0
-shader_parameter/pal0 = SubResource("GradientTexture1D_gvffu")
+shader_parameter/pal0 = ExtResource("2_8shh3")

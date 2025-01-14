@@ -57,7 +57,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq2l6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7xs3"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -363,7 +363,7 @@ position = Vector2(675, -425)
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_gq2l6")
+material = SubResource("ShaderMaterial_b7xs3")
 position = Vector2(-200, 608)
 
 [node name="CameraZoomChanger" parent="." instance=ExtResource("24_raw6j")]

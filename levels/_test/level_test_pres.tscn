@@ -1,11 +1,13 @@
-[gd_scene load_steps=37 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=45 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
 [ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_n0jms"]
+[ext_resource type="Texture2D" uid="uid://djcovhk6o7au" path="res://shaders/sundown_Sky.tres" id="3_x3i2t"]
 [ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="4_gh5y7"]
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
+[ext_resource type="Texture2D" uid="uid://cs7a0adbjv5fk" path="res://assets/fx/yellowlight.png" id="6_q1bqe"]
 [ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="7_sl7sr"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="9_apqma"]
 [ext_resource type="Texture2D" uid="uid://y6fdosd78yto" path="res://assets/world/CityBGparalax/7.png" id="9_y7upe"]
@@ -21,12 +23,28 @@
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/CityBGparalax/5.png" id="13_18ogu"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="14_iiwd3"]
 [ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
+[ext_resource type="Texture2D" uid="uid://bopywnxj4lrnu" path="res://shaders/sundown_Back.tres" id="20_4rgl8"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
-[ext_resource type="PackedScene" uid="uid://cnpg6uxbisclk" path="res://props/interactable/water_fountain.tscn" id="22_asyco"]
+[ext_resource type="Texture2D" uid="uid://c75xw3qxyyaql" path="res://shaders/sundown_Front.tres" id="24_76756"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
+shader = ExtResource("20_qa315")
+shader_parameter/lerper = null
+shader_parameter/pal0 = ExtResource("3_x3i2t")
+
+[sub_resource type="Gradient" id="Gradient_ojso3"]
+colors = PackedColorArray(1, 0.8483, 0.449643, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6rifq"]
+gradient = SubResource("Gradient_ojso3")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n58jg"]
+shader = ExtResource("20_qa315")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_6rifq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0mi2"]
 
@@ -44,11 +62,28 @@ shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_71rrb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
+shader = ExtResource("20_qa315")
+shader_parameter/lerper = null
+shader_parameter/pal0 = ExtResource("20_4rgl8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
+shader = ExtResource("20_qa315")
+shader_parameter/lerper = null
+shader_parameter/pal0 = ExtResource("24_76756")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_peyjf"]
+[sub_resource type="Gradient" id="Gradient_8om8i"]
+offsets = PackedFloat32Array(0, 0.439614, 1)
+colors = PackedColorArray(0.00669614, 0, 0.204705, 1, 0.0310667, 0.155646, 0.105578, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bnysp"]
+gradient = SubResource("Gradient_8om8i")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5fms"]
 resource_local_to_scene = true
+shader = ExtResource("20_qa315")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_bnysp")
 
 [sub_resource type="Gradient" id="Gradient_0or05"]
 offsets = PackedFloat32Array(0, 0.405797)
@@ -67,7 +102,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_dh1ni")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(-2, -2)
-color = Color(0.460723, 0.284543, 0.440165, 1)
+color = Color(0.883511, 0.447309, 0.595483, 1)
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -78,10 +113,9 @@ material = ExtResource("1_4mrx4")
 [node name="0" type="Parallax2D" parent="BG/City"]
 material = SubResource("ShaderMaterial_deo0f")
 scroll_scale = Vector2(1, 0.8)
-scroll_offset = Vector2(-1132, -85.4796)
+scroll_offset = Vector2(-908, 188)
 repeat_size = Vector2(320, 0)
 repeat_times = 20
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/0"]
 use_parent_material = true
@@ -90,26 +124,31 @@ texture = ExtResource("9_apqma")
 offset = Vector2(0, -81.695)
 
 [node name="1" type="Parallax2D" parent="BG/City"]
-use_parent_material = true
-scroll_scale = Vector2(1, 0.2)
-scroll_offset = Vector2(2.40002, -336)
-screen_offset = Vector2(-604.229, -417.534)
+material = SubResource("ShaderMaterial_n58jg")
+scroll_scale = Vector2(-0.03, 1)
+scroll_offset = Vector2(-408, -257)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/1"]
 use_parent_material = true
+position = Vector2(657, -278)
 texture = ExtResource("10_lqrwa")
 offset = Vector2(0, 374.87)
 
+[node name="PointLight2D" type="PointLight2D" parent="BG/City/1"]
+position = Vector2(749, -30)
+texture = ExtResource("6_q1bqe")
+texture_scale = 9.83
+
 [node name="2" type="Parallax2D" parent="BG/City"]
 use_parent_material = true
-scroll_scale = Vector2(1.03, 0.4)
-scroll_offset = Vector2(-1101.79, -252.493)
+scale = Vector2(3, 3)
+scroll_scale = Vector2(0.1, 0.4)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/2"]
 use_parent_material = true
+position = Vector2(7.02736, -309.392)
 texture = ExtResource("11_b3kqo")
 offset = Vector2(0, 477.31)
 
@@ -119,7 +158,6 @@ scroll_scale = Vector2(1.04, 0.6)
 scroll_offset = Vector2(-1071.58, -168.986)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/3"]
 use_parent_material = true
@@ -132,7 +170,6 @@ scroll_scale = Vector2(1.06, 0.8)
 scroll_offset = Vector2(-1041.37, -85.4796)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/4"]
 use_parent_material = true
@@ -142,26 +179,26 @@ offset = Vector2(0, 23.45)
 [node name="5" type="Parallax2D" parent="BG/City"]
 use_parent_material = true
 scroll_scale = Vector2(1.08, 1)
-scroll_offset = Vector2(-1011.15, -1.97281)
-repeat_size = Vector2(320, 0)
+scroll_offset = Vector2(-1566.49, 452)
+repeat_size = Vector2(640, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/5"]
 use_parent_material = true
+position = Vector2(-86.6143, -762.027)
+scale = Vector2(2, 2)
 texture = ExtResource("13_18ogu")
-offset = Vector2(0, -142.63)
 
 [node name="6" type="Parallax2D" parent="BG/City"]
 use_parent_material = true
-scroll_scale = Vector2(1.1, 1)
-scroll_offset = Vector2(-1011.15, -1.97281)
+scale = Vector2(5, 5)
+scroll_offset = Vector2(-3044.5, 88)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/6"]
 use_parent_material = true
+position = Vector2(-7.90674, -48.2)
 texture = ExtResource("14_iiwd3")
 offset = Vector2(0, -112.495)
 
@@ -171,7 +208,6 @@ scroll_scale = Vector2(1.15, 1)
 scroll_offset = Vector2(-1011.15, -1.97281)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/9"]
 use_parent_material = true
@@ -186,7 +222,6 @@ scroll_scale = Vector2(1.18, 1)
 scroll_offset = Vector2(-1011.15, -1.97281)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/7"]
 use_parent_material = true
@@ -200,7 +235,6 @@ scroll_scale = Vector2(1.2, 1)
 scroll_offset = Vector2(-1011.15, -1.97281)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/8"]
 use_parent_material = true
@@ -214,7 +248,6 @@ material = SubResource("ShaderMaterial_xt6jx")
 [node name="Parallax2D" type="Parallax2D" parent="BG/Classroom2"]
 use_parent_material = true
 scroll_scale = Vector2(1.03, 1)
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Classroom2/Parallax2D"]
 use_parent_material = true
@@ -236,7 +269,6 @@ texture = ExtResource("4_gh5y7")
 [node name="Parallax2D2" type="Parallax2D" parent="BG/Classroom2"]
 use_parent_material = true
 scroll_scale = Vector2(1.03, 1)
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Classroom2/Parallax2D2"]
 use_parent_material = true
@@ -247,7 +279,6 @@ texture = ExtResource("7_sl7sr")
 [node name="Parallax2D3" type="Parallax2D" parent="BG/Classroom2"]
 use_parent_material = true
 scroll_scale = Vector2(1.02, 1)
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Classroom2/Parallax2D3"]
 use_parent_material = true
@@ -258,7 +289,6 @@ texture = ExtResource("6_gwbrd")
 [node name="Parallax2D4" type="Parallax2D" parent="BG/Classroom2"]
 use_parent_material = true
 scroll_scale = Vector2(1.01, 1)
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Classroom2/Parallax2D4"]
 use_parent_material = true
@@ -269,7 +299,6 @@ texture = ExtResource("5_0ta4p")
 [node name="Parallax2D_Back" type="Parallax2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_bfyrw")
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Back"]
 use_parent_material = true
@@ -281,7 +310,6 @@ tile_set = ExtResource("9_yjwib")
 z_index = -1
 material = ExtResource("11_svt7y")
 repeat_times = 10
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Objects"]
 use_parent_material = true
@@ -298,7 +326,6 @@ position = Vector2(423, -189)
 [node name="Parallax2D_Base" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_npu4g")
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Base"]
 use_parent_material = true
@@ -332,9 +359,6 @@ texture = ExtResource("21_a7jds")
 position = Vector2(-172, -193)
 texture = ExtResource("21_a7jds")
 
-[node name="WaterFountain" parent="Lights" instance=ExtResource("22_asyco")]
-position = Vector2(-344, 72)
-
 [node name="SurfaceDriver" parent="." instance=ExtResource("22_8h22b")]
 position = Vector2(3906, -691)
 scale = Vector2(0.835038, 36.4743)
@@ -344,13 +368,13 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_peyjf")
+material = SubResource("ShaderMaterial_w5fms")
+use_parent_material = false
 position = Vector2(-274, -19)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_npu4g")
-screen_offset = Vector2(-604.229, -417.534)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D_Front"]
 use_parent_material = true

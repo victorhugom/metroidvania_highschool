@@ -1,15 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://qbhgpqyk8a7g"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://qbhgpqyk8a7g"]
 
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="1_m2dhi"]
-
-[sub_resource type="Gradient" id="Gradient_0e3lm"]
-colors = PackedColorArray(0.116887, 0.102575, 0.199384, 1, 0.713634, 0.582622, 0.763227, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4e03u"]
-gradient = SubResource("Gradient_0e3lm")
-width = 5
+[ext_resource type="Texture2D" uid="uid://d2w8hhiv8eu07" path="res://shaders/night_Objects.tres" id="2_fj6du"]
 
 [resource]
 shader = ExtResource("1_m2dhi")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_4e03u")
+shader_parameter/pal0 = ExtResource("2_fj6du")
