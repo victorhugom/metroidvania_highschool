@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=51 format=3 uid="uid://cr6n7sschkx3f"]
+[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://cr6n7sschkx3f"]
 
 [ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="1_66w5h"]
 [ext_resource type="Script" path="res://ai/tasks/task_parried.gd" id="1_j5h87"]
@@ -25,6 +25,15 @@ var/animation_player/name = &"animation_player"
 var/animation_player/type = 24
 var/animation_player/hint = 0
 var/animation_player/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_5rvkd"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_eqqmi"]
+property = &"is_enabled"
+value = SubResource("BBVariant_5rvkd")
 
 [sub_resource type="BBVariant" id="BBVariant_05d37"]
 type = 1
@@ -184,7 +193,7 @@ custom_name = "Sequence: Roam"
 children = [SubResource("BTCheckVar_fsrlj"), SubResource("BTAction_ognob"), SubResource("BTAction_7aq3u"), SubResource("BTRandomWait_45nid")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_74cf8"]
-children = [SubResource("BTSequence_45q7m"), SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
+children = [SubResource("BTCheckAgentProperty_eqqmi"), SubResource("BTSequence_45q7m"), SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_paedr")

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dl3qdpap15vq4" path="res://assets/blank.png" id="5_oxiti"]
 [ext_resource type="StyleBox" uid="uid://cyfdxhkxehxq7" path="res://gui/icon_style.tres" id="6_axgp7"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="6_ceo4a"]
-[ext_resource type="Texture2D" uid="uid://bjh5yo88okr18" path="res://assets/gui/sakura_icon.PNG" id="8_86icd"]
+[ext_resource type="Texture2D" uid="uid://bjh5yo88okr18" path="res://assets/gui/sakura_icon.png" id="8_86icd"]
 [ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="8_apo1y"]
 
 [sub_resource type="Animation" id="Animation_52c7x"]

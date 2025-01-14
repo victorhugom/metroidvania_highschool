@@ -33,6 +33,7 @@ var is_dying = null
 var is_being_hit = false
 var is_being_parried = false
 
+
 func _ready():
 	origin_position = global_position
 	
@@ -46,7 +47,9 @@ func _physics_process(delta: float) -> void:
 	
 	loose_sight_timeout-= delta
 	
-	if is_dying:
+	if is_dying || LevelsVars.SLEEPING == false:
+		if animation_player.is_playing():
+			animation_player.stop()
 		return
 	
 	is_being_attacked = Input.is_action_just_pressed("player_attack")

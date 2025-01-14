@@ -61,6 +61,7 @@ player=""
 wallkable_wall=""
 awake_only_node=""
 sleep_only_node=""
+enemies=""
 
 [input]
 
