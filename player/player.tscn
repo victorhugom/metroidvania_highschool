@@ -2322,12 +2322,11 @@ shader_parameter/pal0 = ExtResource("28_d8kds")
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 use_parent_material = true
 collision_mask = 17920
-floor_snap_length = 10.0
+floor_snap_length = 30.0
 script = ExtResource("1_dpgy2")
 deceleration = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 use_parent_material = true
 position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_ifgk3")
@@ -2402,7 +2401,6 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
 [node name="ShapeCast2DLeft" type="ShapeCast2D" parent="."]
-visible = false
 position = Vector2(-8, -5)
 shape = SubResource("RectangleShape2D_d16ml")
 target_position = Vector2(-4, 0)
@@ -2411,7 +2409,6 @@ collision_mask = 32768
 collide_with_areas = true
 
 [node name="ShapeCast2DRight" type="ShapeCast2D" parent="."]
-visible = false
 position = Vector2(8, -5)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_d16ml")
@@ -2421,13 +2418,11 @@ collision_mask = 32768
 collide_with_areas = true
 
 [node name="RayCast2DFootLeft" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(-12, -19)
 collision_mask = 32768
 collide_with_areas = true
 
 [node name="RayCast2DFootRight" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(12, -18)
 collision_mask = 32768
 collide_with_areas = true

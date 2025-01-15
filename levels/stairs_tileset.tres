@@ -1,0 +1,42 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ccjki1trbd055"]
+
+[ext_resource type="Texture2D" uid="uid://2y2fk5y7ew5" path="res://assets/props/stairs.png" id="1_2l6g3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lq5f"]
+texture = ExtResource("1_2l6g3")
+0:0/next_alternative_id = 2
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, -8, 0, -8, -8, 8, -8)
+0:2/0/physics_layer_0/polygon_0/one_way = true
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, -8, 0, -8, -8, -8, -8, 8, -8)
+1:2/0/physics_layer_0/polygon_0/one_way = true
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, -8, 0, -8, -8, 8, -8)
+2:4/0/physics_layer_0/polygon_0/one_way = true
+0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, 8, -8)
+0:5/0/physics_layer_0/polygon_0/one_way = true
+1:5/0 = 0
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, 8, -8, 8)
+1:5/0/physics_layer_0/polygon_0/one_way = true
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, -8, 0, -8, -8, 8, -8)
+2:5/0/physics_layer_0/polygon_0/one_way = true
+0:4/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 16384
+physics_layer_0/collision_mask = 4113
+sources/0 = SubResource("TileSetAtlasSource_0lq5f")

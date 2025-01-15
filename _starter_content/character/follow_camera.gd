@@ -5,7 +5,7 @@ class_name FollowCamera extends Camera2D
 
 # Variables for zoom
 var zoom_speed = 0.5
-var target_zoom = Vector2(1.5, 1.5)
+var target_zoom = Vector2(1, 1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
