@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0p34ifc0ljr5"
-path="res://.godot/imported/sleep.png-4d9006affd225a6807504f8c95551471.ctex"
+uid="uid://2y2fk5y7ew5"
+path="res://.godot/imported/stairs.png-eb8dd7985a4dcfc8a7c2435ae9319fea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/amenine/sleep.png"
-dest_files=["res://.godot/imported/sleep.png-4d9006affd225a6807504f8c95551471.ctex"]
+source_file="res://assets/props/stairs.png"
+dest_files=["res://.godot/imported/stairs.png-eb8dd7985a4dcfc8a7c2435ae9319fea.ctex"]
 
 [params]
 
