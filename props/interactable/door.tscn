@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv6kxwj18johh"]
+[gd_scene load_steps=8 format=3 uid="uid://cj5xpski30gqb"]
 
 [ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="3_k6myy"]
 [ext_resource type="Texture2D" uid="uid://bf5ncnn714y2r" path="res://assets/props/door.png" id="4_jrncg"]
@@ -11,26 +11,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Door/StaticBody2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Door:frame")
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_m8ehw"]
@@ -39,7 +39,7 @@ length = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Door:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Door/StaticBody2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,30 +63,30 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_v5pnr"]
 resource_name = "state_b"
-length = 0.15
+length = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Door:frame")
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Door/StaticBody2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_16fus"]
@@ -100,6 +100,7 @@ _data = {
 position = Vector2(8, -48)
 texture = ExtResource("4_jrncg")
 hframes = 7
+frame = 1
 animation_player = NodePath("AnimationPlayer")
 interact_message_a = "Abrir"
 interact_message_b = "Fecjar"
@@ -115,11 +116,9 @@ collision_mask = 17
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_rrvhp")
-disabled = true
 debug_color = Color(0.938467, 1.37654e-05, 0.623568, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_16fus")
 }

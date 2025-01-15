@@ -109,21 +109,14 @@ func _process(_delta: float) -> void:
 
 func _on_interactable_interacted(body: Node2D) -> void:
 	
+	animation_player.stop()
+	
 	# switch interact message and state
 	if current_state == "state_a":
-		current_state = "state_b"
-		interactable.interact_message = interact_message_b
+		go_to_sate_b()
 	else:
-		current_state = "state_a"
-		interactable.interact_message = interact_message_a
+		go_to_sate_a()
 
-	#get audio stream and switch
-	var audio_stream = audio_stream_a if current_state == "state_b" else audio_stream_b
-	if audio_stream != null:
-		interactable.audio_stream = audio_stream
-	
-	#play animation
-	animation_player.play(current_state)
 	interact.emit(body)
 	
 func go_to_sate_a():
