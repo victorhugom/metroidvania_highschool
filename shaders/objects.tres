@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://qbhgpqyk8a7g"]
 
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="1_m2dhi"]
-[ext_resource type="Texture2D" path="res://shaders/night_Objects.tres" id="2_fj6du"]
+[ext_resource type="Texture2D" uid="uid://bm3patqw1m6cd" path="res://shaders/night_Objects.tres" id="2_fj6du"]
 
 [resource]
 shader = ExtResource("1_m2dhi")

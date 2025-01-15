@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"
+uid="uid://dqlbfv1ewumyg"
+path="res://.godot/imported/sleepingpoint.png-40f9b0030459d42e26796e3331c627c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/sakura_icon.PNG"
-dest_files=["res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"]
+source_file="res://assets/props/sleepingpoint.png"
+dest_files=["res://.godot/imported/sleepingpoint.png-40f9b0030459d42e26796e3331c627c0.ctex"]
 
 [params]
 
