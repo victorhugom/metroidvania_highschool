@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
 [ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_n0jms"]
-[ext_resource type="Texture2D" uid="uid://djcovhk6o7au" path="res://shaders/sundown_Sky.tres" id="3_x3i2t"]
+[ext_resource type="Texture2D" uid="uid://b3q87f0sia0i0" path="res://shaders/sundown_Sky.tres" id="3_x3i2t"]
 [ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="4_gh5y7"]
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
@@ -23,11 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/CityBGparalax/5.png" id="13_18ogu"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="14_iiwd3"]
 [ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
-[ext_resource type="Texture2D" uid="uid://bopywnxj4lrnu" path="res://shaders/sundown_Back.tres" id="20_4rgl8"]
+[ext_resource type="Texture2D" uid="uid://djodpwuyyk3t4" path="res://shaders/sundown_Back.tres" id="20_4rgl8"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
-[ext_resource type="Texture2D" uid="uid://c75xw3qxyyaql" path="res://shaders/sundown_Front.tres" id="24_76756"]
+[ext_resource type="Texture2D" uid="uid://caybmnhiv3yja" path="res://shaders/sundown_Front.tres" id="24_76756"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 shader = ExtResource("20_qa315")
@@ -79,7 +79,7 @@ colors = PackedColorArray(0.00669614, 0, 0.204705, 1, 0.0310667, 0.155646, 0.105
 gradient = SubResource("Gradient_8om8i")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sayb0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvi0j"]
 resource_local_to_scene = true
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
@@ -368,7 +368,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_sayb0")
+material = SubResource("ShaderMaterial_qvi0j")
 use_parent_material = false
 position = Vector2(-274, -19)
 

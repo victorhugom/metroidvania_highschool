@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"
+uid="uid://ceyi0fycs4175"
+path="res://.godot/imported/carteiraBG.png-9f50cd543cecb1b66dd1f98a8fbcde07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/sakura_icon.PNG"
-dest_files=["res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"]
+source_file="res://assets/props/carteiraBG.png"
+dest_files=["res://.godot/imported/carteiraBG.png-9f50cd543cecb1b66dd1f98a8fbcde07.ctex"]
 
 [params]
 
