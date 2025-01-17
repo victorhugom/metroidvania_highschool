@@ -25,7 +25,7 @@ signal state_changed(current_state: String, velocity: Vector2)
 
 @export_group("Jump")
 ## The max height that the player can jump
-@export var jump_height: int = 96
+@export var jump_height: int = 128
 ## The jump buffer time in seconds, used to allow player to make mistakes when jumping
 @export var jump_buffer_time: float = 0.1 # Buffer time in seconds
 @export var max_jumps: int = 2

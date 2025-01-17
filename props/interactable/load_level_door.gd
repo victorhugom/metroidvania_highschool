@@ -12,7 +12,7 @@ func _ready() -> void:
 		player.global_position = player_position.global_position
 
 		
-func _on_interactable_switch_interact(body: Node2D) -> void:
+func _on_interactable_switch_interact(_body: Node2D) -> void:
 	LevelsVars.previous_level_path = get_tree().current_scene.scene_file_path
 	get_tree().change_scene_to_file(target_scene_path)
 	

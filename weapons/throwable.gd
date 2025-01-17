@@ -21,8 +21,8 @@ func _on_body_entered(_body):
 	
 	_create_explosion()
 
-func _on_parried(character: CharacterBody2D):
-	speed = -speed/2
+func _on_parried(_character: CharacterBody2D):
+	speed = -int(speed/2)
 	
 	var throw_force = Vector2(speed, -64*3)
 	apply_impulse(throw_force, Vector2())

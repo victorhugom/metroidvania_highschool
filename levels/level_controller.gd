@@ -1,5 +1,8 @@
 extends Node2D
 
+@onready var player: Player = %Player
+@export var zoom: Vector2 = Vector2(2.5, 2.5)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	LevelsVars.sleeping.connect(_on_sleeping)
@@ -9,6 +12,8 @@ func _ready() -> void:
 		_on_sleeping()
 	else:
 		_on_awake()
+		
+	player.follow_camera.update_zoom(zoom)
 
 func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_L):

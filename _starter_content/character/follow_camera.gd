@@ -4,7 +4,7 @@ class_name FollowCamera extends Camera2D
 @export var ground_map_tile: TileMapLayer
 
 # Variables for zoom
-var zoom_speed = 0.5
+var zoom_speed = 0.7
 var target_zoom = Vector2(1, 1)
 
 # Called when the node enters the scene tree for the first time.

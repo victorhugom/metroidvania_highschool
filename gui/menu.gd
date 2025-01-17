@@ -11,7 +11,7 @@ func _ready() -> void:
 	#animation_player.animation_finished.connect(_animation_finished)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	rich_text_label_time.text = get_current_time()
 
 func get_current_time() -> String:

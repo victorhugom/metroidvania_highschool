@@ -155,7 +155,7 @@ func parried():
 		animation_player.play("idle")
 	).set_delay(.2) 
 
-func _on_attack_parried(character: CharacterBody2D):
+func _on_attack_parried(_character: CharacterBody2D):
 	is_being_parried = true
 		
 func _on_animation_player_being_hit_animation_finished(anim_name: StringName) -> void:
