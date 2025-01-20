@@ -15,11 +15,6 @@ func _ready() -> void:
 func _process(delta):
 	# Smoothly interpolate the zoom value
 	zoom = lerp(zoom, target_zoom, zoom_speed * delta)
-	
-	if Input.is_key_pressed(KEY_EQUAL):
-		update_zoom(Vector2(1.5, 1.5))
-	if Input.is_key_pressed(KEY_MINUS):
-		update_zoom(Vector2(2.5, 2.5))
 		
 func set_camera_limit():
 	if ground_map_tile != null:

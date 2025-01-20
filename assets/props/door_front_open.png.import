@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura_icon.png-4e9265c16b7829e67a9e2f167e898782.ctex"
+uid="uid://owci245qview"
+path="res://.godot/imported/door_front_open.png-61d533cb4a4ff1b4e95681918d8b59bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/sakura_icon.png"
-dest_files=["res://.godot/imported/sakura_icon.png-4e9265c16b7829e67a9e2f167e898782.ctex"]
+source_file="res://assets/props/door_front_open.png"
+dest_files=["res://.godot/imported/door_front_open.png-61d533cb4a4ff1b4e95681918d8b59bf.ctex"]
 
 [params]
 

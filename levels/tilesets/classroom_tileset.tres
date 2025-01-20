@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bsiaynvykkoko"]
+
+[ext_resource type="Texture2D" uid="uid://clumu3f0shbhg" path="res://assets/world/classroom_tileset.png" id="1_3f66l"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ticvk"]
+texture = ExtResource("1_3f66l")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_ticvk")

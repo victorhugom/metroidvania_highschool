@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3djvh74heeys"]
+[gd_scene load_steps=12 format=3 uid="uid://nyner8qkvtad"]
 
-[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_i1o66"]
-[ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="2_urqat"]
-[ext_resource type="Script" path="res://props/interactable/load_level_door.gd" id="2_yra23"]
-[ext_resource type="Texture2D" uid="uid://bf5ncnn714y2r" path="res://assets/props/door.png" id="3_gyud1"]
+[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_ptud8"]
+[ext_resource type="Script" path="res://props/interactable/load_level_door.gd" id="2_1yn3l"]
+[ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="3_7hug6"]
+[ext_resource type="Texture2D" uid="uid://owci245qview" path="res://assets/props/door_front_open.png" id="4_ppxip"]
 
 [sub_resource type="Gradient" id="Gradient_c0nb3"]
 offsets = PackedFloat32Array(0, 0.647343, 1)
@@ -14,7 +14,7 @@ gradient = SubResource("Gradient_c0nb3")
 width = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxysk"]
-shader = ExtResource("1_i1o66")
+shader = ExtResource("1_ptud8")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_a8t8j")
 
@@ -32,18 +32,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_m8ehw"]
 resource_name = "state_a"
@@ -59,18 +47,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_v5pnr"]
@@ -88,18 +64,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_16fus"]
 _data = {
@@ -108,18 +72,15 @@ _data = {
 "state_b": SubResource("Animation_v5pnr")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_460gr"]
-size = Vector2(20, 96)
-
-[node name="LoadLevelDoor" type="Node2D"]
+[node name="LoadLevelDoorFront" type="Node2D"]
 material = SubResource("ShaderMaterial_yxysk")
-script = ExtResource("2_yra23")
-
-[node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("2_urqat")]
 use_parent_material = true
-position = Vector2(8, -48)
-texture = ExtResource("3_gyud1")
-hframes = 7
+script = ExtResource("2_1yn3l")
+
+[node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_7hug6")]
+use_parent_material = true
+position = Vector2(0, -48)
+texture = ExtResource("4_ppxip")
 animation_player = NodePath("../AnimationPlayer")
 interact_message_a = "Abrir"
 interact_message_b = "Fechar"
@@ -132,16 +93,6 @@ libraries = {
 "": SubResource("AnimationLibrary_16fus")
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 512
-collision_mask = 17
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -48)
-shape = SubResource("RectangleShape2D_460gr")
-debug_color = Color(0.938467, 1.37654e-05, 0.623568, 0.42)
-
 [node name="PlayerPosition" type="Marker2D" parent="."]
-position = Vector2(-64, 0)
 
 [connection signal="interact" from="InteractableSwitch" to="." method="_on_interactable_switch_interact"]

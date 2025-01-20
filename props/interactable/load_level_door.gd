@@ -4,12 +4,14 @@ class_name Door extends Node2D
 @onready var player_position: Marker2D = $PlayerPosition
 
 @export_file("*.tscn") var target_scene_path: String
+@export var camera_zoom = Vector2(1,1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	if LevelsVars.previous_level_path == target_scene_path:
 		player.global_position = player_position.global_position
+		get_tree().current_scene.zoom = camera_zoom
 
 		
 func _on_interactable_switch_interact(_body: Node2D) -> void:
