@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"
+uid="uid://cmx158msqvx4o"
+path="res://.godot/imported/Ninja - attack.png-e99c5204e302277a9eb191ed3b05ee3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/sakura_icon.PNG"
-dest_files=["res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"]
+source_file="res://assets/enemies/Ninja/Ninja - attack.png"
+dest_files=["res://.godot/imported/Ninja - attack.png-e99c5204e302277a9eb191ed3b05ee3d.ctex"]
 
 [params]
 
