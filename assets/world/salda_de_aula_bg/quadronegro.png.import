@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm6nv8k4g8eib"
-path="res://.godot/imported/9.png-1bcdf4ea378e939c70d1a758e2b9cf4e.ctex"
+uid="uid://cnj3j8am56r6f"
+path="res://.godot/imported/quadronegro.png-ddda80d5f50a258795febcfe00566c4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/CityBGparalax/9.png"
-dest_files=["res://.godot/imported/9.png-1bcdf4ea378e939c70d1a758e2b9cf4e.ctex"]
+source_file="res://assets/world/salda_de_aula_bg/quadronegro.png"
+dest_files=["res://.godot/imported/quadronegro.png-ddda80d5f50a258795febcfe00566c4f.ctex"]
 
 [params]
 

@@ -1,46 +1,46 @@
 [gd_scene load_steps=15 format=3 uid="uid://t4lm1kivhjcj"]
 
-[ext_resource type="Script" path="res://weapons/acid.gd" id="1_7xeja"]
-[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_umtny"]
-[ext_resource type="Texture2D" uid="uid://besfywfkybil0" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Effects/Explosion/Explosions.png" id="3_h7mgg"]
+[ext_resource type="Script" path="res://weapons/acid_cloud.gd" id="1_qs6je"]
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_capdv"]
+[ext_resource type="Texture2D" uid="uid://besfywfkybil0" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Effects/Explosion/Explosions.png" id="3_me88v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
 size = Vector2(40, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_anggw"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gn1tc"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snhqr"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5h73d"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6qpg"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rhkq4"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1aaal"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(1152, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7k6bg"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(1344, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpj50"]
-atlas = ExtResource("3_h7mgg")
+atlas = ExtResource("3_me88v")
 region = Rect2(1536, 0, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sp52q"]
@@ -80,9 +80,9 @@ animations = [{
 
 [node name="BallExplosion" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_7xeja")
+script = ExtResource("1_qs6je")
 
-[node name="AttackBox" parent="." instance=ExtResource("2_umtny")]
+[node name="AttackBox" parent="." instance=ExtResource("2_capdv")]
 position = Vector2(1, 7.5)
 collision_layer = 8
 collision_mask = 64

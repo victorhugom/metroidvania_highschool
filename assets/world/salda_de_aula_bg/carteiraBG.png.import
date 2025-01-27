@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1vr2cu1hm2pu"
-path="res://.godot/imported/8.png-7e06844b2fb1bdf13ac87a1e488e84f2.ctex"
+uid="uid://cstdswcy3lqnn"
+path="res://.godot/imported/carteiraBG.png-514fff9b51da16ba59e08c50c3fd5b65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/CityBGparalax/8.png"
-dest_files=["res://.godot/imported/8.png-7e06844b2fb1bdf13ac87a1e488e84f2.ctex"]
+source_file="res://assets/world/salda_de_aula_bg/carteiraBG.png"
+dest_files=["res://.godot/imported/carteiraBG.png-514fff9b51da16ba59e08c50c3fd5b65.ctex"]
 
 [params]
 

@@ -5,3 +5,5 @@
 [node name="AttackBox" type="Area2D"]
 collision_mask = 8193
 script = ExtResource("1_pijr0")
+
+[node name="Timer" type="Timer" parent="."]

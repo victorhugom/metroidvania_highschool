@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbeuhn48xl1id"
-path="res://.godot/imported/sala.png-17ead81edb3b86f022e1864ac44cfbec.ctex"
+path="res://.godot/imported/sala.png-1f395a254678cd38c65859724ef09e6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/salda de aula BG/sala.png"
-dest_files=["res://.godot/imported/sala.png-17ead81edb3b86f022e1864ac44cfbec.ctex"]
+source_file="res://assets/world/salda_de_aula_bg/sala.png"
+dest_files=["res://.godot/imported/sala.png-1f395a254678cd38c65859724ef09e6c.ctex"]
 
 [params]
 

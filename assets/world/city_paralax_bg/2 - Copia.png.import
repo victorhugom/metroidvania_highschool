@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4v7pjk4bogg"
-path="res://.godot/imported/relogio.png-8631a97a2c1713bfe540f7456ba66140.ctex"
+uid="uid://cjjtov2p7fxve"
+path="res://.godot/imported/2 - Copia.png-5c0a731fff295f0b3d83e55829a5a20e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/salda de aula BG/relogio.png"
-dest_files=["res://.godot/imported/relogio.png-8631a97a2c1713bfe540f7456ba66140.ctex"]
+source_file="res://assets/world/city_paralax_bg/2 - Copia.png"
+dest_files=["res://.godot/imported/2 - Copia.png-5c0a731fff295f0b3d83e55829a5a20e.ctex"]
 
 [params]
 

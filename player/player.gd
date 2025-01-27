@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+const SIMPLE_EXPLOSION = preload("res://weapons/simple_explosion.tscn")
 const THROWABLE = preload("res://weapons/throwable.tscn")
 const MIN_THROW_SPEED: int = 200
 
@@ -748,7 +749,7 @@ func _state_throw_attack_enter():
 	
 	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = throw_hand.global_position
-	new_projectile.explosion = load("res://weapons/ball_explosion.tscn")
+	new_projectile.explosion = SIMPLE_EXPLOSION
 	
 	new_projectile.throw(last_direction, throw_speed)
 

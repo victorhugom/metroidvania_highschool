@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvbpv6wotcl2e"
-path="res://.godot/imported/1.png-ba43730067e49678ee2001e421296f3d.ctex"
+uid="uid://deoc3d7myn5so"
+path="res://.godot/imported/vines_temp.png-48db4cf04798e49b71e347f4f170db55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/CityBGparalax/1.png"
-dest_files=["res://.godot/imported/1.png-ba43730067e49678ee2001e421296f3d.ctex"]
+source_file="res://assets/world/vines_temp.png"
+dest_files=["res://.godot/imported/vines_temp.png-48db4cf04798e49b71e347f4f170db55.ctex"]
 
 [params]
 

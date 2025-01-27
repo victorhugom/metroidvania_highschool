@@ -1,5 +1,6 @@
 extends Node2D
 const THROWABLE = preload("res://weapons/throwable.tscn")
+const ACID_CLOUD = preload("res://weapons/acid_cloud.tscn")
 
 @onready var timer: Timer = $Timer
 
@@ -14,7 +15,7 @@ func _ready() -> void:
 func throw():
 	var new_projectile: Throwable = THROWABLE.instantiate()
 	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
-	new_projectile.explosion = load("res://weapons/acid.tscn")
+	new_projectile.explosion = ACID_CLOUD
 	
 	new_projectile.throw(direction, speed)
 

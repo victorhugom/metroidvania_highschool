@@ -1,7 +1,6 @@
 class_name Throwable extends RigidBody2D
 
 @export var explosion: PackedScene
-
 @onready var attack_box: AttackBox = $AttackBox
 
 var exploded = false

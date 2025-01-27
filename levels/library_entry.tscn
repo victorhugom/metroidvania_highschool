@@ -1,18 +1,18 @@
-[gd_scene load_steps=38 format=4 uid="uid://dgdihf6cr3xrt"]
+[gd_scene load_steps=43 format=4 uid="uid://dgdihf6cr3xrt"]
 
 [ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_8xfxa"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_r8e06"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="2_21j5i"]
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="2_gipnx"]
-[ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="3_0mk3d"]
+[ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/city_paralax_bg/1.png" id="3_0mk3d"]
 [ext_resource type="Script" path="res://shaders/color_grading.gd" id="3_r6h2d"]
-[ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/CityBGparalax/2.png" id="4_3aoio"]
+[ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/city_paralax_bg/2.png" id="4_3aoio"]
 [ext_resource type="Texture2D" uid="uid://bv0byxavptfig" path="res://shaders/sundown.tres" id="4_ri7nd"]
 [ext_resource type="Texture2D" uid="uid://b4d5qb6gmpxp0" path="res://shaders/sundown_BG.tres" id="4_w4oyy"]
-[ext_resource type="Texture2D" uid="uid://b6rnj5qaca3if" path="res://assets/world/CityBGparalax/3.png" id="5_8tiuh"]
-[ext_resource type="Texture2D" uid="uid://4md8j1yw2g0v" path="res://assets/world/CityBGparalax/4.png" id="6_8p7aw"]
-[ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/CityBGparalax/5.png" id="7_dk40l"]
-[ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/CityBGparalax/6.png" id="8_705t5"]
+[ext_resource type="Texture2D" uid="uid://b6rnj5qaca3if" path="res://assets/world/city_paralax_bg/3.png" id="5_8tiuh"]
+[ext_resource type="Texture2D" uid="uid://4md8j1yw2g0v" path="res://assets/world/city_paralax_bg/4.png" id="6_8p7aw"]
+[ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/city_paralax_bg/5.png" id="7_dk40l"]
+[ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/city_paralax_bg/6.png" id="8_705t5"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="10_2puiy"]
 [ext_resource type="Texture2D" uid="uid://bffuowp2bsmc2" path="res://assets/gradients/roxoaorose.tres" id="11_5a1co"]
 [ext_resource type="PackedScene" uid="uid://booa2seap27ik" path="res://props/interactable/load_level_door_side.tscn" id="12_l4h6k"]
@@ -26,6 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="23_437dc"]
 [ext_resource type="PackedScene" uid="uid://bi8pk6grgod46" path="res://props/interactable/sleeping_chair.tscn" id="24_thtdu"]
 [ext_resource type="PackedScene" uid="uid://dupdkpmqyp5ru" path="res://props/interactable/chest.tscn" id="26_aj0c5"]
+[ext_resource type="Script" path="res://_starter_content/character/hurt_box.gd" id="27_3gnnc"]
+[ext_resource type="Script" path="res://levels/vines.gd" id="27_j50s8"]
+[ext_resource type="Texture2D" uid="uid://deoc3d7myn5so" path="res://assets/world/vines_temp.png" id="28_xj73k"]
 
 [sub_resource type="Gradient" id="Gradient_ctsr5"]
 offsets = PackedFloat32Array(0, 0.845411)
@@ -70,6 +73,12 @@ size = Vector2(13, 47.619)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvd3v"]
 size = Vector2(18, 40.293)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykjir"]
+size = Vector2(128, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blvfu"]
+size = Vector2(128, 18)
 
 [node name="LibraryEntry" type="Node2D"]
 script = ExtResource("1_8xfxa")
@@ -301,3 +310,38 @@ position = Vector2(-424, -32)
 
 [node name="Chest" parent="." instance=ExtResource("26_aj0c5")]
 position = Vector2(392, 1696)
+
+[node name="Vines" type="Node2D" parent="."]
+position = Vector2(-928, 1136)
+script = ExtResource("27_j50s8")
+
+[node name="HurtBox" type="Area2D" parent="Vines"]
+collision_layer = 262144
+collision_mask = 4104
+script = ExtResource("27_3gnnc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vines/HurtBox"]
+shape = SubResource("RectangleShape2D_ykjir")
+
+[node name="Sprite2D" type="Sprite2D" parent="Vines"]
+position = Vector2(-40, 2.563e-05)
+scale = Vector2(0.0419408, 0.0419408)
+texture = ExtResource("28_xj73k")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Vines"]
+position = Vector2(8.00002, 2.563e-05)
+scale = Vector2(0.0419408, 0.0419408)
+texture = ExtResource("28_xj73k")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Vines"]
+position = Vector2(56, 2.563e-05)
+scale = Vector2(0.0419408, 0.0419408)
+texture = ExtResource("28_xj73k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Vines"]
+collision_layer = 262144
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vines/StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_blvfu")

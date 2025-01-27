@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6fdosd78yto"
-path="res://.godot/imported/7.png-2a7832000fe76c9e593fb263e9b1a9e7.ctex"
+uid="uid://dlf4p6rbvu51w"
+path="res://.godot/imported/5.png-9c9d2c2f0f979e8e1678801ed87eb607.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/CityBGparalax/7.png"
-dest_files=["res://.godot/imported/7.png-2a7832000fe76c9e593fb263e9b1a9e7.ctex"]
+source_file="res://assets/world/city_paralax_bg/5.png"
+dest_files=["res://.godot/imported/5.png-9c9d2c2f0f979e8e1678801ed87eb607.ctex"]
 
 [params]
 

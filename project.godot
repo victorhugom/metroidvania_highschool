@@ -181,6 +181,7 @@ player_shade={
 2d_physics/layer_16="WalkableWall"
 2d_physics/layer_17="EnemyProjectile"
 2d_physics/layer_18="SakuraLeaves"
+2d_physics/layer_19="DestroyableWall"
 
 [rendering]
 
