@@ -433,6 +433,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_walk, state_idle, to_idle)
 	main_state_machine.add_transition(state_run, state_idle, to_idle)
 	main_state_machine.add_transition(state_jump, state_idle, to_idle)
+	main_state_machine.add_transition(state_jump_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_down, state_idle, to_idle)
 	main_state_machine.add_transition(state_dash, state_idle, to_idle)
 	main_state_machine.add_transition(state_dash_attack, state_idle, to_idle)

@@ -37,7 +37,7 @@ func _on_area_entered(area: Area2D):
 ## Occours when entering a body that can be hit
 func _on_body_entered(body: Node2D):
 	
-	if body not in damaged_entities:
+	if body not in damaged_entities and body.has_method("damage"):
 		damaged_entities.append(body)
 		body.damage(damage, self)
 		hit_body.emit(damage, body)
