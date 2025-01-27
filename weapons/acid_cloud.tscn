@@ -71,7 +71,7 @@ script = ExtResource("1_xu0qx")
 [node name="AttackBox" parent="." instance=ExtResource("2_112uo")]
 position = Vector2(0, -13)
 collision_layer = 8
-collision_mask = 64
+collision_mask = 262208
 damage = 2
 damage_type = 1
 
