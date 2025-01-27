@@ -4,7 +4,7 @@ signal sleeping()
 signal awake()
 
 @export var SLEEPING:= false
-@export var previous_level_path = "res://levels/main.tscn"
+@export var previous_level_path = ""
 
 func sleep():
 	SLEEPING = true

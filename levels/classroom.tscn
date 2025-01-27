@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=4 uid="uid://cs56v7ed2fsw2"]
 
-[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_c8brv"]
+[ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_c8brv"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_icyom"]
 [ext_resource type="TileSet" uid="uid://bsiaynvykkoko" path="res://levels/tilesets/classroom_tileset.tres" id="3_5dji1"]
 [ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_5f26h"]

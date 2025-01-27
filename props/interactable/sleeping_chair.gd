@@ -11,7 +11,7 @@ func _ready() -> void:
 	interactable.interact.connect(_on_interactable_interact)
 	#animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 
-func _on_interactable_interact(body: Node2D):
+func _on_interactable_interact(_body: Node2D):
 	
 	if LevelsVars.SLEEPING == true:
 		player_sprite.visible = true
@@ -30,6 +30,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "sleep":
 		player.visible = true
 
-func _on_animation_player_animation_changed(old_name: StringName, new_name: StringName) -> void:
+func _on_animation_player_animation_changed(old_name: StringName, _new_name: StringName) -> void:
 	if old_name == "sleep":
 		player.visible = true

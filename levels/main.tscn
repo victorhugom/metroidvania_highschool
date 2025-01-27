@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=4 uid="uid://bhye2xudcyhv5"]
+[gd_scene load_steps=37 format=4 uid="uid://bhye2xudcyhv5"]
 
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="1_4othn"]
 [ext_resource type="PackedScene" uid="uid://dj531wg6ca31v" path="res://player/player.tscn" id="1_8mx52"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/CityBGparalax/1.png" id="1_b7m6c"]
-[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_srup0"]
+[ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_srup0"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_viv0j"]
 [ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/CityBGparalax/2.png" id="2_dpg3j"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="2_e22s8"]
@@ -25,6 +25,7 @@
 [ext_resource type="TileSet" uid="uid://ccjki1trbd055" path="res://levels/tilesets/stairs_tileset.tres" id="23_3sq8g"]
 [ext_resource type="PackedScene" uid="uid://dplsakl01yn0s" path="res://util/camera_zoom_changer.tscn" id="24_raw6j"]
 [ext_resource type="PackedScene" uid="uid://nyner8qkvtad" path="res://props/interactable/load_level_door_front.tscn" id="25_v0sgs"]
+[ext_resource type="PackedScene" uid="uid://xxvwsb4guibq" path="res://props/interactable/drinking_fountain.tscn" id="26_7feu4"]
 
 [sub_resource type="Gradient" id="Gradient_4144g"]
 offsets = PackedFloat32Array(0, 0.845411)
@@ -65,7 +66,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gkmv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctn5y"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -73,7 +74,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_byksv")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_srup0")
-zoom = Vector2(1, 1)
+zoom = Vector2(1.2, 1.2)
 
 [node name="CanvasModulate" parent="." instance=ExtResource("1_4othn")]
 
@@ -350,68 +351,9 @@ tile_map_data = PackedByteArray("AAArAAAAAgAAAAAAAAArAAEAAgAAAAEAAAArAAIAAgAAAAI
 tile_set = ExtResource("15_saqqm")
 metadata/_edit_lock_ = true
 
-[node name="Doors" type="Node2D" parent="Parallax2D_Front"]
-
-[node name="Door" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(88, 560)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door2" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 560)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door3" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 368)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door4" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 176)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door5" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -16)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door6" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -208)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door7" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -400)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="Door8" parent="Parallax2D_Front/Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(1176, 80)
-interact_message_a = "Abrir Porta"
-interact_message_b = "Fechar Porta"
-cannot_interact_message = "Porta Trancada"
-
-[node name="LoadLevelDoor" parent="Parallax2D_Front/Doors" instance=ExtResource("14_b83tb")]
-position = Vector2(2032, 128)
-target_scene_path = "res://levels/library_entry.tscn"
-
-[node name="Player" parent="." instance=ExtResource("1_8mx52")]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_6gkmv")
-position = Vector2(-200, 608)
-
 [node name="CameraZoomChanger_Out2" parent="." instance=ExtResource("24_raw6j")]
 position = Vector2(48, 552)
-zoom = Vector2(1, 1)
+zoom = Vector2(1.2, 1.2)
 
 [node name="CameraZoomChanger_In2" parent="." instance=ExtResource("24_raw6j")]
 position = Vector2(127, 554)
@@ -424,3 +366,66 @@ zoom = Vector2(1, 1)
 [node name="CameraZoomChanger_In" parent="." instance=ExtResource("24_raw6j")]
 position = Vector2(1136, 72)
 zoom = Vector2(2.5, 2.5)
+
+[node name="DrinkingFountain2" parent="." instance=ExtResource("26_7feu4")]
+position = Vector2(568, 608)
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="LoadLevelDoor" parent="Doors" instance=ExtResource("14_b83tb")]
+position = Vector2(2032, 128)
+target_scene_path = "res://levels/library_entry.tscn"
+
+[node name="Door" parent="Doors" instance=ExtResource("22_3uqhf")]
+z_index = -1
+position = Vector2(88, 560)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door2" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, 560)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door3" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, 368)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door4" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, 176)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door5" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, -16)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door6" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, -208)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door7" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(920, -400)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Door8" parent="Doors" instance=ExtResource("22_3uqhf")]
+position = Vector2(1176, 80)
+interact_message_a = "Abrir Porta"
+interact_message_b = "Fechar Porta"
+cannot_interact_message = "Porta Trancada"
+
+[node name="Player" parent="." instance=ExtResource("1_8mx52")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ctn5y")
+position = Vector2(-200, 608)

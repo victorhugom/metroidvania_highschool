@@ -1,7 +1,8 @@
 extends BTAction
 
-@export var target_node_var : StringName
+@export var target_node_var : StringName = "target_player"
 @export var tolerance = 10
+@export var run: bool = false
 
 func _tick(_delta: float) -> Status:
 	
@@ -21,5 +22,5 @@ func _tick(_delta: float) -> Status:
 		(agent as BaseEnemy).stop()
 		return SUCCESS
 	else:
-		(agent as BaseEnemy).move(target_position)
+		(agent as BaseEnemy).move(target_position, run)
 		return RUNNING

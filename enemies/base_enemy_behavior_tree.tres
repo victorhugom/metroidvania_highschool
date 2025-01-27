@@ -153,8 +153,9 @@ children = [SubResource("BTCheckVar_2inbc"), SubResource("BTCheckAgentProperty_r
 
 [sub_resource type="BTAction" id="BTAction_dndn3"]
 script = ExtResource("2_3urkf")
-target_node_var = "target_player"
+target_node_var = &"target_player"
 tolerance = 30
+run = true
 
 [sub_resource type="BTSequence" id="BTSequence_212q4"]
 custom_name = "Sequence: Move Torwards Player"

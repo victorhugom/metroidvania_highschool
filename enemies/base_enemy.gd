@@ -32,6 +32,7 @@ var damager_position = null
 var is_dying = null
 var is_being_hit = false
 var is_being_parried = false
+var is_enabled = true
 
 
 func _ready():
@@ -42,12 +43,14 @@ func _ready():
 	hurt_box.damaged.connect(_on_hurt_box_damaged)
 	health.health_empty.connect(_on_health_empty)
 	attack_box.parried.connect(_on_attack_parried)
+	LevelsVars.awake.connect(func(): is_enabled = false)
+	LevelsVars.sleeping.connect(func(): is_enabled = true)
 
 func _physics_process(delta: float) -> void:
 	
 	loose_sight_timeout-= delta
 	
-	if is_dying || LevelsVars.SLEEPING == false:
+	if is_dying || is_enabled == false:
 		if animation_player.is_playing():
 			animation_player.stop()
 		return
@@ -64,15 +67,11 @@ func _physics_process(delta: float) -> void:
 	if velocity.x > 0:
 		direction = "right"
 		sprite_2d.flip_h = false
-		animation_player.play("walk")
 		ray_cast_2d_eyes.target_position = abs(ray_cast_2d_eyes.target_position)
 	elif velocity.x < 0:
 		direction = "left"
 		sprite_2d.flip_h = true
-		animation_player.play("walk")
 		ray_cast_2d_eyes.target_position = -abs(ray_cast_2d_eyes.target_position)
-	else:
-		animation_player.play("idle")
 
 	if velocity.x < 0 and not ray_cast_2d_left.is_colliding():
 		has_floor = false
@@ -87,17 +86,21 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 	if velocity.x != 0:
-		animation_player.play("walk")
+		if abs(velocity.x) > speed:
+			animation_player.play("run")
+		else:
+			animation_player.play("walk")
 	else:
 		animation_player.play("idle")
 		
-func move(target_position) -> void:
+func move(target_position, run = false) -> void:
 	
+	var move_speed = speed * 2 if run else speed
 	var move_direction = (target_position - global_position).normalized()
 	if move_direction.x > 0:
-		velocity = Vector2(1, 0) * speed
+		velocity = Vector2(1, 0) * move_speed
 	else:
-		velocity = Vector2(-1, 0) * speed
+		velocity = Vector2(-1, 0) * move_speed
 		
 func swing_bat():
 	animation_player.play("attack_01_%s" %direction)
@@ -124,17 +127,6 @@ func check_for_player():
 	else:
 		if player_in_sight != null and loose_sight_timeout <= 0:
 			player_in_sight = null	
-		
-func _on_animation_finished(anim_name:String):
-	if anim_name.begins_with("attack_01"):
-		if is_combo_attack:
-			combo_attack(2)
-		else:
-			is_attacking = false	
-	if anim_name.begins_with("attack_02"):
-		combo_attack(3)
-	if anim_name.begins_with("attack_03"):
-		is_attacking = false
 
 func parried():
 	
@@ -155,6 +147,24 @@ func parried():
 		animation_player.play("idle")
 	).set_delay(.2) 
 
+func set_as_is_dying():
+	visible = false
+	is_dying = true
+	
+func drop_money():
+	money_dropper.drop()
+
+func _on_animation_finished(anim_name:String):
+	if anim_name.begins_with("attack_01"):
+		if is_combo_attack:
+			combo_attack(2)
+		else:
+			is_attacking = false	
+	if anim_name.begins_with("attack_02"):
+		combo_attack(3)
+	if anim_name.begins_with("attack_03"):
+		is_attacking = false
+
 func _on_attack_parried(_character: CharacterBody2D):
 	is_being_parried = true
 		
@@ -167,13 +177,6 @@ func _on_health_empty():
 	set_as_is_dying()
 	drop_money()
 	queue_free()
-
-func set_as_is_dying():
-	visible = false
-	is_dying = true
-	
-func drop_money():
-	money_dropper.drop()
 
 func _on_hurt_box_damaged(damage: int, area: Area2D):
 	

@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DebugUI="*res://gui/debug_overlay.tscn"
-LevelsVars="*res://levels/levels_vars.gd"
+LevelsVars="*res://levels/util/levels_vars.gd"
 Menu="*res://gui/menu.tscn"
 
 [display]

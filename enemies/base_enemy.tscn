@@ -1976,13 +1976,13 @@ behavior_tree = ExtResource("7_2lvw2")
 blackboard_plan = SubResource("BlackboardPlan_qe8r2")
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
-position = Vector2(-13, 0)
+position = Vector2(-16, -8)
 target_position = Vector2(0, 30)
 collision_mask = 17408
 collide_with_areas = true
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(13, 0)
+position = Vector2(16, -8)
 target_position = Vector2(0, 30)
 collision_mask = 17408
 collide_with_areas = true

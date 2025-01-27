@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=4 uid="uid://colh4gbqp7na4"]
 
-[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_2yrvx"]
+[ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_2yrvx"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="2_m8og0"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="3_jhowo"]
