@@ -12,6 +12,5 @@ func _process(delta: float) -> void:
 	
 func _on_damaged(damage: int, damager: AttackBox):
 	
-	print_debug(damager)
 	if damager.damage_type == AttackBox.DamageType.Acid:
 		queue_free()

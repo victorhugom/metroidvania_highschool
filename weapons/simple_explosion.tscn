@@ -87,7 +87,7 @@ position = Vector2(1, 7.5)
 collision_layer = 8
 collision_mask = 262208
 damage = 2
-damage_type = 1
+damage_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(-1, -7.5)
