@@ -8,7 +8,6 @@ signal item_added(item: InventoryItem)
 var inventory_items: Array[InventoryItem]
 
 func _ready() -> void:
-	
 	inventory_items = _load_data()
 
 func add_item(item: InventoryItem):
@@ -19,11 +18,22 @@ func add_item(item: InventoryItem):
 	
 func has_item(item_type: String) -> Array[InventoryItem]:
 	var items_found: Array[InventoryItem] = []
-	for item in inventory_items:
+	for item in inventory_items + starter_items:
 		if item.item_type == item_type:
 			items_found.append(item)
 			
 	return items_found
+
+func get_items_grouped()-> Dictionary:
+	var grouped_items = {}
+	
+	for item in inventory_items + starter_items:
+		if item.item_type in grouped_items:
+			grouped_items[item.item_type] += 1
+		else:
+			grouped_items[item.item_type] = 1
+	
+	return grouped_items
 	
 func _save_data():
 	var file := FileAccess.open(inventory_data_save_path, FileAccess.WRITE)

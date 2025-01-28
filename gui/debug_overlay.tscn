@@ -7,5 +7,5 @@ script = ExtResource("1_gkpty")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 459.0
-offset_bottom = 322.0
+offset_bottom = 808.0
 bbcode_enabled = true
