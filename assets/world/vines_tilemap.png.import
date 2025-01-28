@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"
+uid="uid://c1m0fmjuejvtr"
+path="res://.godot/imported/vines_tilemap.png-3cc5f6343b9310cdffdd44f2414d8956.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/icons/sakura.png"
-dest_files=["res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"]
+source_file="res://assets/world/vines_tilemap.png"
+dest_files=["res://.godot/imported/vines_tilemap.png-3cc5f6343b9310cdffdd44f2414d8956.ctex"]
 
 [params]
 

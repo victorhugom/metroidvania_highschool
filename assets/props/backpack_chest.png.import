@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"
+uid="uid://csp3jqhkbnogw"
+path="res://.godot/imported/backpack_chest.png-05c74e3572b186538257e809a81f0655.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/icons/sakura.png"
-dest_files=["res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"]
+source_file="res://assets/props/backpack_chest.png"
+dest_files=["res://.godot/imported/backpack_chest.png-05c74e3572b186538257e809a81f0655.ctex"]
 
 [params]
 

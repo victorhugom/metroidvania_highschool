@@ -62,8 +62,9 @@ _data = {
 script = ExtResource("1_0o6s3")
 
 [node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("2_b4ecs")]
-position = Vector2(0, -64)
+position = Vector2(0, -20)
 texture = ExtResource("4_oh1er")
+hframes = 4
 animation_player = NodePath("../AnimationPlayer")
 interact_message_a = "Abrir Baú"
 cannot_interact_message = ""
