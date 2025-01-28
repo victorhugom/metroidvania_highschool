@@ -177,7 +177,6 @@ func _process(_delta: float) -> void:
 		debug_message +=debug_message_template %["Jump Buffer Timer:", current_jump_buffer_timer]
 		debug_message +=debug_message_template %["Dash Timer:", dash_timer]
 		debug_message +=debug_message_template %["Dash Cooldown Timer:", dash_cooldown_timer]
-		debug_message +=debug_message_template %["Money:", inventory.has_item("money").size()]
 		debug_message +=debug_message_template %["Ammo:", throw_ammunition]
 		
 		var current_state = ""
@@ -185,6 +184,12 @@ func _process(_delta: float) -> void:
 			current_state = main_state_machine.get_active_state().name
 		debug_message +=debug_message_template %["Current State", current_state]
 		debug_message +="_______________________________\n"
+		
+		debug_message +=debug_message_template %["Inventory:", ""]
+		
+		var items_grouped = inventory.get_items_grouped()
+		for key in items_grouped.keys():
+			debug_message +=debug_message_template %[key, items_grouped[key]]
 
 		DebugUI.show_message(debug_message)
 	else:

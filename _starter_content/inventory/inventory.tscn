@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8c7pmnu2dvsw"]
+[gd_scene load_steps=5 format=3 uid="uid://c8c7pmnu2dvsw"]
 
 [ext_resource type="Script" path="res://_starter_content/inventory/inventory.gd" id="1_4y2px"]
+[ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="2_lu4kc"]
+[ext_resource type="Resource" uid="uid://cvsah372dww22" path="res://gui/inventory_start_items/baseball_default.tres" id="3_m484u"]
+[ext_resource type="Resource" uid="uid://d2m8nj0s3cm63" path="res://gui/inventory_start_items/glasses.tres" id="4_dpvjl"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_4y2px")
+starter_items = Array[ExtResource("2_lu4kc")]([ExtResource("3_m484u"), ExtResource("4_dpvjl")])
