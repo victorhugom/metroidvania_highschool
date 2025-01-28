@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"
+uid="uid://cq3v8al0vd3ap"
+path="res://.godot/imported/Ninja - Whitehit.png-757ebd97b2e53bb5a4e3ad4ffb05990a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/sakura_icon.PNG"
-dest_files=["res://.godot/imported/sakura_icon.PNG-4f260d9089c6daa2940259694abfa7b5.ctex"]
+source_file="res://assets/enemies/Ninja/Ninja - Whitehit.png"
+dest_files=["res://.godot/imported/Ninja - Whitehit.png-757ebd97b2e53bb5a4e3ad4ffb05990a.ctex"]
 
 [params]
 
