@@ -1,13 +1,13 @@
-[gd_scene load_steps=45 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=44 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
+[ext_resource type="Texture2D" uid="uid://1r1dj5sg7pva" path="res://shaders/night_Sky.tres" id="3_ado5x"]
 [ext_resource type="Texture2D" uid="uid://d3p2yu2g0k1kp" path="res://assets/props/quadronegro.png" id="3_n0jms"]
-[ext_resource type="Texture2D" uid="uid://b3q87f0sia0i0" path="res://shaders/sundown_Sky.tres" id="3_x3i2t"]
 [ext_resource type="Texture2D" uid="uid://51ildpvwtagn" path="res://assets/props/relogio.png" id="4_gh5y7"]
 [ext_resource type="Texture2D" uid="uid://ci8qsiqijv0lv" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax3.png" id="5_0ta4p"]
 [ext_resource type="Texture2D" uid="uid://b1ok5p72827up" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax2.png" id="6_gwbrd"]
-[ext_resource type="Texture2D" uid="uid://cs7a0adbjv5fk" path="res://assets/fx/yellowlight.png" id="6_q1bqe"]
+[ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/fx/light.png" id="6_ynx8s"]
 [ext_resource type="Texture2D" uid="uid://f06mjfqdehak" path="res://assets/world/schoolcorridor/salda de aula BG/carteiraparalax1.png" id="7_sl7sr"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/city_paralax_bg/1.png" id="9_apqma"]
 [ext_resource type="Texture2D" uid="uid://y6fdosd78yto" path="res://assets/world/city_paralax_bg/7.png" id="9_y7upe"]
@@ -23,16 +23,17 @@
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/city_paralax_bg/5.png" id="13_18ogu"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/city_paralax_bg/6.png" id="14_iiwd3"]
 [ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
-[ext_resource type="Texture2D" uid="uid://djodpwuyyk3t4" path="res://shaders/sundown_Back.tres" id="20_4rgl8"]
+[ext_resource type="Texture2D" uid="uid://dew8ws4ys7jpc" path="res://shaders/night_Back.tres" id="20_d3bxd"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
-[ext_resource type="Texture2D" uid="uid://caybmnhiv3yja" path="res://shaders/sundown_Front.tres" id="24_76756"]
+[ext_resource type="Texture2D" uid="uid://bqi0g6ymcc5ik" path="res://shaders/night_Front.tres" id="24_4y0kv"]
+[ext_resource type="Texture2D" uid="uid://cguaids1xq2ng" path="res://shaders/gradientmap-player-sundown.tres" id="28_c31dv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = ExtResource("3_x3i2t")
+shader_parameter/pal0 = ExtResource("3_ado5x")
 
 [sub_resource type="Gradient" id="Gradient_ojso3"]
 colors = PackedColorArray(1, 0.8483, 0.449643, 1, 1, 1, 1, 1)
@@ -64,26 +65,18 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_71rrb")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyrw"]
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = ExtResource("20_4rgl8")
+shader_parameter/pal0 = ExtResource("20_d3bxd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npu4g"]
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = ExtResource("24_76756")
+shader_parameter/pal0 = ExtResource("24_4y0kv")
 
-[sub_resource type="Gradient" id="Gradient_8om8i"]
-offsets = PackedFloat32Array(0, 0.439614, 1)
-colors = PackedColorArray(0.00669614, 0, 0.204705, 1, 0.0310667, 0.155646, 0.105578, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bnysp"]
-gradient = SubResource("Gradient_8om8i")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gtsjc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gif06"]
 resource_local_to_scene = true
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_bnysp")
+shader_parameter/pal0 = ExtResource("28_c31dv")
 
 [sub_resource type="Gradient" id="Gradient_0or05"]
 offsets = PackedFloat32Array(0, 0.405797)
@@ -102,7 +95,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_dh1ni")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(-2, -2)
-color = Color(0.774316, 0.564844, 0.26539, 1)
+color = Color(0.145837, 0.31183, 0.506045, 1)
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -125,7 +118,7 @@ offset = Vector2(0, -81.695)
 
 [node name="1" type="Parallax2D" parent="BG/City"]
 material = SubResource("ShaderMaterial_n58jg")
-scroll_scale = Vector2(-0.03, 1)
+scroll_scale = Vector2(-0.015, 0.51)
 scroll_offset = Vector2(-408, -257)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/City/1"]
@@ -136,13 +129,14 @@ offset = Vector2(0, 374.87)
 
 [node name="PointLight2D" type="PointLight2D" parent="BG/City/1"]
 position = Vector2(749, -30)
-texture = ExtResource("6_q1bqe")
-texture_scale = 9.83
+color = Color(0.721388, 0.483956, 0.733541, 1)
+texture = ExtResource("6_ynx8s")
+texture_scale = 6.89
 
 [node name="2" type="Parallax2D" parent="BG/City"]
 use_parent_material = true
-scale = Vector2(3, 3)
-scroll_scale = Vector2(0.1, 0.4)
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.1, 0.17)
 repeat_size = Vector2(320, 0)
 repeat_times = 100
 
@@ -368,7 +362,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_gtsjc")
+material = SubResource("ShaderMaterial_gif06")
 use_parent_material = false
 position = Vector2(-274, -19)
 

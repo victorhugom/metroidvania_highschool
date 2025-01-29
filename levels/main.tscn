@@ -78,7 +78,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6gah"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cp1g5"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -510,5 +510,5 @@ cannot_interact_message = "Porta Trancada"
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_n6gah")
+material = SubResource("ShaderMaterial_cp1g5")
 position = Vector2(-200, 608)
