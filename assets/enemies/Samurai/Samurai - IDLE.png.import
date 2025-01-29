@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjh5yo88okr18"
-path="res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"
+uid="uid://dg657vcf6y8sb"
+path="res://.godot/imported/Samurai - IDLE.png-60380ee1cb30c47798e371c34f211c64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/icons/sakura.png"
-dest_files=["res://.godot/imported/sakura.png-0273ea40c06f5d58c0525c6361ce0796.ctex"]
+source_file="res://assets/enemies/Samurai/Samurai - IDLE.png"
+dest_files=["res://.godot/imported/Samurai - IDLE.png-60380ee1cb30c47798e371c34f211c64.ctex"]
 
 [params]
 

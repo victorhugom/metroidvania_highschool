@@ -153,16 +153,16 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_xsdjp")
 script = ExtResource("8_8787q")
 item_id = "baseball_default"
 item_type = "baseball"
-display_name = "Select Baseball"
-description = "Select Baseball"
+display_name = "Change Baseball"
+description = "Change Baseball"
 icon = "res://assets/gui/icons/baseball.png"
 
 [sub_resource type="Resource" id="Resource_jishv"]
 script = ExtResource("8_8787q")
 item_id = "glasses"
 item_type = "glasses"
-display_name = "Change Galsses"
-description = "Change Galsses"
+display_name = "Change Glasses"
+description = "Change Glasses"
 icon = "res://assets/gui/icons/summer.png"
 
 [node name="Menu" type="CanvasLayer"]
@@ -205,17 +205,6 @@ offset_bottom = 376.0
 texture = ExtResource("5_oxiti")
 expand_mode = 1
 
-[node name="SelectedItemLabel" type="RichTextLabel" parent="."]
-offset_left = 1144.0
-offset_top = 352.0
-offset_right = 1309.0
-offset_bottom = 374.0
-theme_override_colors/default_color = Color(1.41384e-07, 0.103027, 1.20327e-08, 1)
-theme_override_fonts/normal_font = ExtResource("4_m30wb")
-text = "Select Thowable"
-fit_content = true
-autowrap_mode = 0
-
 [node name="RichTextLabel_Time" type="RichTextLabel" parent="."]
 offset_left = 1265.0
 offset_top = 216.0
@@ -251,7 +240,7 @@ stretch_mode = 4
 
 [node name="MenuContainer" type="HFlowContainer" parent="."]
 offset_left = 1114.0
-offset_top = 236.0
+offset_top = 243.0
 offset_right = 1350.0
 offset_bottom = 345.0
 alignment = 1
@@ -282,3 +271,17 @@ alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = 1114.0
+offset_top = 343.0
+offset_right = 1350.0
+offset_bottom = 379.0
+
+[node name="SelectedItemLabel" type="RichTextLabel" parent="CenterContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1.41384e-07, 0.103027, 1.20327e-08, 1)
+theme_override_fonts/normal_font = ExtResource("4_m30wb")
+text = "Select Thowable"
+fit_content = true
+autowrap_mode = 0

@@ -7,5 +7,5 @@ script = ExtResource("1_cfrf3")
 item_id = "energy_drink"
 item_type = "drink"
 display_name = "Pick Drink"
-description = "Pick Drink"
+description = "Pick Drink (energy)"
 icon = "res://assets/gui/icons/wine.png"

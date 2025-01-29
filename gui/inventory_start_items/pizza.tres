@@ -7,5 +7,5 @@ script = ExtResource("1_yx6x2")
 item_id = "pizza"
 item_type = "food"
 display_name = "Pick Food"
-description = "Pick Food"
+description = "Pick Food (health)"
 icon = "res://assets/gui/icons/pizza.png"

@@ -6,7 +6,7 @@ const MENU_ITEM = preload("res://gui/menu_item.tscn")
 @onready var rich_text_label_time: RichTextLabel = $RichTextLabel_Time
 @onready var menu_container: HFlowContainer = $MenuContainer
 @onready var sub_container: HFlowContainer = $SubContainer
-@onready var selected_item_label: RichTextLabel = $SelectedItemLabel
+@onready var selected_item_label: RichTextLabel = $CenterContainer/SelectedItemLabel
 @onready var money_label: RichTextLabel = $MoneyLabel
 
 var is_menu_open:bool = false
@@ -61,11 +61,12 @@ func select_item(item_index:int):
 	item_selected = menu_items[item_index]
 	item_selected.selected = true
 	
-	selected_item_label.text = item_selected.inventory_item.display_name
+	selected_item_label.text = item_selected.inventory_item.description
 
 func select_menu_item(menu_item_type: String):
 	
 	item_selected_index = 0
+	var player: Player = get_tree().get_nodes_in_group("player")[0]
 	
 	if menu_item_type == "back":
 		menu_container.visible = true
@@ -74,8 +75,10 @@ func select_menu_item(menu_item_type: String):
 		menu_items = current_menu.get_children()
 		select_item(item_selected_index)
 		return
+	if current_menu == sub_container:
+		return
+		#TODO: use item
 	
-	var player: Player = get_tree().get_nodes_in_group("player")[0]
 	var inventory = player.inventory
 	var inventory_items = inventory.get_items_grouped()
 	
