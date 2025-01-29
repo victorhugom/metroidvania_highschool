@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvbc4pj61sme8"
-path="res://.godot/imported/Samurai - HURT.png-765eb62ed1f2409e4376b5d072c21c4c.ctex"
+uid="uid://doooyw0qhiktk"
+path="res://.godot/imported/chest.png-48413dd82f236f3355a71cc65214c799.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/Samurai/Samurai - HURT.png"
-dest_files=["res://.godot/imported/Samurai - HURT.png-765eb62ed1f2409e4376b5d072c21c4c.ctex"]
+source_file="res://assets/props/chest.png"
+dest_files=["res://.godot/imported/chest.png-48413dd82f236f3355a71cc65214c799.ctex"]
 
 [params]
 
