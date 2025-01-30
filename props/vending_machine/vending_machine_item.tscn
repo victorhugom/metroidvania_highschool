@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://db8cs4epkwh0t"]
+
+[ext_resource type="Script" path="res://props/vending_machine/vending_machine_item.gd" id="1_4i3v0"]
+[ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="1_12wi5"]
+[ext_resource type="Texture2D" uid="uid://b1lxxjstodta1" path="res://assets/props/itens/drink_bottle1_icon.png" id="1_cagm7"]
+[ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="2_mpy0h"]
+
+[node name="VendingMachineItem" type="VBoxContainer"]
+material = ExtResource("1_12wi5")
+use_parent_material = true
+theme_override_constants/separation = 0
+script = ExtResource("1_4i3v0")
+item_name = null
+description = null
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer"]
+use_parent_material = true
+position = Vector2(36, 36)
+scale = Vector2(2, 2)
+texture = ExtResource("1_cagm7")
+hframes = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(20, 24)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer2"]
+use_parent_material = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_mpy0h")
+theme_override_font_sizes/normal_font_size = 16
+text = "$ 0"
+fit_content = true
+autowrap_mode = 0

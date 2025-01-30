@@ -57,6 +57,14 @@ var is_attacking: bool = false
 var is_dead: bool = false
 var strong_attack_time: float = 0
 
+var is_busy: bool:
+	set(value):
+		is_busy = value
+		if is_busy:
+			velocity = Vector2.ZERO
+			main_state_machine.dispatch(to_busy)
+			
+
 var is_parrying: bool = false
 var throw_speed: int = MIN_THROW_SPEED
 var throw_ammunition: float = max_throw_ammunition * 10
@@ -97,6 +105,7 @@ var to_walk_wall_left: StringName = &"to_walk_wall_left"
 var to_walk_wall_right: StringName = &"to_walk_wall_right"
 var to_wall_jump: StringName = &"to_wall_jump"
 var to_shade: StringName = &"to_shade"
+var to_busy: StringName = &"to_busy"
 var to_dead: StringName = &"to_dead"
 
 func  _ready() -> void:
@@ -408,6 +417,7 @@ func _initiate_state_machine():
 	var state_throw_attack: LimboState = LimboState.new().named("throw_attack").call_on_enter(_state_throw_attack_enter).call_on_update(_state_throw_attack_update)
 	var state_shade: LimboState = LimboState.new().named("shade").call_on_enter(_state_shade_enter).call_on_update(_state_shade_update)
 	var state_dead: LimboState = LimboState.new().named("dead").call_on_enter(_state_dead_enter).call_on_update(_state_dead_update)
+	var state_busy: LimboState = LimboState.new().named("busy").call_on_enter(_state_busy_enter).call_on_update(_state_busy_update)
 	
 	main_state_machine.add_child(state_idle)
 	main_state_machine.add_child(state_walk)
@@ -429,11 +439,15 @@ func _initiate_state_machine():
 	main_state_machine.add_child(state_throw_attack)
 	main_state_machine.add_child(state_shade)
 	main_state_machine.add_child(state_dead)
+	main_state_machine.add_child(state_busy)
 	
 	main_state_machine.initial_state = state_idle
 	
 	#ENTER DEAD STATE
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_dead, to_dead)
+	
+	#ENTER BUSY STATE
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, state_busy, to_busy)
 	
 	#ENTER IDLE STATE
 	main_state_machine.add_transition(state_walk, state_idle, to_idle)
@@ -450,6 +464,7 @@ func _initiate_state_machine():
 	main_state_machine.add_transition(state_hold_throw_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_throw_attack, state_idle, to_idle)
 	main_state_machine.add_transition(state_shade, state_idle, to_idle)
+	main_state_machine.add_transition(state_busy, state_idle, to_idle)
 	
 	#ENTER JUMP STATE
 	main_state_machine.add_transition(state_idle, state_jump, to_jump)
@@ -819,5 +834,12 @@ func _state_dead_enter():
 func _state_dead_update(_delta):
 	if is_on_floor():
 		state_changed.emit("dead", velocity)
+		
+func _state_busy_enter():
+	state_changed.emit("busy", velocity)
+
+func _state_busy_update(_delta:float):
+	if is_busy == false:
+		main_state_machine.dispatch(to_idle)
 
 #endregion

@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="2_w41ff"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="3_jhowo"]
 [ext_resource type="Texture2D" uid="uid://cvbpv6wotcl2e" path="res://assets/world/city_paralax_bg/1.png" id="4_srpcc"]
-[ext_resource type="PackedScene" path="res://props/interactable/vending_machine.tscn" id="5_i0rrg"]
+[ext_resource type="PackedScene" uid="uid://cc5hcdjreh8hn" path="res://props/vending_machine/vending_machine.tscn" id="5_i0rrg"]
 [ext_resource type="Texture2D" uid="uid://cckrgyy87ni7a" path="res://assets/world/city_paralax_bg/2.png" id="5_prx4j"]
 [ext_resource type="Texture2D" uid="uid://b6rnj5qaca3if" path="res://assets/world/city_paralax_bg/3.png" id="6_yrhj4"]
 [ext_resource type="Texture2D" uid="uid://4md8j1yw2g0v" path="res://assets/world/city_paralax_bg/4.png" id="7_lwk1j"]

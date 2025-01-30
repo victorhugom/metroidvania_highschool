@@ -1,0 +1,245 @@
+[gd_scene load_steps=18 format=3 uid="uid://cc5hcdjreh8hn"]
+
+[ext_resource type="Script" path="res://props/vending_machine/vending_machine.gd" id="2_47h5q"]
+[ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="3_ohvy8"]
+[ext_resource type="Texture2D" uid="uid://tr5ue7grer1a" path="res://assets/props/vendingmachine.png" id="4_e3wee"]
+[ext_resource type="Texture2D" uid="uid://domrhpvjvphc6" path="res://assets/fx/vendingmachinelight.png" id="5_urnr3"]
+[ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="6_tu7nt"]
+[ext_resource type="PackedScene" uid="uid://db8cs4epkwh0t" path="res://props/vending_machine/vending_machine_item.tscn" id="7_q13k1"]
+[ext_resource type="Texture2D" uid="uid://b1lxxjstodta1" path="res://assets/props/itens/drink_bottle1_icon.png" id="8_nvx3k"]
+[ext_resource type="Texture2D" uid="uid://ce5rrc4a7q5n4" path="res://assets/props/itens/drink_bottle2_icon.png" id="9_klx0d"]
+[ext_resource type="Texture2D" uid="uid://dph18uu87tqo3" path="res://assets/props/itens/drink_can_icon.png" id="10_s7k14"]
+[ext_resource type="Texture2D" uid="uid://niejbidlbxq7" path="res://assets/props/itens/throwable_baseball_icon.png" id="11_dygiq"]
+[ext_resource type="Texture2D" uid="uid://dr3ledgjmnf0w" path="res://assets/props/itens/throwable_bottle_icon.png" id="12_kownr"]
+[ext_resource type="Texture2D" uid="uid://xututs32qs6s" path="res://assets/props/itens/throwable_granade_icon.png" id="13_kwmus"]
+[ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="13_w00u0"]
+
+[sub_resource type="Animation" id="Animation_ojvvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_e3wee")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InteractableSwitch:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableSwitch:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_chp63"]
+resource_name = "state_a"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_e3wee")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InteractableSwitch:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_mmapx"]
+resource_name = "state_b"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_e3wee")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InteractableSwitch:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableSwitch:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yl5ge"]
+_data = {
+"RESET": SubResource("Animation_ojvvo"),
+"state_a": SubResource("Animation_chp63"),
+"state_b": SubResource("Animation_mmapx")
+}
+
+[node name="VendingMachine" type="Node2D"]
+material = ExtResource("6_tu7nt")
+script = ExtResource("2_47h5q")
+
+[node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_ohvy8")]
+use_parent_material = true
+position = Vector2(0, -40)
+texture = ExtResource("4_e3wee")
+animation_player = NodePath("../AnimationPlayer")
+interact_message_a = "Beber"
+interact_message_b = "Vazio"
+cannot_interact_message = "Vazio"
+collision_layers = 256
+collision_masks = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yl5ge")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(-12, -44)
+color = Color(0.613874, 0.569018, 0.756301, 1)
+energy = 0.5
+texture = ExtResource("5_urnr3")
+
+[node name="MenuContainer" type="HFlowContainer" parent="."]
+material = ExtResource("6_tu7nt")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -72.0
+offset_right = 204.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.13, 0.13)
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="VendingMachineItem" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("8_nvx3k")
+item_price = 100
+item_name = "Energy Drink"
+description = "Recover 30 live"
+
+[node name="VendingMachineItem2" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("9_klx0d")
+item_price = 150
+item_name = "Soda"
+description = "Recover 50 Life"
+
+[node name="VendingMachineItem3" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("10_s7k14")
+item_price = 200
+item_name = "Super Soda"
+description = "Recover 100 Life"
+
+[node name="VendingMachineItem4" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("11_dygiq")
+item_price = 100
+item_name = null
+description = null
+
+[node name="VendingMachineItem5" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("12_kownr")
+item_price = 100
+item_name = null
+description = null
+
+[node name="VendingMachineItem6" parent="MenuContainer" instance=ExtResource("7_q13k1")]
+layout_mode = 2
+item_sprite = ExtResource("13_kwmus")
+item_price = 100
+item_name = null
+description = null
+
+[node name="PlayerPosition" type="Marker2D" parent="."]
+position = Vector2(48, -1)
+
+[node name="ItemName" type="RichTextLabel" parent="."]
+offset_left = 6.0
+offset_top = -52.0
+offset_right = 66.0
+offset_bottom = -6.0
+scale = Vector2(0.15, 0.15)
+theme_override_colors/default_color = Color(0, 0.96802, 0.214182, 1)
+theme_override_fonts/normal_font = ExtResource("13_w00u0")
+theme_override_font_sizes/normal_font_size = 12
+text = "Energy Drink"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = -27.0
+offset_top = -23.0
+offset_right = 173.0
+scale = Vector2(0.15, 0.15)
+
+[node name="ItemDescription" type="RichTextLabel" parent="CenterContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0.968627, 0.215686, 1)
+theme_override_fonts/normal_font = ExtResource("13_w00u0")
+text = "Recover 10 life"
+fit_content = true
+autowrap_mode = 0
+
+[connection signal="interact" from="InteractableSwitch" to="." method="_on_interactable_switch_interact"]

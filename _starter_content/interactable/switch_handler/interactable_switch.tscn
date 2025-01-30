@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dl3hticbwtgq4" path="res://_starter_content/interactable/interactable.tscn" id="2_kjp3g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnyy7"]
-size = Vector2(112, 96)
+size = Vector2(64, 80)
 
 [node name="InteractableSwitch" type="Sprite2D"]
 script = ExtResource("1_84ho0")

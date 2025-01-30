@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://bhye2xudcyhv5"]
+[gd_scene load_steps=46 format=4 uid="uid://bhye2xudcyhv5"]
 
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="1_4othn"]
 [ext_resource type="PackedScene" uid="uid://dj531wg6ca31v" path="res://player/player.tscn" id="1_8mx52"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dplsakl01yn0s" path="res://util/camera_zoom_changer.tscn" id="24_raw6j"]
 [ext_resource type="PackedScene" uid="uid://nyner8qkvtad" path="res://props/interactable/load_level_door_front.tscn" id="25_v0sgs"]
 [ext_resource type="PackedScene" uid="uid://xxvwsb4guibq" path="res://props/interactable/drinking_fountain.tscn" id="26_7feu4"]
+[ext_resource type="PackedScene" uid="uid://cc5hcdjreh8hn" path="res://props/vending_machine/vending_machine.tscn" id="33_tfkrl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_de4ef"]
 shader = ExtResource("7_lgvnm")
@@ -78,7 +79,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cp1g5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4pr34"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -91,8 +92,7 @@ zoom = Vector2(1.2, 1.2)
 [node name="CanvasModulate" parent="." instance=ExtResource("1_4othn")]
 
 [node name="BG" type="Node2D" parent="."]
-position = Vector2(274, -42.885)
-scale = Vector2(3, 3)
+position = Vector2(288, 472)
 
 [node name="City" type="Node2D" parent="BG"]
 z_index = -2
@@ -102,6 +102,7 @@ night_resource = ExtResource("4_fg3sh")
 day_resource = ExtResource("5_5ga53")
 
 [node name="0" type="Parallax2D" parent="BG/City"]
+visible = false
 material = SubResource("ShaderMaterial_de4ef")
 scroll_scale = Vector2(1, 0.8)
 scroll_offset = Vector2(-908, 188)
@@ -115,7 +116,6 @@ texture = ExtResource("1_b7m6c")
 offset = Vector2(0, -81.695)
 
 [node name="1" type="Parallax2D" parent="BG/City"]
-visible = false
 material = SubResource("ShaderMaterial_1p82f")
 scroll_scale = Vector2(-0.03, 1)
 scroll_offset = Vector2(-408, -257)
@@ -132,7 +132,6 @@ texture = ExtResource("11_f0lja")
 texture_scale = 9.83
 
 [node name="2" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scale = Vector2(3, 3)
 scroll_scale = Vector2(0.1, 0.4)
@@ -146,7 +145,6 @@ texture = ExtResource("3_t4tdf")
 offset = Vector2(0, 477.31)
 
 [node name="3" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scroll_scale = Vector2(1.04, 0.6)
 scroll_offset = Vector2(-1071.58, -168.986)
@@ -159,7 +157,6 @@ texture = ExtResource("4_yq8ha")
 offset = Vector2(0, 248.88)
 
 [node name="4" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scroll_scale = Vector2(1.06, 0.8)
 scroll_offset = Vector2(-1041.37, -85.4796)
@@ -172,7 +169,6 @@ texture = ExtResource("5_qv2im")
 offset = Vector2(0, 23.45)
 
 [node name="5" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scroll_scale = Vector2(1.08, 1)
 scroll_offset = Vector2(-1566.49, 452)
@@ -186,7 +182,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_qv2im")
 
 [node name="6" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scale = Vector2(5, 5)
 scroll_offset = Vector2(-3044.5, 88)
@@ -200,7 +195,6 @@ texture = ExtResource("6_nw8hp")
 offset = Vector2(0, -112.495)
 
 [node name="9" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scroll_scale = Vector2(1.15, 1)
 scroll_offset = Vector2(-1011.15, -1.97281)
@@ -213,7 +207,6 @@ texture = ExtResource("16_5oqeo")
 offset = Vector2(0, -137.115)
 
 [node name="7" type="Parallax2D" parent="BG/City"]
-visible = false
 material = SubResource("ShaderMaterial_bnjev")
 use_parent_material = true
 scale = Vector2(3, 3)
@@ -228,7 +221,6 @@ texture = ExtResource("17_64rer")
 offset = Vector2(0, -129.62)
 
 [node name="8" type="Parallax2D" parent="BG/City"]
-visible = false
 use_parent_material = true
 scale = Vector2(3, 3)
 scroll_scale = Vector2(1.2, 1)
@@ -508,7 +500,10 @@ interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
+[node name="VendingMachine" parent="." instance=ExtResource("33_tfkrl")]
+position = Vector2(-104, 608)
+
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_cp1g5")
+material = SubResource("ShaderMaterial_4pr34")
 position = Vector2(-200, 608)

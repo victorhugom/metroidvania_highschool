@@ -22,13 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://4md8j1yw2g0v" path="res://assets/world/city_paralax_bg/4.png" id="12_2ypj6"]
 [ext_resource type="Texture2D" uid="uid://dlf4p6rbvu51w" path="res://assets/world/city_paralax_bg/5.png" id="13_18ogu"]
 [ext_resource type="Texture2D" uid="uid://cv126d70gtxwt" path="res://assets/world/city_paralax_bg/6.png" id="14_iiwd3"]
-[ext_resource type="PackedScene" uid="uid://bs5fux0tuvww6" path="res://props/interactable/vending_machine.tscn" id="19_8haxy"]
+[ext_resource type="PackedScene" uid="uid://cc5hcdjreh8hn" path="res://props/vending_machine/vending_machine.tscn" id="19_8haxy"]
 [ext_resource type="Texture2D" uid="uid://dew8ws4ys7jpc" path="res://shaders/night_Back.tres" id="20_d3bxd"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
 [ext_resource type="Texture2D" uid="uid://bqi0g6ymcc5ik" path="res://shaders/night_Front.tres" id="24_4y0kv"]
-[ext_resource type="Texture2D" uid="uid://cguaids1xq2ng" path="res://shaders/gradientmap-player-sundown.tres" id="28_c31dv"]
+[ext_resource type="Texture2D" path="res://shaders/gradientmap-player-sundown.tres" id="28_c31dv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 shader = ExtResource("20_qa315")

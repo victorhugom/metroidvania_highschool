@@ -44,7 +44,6 @@ func _on_state_changed(state: String, velocity: Vector2):
 			
 	if state == "dead":
 		play("death")
-
 	if state == "idle":
 		play("idle")
 	elif state == "walk":
@@ -95,6 +94,8 @@ func _on_state_changed(state: String, velocity: Vector2):
 	elif state == "parry":
 		play("parry_%s" %player_direction)
 	elif state == "shade":
-		play("shade", -1, 1.5)
+		play("shade")
+	elif state == "busy":
+		play("busy")
 		
 	previous_state = state
