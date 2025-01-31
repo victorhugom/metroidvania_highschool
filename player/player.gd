@@ -3,6 +3,9 @@ class_name Player extends CharacterBody2D
 const SIMPLE_EXPLOSION = preload("res://weapons/simple_explosion.tscn")
 const THROWABLE = preload("res://weapons/throwable.tscn")
 const MIN_THROW_SPEED: int = 200
+const WALL_ROTATION_ANGLE = PI / 2
+const COLLISION_LAYER_ONE_WAY = 15
+const DASH_DUPLICATION_INTERVAL = 0.020
 
 signal state_changed(current_state: String, velocity: Vector2)
 
@@ -78,7 +81,7 @@ var jump_down_buffer = false
 
 # dash duplication
 var current_time_duplication: float = 0
-var duplication_time: float = .020
+var duplication_time: float = DASH_DUPLICATION_INTERVAL
 var duplcation_lifetime: float = .2
 
 var collision_down_timeout = 0
@@ -587,7 +590,7 @@ func _state_wall_idle_update(_delta: float):
 			state_changed.emit("walk_wall_left", velocity)
 
 func _state_walk_wall_left_enter():
-	rotate(PI/2)
+	rotate(WALL_ROTATION_ANGLE)
 	current_speed = speed * wall_walk_multiplier
 	wall_walking_direction = WALL_WALK_DIRECTION.LEFT
 	up_direction = Vector2.RIGHT
@@ -671,7 +674,7 @@ func _state_jump_update(delta:float):
 func _state_down_enter():
 	if is_on_floor():
 		# Temporarily disable one-way collision to allow dropping through
-		set_collision_mask_value(15, false)
+		set_collision_mask_value(COLLISION_LAYER_ONE_WAY, false)
 		collision_down_timeout = collision_down_duration
 
 func _state_down_update(delta:float):
