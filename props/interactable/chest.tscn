@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dupdkpmqyp5ru"]
+[gd_scene load_steps=9 format=3 uid="uid://dupdkpmqyp5ru"]
 
 [ext_resource type="Script" path="res://props/interactable/chest.gd" id="1_0o6s3"]
 [ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="2_b4ecs"]
-[ext_resource type="Texture2D" uid="uid://cdahi00j0riy6" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Inactive.png" id="4_g4rcd"]
-[ext_resource type="Texture2D" uid="uid://dvy7tadul1y6o" path="res://_starter_content/_demo/assets/Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Active.png" id="4_oh1er"]
+[ext_resource type="Texture2D" uid="uid://doooyw0qhiktk" path="res://assets/props/chest.png" id="3_s6g8s"]
 [ext_resource type="PackedScene" uid="uid://baulxfl7iuam3" path="res://props/money/money_dropper.tscn" id="5_u0v4c"]
 
 [sub_resource type="Animation" id="Animation_mlf24"]
@@ -11,14 +10,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/path = NodePath("InteractableSwitch:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_oh1er")]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_lt8uu"]
@@ -26,29 +25,30 @@ resource_name = "state_a"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/path = NodePath("InteractableSwitch:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_oh1er")]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_5lemj"]
 resource_name = "state_b"
+length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("InteractableSwitch:texture")
+tracks/0/path = NodePath("InteractableSwitch:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_g4rcd")]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l4eu2"]
@@ -63,7 +63,7 @@ script = ExtResource("1_0o6s3")
 
 [node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("2_b4ecs")]
 position = Vector2(0, -20)
-texture = ExtResource("4_oh1er")
+texture = ExtResource("3_s6g8s")
 hframes = 4
 animation_player = NodePath("../AnimationPlayer")
 interact_message_a = "Abrir Baú"
@@ -79,4 +79,4 @@ libraries = {
 
 [node name="MoneyDropper" parent="." instance=ExtResource("5_u0v4c")]
 position = Vector2(0, -128)
-quantity = 20
+quantity = 300

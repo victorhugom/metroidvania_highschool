@@ -34,7 +34,19 @@ func get_items_grouped()-> Dictionary:
 			grouped_items[item.item_type] = 1
 	
 	return grouped_items
+
+func remove_item_by_type_with_quantity(item_type: String, quantity: int) -> bool:
+	var items = has_item(item_type)
+	if items.size() < quantity:
+		return false
 	
+	for i in range(quantity):
+		inventory_items.remove_at(inventory_items.find(items[i]))
+	
+	_save_data()
+	
+	return true
+
 func _save_data():
 	var file := FileAccess.open(inventory_data_save_path, FileAccess.WRITE)
 	

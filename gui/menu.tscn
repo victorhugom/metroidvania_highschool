@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bjh5yo88okr18" path="res://assets/gui/icons/sakura.png" id="8_86icd"]
 [ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="8_8787q"]
 [ext_resource type="Resource" uid="uid://d2xdvrq1u3o8f" path="res://gui/inventory_start_items/pizza.tres" id="10_sjhm4"]
-[ext_resource type="Resource" uid="uid://clnvo7mlfohmj" path="res://gui/inventory_start_items/energy_drink.tres" id="11_vipma"]
+[ext_resource type="Resource" uid="uid://cldc8yjfq6pee" path="res://props/vending_machine/vending_machine_items/energy_drink.tres" id="11_vipma"]
 
 [sub_resource type="Animation" id="Animation_52c7x"]
 length = 0.001

@@ -79,7 +79,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_o31p6")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4pr34"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g8mh"]
 resource_local_to_scene = true
 shader = ExtResource("2_e22s8")
 shader_parameter/lerper = null
@@ -427,7 +427,7 @@ tile_set = ExtResource("15_saqqm")
 metadata/_edit_lock_ = true
 
 [node name="CameraZoomChanger_Out2" parent="." instance=ExtResource("24_raw6j")]
-position = Vector2(48, 552)
+position = Vector2(74, 552)
 zoom = Vector2(1.2, 1.2)
 
 [node name="CameraZoomChanger_In2" parent="." instance=ExtResource("24_raw6j")]
@@ -453,43 +453,43 @@ target_scene_path = "res://levels/library_entry.tscn"
 
 [node name="Door" parent="Doors" instance=ExtResource("22_3uqhf")]
 z_index = -1
-position = Vector2(129, 553)
+position = Vector2(127, 553)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door2" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 560)
+position = Vector2(914, 560)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door3" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 368)
+position = Vector2(914, 368)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door4" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, 176)
+position = Vector2(914, 176)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door5" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -16)
+position = Vector2(914, -16)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door6" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -208)
+position = Vector2(914, -208)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="Door7" parent="Doors" instance=ExtResource("22_3uqhf")]
-position = Vector2(920, -400)
+position = Vector2(914, -400)
 interact_message_a = "Abrir Porta"
 interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
@@ -505,5 +505,5 @@ position = Vector2(-104, 608)
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_4pr34")
+material = SubResource("ShaderMaterial_0g8mh")
 position = Vector2(-200, 608)

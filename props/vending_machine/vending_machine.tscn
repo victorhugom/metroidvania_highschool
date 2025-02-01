@@ -1,17 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cc5hcdjreh8hn"]
+[gd_scene load_steps=12 format=3 uid="uid://cc5hcdjreh8hn"]
 
 [ext_resource type="Script" path="res://props/vending_machine/vending_machine.gd" id="2_47h5q"]
 [ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="3_ohvy8"]
 [ext_resource type="Texture2D" uid="uid://tr5ue7grer1a" path="res://assets/props/vendingmachine.png" id="4_e3wee"]
 [ext_resource type="Texture2D" uid="uid://domrhpvjvphc6" path="res://assets/fx/vendingmachinelight.png" id="5_urnr3"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="6_tu7nt"]
-[ext_resource type="PackedScene" uid="uid://db8cs4epkwh0t" path="res://props/vending_machine/vending_machine_item.tscn" id="7_q13k1"]
-[ext_resource type="Texture2D" uid="uid://b1lxxjstodta1" path="res://assets/props/itens/drink_bottle1_icon.png" id="8_nvx3k"]
-[ext_resource type="Texture2D" uid="uid://ce5rrc4a7q5n4" path="res://assets/props/itens/drink_bottle2_icon.png" id="9_klx0d"]
-[ext_resource type="Texture2D" uid="uid://dph18uu87tqo3" path="res://assets/props/itens/drink_can_icon.png" id="10_s7k14"]
-[ext_resource type="Texture2D" uid="uid://niejbidlbxq7" path="res://assets/props/itens/throwable_baseball_icon.png" id="11_dygiq"]
-[ext_resource type="Texture2D" uid="uid://dr3ledgjmnf0w" path="res://assets/props/itens/throwable_bottle_icon.png" id="12_kownr"]
-[ext_resource type="Texture2D" uid="uid://xututs32qs6s" path="res://assets/props/itens/throwable_granade_icon.png" id="13_kwmus"]
+[ext_resource type="Texture2D" uid="uid://1haroff05kel" path="res://_starter_content/assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_escape_outline.png" id="7_hlyih"]
 [ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="13_w00u0"]
 
 [sub_resource type="Animation" id="Animation_ojvvo"]
@@ -153,7 +147,7 @@ wait_time = 30.0
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(-12, -44)
 color = Color(0.613874, 0.569018, 0.756301, 1)
-energy = 0.5
+energy = 0.56
 texture = ExtResource("5_urnr3")
 
 [node name="MenuContainer" type="HFlowContainer" parent="."]
@@ -172,50 +166,8 @@ scale = Vector2(0.13, 0.13)
 theme_override_constants/v_separation = 0
 alignment = 1
 
-[node name="VendingMachineItem" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("8_nvx3k")
-item_price = 100
-item_name = "Energy Drink"
-description = "Recover 30 live"
-
-[node name="VendingMachineItem2" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("9_klx0d")
-item_price = 150
-item_name = "Soda"
-description = "Recover 50 Life"
-
-[node name="VendingMachineItem3" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("10_s7k14")
-item_price = 200
-item_name = "Super Soda"
-description = "Recover 100 Life"
-
-[node name="VendingMachineItem4" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("11_dygiq")
-item_price = 100
-item_name = null
-description = null
-
-[node name="VendingMachineItem5" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("12_kownr")
-item_price = 100
-item_name = null
-description = null
-
-[node name="VendingMachineItem6" parent="MenuContainer" instance=ExtResource("7_q13k1")]
-layout_mode = 2
-item_sprite = ExtResource("13_kwmus")
-item_price = 100
-item_name = null
-description = null
-
 [node name="PlayerPosition" type="Marker2D" parent="."]
-position = Vector2(48, -1)
+position = Vector2(48, 0)
 
 [node name="ItemName" type="RichTextLabel" parent="."]
 offset_left = 6.0
@@ -223,9 +175,9 @@ offset_top = -52.0
 offset_right = 66.0
 offset_bottom = -6.0
 scale = Vector2(0.15, 0.15)
-theme_override_colors/default_color = Color(0, 0.96802, 0.214182, 1)
+theme_override_colors/default_color = Color(0.785701, 0.810178, 0.790331, 1)
 theme_override_fonts/normal_font = ExtResource("13_w00u0")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 13
 text = "Energy Drink"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -236,10 +188,23 @@ scale = Vector2(0.15, 0.15)
 
 [node name="ItemDescription" type="RichTextLabel" parent="CenterContainer"]
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0.968627, 0.215686, 1)
+theme_override_colors/default_color = Color(0.784314, 0.811765, 0.792157, 1)
 theme_override_fonts/normal_font = ExtResource("13_w00u0")
+theme_override_font_sizes/normal_font_size = 13
 text = "Recover 10 life"
 fit_content = true
 autowrap_mode = 0
+
+[node name="Button" type="Button" parent="."]
+offset_left = -48.0
+offset_top = -80.0
+offset_right = 24.0
+offset_bottom = 38.0
+scale = Vector2(0.2, 0.2)
+text = "Exit"
+icon = ExtResource("7_hlyih")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
 
 [connection signal="interact" from="InteractableSwitch" to="." method="_on_interactable_switch_interact"]

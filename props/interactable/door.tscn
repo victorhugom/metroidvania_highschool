@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -100,7 +100,6 @@ _data = {
 position = Vector2(8, -48)
 texture = ExtResource("4_jrncg")
 hframes = 7
-frame = 1
 animation_player = NodePath("AnimationPlayer")
 interact_message_a = "Abrir"
 interact_message_b = "Fecjar"
