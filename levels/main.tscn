@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bhye2xudcyhv5"]
+[gd_scene load_steps=51 format=4 uid="uid://bhye2xudcyhv5"]
 
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="1_4othn"]
 [ext_resource type="PackedScene" uid="uid://dj531wg6ca31v" path="res://player/player.tscn" id="1_8mx52"]
@@ -23,16 +23,23 @@
 [ext_resource type="TileSet" uid="uid://cii404y27e6ij" path="res://levels/tilesets/objects_tileset.tres" id="15_saqqm"]
 [ext_resource type="Texture2D" uid="uid://y6fdosd78yto" path="res://assets/world/city_paralax_bg/7.png" id="16_5oqeo"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="16_dof6d"]
-[ext_resource type="Texture2D" uid="uid://bffuowp2bsmc2" path="res://assets/gradients/roxoaorose.tres" id="17_4ns04"]
 [ext_resource type="Texture2D" uid="uid://1vr2cu1hm2pu" path="res://assets/world/city_paralax_bg/8.png" id="17_64rer"]
 [ext_resource type="Texture2D" uid="uid://cm6nv8k4g8eib" path="res://assets/world/city_paralax_bg/9.png" id="18_uja1q"]
 [ext_resource type="TileSet" uid="uid://hgcq4adjfcv" path="res://levels/tilesets/floor_tileset.tres" id="20_5cf4i"]
+[ext_resource type="Texture2D" uid="uid://dew8ws4ys7jpc" path="res://shaders/night_Back.tres" id="21_kk070"]
 [ext_resource type="PackedScene" uid="uid://cj5xpski30gqb" path="res://props/interactable/door.tscn" id="22_3uqhf"]
+[ext_resource type="Texture2D" uid="uid://djodpwuyyk3t4" path="res://shaders/sundown_Back.tres" id="22_elgks"]
 [ext_resource type="TileSet" uid="uid://ccjki1trbd055" path="res://levels/tilesets/stairs_tileset.tres" id="23_3sq8g"]
 [ext_resource type="PackedScene" uid="uid://dplsakl01yn0s" path="res://util/camera_zoom_changer.tscn" id="24_raw6j"]
+[ext_resource type="Texture2D" uid="uid://bm3patqw1m6cd" path="res://shaders/night_Objects.tres" id="25_kr3fp"]
 [ext_resource type="PackedScene" uid="uid://nyner8qkvtad" path="res://props/interactable/load_level_door_front.tscn" id="25_v0sgs"]
 [ext_resource type="PackedScene" uid="uid://xxvwsb4guibq" path="res://props/interactable/drinking_fountain.tscn" id="26_7feu4"]
+[ext_resource type="Texture2D" uid="uid://bhs8jvjtkk0a2" path="res://shaders/sundown_Objects.tres" id="26_gyi2h"]
+[ext_resource type="Texture2D" uid="uid://dc41b2vlualt0" path="res://shaders/night_Base.tres" id="30_skevd"]
+[ext_resource type="Texture2D" uid="uid://bqi0g6ymcc5ik" path="res://shaders/night_Front.tres" id="33_rm42f"]
 [ext_resource type="PackedScene" uid="uid://cc5hcdjreh8hn" path="res://props/vending_machine/vending_machine.tscn" id="33_tfkrl"]
+[ext_resource type="Texture2D" uid="uid://caybmnhiv3yja" path="res://shaders/sundown_Front.tres" id="34_lb67o"]
+[ext_resource type="Texture2D" uid="uid://cguaids1xq2ng" path="res://shaders/gradientmap-player-sundown.tres" id="41_qqcx0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_de4ef"]
 shader = ExtResource("7_lgvnm")
@@ -67,23 +74,15 @@ shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_cpiup")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2mby"]
-shader = ExtResource("2_e22s8")
+shader = ExtResource("7_lgvnm")
 shader_parameter/lerper = null
-shader_parameter/pal0 = ExtResource("17_4ns04")
+shader_parameter/pal0 = ExtResource("30_skevd")
 
-[sub_resource type="Gradient" id="Gradient_o31p6"]
-offsets = PackedFloat32Array(0, 0.54918, 1)
-colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_byksv"]
-gradient = SubResource("Gradient_o31p6")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g8mh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vpj0"]
 resource_local_to_scene = true
-shader = ExtResource("2_e22s8")
+shader = ExtResource("7_lgvnm")
 shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_byksv")
+shader_parameter/pal0 = ExtResource("41_qqcx0")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_srup0")
@@ -102,7 +101,6 @@ night_resource = ExtResource("4_fg3sh")
 day_resource = ExtResource("5_5ga53")
 
 [node name="0" type="Parallax2D" parent="BG/City"]
-visible = false
 material = SubResource("ShaderMaterial_de4ef")
 scroll_scale = Vector2(1, 0.8)
 scroll_offset = Vector2(-908, 188)
@@ -273,6 +271,9 @@ position = Vector2(342, 554.885)
 z_index = -1
 material = SubResource("ShaderMaterial_xahwg")
 scroll_offset = Vector2(0, -2.92)
+script = ExtResource("3_ix0ry")
+night_resource = ExtResource("21_kk070")
+day_resource = ExtResource("22_elgks")
 
 [node name="TileMapLayer_BuildingWalls" type="TileMapLayer" parent="Parallax2D_Back"]
 use_parent_material = true
@@ -281,11 +282,19 @@ tile_map_data = PackedByteArray("AAADAPr/AgAFAAUAAAADAPv/AgAFAAAAAAADAPz/AgAFAAE
 tile_set = ExtResource("15_saqqm")
 metadata/_edit_lock_ = true
 
+[node name="LoadLevelDoorFront" parent="Parallax2D_Back" instance=ExtResource("25_v0sgs")]
+position = Vector2(512, 610.92)
+target_scene_path = "res://levels/classroom.tscn"
+camera_zoom = Vector2(2.5, 2.5)
+
 [node name="Parallax2D_Objects" type="Parallax2D" parent="."]
 z_index = -1
 material = ExtResource("16_dof6d")
 scroll_offset = Vector2(-4, 6)
 repeat_times = 10
+script = ExtResource("3_ix0ry")
+night_resource = ExtResource("25_kr3fp")
+day_resource = ExtResource("26_gyi2h")
 
 [node name="Lights" type="Node2D" parent="Parallax2D_Objects"]
 position = Vector2(153, -77)
@@ -387,23 +396,23 @@ tile_map_data = PackedByteArray("AAAKAAUAAwAAAAQAAAAUAAoAAwAAAAAAAAAIABAAAwAAAAA
 tile_set = ExtResource("15_saqqm")
 metadata/_edit_lock_ = true
 
-[node name="LoadLevelDoorFront" parent="Parallax2D_Objects" instance=ExtResource("25_v0sgs")]
-position = Vector2(516, 602)
-target_scene_path = "res://levels/classroom.tscn"
-camera_zoom = Vector2(2.5, 2.5)
-
 [node name="Parallax2D_Base" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_m2mby")
 scroll_offset = Vector2(0, 29)
+script = ExtResource("3_ix0ry")
+night_resource = ExtResource("30_skevd")
+day_resource = ExtResource("4_fg3sh")
 
 [node name="TileMapLayer_Stairs_Down" type="TileMapLayer" parent="Parallax2D_Base"]
+use_parent_material = true
 position = Vector2(0, -29)
 tile_map_data = PackedByteArray("AAA6ABoAAAAAAAIAAAA8ABoAAAAAAAIAAAA7ABoAAAAAAAIAAAA9ABgAAAABAAMAAAA9ABkAAAABAAQAAAA9ABoAAAABAAUAAAA+ABkAAAABAAMAAAA+ABoAAAABAAQAAAA+ABsAAAABAAUAAAA/ABoAAAABAAMAAAA/ABsAAAABAAQAAAA/ABwAAAABAAUAAABAABsAAAABAAMAAABAABwAAAABAAQAAABAAB0AAAABAAUAAABBABwAAAABAAMAAABBAB0AAAABAAQAAABBAB4AAAABAAUAAABCAB0AAAABAAMAAABCAB4AAAABAAQAAABCAB8AAAABAAUAAABBAB8AAAACAAQAAABAAB4AAAACAAQAAAA/AB0AAAACAAQAAAA+ABwAAAACAAQAAAA9ABsAAAACAAQAAABCACAAAAACAAQAAAA8ABkAAAAAAAEAAAA8ABgAAAAAAAAAAAA7ABgAAAAAAAAAAAA7ABkAAAAAAAEAAAA6ABgAAAAAAAAAAAA6ABkAAAAAAAEAAAA6AAwAAAAAAAAAAAA6AA0AAAAAAAEAAAA6AA4AAAAAAAIAAAA7AAwAAAAAAAAAAAA7AA0AAAAAAAEAAAA7AA4AAAAAAAIAAAA8AAwAAAAAAAAAAAA8AA0AAAAAAAEAAAA8AA4AAAAAAAIAAAA9AAwAAAABAAMAAAA9AA0AAAABAAQAAAA9AA4AAAABAAUAAAA9AA8AAAACAAQAAAA+AA0AAAABAAMAAAA+AA4AAAABAAQAAAA+AA8AAAABAAUAAAA+ABAAAAACAAQAAAA/AA4AAAABAAMAAAA/AA8AAAABAAQAAAA/ABAAAAABAAUAAAA/ABEAAAACAAQAAABAAA8AAAABAAMAAABAABAAAAABAAQAAABAABEAAAABAAUAAABAABIAAAACAAQAAABBABAAAAABAAMAAABBABEAAAABAAQAAABBABIAAAABAAUAAABBABMAAAACAAQAAABCABEAAAABAAMAAABCABIAAAABAAQAAABCABMAAAABAAUAAABCABQAAAACAAQAAAA6AAAAAAAAAAAAAAA6AAEAAAAAAAEAAAA6AAIAAAAAAAIAAAA7AAAAAAAAAAAAAAA7AAEAAAAAAAEAAAA7AAIAAAAAAAIAAAA8AAAAAAAAAAAAAAA8AAEAAAAAAAEAAAA8AAIAAAAAAAIAAAA9AAAAAAABAAMAAAA9AAEAAAABAAQAAAA9AAIAAAABAAUAAAA9AAMAAAACAAQAAAA+AAEAAAABAAMAAAA+AAIAAAABAAQAAAA+AAMAAAABAAUAAAA+AAQAAAACAAQAAAA/AAIAAAABAAMAAAA/AAMAAAABAAQAAAA/AAQAAAABAAUAAAA/AAUAAAACAAQAAABAAAMAAAABAAMAAABAAAQAAAABAAQAAABAAAUAAAABAAUAAABAAAYAAAACAAQAAABBAAQAAAABAAMAAABBAAUAAAABAAQAAABBAAYAAAABAAUAAABBAAcAAAACAAQAAABCAAUAAAABAAMAAABCAAYAAAABAAQAAABCAAcAAAABAAUAAABCAAgAAAACAAQAAAA6APT/AAAAAAAAAAA6APX/AAAAAAEAAAA6APb/AAAAAAIAAAA7APT/AAAAAAAAAAA7APX/AAAAAAEAAAA7APb/AAAAAAIAAAA8APT/AAAAAAAAAAA8APX/AAAAAAEAAAA8APb/AAAAAAIAAAA9APT/AAABAAMAAAA9APX/AAABAAQAAAA9APb/AAABAAUAAAA9APf/AAACAAQAAAA+APX/AAABAAMAAAA+APb/AAABAAQAAAA+APf/AAABAAUAAAA+APj/AAACAAQAAAA/APb/AAABAAMAAAA/APf/AAABAAQAAAA/APj/AAABAAUAAAA/APn/AAACAAQAAABAAPf/AAABAAMAAABAAPj/AAABAAQAAABAAPn/AAABAAUAAABAAPr/AAACAAQAAABBAPj/AAABAAMAAABBAPn/AAABAAQAAABBAPr/AAABAAUAAABBAPv/AAACAAQAAABCAPn/AAABAAMAAABCAPr/AAABAAQAAABCAPv/AAABAAUAAABCAPz/AAACAAQAAAA6AOj/AAAAAAAAAAA6AOn/AAAAAAEAAAA6AOr/AAAAAAIAAAA7AOj/AAAAAAAAAAA7AOn/AAAAAAEAAAA7AOr/AAAAAAIAAAA8AOj/AAAAAAAAAAA8AOn/AAAAAAEAAAA8AOr/AAAAAAIAAAA9AOj/AAABAAMAAAA9AOn/AAABAAQAAAA9AOr/AAABAAUAAAA9AOv/AAACAAQAAAA+AOn/AAABAAMAAAA+AOr/AAABAAQAAAA+AOv/AAABAAUAAAA+AOz/AAACAAQAAAA/AOr/AAABAAMAAAA/AOv/AAABAAQAAAA/AOz/AAABAAUAAAA/AO3/AAACAAQAAABAAOv/AAABAAMAAABAAOz/AAABAAQAAABAAO3/AAABAAUAAABAAO7/AAACAAQAAABBAOz/AAABAAMAAABBAO3/AAABAAQAAABBAO7/AAABAAUAAABBAO//AAACAAQAAABCAO3/AAABAAMAAABCAO7/AAABAAQAAABCAO//AAABAAUAAABCAPD/AAACAAQAAAA=")
 tile_set = ExtResource("23_3sq8g")
 metadata/_edit_lock_ = true
 
 [node name="TileMapLayer_Stairs_Up" type="TileMapLayer" parent="Parallax2D_Base"]
+use_parent_material = true
 position = Vector2(0, -29)
 tile_map_data = PackedByteArray("AAA9ACMAAAAAAAMAAAA9ACQAAAAAAAQAAAA9ACUAAAAAAAUAAAA+ACIAAAAAAAMAAAA+ACMAAAAAAAQAAAA+ACQAAAAAAAUAAAA/ACEAAAAAAAMAAAA/ACIAAAAAAAQAAAA/ACMAAAAAAAUAAABAACAAAAAAAAMAAABAACEAAAAAAAQAAABAACIAAAAAAAUAAABDACAAAAABAAIAAABEACAAAAABAAIAAABFACAAAAABAAIAAABGACAAAAABAAIAAABHACAAAAABAAIAAABBAB8AAAAAAAMAAABBACAAAAAAAAQAAABBACEAAAAAAAUAAABCAB4AAAAAAAMAAABCAB8AAAAAAAQAAABCACAAAAAAAAUAAABDAB4AAAABAAAAAABDAB8AAAABAAEAAABEAB4AAAABAAAAAABEAB8AAAABAAEAAABFAB4AAAABAAAAAABFAB8AAAABAAEAAABGAB4AAAABAAAAAABGAB8AAAABAAEAAABHAB4AAAABAAAAAABHAB8AAAABAAEAAAA+ACUAAAACAAUAAAA/ACQAAAACAAUAAABAACMAAAACAAUAAABBACIAAAACAAUAAABCACEAAAACAAUAAAA9ABcAAAAAAAMAAAA9ABgAAAAAAAQAAAA9ABkAAAAAAAUAAAA+ABYAAAAAAAMAAAA+ABcAAAAAAAQAAAA+ABgAAAAAAAUAAAA+ABkAAAACAAUAAAA/ABUAAAAAAAMAAAA/ABYAAAAAAAQAAAA/ABcAAAAAAAUAAAA/ABgAAAACAAUAAABAABQAAAAAAAMAAABAABUAAAAAAAQAAABAABYAAAAAAAUAAABAABcAAAACAAUAAABBABMAAAAAAAMAAABBABQAAAAAAAQAAABBABUAAAAAAAUAAABBABYAAAACAAUAAABCABIAAAAAAAMAAABCABMAAAAAAAQAAABCABQAAAAAAAUAAABCABUAAAACAAUAAABDABIAAAABAAAAAABDABMAAAABAAEAAABDABQAAAABAAIAAABEABIAAAABAAAAAABEABMAAAABAAEAAABEABQAAAABAAIAAABFABIAAAABAAAAAABFABMAAAABAAEAAABFABQAAAABAAIAAABGABIAAAABAAAAAABGABMAAAABAAEAAABGABQAAAABAAIAAABHABIAAAABAAAAAABHABMAAAABAAEAAABHABQAAAABAAIAAAA9AAsAAAAAAAMAAAA9AAwAAAAAAAQAAAA9AA0AAAAAAAUAAAA+AAoAAAAAAAMAAAA+AAsAAAAAAAQAAAA+AAwAAAAAAAUAAAA+AA0AAAACAAUAAAA/AAkAAAAAAAMAAAA/AAoAAAAAAAQAAAA/AAsAAAAAAAUAAAA/AAwAAAACAAUAAABAAAgAAAAAAAMAAABAAAkAAAAAAAQAAABAAAoAAAAAAAUAAABAAAsAAAACAAUAAABBAAcAAAAAAAMAAABBAAgAAAAAAAQAAABBAAkAAAAAAAUAAABBAAoAAAACAAUAAABCAAYAAAAAAAMAAABCAAcAAAAAAAQAAABCAAgAAAAAAAUAAABCAAkAAAACAAUAAABDAAYAAAABAAAAAABDAAcAAAABAAEAAABDAAgAAAABAAIAAABEAAYAAAABAAAAAABEAAcAAAABAAEAAABEAAgAAAABAAIAAABFAAYAAAABAAAAAABFAAcAAAABAAEAAABFAAgAAAABAAIAAABGAAYAAAABAAAAAABGAAcAAAABAAEAAABGAAgAAAABAAIAAABHAAYAAAABAAAAAABHAAcAAAABAAEAAABHAAgAAAABAAIAAAA9AP//AAAAAAMAAAA9AAAAAAAAAAQAAAA9AAEAAAAAAAUAAAA+AP7/AAAAAAMAAAA+AP//AAAAAAQAAAA+AAAAAAAAAAUAAAA+AAEAAAACAAUAAAA/AP3/AAAAAAMAAAA/AP7/AAAAAAQAAAA/AP//AAAAAAUAAAA/AAAAAAACAAUAAABAAPz/AAAAAAMAAABAAP3/AAAAAAQAAABAAP7/AAAAAAUAAABAAP//AAACAAUAAABBAPv/AAAAAAMAAABBAPz/AAAAAAQAAABBAP3/AAAAAAUAAABBAP7/AAACAAUAAABCAPr/AAAAAAMAAABCAPv/AAAAAAQAAABCAPz/AAAAAAUAAABCAP3/AAACAAUAAABDAPr/AAABAAAAAABDAPv/AAABAAEAAABDAPz/AAABAAIAAABEAPr/AAABAAAAAABEAPv/AAABAAEAAABEAPz/AAABAAIAAABFAPr/AAABAAAAAABFAPv/AAABAAEAAABFAPz/AAABAAIAAABGAPr/AAABAAAAAABGAPv/AAABAAEAAABGAPz/AAABAAIAAABHAPr/AAABAAAAAABHAPv/AAABAAEAAABHAPz/AAABAAIAAAA9APP/AAAAAAMAAAA9APT/AAAAAAQAAAA9APX/AAAAAAUAAAA+APL/AAAAAAMAAAA+APP/AAAAAAQAAAA+APT/AAAAAAUAAAA+APX/AAACAAUAAAA/APH/AAAAAAMAAAA/APL/AAAAAAQAAAA/APP/AAAAAAUAAAA/APT/AAACAAUAAABAAPD/AAAAAAMAAABAAPH/AAAAAAQAAABAAPL/AAAAAAUAAABAAPP/AAACAAUAAABBAO//AAAAAAMAAABBAPD/AAAAAAQAAABBAPH/AAAAAAUAAABBAPL/AAACAAUAAABCAO7/AAAAAAMAAABCAO//AAAAAAQAAABCAPD/AAAAAAUAAABCAPH/AAACAAUAAABDAO7/AAABAAAAAABDAO//AAABAAEAAABDAPD/AAABAAIAAABEAO7/AAABAAAAAABEAO//AAABAAEAAABEAPD/AAABAAIAAABFAO7/AAABAAAAAABFAO//AAABAAEAAABFAPD/AAABAAIAAABGAO7/AAABAAAAAABGAO//AAABAAEAAABGAPD/AAABAAIAAABHAO7/AAABAAAAAABHAO//AAABAAEAAABHAPD/AAABAAIAAAA=")
 tile_set = ExtResource("23_3sq8g")
@@ -418,6 +427,9 @@ metadata/_edit_lock_ = true
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_m2mby")
+script = ExtResource("3_ix0ry")
+night_resource = ExtResource("33_rm42f")
+day_resource = ExtResource("34_lb67o")
 
 [node name="TileMapLayer_Windows" type="TileMapLayer" parent="Parallax2D_Front"]
 use_parent_material = true
@@ -501,9 +513,10 @@ interact_message_b = "Fechar Porta"
 cannot_interact_message = "Porta Trancada"
 
 [node name="VendingMachine" parent="." instance=ExtResource("33_tfkrl")]
-position = Vector2(-104, 608)
+position = Vector2(376, 608)
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_0g8mh")
+material = SubResource("ShaderMaterial_5vpj0")
+use_parent_material = false
 position = Vector2(-200, 608)

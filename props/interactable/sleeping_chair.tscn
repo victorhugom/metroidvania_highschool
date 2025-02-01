@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://props/interactable/sleeping_chair.gd" id="1_0ilrx"]
 [ext_resource type="PackedScene" uid="uid://dl3hticbwtgq4" path="res://_starter_content/interactable/interactable.tscn" id="1_ubfkd"]
-[ext_resource type="Texture2D" uid="uid://ceyi0fycs4175" path="res://assets/props/carteiraBG.png" id="2_bd5eg"]
+[ext_resource type="Texture2D" uid="uid://dqlbfv1ewumyg" path="res://assets/props/sleepingpoint.png" id="3_6pdhd"]
 [ext_resource type="Texture2D" uid="uid://b0p34ifc0ljr5" path="res://assets/player/amenine/sleep.png" id="3_c8wbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okp7v"]
@@ -130,12 +130,14 @@ shape = SubResource("RectangleShape2D_okp7v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-texture = ExtResource("2_bd5eg")
+position = Vector2(2, 0)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_6pdhd")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 visible = false
 use_parent_material = true
-position = Vector2(0, -16)
+position = Vector2(-19, -14)
 texture = ExtResource("3_c8wbr")
 hframes = 11
 
