@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
 [ext_resource type="Texture2D" uid="uid://bqi0g6ymcc5ik" path="res://shaders/night_Front.tres" id="24_4y0kv"]
-[ext_resource type="Texture2D" path="res://shaders/gradientmap-player-sundown.tres" id="28_c31dv"]
+[ext_resource type="Texture2D" uid="uid://cguaids1xq2ng" path="res://shaders/gradientmap-player-sundown.tres" id="28_c31dv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deo0f"]
 shader = ExtResource("20_qa315")
@@ -72,7 +72,7 @@ shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
 shader_parameter/pal0 = ExtResource("24_4y0kv")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gif06"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75f3b"]
 resource_local_to_scene = true
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
@@ -362,7 +362,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_gif06")
+material = SubResource("ShaderMaterial_75f3b")
 use_parent_material = false
 position = Vector2(-274, -19)
 

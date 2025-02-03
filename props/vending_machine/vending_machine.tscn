@@ -1,12 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://cc5hcdjreh8hn"]
+[gd_scene load_steps=16 format=3 uid="uid://cc5hcdjreh8hn"]
 
 [ext_resource type="Script" path="res://props/vending_machine/vending_machine.gd" id="2_47h5q"]
 [ext_resource type="PackedScene" uid="uid://b38vp4ymwvvky" path="res://_starter_content/interactable/switch_handler/interactable_switch.tscn" id="3_ohvy8"]
 [ext_resource type="Texture2D" uid="uid://tr5ue7grer1a" path="res://assets/props/vendingmachine.png" id="4_e3wee"]
+[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="4_p2q51"]
 [ext_resource type="Texture2D" uid="uid://domrhpvjvphc6" path="res://assets/fx/vendingmachinelight.png" id="5_urnr3"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="6_tu7nt"]
 [ext_resource type="Texture2D" uid="uid://1haroff05kel" path="res://_starter_content/assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_escape_outline.png" id="7_hlyih"]
 [ext_resource type="FontFile" uid="uid://bm0s5gub5omxg" path="res://assets/fonts/Minecraft.ttf" id="13_w00u0"]
+
+[sub_resource type="Gradient" id="Gradient_ytes5"]
+offsets = PackedFloat32Array(0, 0.550725, 1)
+colors = PackedColorArray(0.0256607, 0.0162363, 0.140943, 1, 1, 0.209966, 0.291138, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lngb8"]
+gradient = SubResource("Gradient_ytes5")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5teqp"]
+shader = ExtResource("4_p2q51")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_lngb8")
 
 [sub_resource type="Animation" id="Animation_ojvvo"]
 length = 0.001
@@ -126,7 +140,7 @@ material = ExtResource("6_tu7nt")
 script = ExtResource("2_47h5q")
 
 [node name="InteractableSwitch" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_ohvy8")]
-use_parent_material = true
+material = SubResource("ShaderMaterial_5teqp")
 position = Vector2(0, -40)
 texture = ExtResource("4_e3wee")
 animation_player = NodePath("../AnimationPlayer")
@@ -152,7 +166,6 @@ texture = ExtResource("5_urnr3")
 
 [node name="MenuContainer" type="HFlowContainer" parent="."]
 material = ExtResource("6_tu7nt")
-use_parent_material = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
