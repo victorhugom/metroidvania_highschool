@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://crftrycoouo55"]
+
+[ext_resource type="Script" path="res://weapons/granade_explosion.gd" id="1_ubpem"]
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_g6qbk"]
+[ext_resource type="Texture2D" uid="uid://bnrtrenc5m3cg" path="res://assets/fx/explosion.png" id="3_lf7jp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
+size = Vector2(160, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvxf8"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(0, 0, 142, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ia2f"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(142, 0, 142, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0dcr"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(284, 0, 142, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yndxc"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(426, 0, 142, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwe6q"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(568, 0, 142, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekaqu"]
+atlas = ExtResource("3_lf7jp")
+region = Rect2(710, 0, 142, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sp52q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvxf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ia2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0dcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yndxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwe6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekaqu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Acid" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_ubpem")
+
+[node name="AttackBox" parent="." instance=ExtResource("2_g6qbk")]
+collision_layer = 8
+collision_mask = 262208
+damage = 2
+damage_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_mnst4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.981202
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

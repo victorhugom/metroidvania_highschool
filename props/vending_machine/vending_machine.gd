@@ -20,6 +20,9 @@ const VENDING_MACHINE_ITEM = preload("res://props/vending_machine/vending_machin
 const COFFEE = preload("res://props/vending_machine/vending_machine_items/coffee.tres")
 const ENERGY_DRINK = preload("res://props/vending_machine/vending_machine_items/energy_drink.tres")
 const SODA = preload("res://props/vending_machine/vending_machine_items/soda.tres")
+const BASEBALL = preload("res://props/vending_machine/vending_machine_items/baseball.tres")
+const GRANADE = preload("res://props/vending_machine/vending_machine_items/granade.tres")
+const ACID_GLASS = preload("res://props/vending_machine/vending_machine_items/acid_glass.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,9 +49,30 @@ func initialize_vending_machine_items():
 	vending_machine_item_coffee.item_price = 300
 	vending_machine_item_coffee.item_sprite = preload("res://assets/props/itens/drink_can_icon.png")
 
+	var vending_machine_item_baseball = VENDING_MACHINE_ITEM.instantiate()
+	vending_machine_item_baseball.item_name = BASEBALL.display_name
+	vending_machine_item_baseball.description = BASEBALL.description
+	vending_machine_item_baseball.item_price = 100
+	vending_machine_item_baseball.item_sprite = preload("res://assets/props/itens/throwable_baseball_icon.png")
+
+	var vending_machine_item_granade = VENDING_MACHINE_ITEM.instantiate()
+	vending_machine_item_granade.item_name = GRANADE.display_name
+	vending_machine_item_granade.description = GRANADE.description
+	vending_machine_item_granade.item_price = 200
+	vending_machine_item_granade.item_sprite = preload("res://assets/props/itens/throwable_granade_icon.png")
+
+	var vending_machine_item_acid_glass = VENDING_MACHINE_ITEM.instantiate()
+	vending_machine_item_acid_glass.item_name = ACID_GLASS.display_name
+	vending_machine_item_acid_glass.description = ACID_GLASS.description
+	vending_machine_item_acid_glass.item_price = 300
+	vending_machine_item_acid_glass.item_sprite = preload("res://assets/props/itens/throwable_bottle_icon.png")
+
 	menu_container.add_child(vending_machine_item_soda)
 	menu_container.add_child(vending_machine_item_energy_drink)
 	menu_container.add_child(vending_machine_item_coffee)
+	menu_container.add_child(vending_machine_item_baseball)
+	menu_container.add_child(vending_machine_item_granade)
+	menu_container.add_child(vending_machine_item_acid_glass)
 
 	menu_items = menu_container.get_children()
 	item_selected = menu_items[0]

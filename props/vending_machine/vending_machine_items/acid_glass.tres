@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://b0422ryjn2bsm"]
+
+[ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="1_k8vpx"]
+
+[resource]
+script = ExtResource("1_k8vpx")
+item_id = "acid_glass"
+item_type = "weapon"
+display_name = "Acid Glass"
+description = "Creates an area explosion"
+icon = "res://assets/props/itens/throwable_bottle.png"

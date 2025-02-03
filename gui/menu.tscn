@@ -151,7 +151,7 @@ shader_parameter/pal0 = SubResource("GradientTexture1D_xsdjp")
 [sub_resource type="Resource" id="Resource_qwejf"]
 script = ExtResource("8_8787q")
 item_id = "baseball_default"
-item_type = "baseball"
+item_type = "weapon"
 display_name = "Change Baseball"
 description = "Change Baseball"
 icon = "res://assets/gui/icons/baseball.png"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://dj531wg6ca31v"]
+[gd_scene load_steps=89 format=3 uid="uid://dj531wg6ca31v"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -39,6 +39,9 @@
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
 [ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="34_e8ruu"]
 [ext_resource type="Resource" uid="uid://b3c6hxckuev32" path="res://props/vending_machine/vending_machine_items/coffee.tres" id="35_myree"]
+[ext_resource type="Resource" uid="uid://bj0yik5w2m11s" path="res://props/vending_machine/vending_machine_items/baseball.tres" id="36_42x6v"]
+[ext_resource type="Resource" uid="uid://bipymmj2i05rp" path="res://props/vending_machine/vending_machine_items/granade.tres" id="37_unq0m"]
+[ext_resource type="Resource" uid="uid://b0422ryjn2bsm" path="res://props/vending_machine/vending_machine_items/acid_glass.tres" id="38_2napl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 9.0
@@ -2658,7 +2661,7 @@ libraries = {
 
 [node name="Inventory" parent="." instance=ExtResource("6_xnhrv")]
 use_parent_material = true
-starter_items = Array[ExtResource("34_e8ruu")]([ExtResource("35_myree")])
+starter_items = Array[ExtResource("34_e8ruu")]([ExtResource("35_myree"), ExtResource("36_42x6v"), ExtResource("37_unq0m"), ExtResource("38_2napl")])
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
 use_parent_material = true

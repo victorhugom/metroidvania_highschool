@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://bj0yik5w2m11s"]
+
+[ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="1_r1xwc"]
+
+[resource]
+script = ExtResource("1_r1xwc")
+item_id = "baseball"
+item_type = "weapon"
+display_name = "Baseball"
+description = "Trow at the enemy"
+icon = "res://assets/props/itens/throwable_baseball.png"

@@ -2,7 +2,7 @@ extends LimboState
 
 func _enter():
 	if agent.throw_ammunition < 10:
-		agent.emit_signal("state_changed", "no_ammo")
+		agent.emit_signal("state_changed", "no_ammo", agent.velocity)
 		agent.main_state_machine.dispatch(agent.to_idle)
 		return
 	agent.is_attacking = true

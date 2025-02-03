@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://t4lm1kivhjcj"]
+
+[ext_resource type="Script" path="res://weapons/granade_explosion.gd" id="1_526sw"]
+[ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_11a42"]
+[ext_resource type="Texture2D" uid="uid://d1p2hiybipxf5" path="res://assets/fx/bottle_explosion.png" id="3_1kjwe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
+size = Vector2(160, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkwoj"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(0, 0, 144, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8ojc"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(144, 0, 144, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3edh0"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(288, 0, 144, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pykc5"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(432, 0, 144, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40tal"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(576, 0, 144, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io8m5"]
+atlas = ExtResource("3_1kjwe")
+region = Rect2(720, 0, 144, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sp52q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkwoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8ojc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3edh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pykc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40tal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io8m5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="BallExplosion" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_526sw")
+
+[node name="AttackBox" parent="." instance=ExtResource("2_11a42")]
+collision_layer = 8
+collision_mask = 262208
+damage = 2
+damage_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_mnst4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.198999
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://bipymmj2i05rp"]
+
+[ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="1_4p7v8"]
+
+[resource]
+script = ExtResource("1_4p7v8")
+item_id = "granade"
+item_type = "weapon"
+display_name = "granade"
+description = "Creates an area explosion"
+icon = "res://assets/props/itens/throwable_granade.png"

@@ -29,11 +29,16 @@ script = ExtResource("1_2ckqn")
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_cgnd4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ThrowableTexture" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_16liw")
-position = Vector2(3.57628e-07, 3)
-scale = Vector2(0.625, 0.625)
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 18.0
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_2u5p3")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="AttackBox" parent="." instance=ExtResource("5_hyr4s")]
 collision_layer = 4096

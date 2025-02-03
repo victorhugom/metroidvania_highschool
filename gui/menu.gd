@@ -34,9 +34,7 @@ func get_current_time() -> String:
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_menu"):
 		if is_menu_open:
-			animation_player.play("hide_phone")
-			is_menu_open = false
-			get_tree().paused = false
+			close_menu()
 		else:
 			animation_player.play("show_phone")
 			is_menu_open = true
@@ -118,6 +116,12 @@ func use_inventory_item():
 	elif inventory_item.item_id == "soda":
 		player.health.increase_health(3)
 		is_item_used = true
+	elif inventory_item.item_id == "granade":
+		player.throwable_type = Throwable.TrowableType.GRANADE
+	elif inventory_item.item_id == "acid_glass":
+		player.throwable_type = Throwable.TrowableType.GLASS
+	elif inventory_item.item_id == "baseball":
+		player.throwable_type = Throwable.TrowableType.DEFAULT
 
 	if is_item_used:
 		player.inventory.remove_item(inventory_item)
@@ -128,3 +132,11 @@ func use_inventory_item():
 			select_item(item_selected_index)
 		else:
 			selected_item_label.text = "No items available"
+			
+	close_menu()
+			
+
+func close_menu():
+	animation_player.play("hide_phone")
+	is_menu_open = false
+	get_tree().paused = false

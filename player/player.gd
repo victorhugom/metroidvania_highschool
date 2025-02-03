@@ -1,9 +1,5 @@
 class_name Player extends CharacterBody2D
 
-# Preload resources
-const SIMPLE_EXPLOSION = preload("res://weapons/simple_explosion.tscn")
-const THROWABLE = preload("res://weapons/throwable.tscn")
-
 # Constants
 const MIN_THROW_SPEED: int = 200
 const WALL_ROTATION_ANGLE = PI / 2
@@ -101,6 +97,7 @@ var is_parrying: bool = false
 # Throw variables
 var throw_speed: int = MIN_THROW_SPEED
 var throw_ammunition: float = max_throw_ammunition * 10
+var throwable_type: Throwable.TrowableType = Throwable.TrowableType.DEFAULT
 
 # Jump variables
 var current_jumps: int = 0
