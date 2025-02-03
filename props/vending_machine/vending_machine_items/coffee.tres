@@ -7,5 +7,5 @@ script = ExtResource("1_e8dte")
 item_id = "coffee"
 item_type = "drink"
 display_name = "Coffee"
-description = "Recover 100 Energy"
+description = "Recover Full Energy"
 icon = "res://assets/gui/icons/wine.png"

@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dssfgppqd34df" path="res://gui/menu_item.tscn" id="7_334uo"]
 [ext_resource type="Texture2D" uid="uid://bjh5yo88okr18" path="res://assets/gui/icons/sakura.png" id="8_86icd"]
 [ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="8_8787q"]
-[ext_resource type="Resource" uid="uid://d2xdvrq1u3o8f" path="res://gui/inventory_start_items/pizza.tres" id="10_sjhm4"]
 [ext_resource type="Resource" uid="uid://cldc8yjfq6pee" path="res://props/vending_machine/vending_machine_items/energy_drink.tres" id="11_vipma"]
 
 [sub_resource type="Animation" id="Animation_52c7x"]
@@ -165,6 +164,14 @@ display_name = "Change Glasses"
 description = "Change Glasses"
 icon = "res://assets/gui/icons/summer.png"
 
+[sub_resource type="Resource" id="Resource_4mkix"]
+script = ExtResource("8_8787q")
+item_id = "pizza"
+item_type = "food"
+display_name = "Pick Food"
+description = "Pick Food (health)"
+icon = "res://assets/gui/icons/pizza.png"
+
 [node name="Menu" type="CanvasLayer"]
 process_mode = 3
 offset = Vector2(1220, 680)
@@ -255,7 +262,7 @@ inventory_item = SubResource("Resource_jishv")
 
 [node name="Pizza" parent="MenuContainer" instance=ExtResource("7_334uo")]
 layout_mode = 2
-inventory_item = ExtResource("10_sjhm4")
+inventory_item = SubResource("Resource_4mkix")
 
 [node name="Drink" parent="MenuContainer" instance=ExtResource("7_334uo")]
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://dj531wg6ca31v"]
+[gd_scene load_steps=84 format=3 uid="uid://dj531wg6ca31v"]
 
 [ext_resource type="Material" uid="uid://dh87rmh7f2cqo" path="res://player/playercolor.tres" id="1_7n57d"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_dpgy2"]
@@ -37,7 +37,6 @@
 [ext_resource type="AudioStream" uid="uid://c1cha8waippdm" path="res://assets/sfx/step4.wav" id="27_kvcjf"]
 [ext_resource type="Texture2D" uid="uid://b7aejk4mhvebp" path="res://assets/props/baseball.png" id="27_pbpr2"]
 [ext_resource type="Texture2D" uid="uid://22xdwj6x0cjd" path="res://player/ball.tres" id="28_d8kds"]
-[ext_resource type="Script" path="res://_starter_content/inventory/inventory_item.gd" id="34_e8ruu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifgk3"]
 radius = 9.0
@@ -2657,7 +2656,6 @@ libraries = {
 
 [node name="Inventory" parent="." instance=ExtResource("6_xnhrv")]
 use_parent_material = true
-starter_items = Array[ExtResource("34_e8ruu")]([])
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_mhy6p")]
 use_parent_material = true

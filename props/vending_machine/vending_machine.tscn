@@ -195,7 +195,7 @@ text = "Recover 10 life"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Button" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="."]
 offset_left = -48.0
 offset_top = -80.0
 offset_right = 24.0

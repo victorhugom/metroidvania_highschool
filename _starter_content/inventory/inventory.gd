@@ -47,6 +47,38 @@ func remove_item_by_type_with_quantity(item_type: String, quantity: int) -> bool
 	
 	return true
 
+func remove_item(item: InventoryItem) -> bool:
+	var index = inventory_items.find(item)
+	if index == -1:
+		return false
+	
+	inventory_items.remove_at(index)
+	
+	_save_data()
+	
+	return true
+
+func remove_item_by_type(item_type: String) -> bool:
+	var items = has_item(item_type)
+	if items.size() == 0:
+		return false
+	
+	for item in items:
+		inventory_items.remove_at(inventory_items.find(item))
+	
+	_save_data()
+	
+	return true
+
+func remove_item_by_item_id(item_id: String) -> bool:
+	for item in inventory_items:
+		if item.item_id == item_id:
+			inventory_items.remove_at(inventory_items.find(item))
+			_save_data()
+			return true
+	
+	return false
+
 func _save_data():
 	var file := FileAccess.open(inventory_data_save_path, FileAccess.WRITE)
 	

@@ -8,6 +8,7 @@ const MENU_ITEM = preload("res://gui/menu_item.tscn")
 @onready var sub_container: HFlowContainer = $SubContainer
 @onready var selected_item_label: RichTextLabel = $CenterContainer/SelectedItemLabel
 @onready var money_label: RichTextLabel = $MoneyLabel
+@onready var exit_button: Button = $ExitButton
 
 var is_menu_open:bool = false
 var item_selected: MenuItem
@@ -25,6 +26,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	rich_text_label_time.text = get_current_time()
+	if exit_button:
+		exit_button.visible = is_menu_open
 
 func get_current_time() -> String:
 	var now = Time.get_time_dict_from_system()
@@ -54,6 +57,7 @@ func _input(event: InputEvent) -> void:
 			
 		if event.is_action_pressed("ui_select"):
 			select_menu_item(item_selected.inventory_item.item_type)
+
 			
 func select_item(item_index:int):
 
@@ -76,8 +80,7 @@ func select_menu_item(menu_item_type: String):
 		select_item(item_selected_index)
 		return
 	if current_menu == sub_container:
-		return
-		#TODO: use item
+		use_inventory_item()
 	
 	var inventory = player.inventory
 	var inventory_items = inventory.get_items_grouped()
@@ -102,3 +105,23 @@ func select_menu_item(menu_item_type: String):
 	current_menu = sub_container
 	menu_items = current_menu.get_children()
 	select_item(item_selected_index)
+
+func use_inventory_item():
+	var inventory_item = item_selected.inventory_item
+	var player: Player = get_tree().get_nodes_in_group("player")[0]
+	var is_item_used = false
+
+	if inventory_item.item_id == "coffee":
+		player.health.increase_health(10)
+		is_item_used = true
+	elif inventory_item.item_id == "energy_drink":
+		player.health.increase_health(6)
+		is_item_used = true
+	elif inventory_item.item_id == "soda":
+		player.health.increase_health(3)
+		is_item_used = true
+
+	if is_item_used:
+		player.inventory.remove_item(inventory_item)
+		menu_container.remove_child(item_selected)
+		item_selected = menu_items[0]

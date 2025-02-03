@@ -6,6 +6,7 @@ extends Node2D
 @onready var menu_container: HFlowContainer = $MenuContainer
 @onready var item_name: RichTextLabel = $ItemName
 @onready var item_description: RichTextLabel = $CenterContainer/ItemDescription
+@onready var exit_button: Button = $ExitButton
 
 var is_menu_open:bool = false
 var item_selected: VendingMachineItem
@@ -24,6 +25,7 @@ const SODA = preload("res://props/vending_machine/vending_machine_items/soda.tre
 func _ready() -> void:
 	interactable_switch.interact.connect(_on_interactable_interact)
 	initialize_vending_machine_items()
+	exit_button.visible = false
 
 func initialize_vending_machine_items():
 	var vending_machine_item_soda = VENDING_MACHINE_ITEM.instantiate()
@@ -69,6 +71,22 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_cancel"):
 			exit()
 			
+func _on_interactable_interact(_body: Node2D):
+	player.is_busy = true
+	player.global_position = player_position.global_position
+
+	original_camera_zoom = player.follow_camera.zoom
+	original_camera_position = player.follow_camera.global_position
+
+	player.follow_camera.update_zoom(Vector2(7.2, 7.2))
+	player.follow_camera.global_position = Vector2(global_position.x, global_position.y - 50)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "is_menu_open", true, 1.5)
+	exit_button.visible = true
+
+func _set_player_busy():
+	player.is_busy = false
+
 func select_item(item_index:int):
 
 	item_selected.selected = false
@@ -92,26 +110,13 @@ func buy_selected_item():
 		player.inventory.remove_item_by_type_with_quantity("money", item_selected.item_price)
 	else:
 		print_debug("Cannot buy: not enough money")
-		
-func _on_interactable_interact(_body: Node2D):
-	player.is_busy = true
-	player.global_position = player_position.global_position
 
-	original_camera_zoom = player.follow_camera.zoom
-	original_camera_position = player.follow_camera.global_position
-
-	player.follow_camera.update_zoom(Vector2(7.2, 7.2))
-	player.follow_camera.global_position = Vector2(global_position.x, global_position.y - 50)
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "is_menu_open", true, 1.5)
 
 func exit():
 	is_menu_open = false
+	exit_button.visible = false
 
 	player.follow_camera.update_zoom(original_camera_zoom)
 	player.follow_camera.global_position = original_camera_position
 	var tween = get_tree().create_tween()
 	tween.tween_callback(Callable(self, "_set_player_busy")).set_delay(1.5)
-
-func _set_player_busy():
-	player.is_busy = false
