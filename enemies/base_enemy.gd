@@ -194,7 +194,9 @@ func _on_hurt_box_damaged(damage: int, area: Area2D):
 		global_position.x += 10
 		velocity = Vector2(-1, 0)
 	
-	player_in_sight = area.get_parent()
+	var parent = area.get_parent()
+	if parent is Player:
+		player_in_sight = parent
 	loose_sight_timeout = sight_time
 	
 	animation_player_being_hit.play("hit")

@@ -42,7 +42,8 @@ stretch_mode = 5
 
 [node name="AttackBox" parent="." instance=ExtResource("5_hyr4s")]
 collision_layer = 4096
-collision_mask = 8192
+collision_mask = 270400
+damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(0, 3)

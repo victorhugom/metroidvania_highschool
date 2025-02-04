@@ -6,6 +6,11 @@ class_name Throwable extends RigidBody2D
 
 enum TrowableType {DEFAULT, GLASS, GRANADE}
 
+const ACID_BOTTLE_EXPLOSION = preload("res://weapons/acid_bottle_explosion.tscn")
+const GRANADE_EXPLOSION = preload("res://weapons/granade_explosion.tscn")
+
+const EXPLOSION_TIMEOUT: float = 1.0
+
 var explosion: PackedScene
 var exploded = false
 var direction = "right"
@@ -20,12 +25,12 @@ func _ready():
 
 	match throwable_type:
 		TrowableType.GLASS:
-			attack_box.damage = 0
-			explosion = preload("res://weapons/acid_bottle_explosion.tscn")
+			attack_box.damage = 1
+			explosion = ACID_BOTTLE_EXPLOSION
 			throwable_texture.texture = preload("res://assets/props/itens/throwable_bottle.png")
 		TrowableType.GRANADE:
-			attack_box.damage = 2
-			explosion = preload("res://weapons/granade_explosion.tscn")
+			attack_box.damage = 1
+			explosion = GRANADE_EXPLOSION
 			throwable_texture.texture = preload("res://assets/props/itens/throwable_granade.png")
 		TrowableType.DEFAULT:
 			attack_box.damage = 1
@@ -37,6 +42,10 @@ func _on_body_entered(_body):
 	if exploded: return
 	
 	_create_explosion()
+	
+	if _body is Vine and explosion == ACID_BOTTLE_EXPLOSION:
+		var tween = create_tween()
+		tween.tween_callback((_body as Vine).destroy).set_delay(EXPLOSION_TIMEOUT/2)
 
 func _on_parried(_character: CharacterBody2D):
 	speed = -(speed / 2)
@@ -64,13 +73,13 @@ func _create_explosion():
 		(first_node as Node2D).add_sibling.call_deferred(new_explosion)
 		
 		var tween = create_tween()
-		tween.tween_property(self, "modulate:a", 0.0, .05)
+		tween.tween_property(self, "modulate:a", 0.0, EXPLOSION_TIMEOUT)
 		tween.finished.connect(_on_tween_finished)
 		
 		exploded = true
 	else:
 		var tween = create_tween()
-		tween.tween_callback(_on_tween_finished).set_delay(.05)
+		tween.tween_callback(_on_tween_finished).set_delay(EXPLOSION_TIMEOUT)
 	
 func _on_tween_finished():
 	queue_free()

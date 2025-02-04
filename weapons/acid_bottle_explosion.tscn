@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1p2hiybipxf5" path="res://assets/fx/bottle_explosion.png" id="3_1kjwe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
-size = Vector2(160, 56)
+size = Vector2(160, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkwoj"]
 atlas = ExtResource("3_1kjwe")
@@ -62,21 +62,31 @@ y_sort_enabled = true
 script = ExtResource("1_526sw")
 
 [node name="AttackBox" parent="." instance=ExtResource("2_11a42")]
-collision_layer = 8
+collision_layer = 4096
 collision_mask = 262208
-damage = 2
-damage_type = 2
+damage = 5
+damage_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(0, -28)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_mnst4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -15)
+position = Vector2(0, -19.5)
+scale = Vector2(0.777778, 1.1875)
 sprite_frames = SubResource("SpriteFrames_sp52q")
 autoplay = "default"
 frame_progress = 0.198999
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 28)
+scale = Vector2(0.777778, 1.16667)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.198999
+flip_v = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
