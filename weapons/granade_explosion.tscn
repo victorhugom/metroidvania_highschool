@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bnrtrenc5m3cg" path="res://assets/fx/explosion.png" id="3_lf7jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnst4"]
-size = Vector2(160, 64)
+size = Vector2(160, 88)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nvxf8"]
 atlas = ExtResource("3_lf7jp")
@@ -62,13 +62,13 @@ y_sort_enabled = true
 script = ExtResource("1_ubpem")
 
 [node name="AttackBox" parent="." instance=ExtResource("2_g6qbk")]
-collision_layer = 8
+collision_layer = 4096
 collision_mask = 262208
-damage = 2
-damage_type = 1
+damage = 5
+damage_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(0, -32)
+position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_mnst4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

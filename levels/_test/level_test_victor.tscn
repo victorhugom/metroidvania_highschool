@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=42 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_2yrvx"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="2_m8og0"]
@@ -21,9 +21,8 @@
 [ext_resource type="TileSet" uid="uid://cii404y27e6ij" path="res://levels/tilesets/objects_tileset.tres" id="16_g6wt4"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="17_suvdt"]
 [ext_resource type="Texture2D" uid="uid://bffuowp2bsmc2" path="res://assets/gradients/roxoaorose.tres" id="18_egx00"]
-[ext_resource type="PackedScene" path="res://props/interactable/water_fountain.tscn" id="21_u5wax"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="22_alrb8"]
-[ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="23_jow2k"]
+[ext_resource type="PackedScene" uid="uid://bmusv6lfxrhg2" path="res://props/vines.tscn" id="25_0n6y4"]
 [ext_resource type="Texture2D" uid="uid://bf5ncnn714y2r" path="res://assets/props/door.png" id="25_yntb2"]
 [ext_resource type="PackedScene" uid="uid://dplsakl01yn0s" path="res://util/camera_zoom_changer.tscn" id="26_xu61t"]
 
@@ -79,7 +78,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_ca1op")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_arpnr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acms7"]
 resource_local_to_scene = true
 shader = ExtResource("3_jhowo")
 shader_parameter/lerper = null
@@ -883,10 +882,6 @@ position = Vector2(318, 0)
 [node name="VendingMachine2" parent="." instance=ExtResource("5_i0rrg")]
 position = Vector2(659, 0)
 
-[node name="WaterFountain" parent="." instance=ExtResource("21_u5wax")]
-z_index = -1
-position = Vector2(152, -7)
-
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(149, -71)
 
@@ -937,16 +932,9 @@ color = Color(0.930668, 0.825378, 0.632974, 1)
 energy = 2.96
 texture = ExtResource("22_alrb8")
 
-[node name="SurfaceDriver" parent="." instance=ExtResource("23_jow2k")]
-position = Vector2(3906, -691)
-scale = Vector2(0.835038, 36.4743)
-
-[node name="SurfaceDriver2" parent="." instance=ExtResource("23_jow2k")]
-position = Vector2(3661, -690)
-scale = Vector2(0.835038, 31.2343)
-
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
-material = SubResource("ShaderMaterial_arpnr")
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_acms7")
 position = Vector2(996, -9)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
@@ -974,3 +962,7 @@ zoom = Vector2(2.5, 2.5)
 
 [node name="CameraZoomChanger2" parent="." instance=ExtResource("26_xu61t")]
 position = Vector2(73, 1)
+
+[node name="Vines" parent="." instance=ExtResource("25_0n6y4")]
+position = Vector2(1328, 10)
+tile_map_data = PackedByteArray("AAD2////AAADAAMAAAD3////AAADAAMAAAD1////AAACAAEAAAD1//7/AAAAAAYAAAD2//7/AAAEAAAAAAD3//7/AAAGAAYAAAD4////AAADAAMAAAD4//7/AAAGAAYAAAD5////AAAFAAMAAAD5//7/AAADAAYAAAD6////AAAFAAMAAAD6//7/AAAGAAYAAAD7////AAADAAMAAAD7//7/AAAEAAYAAAD8////AAADAAMAAAD8//7/AAAFAAYAAAD9////AAADAAMAAAD9//7/AAABAAAAAAD9/wQAAAAEAAcAAAD9/wMAAAAFAAMAAAD8/wQAAAADAAcAAAD8/wMAAAADAAMAAAD7/wQAAAADAAcAAAD7/wMAAAAFAAMAAAD6/wQAAAADAAcAAAD6/wMAAAADAAMAAAD5/wQAAAADAAcAAAD5/wMAAAADAAMAAAD4/wQAAAAEAAcAAAD4/wMAAAADAAMAAAD3/wQAAAADAAcAAAD3/wMAAAADAAMAAAD2/wQAAAADAAcAAAD2/wMAAAACAAEAAAD1/wQAAAACAAcAAAD1/wMAAAACAAYAAAD2/wIAAAACAAEAAAD1/wIAAAAAAAcAAAD3/wIAAAAFAAMAAAD1/wEAAAADAAcAAAD2/wEAAAAEAAcAAAD3/wEAAAAFAAMAAAD1/wAAAAACAAEAAAD2/wAAAAAFAAMAAAD9/wIAAAADAAMAAAD8/wIAAAADAAMAAAD8/wEAAAADAAMAAAD7/wIAAAAFAAMAAAD7/wEAAAAFAAMAAAD6/wIAAAADAAMAAAD6/wEAAAADAAMAAAD5/wIAAAADAAMAAAD5/wEAAAAFAAMAAAD4/wIAAAADAAMAAAD4/wEAAAADAAMAAAD9/wEAAAADAAMAAAD6/wAAAAAFAAMAAAD5/wAAAAADAAMAAAD7/wAAAAAFAAMAAAD9/wAAAAAFAAMAAAD8/wAAAAADAAMAAAD4/wAAAAADAAMAAAD3/wAAAAADAAMAAAA=")
