@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://doigv8t3fi1pg"]
+[gd_scene load_steps=77 format=3 uid="uid://doigv8t3fi1pg"]
 
 [ext_resource type="Script" path="res://enemies/base_enemy.gd" id="1_uawak"]
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="2_qj21g"]
@@ -11,24 +11,28 @@
 [ext_resource type="Texture2D" uid="uid://bvfl3d1lsti17" path="res://assets/player/amenine/dash.png" id="8_41o1i"]
 [ext_resource type="Texture2D" uid="uid://wpus3qy1lhbm" path="res://assets/player/amenine/walk.png" id="9_6djn8"]
 [ext_resource type="PackedScene" uid="uid://clfeahbqi3hv2" path="res://_starter_content/destroyable_object/destroyable_object_container.tscn" id="9_twlgn"]
-[ext_resource type="Texture2D" uid="uid://cvhul1ge4w8hd" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 1.png" id="10_ayd7k"]
 [ext_resource type="Texture2D" uid="uid://ddigq8hwt2ga8" path="res://assets/player/amenine/throw.png" id="10_qikho"]
 [ext_resource type="Texture2D" uid="uid://n1kn046dyant" path="res://assets/player/amenine/down.png" id="11_1tbem"]
-[ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="11_neff7"]
 [ext_resource type="Texture2D" uid="uid://c33r8cfk4d3hg" path="res://assets/player/amenine/on_edge.png" id="11_pbef1"]
 [ext_resource type="Shader" path="res://shaders/acceleration_effect.gdshader" id="12_2y0it"]
 [ext_resource type="Texture2D" uid="uid://duuy4ri68hgpv" path="res://assets/player/amenine/charge_attack.png" id="12_dhr5t"]
-[ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="12_qxe2a"]
 [ext_resource type="Texture2D" uid="uid://bpaxppey6ksof" path="res://assets/player/amenine/run.png" id="13_8x83d"]
-[ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="13_glohs"]
 [ext_resource type="Texture2D" uid="uid://cyks626ojs2bj" path="res://assets/fx/light.png" id="14_1q37i"]
 [ext_resource type="Texture2D" uid="uid://c7kqc0eckysja" path="res://assets/player/amenine/shade.png" id="15_fy4g5"]
 [ext_resource type="Texture2D" uid="uid://c43dotfvcp2cx" path="res://assets/player/amenine/up.png" id="18_cahi7"]
 [ext_resource type="Texture2D" uid="uid://bv3k8grmqbq4p" path="res://assets/player/amenine/walk_down.png" id="20_7c063"]
 [ext_resource type="Texture2D" uid="uid://bp82yxyhb3me6" path="res://assets/player/amenine/wall_idle_withtransition.png" id="21_of4e3"]
 [ext_resource type="Texture2D" uid="uid://3u2qdjesprbl" path="res://assets/player/amenine/walk_up.png" id="22_vpt1e"]
+[ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="24_3sxa1"]
+[ext_resource type="Texture2D" uid="uid://dfp1v6uqnnhfb" path="res://assets/enemies/Baseenemy/broken/brokennpc1.png" id="24_t4cqm"]
 [ext_resource type="Texture2D" uid="uid://b82j827qi7q80" path="res://assets/fx/breath.png" id="25_23k5x"]
+[ext_resource type="Texture2D" uid="uid://bjr2aykmub61k" path="res://assets/enemies/Baseenemy/broken/brokennpc2.png" id="25_ac7bu"]
+[ext_resource type="Texture2D" uid="uid://bxi3daehmpmt7" path="res://assets/enemies/Baseenemy/broken/brokennpc3.png" id="26_5myvy"]
+[ext_resource type="Texture2D" uid="uid://hkb8w43h6mhm" path="res://assets/enemies/Baseenemy/broken/brokennpc4.png" id="27_385cx"]
+[ext_resource type="Texture2D" uid="uid://cu085e8h506nu" path="res://assets/enemies/Baseenemy/broken/brokennpc5.png" id="28_r3eok"]
+[ext_resource type="Texture2D" uid="uid://ca8oc7y83mvrt" path="res://assets/enemies/Baseenemy/broken/brokennpc6.png" id="29_q58pr"]
 [ext_resource type="PackedScene" uid="uid://baulxfl7iuam3" path="res://props/money/money_dropper.tscn" id="30_kdblc"]
+[ext_resource type="Texture2D" uid="uid://cyt6l1skymx6w" path="res://assets/enemies/Baseenemy/broken/brokennpc7.png" id="30_x41gl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e42is"]
 height = 56.0
@@ -1909,6 +1913,18 @@ _data = {
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_qe8r2"]
 
+[sub_resource type="Gradient" id="Gradient_we1ra"]
+offsets = PackedFloat32Array(0, 0.193237, 0.357488, 0.565217, 0.806763, 1)
+colors = PackedColorArray(0.00164533, 0.0323917, 0.076184, 1, 0, 0.259906, 0.22449, 1, 0.583748, 0.493126, 3.85046e-07, 1, 0.864033, 0.676151, 0.437402, 1, 0.946146, 0.628845, 0.545478, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8l5xb"]
+gradient = SubResource("Gradient_we1ra")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fl2h7"]
+shader = ExtResource("24_3sxa1")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_8l5xb")
+
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 16
 collision_mask = 30208
@@ -1929,6 +1945,7 @@ monitorable = false
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+visible = false
 use_parent_material = true
 position = Vector2(-18.25, -33.5)
 rotation = 0.600826
@@ -1944,8 +1961,8 @@ hframes = 6
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
 show_behind_parent = true
-position = Vector2(15, -53)
-color = Color(0.325625, 0.430132, 0.701241, 1)
+position = Vector2(3, -13)
+color = Color(0, 0.539737, 0.0749395, 1)
 texture = ExtResource("14_1q37i")
 texture_scale = 0.6
 
@@ -1957,6 +1974,7 @@ collision_layer = 64
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
 position = Vector2(-1, -28)
 shape = SubResource("RectangleShape2D_vums4")
 debug_color = Color(0.960784, 0, 0, 0.419608)
@@ -1997,8 +2015,9 @@ wait_time = 0.5
 autostart = true
 
 [node name="DestroyableObjectContainer" parent="." instance=ExtResource("9_twlgn")]
+material = SubResource("ShaderMaterial_fl2h7")
 destruction_power = Vector2(4, 1)
-texture_pieces = Array[Texture2D]([ExtResource("10_ayd7k"), ExtResource("11_neff7"), ExtResource("12_qxe2a"), ExtResource("13_glohs")])
+texture_pieces = Array[Texture2D]([ExtResource("24_t4cqm"), ExtResource("25_ac7bu"), ExtResource("26_5myvy"), ExtResource("27_385cx"), ExtResource("28_r3eok"), ExtResource("29_q58pr"), ExtResource("30_x41gl")])
 
 [node name="SpriteBreath" type="Sprite2D" parent="."]
 visible = false

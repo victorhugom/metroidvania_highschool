@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://d0qglmexvusns"]
+[gd_scene load_steps=45 format=4 uid="uid://d0qglmexvusns"]
 
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="1_4mrx4"]
 [ext_resource type="Texture2D" uid="uid://bx53rl27p5vrn" path="res://assets/world/schoolcorridor/salda de aula BG/sala.png" id="2_blga1"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cc5hcdjreh8hn" path="res://props/vending_machine/vending_machine.tscn" id="19_8haxy"]
 [ext_resource type="Texture2D" uid="uid://dew8ws4ys7jpc" path="res://shaders/night_Back.tres" id="20_d3bxd"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="20_qa315"]
+[ext_resource type="Texture2D" uid="uid://b33axp6a6ky55" path="res://assets/props/bookshelf7.png" id="20_wfnke"]
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="21_a7jds"]
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="22_8h22b"]
 [ext_resource type="Texture2D" uid="uid://bqi0g6ymcc5ik" path="res://shaders/night_Front.tres" id="24_4y0kv"]
@@ -72,7 +73,7 @@ shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
 shader_parameter/pal0 = ExtResource("24_4y0kv")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_75f3b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4fy0w"]
 resource_local_to_scene = true
 shader = ExtResource("20_qa315")
 shader_parameter/lerper = null
@@ -290,6 +291,177 @@ position = Vector2(-5, 31)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("5_0ta4p")
 
+[node name="Library" type="Node2D" parent="BG"]
+
+[node name="bookshelf1" type="Node2D" parent="BG/Library"]
+position = Vector2(-51.15, -1.19209e-07)
+scale = Vector2(3, 3)
+
+[node name="Parallax2D2" type="Parallax2D" parent="BG/Library/bookshelf1"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.99, 1)
+scroll_offset = Vector2(32, 0)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf1/Parallax2D2"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D3" type="Parallax2D" parent="BG/Library/bookshelf1"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.992, 1)
+scroll_offset = Vector2(24, 0)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf1/Parallax2D3"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D4" type="Parallax2D" parent="BG/Library/bookshelf1"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.994, 1)
+scroll_offset = Vector2(16, 0)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf1/Parallax2D4"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D5" type="Parallax2D" parent="BG/Library/bookshelf1"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.996, 1)
+scroll_offset = Vector2(8, 0)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf1/Parallax2D5"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D6" type="Parallax2D" parent="BG/Library/bookshelf1"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.999, 1)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf1/Parallax2D6"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="bookshelf2" type="Node2D" parent="BG/Library"]
+position = Vector2(63, -1.19209e-07)
+scale = Vector2(3, 3)
+
+[node name="Parallax2D2" type="Parallax2D" parent="BG/Library/bookshelf2"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.99, 1)
+scroll_offset = Vector2(32, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf2/Parallax2D2"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D3" type="Parallax2D" parent="BG/Library/bookshelf2"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.992, 1)
+scroll_offset = Vector2(24, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf2/Parallax2D3"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D4" type="Parallax2D" parent="BG/Library/bookshelf2"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.994, 1)
+scroll_offset = Vector2(16, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf2/Parallax2D4"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D5" type="Parallax2D" parent="BG/Library/bookshelf2"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.996, 1)
+scroll_offset = Vector2(8, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf2/Parallax2D5"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D6" type="Parallax2D" parent="BG/Library/bookshelf2"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.999, 1)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf2/Parallax2D6"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="bookshelf3" type="Node2D" parent="BG/Library"]
+position = Vector2(187, -1.19209e-07)
+scale = Vector2(3, 3)
+
+[node name="Parallax2D2" type="Parallax2D" parent="BG/Library/bookshelf3"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.99, 1)
+scroll_offset = Vector2(32, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf3/Parallax2D2"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D3" type="Parallax2D" parent="BG/Library/bookshelf3"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.992, 1)
+scroll_offset = Vector2(24, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf3/Parallax2D3"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D4" type="Parallax2D" parent="BG/Library/bookshelf3"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.994, 1)
+scroll_offset = Vector2(16, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf3/Parallax2D4"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D5" type="Parallax2D" parent="BG/Library/bookshelf3"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.996, 1)
+scroll_offset = Vector2(8, 0)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf3/Parallax2D5"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
+[node name="Parallax2D6" type="Parallax2D" parent="BG/Library/bookshelf3"]
+scale = Vector2(0.333333, 0.333333)
+scroll_scale = Vector2(0.999, 1)
+screen_offset = Vector2(-1208, -433.073)
+
+[node name="Bookshelf7" type="Sprite2D" parent="BG/Library/bookshelf3/Parallax2D6"]
+position = Vector2(-515, -52)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_wfnke")
+
 [node name="Parallax2D_Back" type="Parallax2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_bfyrw")
@@ -362,7 +534,7 @@ position = Vector2(3661, -690)
 scale = Vector2(0.835038, 31.2343)
 
 [node name="Player" parent="." instance=ExtResource("11_an7wo")]
-material = SubResource("ShaderMaterial_75f3b")
+material = SubResource("ShaderMaterial_4fy0w")
 use_parent_material = false
 position = Vector2(-274, -19)
 
