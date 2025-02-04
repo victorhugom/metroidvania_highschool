@@ -15,3 +15,6 @@ use_parent_material = true
 position = Vector2(0, -32)
 texture = ExtResource("2_mccf7")
 hframes = 3
+
+[node name="ThrowPosition" type="Marker2D" parent="."]
+position = Vector2(-24, -29)

@@ -1,11 +1,11 @@
 extends Node2D
 const THROWABLE = preload("res://weapons/throwable.tscn")
-const ACID_CLOUD = preload("res://weapons/acid_cloud.tscn")
 
 @onready var timer: Timer = $Timer
+@onready var throw_position: Marker2D = $ThrowPosition
 
 @export var direction: String = "left"
-@export var speed: int = 400
+@export var speed: int = 800
 @export var angle: int = 45
 
 # Called when the node enters the scene tree for the first time.
@@ -14,8 +14,8 @@ func _ready() -> void:
 
 func throw():
 	var new_projectile: Throwable = THROWABLE.instantiate()
-	new_projectile.global_position = Vector2(global_position.x, global_position.y - 32)
-	new_projectile.explosion = ACID_CLOUD
+	new_projectile.global_position = throw_position.global_position
+	new_projectile.throwable_type = Throwable.TrowableType.DEFAULT
 	
 	new_projectile.throw(direction, speed)
 
