@@ -73,10 +73,20 @@ shape = SubResource("RectangleShape2D_mnst4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -15)
+position = Vector2(4.76837e-07, -23)
+scale = Vector2(0.788732, 1.32)
 sprite_frames = SubResource("SpriteFrames_sp52q")
 autoplay = "default"
 frame_progress = 0.981202
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(2.86102e-06, 31.5)
+scale = Vector2(0.788732, 1.3)
+sprite_frames = SubResource("SpriteFrames_sp52q")
+autoplay = "default"
+frame_progress = 0.981202
+flip_v = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

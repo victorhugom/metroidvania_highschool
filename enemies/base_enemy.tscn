@@ -2008,7 +2008,7 @@ texture = ExtResource("25_23k5x")
 hframes = 6
 
 [node name="MoneyDropper" parent="." instance=ExtResource("30_kdblc")]
-position = Vector2(0, -64)
+position = Vector2(2, -64)
 quantity = 5
 
 [connection signal="timeout" from="EyeSightTimer" to="." method="check_for_player"]

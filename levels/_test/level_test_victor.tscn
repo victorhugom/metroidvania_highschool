@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://colh4gbqp7na4"]
+[gd_scene load_steps=43 format=4 uid="uid://colh4gbqp7na4"]
 
 [ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_2yrvx"]
 [ext_resource type="Material" uid="uid://bhjprxe5y5k3i" path="res://shaders/gradientmap.tres" id="2_m8og0"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dxfiljcxeadfd" path="res://assets/fx/pixellight.png" id="22_alrb8"]
 [ext_resource type="PackedScene" uid="uid://bmusv6lfxrhg2" path="res://props/vines.tscn" id="25_0n6y4"]
 [ext_resource type="Texture2D" uid="uid://bf5ncnn714y2r" path="res://assets/props/door.png" id="25_yntb2"]
+[ext_resource type="PackedScene" uid="uid://doigv8t3fi1pg" path="res://enemies/base_enemy.tscn" id="26_e25go"]
 [ext_resource type="PackedScene" uid="uid://dplsakl01yn0s" path="res://util/camera_zoom_changer.tscn" id="26_xu61t"]
 
 [sub_resource type="Gradient" id="Gradient_76me2"]
@@ -78,7 +79,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_ca1op")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_acms7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6edge"]
 resource_local_to_scene = true
 shader = ExtResource("3_jhowo")
 shader_parameter/lerper = null
@@ -934,7 +935,7 @@ texture = ExtResource("22_alrb8")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_acms7")
+material = SubResource("ShaderMaterial_6edge")
 position = Vector2(996, -9)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
@@ -965,4 +966,25 @@ position = Vector2(73, 1)
 
 [node name="Vines" parent="." instance=ExtResource("25_0n6y4")]
 position = Vector2(1328, 10)
-tile_map_data = PackedByteArray("AAD2////AAADAAMAAAD3////AAADAAMAAAD1////AAACAAEAAAD1//7/AAAAAAYAAAD2//7/AAAEAAAAAAD3//7/AAAGAAYAAAD4////AAADAAMAAAD4//7/AAAGAAYAAAD5////AAAFAAMAAAD5//7/AAADAAYAAAD6////AAAFAAMAAAD6//7/AAAGAAYAAAD7////AAADAAMAAAD7//7/AAAEAAYAAAD8////AAADAAMAAAD8//7/AAAFAAYAAAD9////AAADAAMAAAD9//7/AAABAAAAAAD9/wQAAAAEAAcAAAD9/wMAAAAFAAMAAAD8/wQAAAADAAcAAAD8/wMAAAADAAMAAAD7/wQAAAADAAcAAAD7/wMAAAAFAAMAAAD6/wQAAAADAAcAAAD6/wMAAAADAAMAAAD5/wQAAAADAAcAAAD5/wMAAAADAAMAAAD4/wQAAAAEAAcAAAD4/wMAAAADAAMAAAD3/wQAAAADAAcAAAD3/wMAAAADAAMAAAD2/wQAAAADAAcAAAD2/wMAAAACAAEAAAD1/wQAAAACAAcAAAD1/wMAAAACAAYAAAD2/wIAAAACAAEAAAD1/wIAAAAAAAcAAAD3/wIAAAAFAAMAAAD1/wEAAAADAAcAAAD2/wEAAAAEAAcAAAD3/wEAAAAFAAMAAAD1/wAAAAACAAEAAAD2/wAAAAAFAAMAAAD9/wIAAAADAAMAAAD8/wIAAAADAAMAAAD8/wEAAAADAAMAAAD7/wIAAAAFAAMAAAD7/wEAAAAFAAMAAAD6/wIAAAADAAMAAAD6/wEAAAADAAMAAAD5/wIAAAADAAMAAAD5/wEAAAAFAAMAAAD4/wIAAAADAAMAAAD4/wEAAAADAAMAAAD9/wEAAAADAAMAAAD6/wAAAAAFAAMAAAD5/wAAAAADAAMAAAD7/wAAAAAFAAMAAAD9/wAAAAAFAAMAAAD8/wAAAAADAAMAAAD4/wAAAAADAAMAAAD3/wAAAAADAAMAAAA=")
+tile_map_data = PackedByteArray("AAD1//H/AAAFAAMAAAD1//L/AAADAAQAAAD1//P/AAADAAMAAAD1//T/AAADAAQAAAD1//X/AAADAAMAAAD1//b/AAADAAQAAAD1//f/AAAFAAMAAAD1////AAADAAcAAAD0//7/AAACAAEAAAD0//3/AAACAAEAAAD0//z/AAACAAEAAAD0//v/AAACAAEAAAD0//r/AAACAAEAAAD0//n/AAACAAEAAAD0//j/AAACAAEAAAD0//f/AAACAAEAAAD0//b/AAACAAEAAAD0//X/AAACAAEAAAD0//T/AAACAAEAAAD0//P/AAACAAEAAAD0//L/AAACAAEAAAD0//H/AAACAAEAAAD0//D/AAACAAEAAAD1//D/AAADAAQAAAD0/+//AAAAAAQAAAD1/+//AAAFAAMAAAD1//7/AAADAAQAAAD1//3/AAADAAMAAAD1//z/AAADAAQAAAD1//v/AAADAAMAAAD1//r/AAADAAQAAAD1//n/AAADAAMAAAD1//j/AAADAAQAAAD2//X/AAABAAUAAAD2//T/AAABAAYAAAD2//P/AAAHAAcAAAD2//L/AAAHAAAAAAD2//H/AAABAAcAAAD2//D/AAABAAAAAAD2//v/AAAHAAcAAAD2//z/AAABAAYAAAD2//3/AAAHAAcAAAD2//7/AAAHAAAAAAD2////AAABAAcAAAD2//r/AAAHAAAAAAD2//n/AAABAAUAAAD2//j/AAAHAAYAAAD2//f/AAAHAAUAAAD2//b/AAABAAYAAAD2/+//AAAHAAcAAAD0/+7/AAACAAYAAAD1/+7/AAAGAAYAAAD2/+7/AAABAAAAAAA=")
+
+[node name="BaseEnemy" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(1721, 352)
+
+[node name="BaseEnemy2" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(1888, 352)
+
+[node name="BaseEnemy3" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(2016, 352)
+
+[node name="BaseEnemy4" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(2168, 352)
+
+[node name="BaseEnemy5" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(2336, 352)
+
+[node name="BaseEnemy6" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(2536, 352)
+
+[node name="BaseEnemy7" parent="." instance=ExtResource("26_e25go")]
+position = Vector2(2536, 352)
