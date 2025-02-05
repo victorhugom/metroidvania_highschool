@@ -79,7 +79,7 @@ colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 
 gradient = SubResource("Gradient_ca1op")
 width = 5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6edge"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1p0v"]
 resource_local_to_scene = true
 shader = ExtResource("3_jhowo")
 shader_parameter/lerper = null
@@ -935,7 +935,7 @@ texture = ExtResource("22_alrb8")
 
 [node name="Player" parent="." instance=ExtResource("11_5ede0")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_6edge")
+material = SubResource("ShaderMaterial_w1p0v")
 position = Vector2(996, -9)
 
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
