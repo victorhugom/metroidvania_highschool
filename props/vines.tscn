@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=4 uid="uid://c0x7ir4qhn2tl"]
+[gd_scene load_steps=3 format=4 uid="uid://bmusv6lfxrhg2"]
 
 [ext_resource type="Script" path="res://props/vines.gd" id="2_86msx"]
-[ext_resource type="TileSet" uid="uid://cul0ycyfd38mc" path="res://levels/tilesets/vine_tileset.tres" id="4_neld1"]
+[ext_resource type="TileSet" uid="uid://h2vkan462k1s" path="res://levels/tilesets/vine_tileset.tres" id="4_neld1"]
 
 [node name="Vines" type="TileMapLayer"]
 use_parent_material = true
