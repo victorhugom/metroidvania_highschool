@@ -4,6 +4,7 @@ class_name Inventory extends Node2D
 @export var starter_items: Array[InventoryItem]
 
 signal item_added(item: InventoryItem)
+signal item_removed(item: InventoryItem)
 
 var inventory_items: Array[InventoryItem]
 
@@ -42,6 +43,7 @@ func remove_item_by_type_with_quantity(item_type: String, quantity: int) -> bool
 	
 	for i in range(quantity):
 		inventory_items.remove_at(inventory_items.find(items[i]))
+		item_removed.emit(items[i])
 	
 	_save_data()
 	
@@ -53,6 +55,7 @@ func remove_item(item: InventoryItem) -> bool:
 		return false
 	
 	inventory_items.remove_at(index)
+	item_removed.emit(item)
 	
 	_save_data()
 	
@@ -64,7 +67,10 @@ func remove_item_by_type(item_type: String) -> bool:
 		return false
 	
 	for item in items:
-		inventory_items.remove_at(inventory_items.find(item))
+		var item_to_remove = inventory_items.find(item)
+		if item_to_remove != -1:
+			inventory_items.remove_at(item_to_remove)
+			item_removed.emit(item)
 	
 	_save_data()
 	
@@ -73,7 +79,11 @@ func remove_item_by_type(item_type: String) -> bool:
 func remove_item_by_item_id(item_id: String) -> bool:
 	for item in inventory_items:
 		if item.item_id == item_id:
-			inventory_items.remove_at(inventory_items.find(item))
+			var item_to_remove = inventory_items.find(item)
+			if item_to_remove != -1:
+				inventory_items.remove_at(item_to_remove)
+				item_removed.emit(item)
+
 			_save_data()
 			return true
 	

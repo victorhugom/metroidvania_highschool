@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var health_bar: Sprite2D = $HealthBar
 @onready var energy_bar: Sprite2D = $EnergyBar
+@onready var money_count: RichTextLabel = $CenterContainer/MoneyCount
 
 @export var health: int = 10:
 	get:
@@ -16,6 +17,13 @@ extends CanvasLayer
 	set(value):
 		energy = value
 		energy_bar.frame = int(energy/10)
+		
+@export var money: int = 3:
+	get:
+		return money
+	set(value):
+		money = value
+		money_count.text = str(value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

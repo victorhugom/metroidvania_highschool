@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp3024xg18rjb"]
+[gd_scene load_steps=5 format=3 uid="uid://cp3024xg18rjb"]
 
 [ext_resource type="Script" path="res://gui/hud.gd" id="1_43uye"]
 [ext_resource type="Texture2D" uid="uid://7dmtfyctanck" path="res://assets/gui/health_bar.png" id="2_gyl1o"]
 [ext_resource type="Texture2D" uid="uid://csljmaxf4ib5o" path="res://assets/gui/energy_bar.png" id="3_ixq87"]
+[ext_resource type="Texture2D" uid="uid://x1xegaxmujx4" path="res://assets/props/itens/sakura_flower.png" id="4_anwf5"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_43uye")
@@ -18,3 +19,20 @@ position = Vector2(105, 64)
 texture = ExtResource("3_ixq87")
 vframes = 11
 frame = 10
+
+[node name="SakuraFlower" type="Sprite2D" parent="."]
+position = Vector2(1400, 40)
+texture = ExtResource("4_anwf5")
+hframes = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = 1368.0
+offset_top = 56.0
+offset_right = 1432.0
+offset_bottom = 88.0
+
+[node name="MoneyCount" type="RichTextLabel" parent="CenterContainer"]
+layout_mode = 2
+text = "300"
+fit_content = true
+autowrap_mode = 0

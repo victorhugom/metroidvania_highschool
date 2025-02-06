@@ -211,6 +211,8 @@ func _process(_delta: float) -> void:
 		main_state_machine.dispatch(to_run)
 	if Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right"):
 		main_state_machine.dispatch(to_walk)
+		
+	Hud.money = inventory.has_item("money").size()
 	
 	if DebugUI.ON:
 		var debug_message_template := "[color=green][b] %s [/b][/color]: %s \n"
