@@ -26,6 +26,7 @@ LevelsVars="*res://levels/util/levels_vars.gd"
 Menu="*res://gui/menu.tscn"
 VendingMachine="*res://gui/vending_machine.tscn"
 GlobalSound="*res://gui/global_sound.gd"
+Hud="*res://gui/hud.tscn"
 
 [display]
 

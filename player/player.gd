@@ -149,6 +149,10 @@ func  _ready() -> void:
 	animation_player.animation_finished.connect(_on_animation_finished)
 	hurt_box.damaged.connect(_on_hurt_box_damaged)
 	health.health_empty.connect(_on_health_empty)
+	health.health_changed.connect(_on_health_change)
+	
+	Hud.health = health.current_health
+	Hud.energy = throw_ammunition
 	
 	_initiate_state_machine()
 
@@ -207,6 +211,8 @@ func _process(_delta: float) -> void:
 		main_state_machine.dispatch(to_run)
 	if Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right"):
 		main_state_machine.dispatch(to_walk)
+		
+	Hud.money = inventory.has_item("money").size()
 	
 	if DebugUI.ON:
 		var debug_message_template := "[color=green][b] %s [/b][/color]: %s \n"
@@ -224,7 +230,7 @@ func _process(_delta: float) -> void:
 		debug_message += debug_message_template % ["Dash Cooldown Timer:", dash_cooldown_timer]
 		debug_message += debug_message_template % ["Ammo:", throw_ammunition]
 		
-		var current_state = main_state_machine.get_active_state().name if main_state_machine else ""
+		var current_state = main_state_machine.get_active_state().name
 		debug_message += debug_message_template % ["Current State", current_state]
 		debug_message += "_______________________________\n"
 		
@@ -253,6 +259,7 @@ func _physics_process(delta: float) -> void:
 		
 	if throw_ammunition < max_throw_ammunition * 10:
 		throw_ammunition += delta
+	Hud.energy = throw_ammunition
 		
 	_handle_jump_buffer(delta)
 	
@@ -414,6 +421,9 @@ func _on_hurt_box_damaged(damage: int, area: AttackBox):
 		
 func _on_health_empty():
 	main_state_machine.dispatch(to_dead)
+	
+func _on_health_change(value: int):
+	Hud.health = value
 
 func move_forward(distance: int = 5):
 	
