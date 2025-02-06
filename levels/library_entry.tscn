@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_8xfxa"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="2_21j5i"]
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="2_gipnx"]
-[ext_resource type="TileSet" uid="uid://cg1cb6ggijuos" path="res://levels/tilesets/BG_tileset.tres" id="3_3pa7w"]
+[ext_resource type="TileSet" uid="uid://dyju4oq7cq5ep" path="res://levels/tilesets/BG_tileset.tres" id="3_3pa7w"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="3_lehpx"]
 [ext_resource type="Texture2D" uid="uid://b33axp6a6ky55" path="res://assets/props/bookshelf7.png" id="4_ivr4a"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="10_2puiy"]
@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://nsb6gspi738u" path="res://world/walkable_wall.tscn" id="23_437dc"]
 [ext_resource type="PackedScene" uid="uid://bi8pk6grgod46" path="res://props/interactable/sleeping_chair.tscn" id="24_thtdu"]
 [ext_resource type="PackedScene" uid="uid://dupdkpmqyp5ru" path="res://props/interactable/chest.tscn" id="26_aj0c5"]
-[ext_resource type="PackedScene" uid="uid://c0x7ir4qhn2tl" path="res://props/vines.tscn" id="26_eyg8r"]
+[ext_resource type="PackedScene" uid="uid://bmusv6lfxrhg2" path="res://props/vines.tscn" id="26_eyg8r"]
 [ext_resource type="PackedScene" uid="uid://b8pr3ebk5ncho" path="res://weapons/auto_throwable.tscn" id="30_iwoya"]
 
 [sub_resource type="Gradient" id="Gradient_ehguh"]
@@ -155,7 +155,7 @@ size = Vector2(13, 47.619)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvd3v"]
 size = Vector2(18, 40.293)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgm3n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mk36d"]
 resource_local_to_scene = true
 shader = ExtResource("3_lehpx")
 shader_parameter/lerper = null
@@ -3880,7 +3880,7 @@ shape = SubResource("RectangleShape2D_cvd3v")
 
 [node name="Player" parent="." instance=ExtResource("13_m7kmh")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_wgm3n")
+material = SubResource("ShaderMaterial_mk36d")
 use_parent_material = false
 position = Vector2(-424, -32)
 
