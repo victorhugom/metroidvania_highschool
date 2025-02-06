@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgduqh6skm300"
-path="res://.godot/imported/pizza.png-fb40bd9d9b87baf8abf8cfba6d1895b6.ctex"
+uid="uid://7dmtfyctanck"
+path="res://.godot/imported/health_bar.png-af81b240cfeeb00a4e111eb0d0fc885f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/icons/pizza.png"
-dest_files=["res://.godot/imported/pizza.png-fb40bd9d9b87baf8abf8cfba6d1895b6.ctex"]
+source_file="res://assets/gui/health_bar.png"
+dest_files=["res://.godot/imported/health_bar.png-af81b240cfeeb00a4e111eb0d0fc885f.ctex"]
 
 [params]
 

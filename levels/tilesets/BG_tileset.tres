@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cg1cb6ggijuos"]
+
+[ext_resource type="Texture2D" uid="uid://bbeuhn48xl1id" path="res://assets/world/salda_de_aula_bg/sala.png" id="1_dwxbv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ticvk"]
+texture = ExtResource("1_dwxbv")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_ticvk")

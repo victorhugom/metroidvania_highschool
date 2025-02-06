@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://y5sipknw3c8a"]
+[gd_scene load_steps=19 format=3 uid="uid://y5sipknw3c8a"]
 
 [ext_resource type="Script" path="res://gui/menu.gd" id="1_0dlck"]
 [ext_resource type="Texture2D" uid="uid://cn3d8sr21c4sb" path="res://assets/props/nokiatijolao.png" id="1_p6d3b"]
@@ -164,14 +164,6 @@ display_name = "Change Glasses"
 description = "Change Glasses"
 icon = "res://assets/gui/icons/summer.png"
 
-[sub_resource type="Resource" id="Resource_4mkix"]
-script = ExtResource("8_8787q")
-item_id = "pizza"
-item_type = "food"
-display_name = "Pick Food"
-description = "Pick Food (health)"
-icon = "res://assets/gui/icons/pizza.png"
-
 [node name="Menu" type="CanvasLayer"]
 process_mode = 3
 offset = Vector2(1220, 680)
@@ -259,10 +251,6 @@ inventory_item = SubResource("Resource_qwejf")
 [node name="Glasses" parent="MenuContainer" instance=ExtResource("7_334uo")]
 layout_mode = 2
 inventory_item = SubResource("Resource_jishv")
-
-[node name="Pizza" parent="MenuContainer" instance=ExtResource("7_334uo")]
-layout_mode = 2
-inventory_item = SubResource("Resource_4mkix")
 
 [node name="Drink" parent="MenuContainer" instance=ExtResource("7_334uo")]
 layout_mode = 2
