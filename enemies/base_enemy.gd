@@ -18,6 +18,12 @@ const DESTROYABLE_OBJECT_CONTAINER = preload("res://_starter_content/destroyable
 @export var speed = 64
 @export var dash_speed = 400
 @export var dodge_distance = 128
+@export var is_enabled: bool = true:
+	get:
+		return is_enabled
+	set(value):
+		is_enabled = value
+		visible = is_enabled
 
 var origin_position = Vector2.ZERO
 var has_floor = true
@@ -32,8 +38,6 @@ var damager_position = null
 var is_dying = null
 var is_being_hit = false
 var is_being_parried = false
-var is_enabled = true
-
 
 func _ready():
 	origin_position = global_position
@@ -45,6 +49,9 @@ func _ready():
 	attack_box.parried.connect(_on_attack_parried)
 	LevelsVars.awake.connect(func(): is_enabled = false)
 	LevelsVars.sleeping.connect(func(): is_enabled = true)
+	
+	if is_enabled == false:
+		visible == false
 
 func _physics_process(delta: float) -> void:
 	

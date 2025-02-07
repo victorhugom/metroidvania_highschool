@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cg1cb6ggijuos"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dyju4oq7cq5ep"]
 
 [ext_resource type="Texture2D" uid="uid://bbeuhn48xl1id" path="res://assets/world/salda_de_aula_bg/sala.png" id="1_dwxbv"]
 [ext_resource type="Texture2D" uid="uid://d1kyfhle1obu1" path="res://assets/world/windowlibrary.png" id="1_n7y2e"]

@@ -1,0 +1,206 @@
+[gd_resource type="BehaviorTree" load_steps=55 format=3 uid="uid://ci5lrjvdabqn5"]
+
+[ext_resource type="Script" path="res://ai/tasks/task_parried.gd" id="1_quw1g"]
+[ext_resource type="Script" path="res://ai/tasks/task_check_distance.gd" id="2_0utmx"]
+[ext_resource type="Script" path="res://ai/tasks/task_dodge.gd" id="3_408d3"]
+[ext_resource type="Script" path="res://ai/tasks/task_look_for_player.gd" id="4_etpno"]
+[ext_resource type="Script" path="res://ai/tasks/taks_stop.gd" id="5_37y30"]
+[ext_resource type="Script" path="res://ai/tasks/task_base_enemy_swing_bat.gd" id="6_1v068"]
+[ext_resource type="Script" path="res://ai/tasks/task_base_enemy_combo_attack.gd" id="7_xo0ly"]
+[ext_resource type="Script" path="res://ai/tasks/task_move_torwards_node.gd" id="8_ng6lw"]
+[ext_resource type="Script" path="res://ai/tasks/activate_throwables.gd" id="8_xyny5"]
+[ext_resource type="Script" path="res://ai/tasks/taks_find_roam_position.gd" id="9_fpdtb"]
+[ext_resource type="Script" path="res://ai/tasks/task_move_torwards_position.gd" id="10_cm83c"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_paedr"]
+var/roam_position/name = &"roam_position"
+var/roam_position/type = 5
+var/roam_position/value = Vector2(0, 0)
+var/roam_position/hint = 0
+var/roam_position/hint_string = ""
+var/target_player/name = &"target_player"
+var/target_player/type = 24
+var/target_player/hint = 0
+var/target_player/hint_string = ""
+var/animation_player/name = &"animation_player"
+var/animation_player/type = 24
+var/animation_player/hint = 0
+var/animation_player/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_5rvkd"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_eqqmi"]
+property = &"is_enabled"
+value = SubResource("BBVariant_5rvkd")
+
+[sub_resource type="BBVariant" id="BBVariant_05d37"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_aconq"]
+property = &"is_being_parried"
+value = SubResource("BBVariant_05d37")
+
+[sub_resource type="BTAction" id="BTAction_b64qo"]
+script = ExtResource("1_quw1g")
+
+[sub_resource type="BTSequence" id="BTSequence_45q7m"]
+custom_name = "Sequence: React to Being Parried"
+children = [SubResource("BTCheckAgentProperty_aconq"), SubResource("BTAction_b64qo")]
+
+[sub_resource type="BBVariant" id="BBVariant_dj2f0"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_51ejd"]
+property = &"is_being_attacked"
+value = SubResource("BBVariant_dj2f0")
+
+[sub_resource type="BBVariant" id="BBVariant_ybmhh"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_1r7vi"]
+variable = &"target_player"
+check_type = 5
+value = SubResource("BBVariant_ybmhh")
+
+[sub_resource type="BTAction" id="BTAction_mo1n0"]
+script = ExtResource("2_0utmx")
+tagert_node_var = "target_player"
+more_than_distance = 0
+less_than_distance = 50
+
+[sub_resource type="BTAction" id="BTAction_oa7xt"]
+script = ExtResource("3_408d3")
+
+[sub_resource type="BTWait" id="BTWait_mdnxr"]
+duration = 0.2
+
+[sub_resource type="BTSequence" id="BTSequence_2xpde"]
+custom_name = "Sequenece: Dodge"
+children = [SubResource("BTAction_oa7xt"), SubResource("BTWait_mdnxr")]
+
+[sub_resource type="BTProbability" id="BTProbability_n5ud1"]
+run_chance = 0.1
+children = [SubResource("BTSequence_2xpde")]
+
+[sub_resource type="BTSequence" id="BTSequence_bw7nw"]
+custom_name = "Sequence: React to Being Attacked"
+children = [SubResource("BTCheckAgentProperty_51ejd"), SubResource("BTCheckVar_1r7vi"), SubResource("BTAction_mo1n0"), SubResource("BTProbability_n5ud1")]
+
+[sub_resource type="BTAction" id="BTAction_jow58"]
+script = ExtResource("4_etpno")
+target_player_var = "target_player"
+detection_range = 200
+
+[sub_resource type="BTAction" id="BTAction_sq7io"]
+script = ExtResource("5_37y30")
+
+[sub_resource type="BTSequence" id="BTSequence_5wci6"]
+custom_name = "Sequence: Look For Player"
+children = [SubResource("BTAction_jow58"), SubResource("BTAction_sq7io")]
+
+[sub_resource type="BBVariant" id="BBVariant_8gu5v"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_2inbc"]
+variable = &"target_player"
+check_type = 5
+value = SubResource("BBVariant_8gu5v")
+
+[sub_resource type="BBVariant" id="BBVariant_gxqvd"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_rt4s1"]
+property = &"is_attacking"
+value = SubResource("BBVariant_gxqvd")
+
+[sub_resource type="BTAction" id="BTAction_8ug22"]
+script = ExtResource("2_0utmx")
+tagert_node_var = "target_player"
+more_than_distance = 0
+less_than_distance = 30
+
+[sub_resource type="BTAction" id="BTAction_8f78n"]
+script = ExtResource("6_1v068")
+metadata/_weight_ = 5.0
+
+[sub_resource type="BTAction" id="BTAction_xkjnv"]
+script = ExtResource("7_xo0ly")
+
+[sub_resource type="BTAction" id="BTAction_50ltw"]
+script = ExtResource("8_xyny5")
+metadata/_weight_ = 10.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_4wqiq"]
+children = [SubResource("BTAction_8f78n"), SubResource("BTAction_xkjnv"), SubResource("BTAction_50ltw")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_iqwjn"]
+duration = 2.0
+children = [SubResource("BTProbabilitySelector_4wqiq")]
+
+[sub_resource type="BTSequence" id="BTSequence_x4s0g"]
+custom_name = "Selector: Attack"
+children = [SubResource("BTAction_8ug22"), SubResource("BTCooldown_iqwjn")]
+
+[sub_resource type="BTSequence" id="BTSequence_ttrdq"]
+custom_name = "Sequence: Handle Attack"
+children = [SubResource("BTCheckVar_2inbc"), SubResource("BTCheckAgentProperty_rt4s1"), SubResource("BTSequence_x4s0g")]
+
+[sub_resource type="BTAction" id="BTAction_dndn3"]
+script = ExtResource("8_ng6lw")
+target_node_var = &"target_player"
+tolerance = 30
+run = true
+
+[sub_resource type="BTSequence" id="BTSequence_212q4"]
+custom_name = "Sequence: Move Torwards Player"
+children = [SubResource("BTAction_dndn3")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hsxeh"]
+children = [SubResource("BTSequence_ttrdq"), SubResource("BTSequence_212q4")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_qjgyi"]
+custom_name = "Sequence: Engage Player"
+children = [SubResource("BTSequence_5wci6"), SubResource("BTDynamicSelector_hsxeh")]
+
+[sub_resource type="BBVariant" id="BBVariant_rdgjo"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_fsrlj"]
+variable = &"target_player"
+value = SubResource("BBVariant_rdgjo")
+
+[sub_resource type="BTAction" id="BTAction_ognob"]
+script = ExtResource("9_fpdtb")
+roam_min_radius = 128.0
+roam_max_radius = 256.0
+roam_position_var = &"roam_position"
+
+[sub_resource type="BTAction" id="BTAction_7aq3u"]
+script = ExtResource("10_cm83c")
+tolerance = 10
+target_position_var = "roam_position"
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_45nid"]
+
+[sub_resource type="BTSequence" id="BTSequence_tve3w"]
+custom_name = "Sequence: Roam"
+children = [SubResource("BTCheckVar_fsrlj"), SubResource("BTAction_ognob"), SubResource("BTAction_7aq3u"), SubResource("BTRandomWait_45nid")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_74cf8"]
+children = [SubResource("BTCheckAgentProperty_eqqmi"), SubResource("BTSequence_45q7m"), SubResource("BTSequence_bw7nw"), SubResource("BTDynamicSequence_qjgyi"), SubResource("BTSequence_tve3w")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_paedr")
+root_task = SubResource("BTDynamicSelector_74cf8")

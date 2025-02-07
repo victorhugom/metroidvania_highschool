@@ -1,4 +1,4 @@
-extends Node2D
+class_name LevelController extends Node2D
 
 @onready var player: Player = %Player
 @export var zoom: Vector2 = Vector2(2.5, 2.5)
@@ -67,7 +67,6 @@ func _enable_node(node):
 		node.visible = true
 	if node is Sprite2D:
 		node.visible = true
-		pass
 	if node is Area2D:
 		(node as Area2D).monitorable = true
 		(node as Area2D).monitoring = true

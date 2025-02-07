@@ -1,12 +1,12 @@
-[gd_scene load_steps=80 format=4 uid="uid://dgdihf6cr3xrt"]
+[gd_scene load_steps=77 format=4 uid="uid://dgdihf6cr3xrt"]
 
 [ext_resource type="Script" path="res://levels/util/level_controller.gd" id="1_8xfxa"]
 [ext_resource type="Shader" path="res://shaders/sakura.gdshader" id="2_21j5i"]
 [ext_resource type="PackedScene" uid="uid://482qqb1njc3y" path="res://util/canvas_modulate.tscn" id="2_gipnx"]
-[ext_resource type="TileSet" uid="uid://cg1cb6ggijuos" path="res://levels/tilesets/BG_tileset.tres" id="3_3pa7w"]
+[ext_resource type="TileSet" uid="uid://dyju4oq7cq5ep" path="res://levels/tilesets/BG_tileset.tres" id="3_3pa7w"]
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="3_lehpx"]
 [ext_resource type="Texture2D" uid="uid://b33axp6a6ky55" path="res://assets/props/bookshelf7.png" id="4_ivr4a"]
-[ext_resource type="Texture2D" uid="uid://cd8mm528filke" path="res://assets/enemies/Boss/placeholder.png" id="6_w6pr4"]
+[ext_resource type="PackedScene" uid="uid://xhfsnfcv0kds" path="res://levels/boss_room.tscn" id="7_80lif"]
 [ext_resource type="Material" uid="uid://qbhgpqyk8a7g" path="res://shaders/objects.tres" id="10_2puiy"]
 [ext_resource type="PackedScene" uid="uid://bnaf10n6cgnuy" path="res://_starter_content/destroyable_object/destroyable_object.tscn" id="10_pq41y"]
 [ext_resource type="Texture2D" uid="uid://jl5s2o0qm385" path="res://assets/props/barrelbroken/barrelpiece1.png" id="11_3vogh"]
@@ -107,18 +107,6 @@ shader = ExtResource("3_lehpx")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_h7ohl")
 
-[sub_resource type="Gradient" id="Gradient_jd1a5"]
-offsets = PackedFloat32Array(0, 0.188406, 0.47343, 0.676328, 0.768116, 1)
-colors = PackedColorArray(0.0189747, 0.0984639, 0.098796, 1, 0, 0.293895, 0.203128, 1, 0.413813, 0.408384, 0.202672, 1, 0.330052, 0.6604, 1.15514e-06, 1, 0.743204, 0.806737, 0.770118, 1, 0.446007, 0.952969, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2wafb"]
-gradient = SubResource("Gradient_jd1a5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhsmi"]
-shader = ExtResource("3_lehpx")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_2wafb")
-
 [sub_resource type="Gradient" id="Gradient_fx4fg"]
 offsets = PackedFloat32Array(0, 0.991803)
 colors = PackedColorArray(0.0588235, 0.054902, 0.215686, 1, 0.36403, 0.327566, 0.536837, 1)
@@ -174,7 +162,7 @@ size = Vector2(13, 47.619)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvd3v"]
 size = Vector2(18, 40.293)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqm2k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3gcc"]
 resource_local_to_scene = true
 shader = ExtResource("3_lehpx")
 shader_parameter/lerper = null
@@ -2684,11 +2672,8 @@ position = Vector2(0, -51.0001)
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("4_ivr4a")
 
-[node name="Bossplaceholder" type="Sprite2D" parent="BG"]
-material = SubResource("ShaderMaterial_nhsmi")
-position = Vector2(8114, 1715)
-scale = Vector2(2, 2)
-texture = ExtResource("6_w6pr4")
+[node name="BossRoom" parent="BG" instance=ExtResource("7_80lif")]
+position = Vector2(5786, 1872)
 
 [node name="Parallax2D_Back" type="Parallax2D" parent="."]
 z_index = -1
@@ -2867,14 +2852,12 @@ position = Vector2(1428, 1075)
 interact_message_a = "Abrir Salda do Professor"
 interact_message_b = "Fechar"
 cannot_interact_message = "Porta Trancada"
-disabled = true
 
 [node name="Door_SafeRoom2" parent="." instance=ExtResource("18_0m0qi")]
 position = Vector2(2007, 1075)
 interact_message_a = "Abrir Salda do Professor"
 interact_message_b = "Fechar"
 cannot_interact_message = "Porta Trancada"
-disabled = true
 
 [node name="SleepingChair" parent="." instance=ExtResource("24_thtdu")]
 material = SubResource("ShaderMaterial_hyeyp")
@@ -2897,7 +2880,7 @@ shape = SubResource("RectangleShape2D_cvd3v")
 
 [node name="Player" parent="." instance=ExtResource("13_m7kmh")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_bqm2k")
+material = SubResource("ShaderMaterial_u3gcc")
 use_parent_material = false
 position = Vector2(-424, -32)
 

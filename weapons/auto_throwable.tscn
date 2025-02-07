@@ -8,7 +8,6 @@ use_parent_material = true
 script = ExtResource("1_xfm63")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true

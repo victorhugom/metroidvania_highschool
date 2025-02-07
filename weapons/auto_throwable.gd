@@ -1,4 +1,4 @@
-extends Node2D
+class_name AutoThrowable extends Node2D
 const THROWABLE = preload("res://weapons/throwable.tscn")
 
 @onready var timer: Timer = $Timer
@@ -7,10 +7,18 @@ const THROWABLE = preload("res://weapons/throwable.tscn")
 @export var direction: String = "left"
 @export var speed: int = 800
 @export var angle: int = 45
+@export var disabled: bool = false:
+	get:
+		return disabled
+	set(value):
+		disabled = value
+		if disabled == false:
+			timer.start()
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.timeout.connect(throw)
+	if disabled == false:
+		timer.start()
 
 func throw():
 	var new_projectile: Throwable = THROWABLE.instantiate()
