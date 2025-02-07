@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnaf10n6cgnuy"]
+[gd_scene load_steps=14 format=3 uid="uid://bnaf10n6cgnuy"]
 
 [ext_resource type="Script" path="res://_starter_content/destroyable_object/destroyable_object.gd" id="1_mt7j0"]
 [ext_resource type="PackedScene" uid="uid://clfeahbqi3hv2" path="res://_starter_content/destroyable_object/destroyable_object_container.tscn" id="2_h2o0i"]
@@ -8,22 +8,31 @@
 [ext_resource type="Texture2D" uid="uid://bevn6x8lmy1qh" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 2.png" id="4_pp7pl"]
 [ext_resource type="Texture2D" uid="uid://bme0t8xfwpkid" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 3.png" id="5_irw68"]
 [ext_resource type="Texture2D" uid="uid://b5y0xm73jptxc" path="res://_starter_content/_demo/assets/Kings and Pigs/Sprites/08-Box/Box Pieces 4.png" id="6_t0cfv"]
+[ext_resource type="Texture2D" uid="uid://jl5s2o0qm385" path="res://assets/props/barrelbroken/barrelpiece1.png" id="7_rc3rc"]
+[ext_resource type="Texture2D" uid="uid://cbvr0kubpvkbx" path="res://assets/props/barrelbroken/barrelpiece2.png" id="8_suokg"]
+[ext_resource type="Texture2D" uid="uid://2wt6cde55swo" path="res://assets/props/barrelbroken/barrelpiece3.png" id="9_sj4m3"]
+[ext_resource type="Texture2D" uid="uid://chtyw0hl02g3g" path="res://assets/props/barrelbroken/barrelpiece4.png" id="10_3yort"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gopik"]
-size = Vector2(22, 16)
+size = Vector2(64, 64)
 
 [node name="DestroyableObject" type="Node2D"]
+use_parent_material = true
 script = ExtResource("1_mt7j0")
 texture_pieces = Array[Texture2D]([ExtResource("3_hgdwf"), ExtResource("4_pp7pl"), ExtResource("5_irw68"), ExtResource("6_t0cfv")])
 
 [node name="DestroyableObjectContainer" parent="." instance=ExtResource("2_h2o0i")]
+use_parent_material = true
+texture_pieces = Array[Texture2D]([ExtResource("7_rc3rc"), ExtResource("8_suokg"), ExtResource("9_sj4m3"), ExtResource("10_3yort")])
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_egsjc")]
+[node name="HurtBox" parent="." instance=ExtResource("3_egsjc")]
+use_parent_material = true
 collision_layer = 2048
 collision_mask = 8
-health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+use_parent_material = true
 shape = SubResource("RectangleShape2D_gopik")
 
 [node name="Health" parent="." instance=ExtResource("3_ucdif")]
+use_parent_material = true

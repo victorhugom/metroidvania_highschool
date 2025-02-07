@@ -78,7 +78,7 @@ shader = ExtResource("7_lgvnm")
 shader_parameter/lerper = null
 shader_parameter/pal0 = ExtResource("30_skevd")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgl53"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwkxd"]
 resource_local_to_scene = true
 shader = ExtResource("7_lgvnm")
 shader_parameter/lerper = null
@@ -517,6 +517,6 @@ position = Vector2(376, 608)
 
 [node name="Player" parent="." instance=ExtResource("1_8mx52")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_lgl53")
+material = SubResource("ShaderMaterial_kwkxd")
 use_parent_material = false
 position = Vector2(-200, 608)
