@@ -124,10 +124,8 @@ disabled = true
 
 [node name="AutoThrowable6" parent="." groups=["boss_throwable"] instance=ExtResource("11_8k8ak")]
 position = Vector2(992, -893)
+speed = 1200
 disabled = true
-
-[node name="BossEnemy" parent="." instance=ExtResource("13_j05tp")]
-position = Vector2(674, -256)
 
 [node name="BossRoomTrigger" type="Area2D" parent="."]
 position = Vector2(147, -264)
@@ -140,10 +138,16 @@ shape = SubResource("RectangleShape2D_7041j")
 position = Vector2(168, -304)
 interact_message_b = "Fechar"
 
+[node name="BossEnemy" parent="." instance=ExtResource("13_j05tp")]
+position = Vector2(674, -256)
+is_enabled = false
+
 [node name="BaseEnemy" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
 position = Vector2(256, -416)
+is_enabled = false
 
 [node name="BaseEnemy2" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
 position = Vector2(320, -576)
+is_enabled = false
 
 [connection signal="area_entered" from="BossRoomTrigger" to="." method="_on_boss_room_trigger_area_entered"]

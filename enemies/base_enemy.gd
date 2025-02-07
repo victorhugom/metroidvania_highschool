@@ -50,8 +50,8 @@ func _ready():
 	LevelsVars.awake.connect(func(): is_enabled = false)
 	LevelsVars.sleeping.connect(func(): is_enabled = true)
 	
-	if is_enabled == false:
-		visible == false
+	is_enabled = LevelsVars.SLEEPING
+	visible == is_enabled
 
 func _physics_process(delta: float) -> void:
 	

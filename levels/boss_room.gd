@@ -9,12 +9,13 @@ var minions_spawn = false
 func _ready() -> void:
 	boss_enemy.health.health_changed.connect(_on_boss_health_change)
 	
+	var tween = get_tree().create_tween()
+	tween.tween_callback(disable_minions).set_delay(5)
+	
+func disable_minions():
 	var minions = get_tree().get_nodes_in_group("enemy_spawn")
-		
 	for minion: BaseEnemy in minions:
 		minion.is_enabled = false
-	
-	#super._ready()
 
 func _on_boss_room_trigger_area_entered(area: Area2D) -> void:
 	door.disabled = true

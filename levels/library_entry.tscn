@@ -162,7 +162,7 @@ size = Vector2(13, 47.619)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvd3v"]
 size = Vector2(18, 40.293)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3gcc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrdd1"]
 resource_local_to_scene = true
 shader = ExtResource("3_lehpx")
 shader_parameter/lerper = null
@@ -2768,7 +2768,6 @@ scale = Vector2(1, -1)
 target_scene_path = "res://levels/main.tscn"
 
 [node name="FogOfWar" type="Polygon2D" parent="." groups=["awake_only_node"]]
-visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_4cooc")
 position = Vector2(0, 0.307693)
@@ -2880,7 +2879,7 @@ shape = SubResource("RectangleShape2D_cvd3v")
 
 [node name="Player" parent="." instance=ExtResource("13_m7kmh")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_u3gcc")
+material = SubResource("ShaderMaterial_wrdd1")
 use_parent_material = false
 position = Vector2(-424, -32)
 
