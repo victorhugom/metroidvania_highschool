@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bhjprxe5y5k3i"]
 
 [ext_resource type="Shader" path="res://shaders/gradientmap.gdshader" id="1_nv4hb"]
-[ext_resource type="Texture2D" uid="uid://b4d5qb6gmpxp0" path="res://shaders/sundown_BG.tres" id="2_30nev"]
+[ext_resource type="Texture2D" uid="uid://caybmnhiv3yja" path="res://shaders/sundown_Front.tres" id="2_1ox1l"]
 
 [resource]
 shader = ExtResource("1_nv4hb")
 shader_parameter/lerper = 0.0
-shader_parameter/pal0 = ExtResource("2_30nev")
+shader_parameter/pal0 = ExtResource("2_1ox1l")

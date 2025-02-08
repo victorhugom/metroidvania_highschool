@@ -88,24 +88,19 @@ frame = 1
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_1vveo")
 
 [node name="FloorCollision" type="Area2D" parent="."]
-visible = false
 collision_layer = 131072
 collision_mask = 17408
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorCollision"]
-visible = false
 shape = SubResource("CircleShape2D_eluc4")
 debug_color = Color(0.9421, 8.47101e-06, 0.607648, 0.42)
 
 [node name="PlayerCollision" type="Area2D" parent="."]
-visible = false
 collision_layer = 131072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
-visible = false
 shape = SubResource("CircleShape2D_msh80")
 debug_color = Color(0.711777, 0.485033, 0, 0.42)

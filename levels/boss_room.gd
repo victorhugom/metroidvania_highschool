@@ -20,6 +20,8 @@ func disable_minions():
 func _on_boss_room_trigger_area_entered(area: Area2D) -> void:
 	door.disabled = true
 	boss_enemy.is_enabled = true
+	var player:Player = get_tree().get_nodes_in_group("player")[0]
+	player.follow_camera.update_zoom(Vector2(1.5,1.5))	
 	
 func _on_boss_health_change(current_health: int):
 	
