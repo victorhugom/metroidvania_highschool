@@ -162,7 +162,7 @@ size = Vector2(13, 47.619)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvd3v"]
 size = Vector2(18, 40.293)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrdd1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4hn4"]
 resource_local_to_scene = true
 shader = ExtResource("3_lehpx")
 shader_parameter/lerper = null
@@ -2879,7 +2879,7 @@ shape = SubResource("RectangleShape2D_cvd3v")
 
 [node name="Player" parent="." instance=ExtResource("13_m7kmh")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_wrdd1")
+material = SubResource("ShaderMaterial_l4hn4")
 use_parent_material = false
 position = Vector2(-424, -32)
 

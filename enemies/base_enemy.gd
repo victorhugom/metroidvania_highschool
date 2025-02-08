@@ -44,9 +44,11 @@ func _ready():
 	
 	animation_player.animation_finished.connect(_on_animation_finished)
 	animation_player_being_hit.animation_finished.connect(_on_animation_player_being_hit_animation_finished)
+	
 	hurt_box.damaged.connect(_on_hurt_box_damaged)
 	health.health_empty.connect(_on_health_empty)
 	attack_box.parried.connect(_on_attack_parried)
+	
 	LevelsVars.awake.connect(func(): is_enabled = false)
 	LevelsVars.sleeping.connect(func(): is_enabled = true)
 	
@@ -89,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		has_floor = true
 	
-	if has_floor == true and is_on_wall() == false:
+	if has_floor == true and is_on_wall_only() == false:
 		move_and_slide()
 		
 	if velocity.x != 0:

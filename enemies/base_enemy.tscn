@@ -2624,7 +2624,6 @@ monitorable = false
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-visible = false
 use_parent_material = true
 position = Vector2(-18.25, -33.5)
 rotation = 0.600826
@@ -2650,10 +2649,9 @@ max_health = 3
 
 [node name="HurtBox" parent="." instance=ExtResource("3_3v754")]
 collision_layer = 64
-collision_mask = 8
+collision_mask = 4104
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-visible = false
 position = Vector2(-1, -28)
 shape = SubResource("RectangleShape2D_vums4")
 debug_color = Color(0.960784, 0, 0, 0.419608)

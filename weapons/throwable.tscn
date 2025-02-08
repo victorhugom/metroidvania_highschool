@@ -7,25 +7,25 @@
 [ext_resource type="PackedScene" uid="uid://dmp0apd4b4k2w" path="res://_starter_content/character/attack_box.tscn" id="5_hyr4s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgnd4"]
-radius = 5.0
+radius = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16liw"]
 shader = ExtResource("2_7mifg")
 shader_parameter/lerper = null
 shader_parameter/pal0 = ExtResource("3_elwoi")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vxk2b"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvfg2"]
 
 [node name="Throwable" type="RigidBody2D"]
 position = Vector2(0, -3)
 collision_layer = 4096
-collision_mask = 265744
+collision_mask = 265808
+mass = 0.2
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_2ckqn")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_cgnd4")
 
@@ -42,10 +42,10 @@ stretch_mode = 5
 
 [node name="AttackBox" parent="." instance=ExtResource("5_hyr4s")]
 collision_layer = 4096
-collision_mask = 270400
+collision_mask = 64
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+use_parent_material = true
 position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_vxk2b")
-debug_color = Color(0.963752, 2.88785e-07, 0.496854, 0.42)
+shape = SubResource("CircleShape2D_hvfg2")

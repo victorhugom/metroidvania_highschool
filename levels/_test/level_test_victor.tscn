@@ -71,20 +71,6 @@ shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_hn2e7")
 
-[sub_resource type="Gradient" id="Gradient_ca1op"]
-offsets = PackedFloat32Array(0, 0.54918, 1)
-colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
-gradient = SubResource("Gradient_ca1op")
-width = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpyi3"]
-resource_local_to_scene = true
-shader = ExtResource("3_jhowo")
-shader_parameter/lerper = null
-shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
-
 [sub_resource type="Gradient" id="Gradient_d702f"]
 offsets = PackedFloat32Array(0, 0.405797)
 colors = PackedColorArray(0.0376743, 0.0520494, 0.110566, 1, 0.853986, 0.763631, 0.713302, 1)
@@ -97,6 +83,20 @@ width = 3
 shader = ExtResource("2_w41ff")
 shader_parameter/lerper = null
 shader_parameter/pal0 = SubResource("GradientTexture1D_dh1ni")
+
+[sub_resource type="Gradient" id="Gradient_ca1op"]
+offsets = PackedFloat32Array(0, 0.54918, 1)
+colors = PackedColorArray(0.183461, 0.0514191, 0.161218, 1, 0.568499, 0.239925, 0.23819, 1, 0.904668, 0.547583, 0.344185, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3ykh"]
+gradient = SubResource("Gradient_ca1op")
+width = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pdk0"]
+resource_local_to_scene = true
+shader = ExtResource("3_jhowo")
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_o3ykh")
 
 [node name="SidescrolingMapExample" type="Node2D"]
 script = ExtResource("1_2yrvx")
@@ -933,11 +933,6 @@ color = Color(0.930668, 0.825378, 0.632974, 1)
 energy = 2.96
 texture = ExtResource("22_alrb8")
 
-[node name="Player" parent="." instance=ExtResource("11_5ede0")]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_hpyi3")
-position = Vector2(996, -9)
-
 [node name="Parallax2D_Front" type="Parallax2D" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_45tvp")
@@ -966,25 +961,12 @@ position = Vector2(73, 1)
 
 [node name="Vines" parent="." instance=ExtResource("25_0n6y4")]
 position = Vector2(1328, 10)
-tile_map_data = PackedByteArray("AAD1//H/AAAFAAMAAAD1//L/AAADAAQAAAD1//P/AAADAAMAAAD1//T/AAADAAQAAAD1//X/AAADAAMAAAD1//b/AAADAAQAAAD1//f/AAAFAAMAAAD1////AAADAAcAAAD0//7/AAACAAEAAAD0//3/AAACAAEAAAD0//z/AAACAAEAAAD0//v/AAACAAEAAAD0//r/AAACAAEAAAD0//n/AAACAAEAAAD0//j/AAACAAEAAAD0//f/AAACAAEAAAD0//b/AAACAAEAAAD0//X/AAACAAEAAAD0//T/AAACAAEAAAD0//P/AAACAAEAAAD0//L/AAACAAEAAAD0//H/AAACAAEAAAD0//D/AAACAAEAAAD1//D/AAADAAQAAAD0/+//AAAAAAQAAAD1/+//AAAFAAMAAAD1//7/AAADAAQAAAD1//3/AAADAAMAAAD1//z/AAADAAQAAAD1//v/AAADAAMAAAD1//r/AAADAAQAAAD1//n/AAADAAMAAAD1//j/AAADAAQAAAD2//X/AAABAAUAAAD2//T/AAABAAYAAAD2//P/AAAHAAcAAAD2//L/AAAHAAAAAAD2//H/AAABAAcAAAD2//D/AAABAAAAAAD2//v/AAAHAAcAAAD2//z/AAABAAYAAAD2//3/AAAHAAcAAAD2//7/AAAHAAAAAAD2////AAABAAcAAAD2//r/AAAHAAAAAAD2//n/AAABAAUAAAD2//j/AAAHAAYAAAD2//f/AAAHAAUAAAD2//b/AAABAAYAAAD2/+//AAAHAAcAAAD0/+7/AAACAAYAAAD1/+7/AAAGAAYAAAD2/+7/AAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAD0//n/AAACAAEAAAD1//n/AAADAAMAAAD2//n/AAABAAUAAAD2////AAABAAcAAAD1////AAADAAcAAAD2//j/AAAHAAYAAAD2//f/AAAHAAUAAAD2//b/AAABAAYAAAD2//X/AAABAAUAAAD2//T/AAABAAYAAAD2//P/AAAHAAcAAAD2//L/AAAHAAAAAAD2//H/AAABAAcAAAD2//D/AAABAAAAAAD2/+//AAAHAAcAAAD2/+7/AAABAAAAAAD1//j/AAADAAQAAAD1//f/AAAFAAMAAAD1//b/AAADAAQAAAD1//X/AAADAAMAAAD1//T/AAADAAQAAAD1//P/AAADAAMAAAD1//L/AAADAAQAAAD1//H/AAAFAAMAAAD1//D/AAADAAQAAAD1/+//AAAFAAMAAAD1/+7/AAAGAAYAAAD0//j/AAACAAEAAAD0//f/AAACAAEAAAD0//b/AAACAAEAAAD0//X/AAACAAEAAAD0//T/AAACAAEAAAD0//P/AAACAAEAAAD0//L/AAACAAEAAAD0//H/AAACAAEAAAD0//D/AAACAAEAAAD0/+//AAAAAAQAAAD0/+7/AAACAAYAAAD0//7/AAACAAEAAAD0//3/AAACAAEAAAD0//z/AAACAAEAAAD0//v/AAACAAEAAAD0//r/AAACAAEAAAD1//7/AAADAAQAAAD1//3/AAADAAMAAAD1//z/AAADAAQAAAD1//v/AAADAAMAAAD1//r/AAADAAQAAAD2//v/AAAHAAcAAAD2//z/AAABAAYAAAD2//3/AAAHAAcAAAD2//7/AAAHAAAAAAD2//r/AAAHAAAAAAA=")
+
+[node name="Player" parent="." instance=ExtResource("11_5ede0")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8pdk0")
+position = Vector2(1624, 352)
 
 [node name="BaseEnemy" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(1721, 352)
-
-[node name="BaseEnemy2" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(1888, 352)
-
-[node name="BaseEnemy3" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(2016, 352)
-
-[node name="BaseEnemy4" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(2168, 352)
-
-[node name="BaseEnemy5" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(2336, 352)
-
-[node name="BaseEnemy6" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(2536, 352)
-
-[node name="BaseEnemy7" parent="." instance=ExtResource("26_e25go")]
-position = Vector2(2536, 352)
+position = Vector2(1856, 352)

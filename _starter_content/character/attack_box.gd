@@ -5,7 +5,6 @@ enum DamageType {Default, Acid, Explosion}
 @onready var timer: Timer = $Timer
 
 signal hit_area(damage: int, area_hit: Area2D)
-signal hit_body(damage: int, body_hit: Node2D)
 signal parried(character: CharacterBody2D)
 
 ## amount of damage that this box doe
@@ -18,7 +17,6 @@ var started: bool = true
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
-	body_entered.connect(_on_body_entered)
 	timer.timeout.connect(_on_damage_interval_timeout)
 
 func start_attack():
@@ -41,22 +39,12 @@ func _on_area_entered(area: Area2D):
 		timer.wait_time = damage_interval
 		timer.start()
 	
-	if area not in damaged_entities:
+	if area not in damaged_entities and area.has_method("damage"):
 		damaged_entities.append(area)
 		area.damage(damage, self)
 		hit_area.emit(damage, area)
-		
-## Occours when entering a body that can be hit
-func _on_body_entered(body: Node2D):
-	
-	if not started and damage_interval > 0:
-		timer.wait_time = damage_interval
-		timer.start()
-	
-	if body not in damaged_entities and body.has_method("damage"):
-		damaged_entities.append(body)
-		body.damage(damage, self)
-		hit_body.emit(damage, body)
+	else:
+		print_debug(area.has_method("damage"))
 		
 func _on_damage_interval_timeout():
 	
@@ -68,6 +56,6 @@ func _on_damage_interval_timeout():
 			if item.has_method("damage"):
 				item.damage(damage, self)
 				if item is Node2D:
-					hit_body.emit(damage, item)
+					hit_area.emit(damage, item)
 				elif item is Area2D:
 					hit_area.emit(damage, item)

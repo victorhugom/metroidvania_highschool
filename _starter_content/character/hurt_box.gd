@@ -1,4 +1,4 @@
-class_name HurtBox extends Node2D
+class_name HurtBox extends Area2D
 
 signal damaged(damage:int, damager:AttackBox)
 

@@ -74,12 +74,12 @@ func _create_explosion():
 		
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 0.0, EXPLOSION_TIMEOUT)
-		tween.finished.connect(_on_tween_finished)
+		tween.finished.connect(_on_explosion_created)
 		
 		exploded = true
 	else:
 		var tween = create_tween()
-		tween.tween_callback(_on_tween_finished).set_delay(EXPLOSION_TIMEOUT)
+		tween.tween_callback(_on_explosion_created).set_delay(EXPLOSION_TIMEOUT)
 	
-func _on_tween_finished():
+func _on_explosion_created():
 	queue_free()

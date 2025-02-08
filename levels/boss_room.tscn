@@ -139,7 +139,7 @@ position = Vector2(168, -304)
 interact_message_b = "Fechar"
 
 [node name="BossEnemy" parent="." instance=ExtResource("13_j05tp")]
-position = Vector2(674, -256)
+position = Vector2(672, -256)
 is_enabled = false
 
 [node name="BaseEnemy" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
@@ -148,6 +148,22 @@ is_enabled = false
 
 [node name="BaseEnemy2" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
 position = Vector2(320, -576)
+is_enabled = false
+
+[node name="BaseEnemy3" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
+position = Vector2(544, -672)
+is_enabled = false
+
+[node name="BaseEnemy4" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
+position = Vector2(413, -800)
+is_enabled = false
+
+[node name="BaseEnemy5" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
+position = Vector2(832, -253)
+is_enabled = false
+
+[node name="BaseEnemy6" parent="." groups=["enemy_spawn"] instance=ExtResource("13_ks1gf")]
+position = Vector2(499, -255)
 is_enabled = false
 
 [connection signal="area_entered" from="BossRoomTrigger" to="." method="_on_boss_room_trigger_area_entered"]

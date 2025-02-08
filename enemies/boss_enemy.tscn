@@ -2631,6 +2631,7 @@ rotation = 0.600826
 shape = SubResource("RectangleShape2D_lf2u3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_h11ji")
 use_parent_material = true
 position = Vector2(0, -25)
